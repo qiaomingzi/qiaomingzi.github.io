@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>开源监控软件对比_zabbix | 李明梓个人空间</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="开源监控软件对比 Cacti**（英文含义仙人掌）**  是一套基于PHP、MySQL、SNMP和RRDtool开发的网络流量监测图形分析工具，它通过snmpget来获取数据使用RRDtool绘图，简化RRDtool使用。提供了非常强大的数据和用户管理功能，可以指定每一个用户能查看树状结构、主机设备以及任何一张图，还可以与LDAP结合进行用户认证，同时也能自定义模板。在历史数据展示监控方面，其功能">
+<meta name="keywords" content="软文收集">
+<meta property="og:type" content="article">
+<meta property="og:title" content="开源监控软件对比_zabbix">
+<meta property="og:url" content="http://laile168.com/blog/doc/2017-09-18/开源监控软件对比_zabbix/index.html">
+<meta property="og:site_name" content="李明梓个人空间">
+<meta property="og:description" content="开源监控软件对比 Cacti**（英文含义仙人掌）**  是一套基于PHP、MySQL、SNMP和RRDtool开发的网络流量监测图形分析工具，它通过snmpget来获取数据使用RRDtool绘图，简化RRDtool使用。提供了非常强大的数据和用户管理功能，可以指定每一个用户能查看树状结构、主机设备以及任何一张图，还可以与LDAP结合进行用户认证，同时也能自定义模板。在历史数据展示监控方面，其功能">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://laile168.com/css/images/favicon.gif">
+<meta property="og:updated_time" content="2017-10-15T08:04:04.411Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="开源监控软件对比_zabbix">
+<meta name="twitter:description" content="开源监控软件对比 Cacti**（英文含义仙人掌）**  是一套基于PHP、MySQL、SNMP和RRDtool开发的网络流量监测图形分析工具，它通过snmpget来获取数据使用RRDtool绘图，简化RRDtool使用。提供了非常强大的数据和用户管理功能，可以指定每一个用户能查看树状结构、主机设备以及任何一张图，还可以与LDAP结合进行用户认证，同时也能自定义模板。在历史数据展示监控方面，其功能">
+<meta name="twitter:image" content="http://laile168.com/css/images/favicon.gif">
+    
+
+    
+        <link rel="alternate" href="/" title="李明梓个人空间" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/blog/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/blog/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/blog/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/blog/css/style.css">
+
+    <script src="/blog/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/blog/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/blog/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/blog/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">李明梓个人空间</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/blog/.">Home</a>
+                
+                    <a class="main-nav-link" href="/blog/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/blog/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/blog/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/blog/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/blog/css/images/favicon.gif" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/blog/',
+        CONTENT_URL: '/blog/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/blog/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/blog/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/blog/css/images/favicon.gif" />
+            <h2 id="name">mingzi li</h2>
+            <h3 id="title">Web Developer &amp; Designer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>xiamen, China</span>
+            <a id="follow" target="_blank" href="https://qiaomingzi.github.io">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                5
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                2
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="http://github.com/qiaomingzi" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/blog/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/blog/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/blog/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/blog/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-开源监控软件对比_zabbix" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<img src="/css/images/banner.png" class="article-banner" />
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            开源监控软件对比_zabbix
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/blog/doc/2017-09-18/开源监控软件对比_zabbix/">
+            <time datetime="2017-09-18T07:42:33.000Z" itemprop="datePublished">2017-09-18</time>
+        </a>
+    </div>
+
+
+                        
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/blog/tags/软文收集/">软文收集</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h2 id="开源监控软件对比"><a href="#开源监控软件对比" class="headerlink" title="开源监控软件对比"></a>开源监控软件对比</h2><ul>
+<li><strong>Cacti**</strong>（英文含义仙人掌）**</li>
+</ul>
+<p>是一套基于PHP、MySQL、SNMP和RRDtool开发的网络流量监测图形分析工具，它通过snmpget来获取数据使用RRDtool绘图，简化RRDtool使用。提供了非常强大的数据和用户管理功能，可以指定每一个用户能查看树状结构、主机设备以及任何一张图，还可以与LDAP结合进行用户认证，同时也能自定义模板。在历史数据展示监控方面，其功能相当不错。</p>
+<p>Cacti通过添加模板，使不同设备的监控添加具有可复用性，并且具备可自定义绘图的功能，具有强大的运算能力（数据的叠加功能）</p>
+<ul>
+<li><strong>nagios</strong></li>
+</ul>
+<p>Nagios是一款开源的免费网络监视工具，能有效监控Windows、Linux和Unix的主机状态，交换机路由器等网络设置，打印机等。</p>
+<p>Nagios 可以监控的功能有：<br>1、监控网络服务（SMTP、POP3、HTTP、NNTP、PING等）；<br>2、监控主机资源（处理器负荷、磁盘利用率等）；<br>3、简单地<strong>插件设计</strong>使得用户可以方便地扩展自己服务的检测方法；<br>4、并行服务检查机制；<br>5、具备定义<strong>网络分层结构</strong>的能力，用”parent”主机定义来表达网络主机间的关系，这种关系可被用来发现和明晰主机宕机或不可达状态；<br>6、当服务或主机问题产生与解决时将告警发送给联系人（通过EMail、短信、用户定义方式）；<br>7、具备定义事件句柄功能，它可以在主机或服务的事件发生时获取更多问题定位；<br>8、自动的日志回滚；<br>9、可以支持并实现对主机的冗余监控；<br>10、可选的WEB界面用于查看当前的网络状态、通知和故障历史、日志文件等；</p>
+<ul>
+<li>Ganglia</li>
+</ul>
+<p>是一个跨平台的、可扩展的、<strong>高性能</strong>的分布式监控系统，如集群和网格。它基于<strong>分层设计</strong>，使用广泛的技术，用RRDtool存储数据。具有可视化界面，适合对集群系统的自动化监控。其精心设计的数据结构和算法使得监控端到被监控端的连接开销非常低。目前已经有成千上万的集群正在使用这个监控系统，可以轻松的处理2000个节点的集群环境。</p>
+<p>Ganglia的强大在于：ganglia服务端能够通过一台客户端收集到同一个网段的所有客户端的数据，ganglia集群服务端能够通过一台服务端收集到它下属的所有客户端数据。</p>
+<ul>
+<li><strong>Zabbix</strong></li>
+</ul>
+<p>是一个基于web界面的分布式监控系统，支持多种采集方式采集客户端，有专用的Agent代理，也支持SNMP、IPMI、JMX、Telnet、SSH等多种协议，它将采集到的数据存放到数据库，然后对其进行分析整理，达到条件触发告警。其灵活的扩展性和丰富的功能是其他监控系统所不能比的。</p>
+<p><a href="http://images2015.cnblogs.com/blog/856286/201603/856286-20160302231227923-1370234025.jpg" target="_blank" rel="external"><img src="http://images2015.cnblogs.com/blog/856286/201603/856286-20160302231229283-64771159.jpg" alt="clip_image002"></a></p>
+<p>结论：</p>
+<p>从以上各种监控系统的对比来看，Zabbix都是具有优势的，其丰富的功能、可扩展的能力、二次开发的能力和简单易用的特点，读者只要稍加学习，即可构建自己的监控系统。</p>
+<h2 id="Zabbix"><a href="#Zabbix" class="headerlink" title="Zabbix"></a>Zabbix</h2><h3 id="选择zabbix的理由："><a href="#选择zabbix的理由：" class="headerlink" title="选择zabbix的理由："></a>选择zabbix的理由：</h3><p>- 安装与配置简单，学习成本低<br>- 支持多语言（包括中文）<br>- 免费开源</p>
+<p>- 数据采集到数据库，可二次分析监控数据的。<br>- 自动发现服务器与网络设备<br>- 分布式监视以及WEB集中管理功能<br>- 可以无agent监视<br>- 用户安全认证和柔软的授权方式<br>- 通过WEB界面设置或查看监视结果<br>- email等通知功能<br>等等</p>
+<h3 id="组成："><a href="#组成：" class="headerlink" title="组成："></a>组成：</h3><p>zabbix server：可以通过SNMP、zabbixagent、ping、端口监视等方法提供对远程服务器/网络状态的监视，数据收集等功能，它可以运行在Linux, Solaris, HP-UX, AIX, Free BSD, Open BSD, OS X等平台之上。</p>
+<p>zabbix agent（可选组件）：安装在被监视的目标服务器上，它主要完成对硬件信息或与操作系统有关的内存，CPU等信息的收集。</p>
+<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><p><a href="http://images2015.cnblogs.com/blog/856286/201603/856286-20160302231229751-1485347326.jpg" target="_blank" rel="external"><img src="http://images2015.cnblogs.com/blog/856286/201603/856286-20160302231230501-657878972.jpg" alt="clip_image004"></a></p>
+<p>目前推荐使用<strong>Zabbix2.2</strong></p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><h4 id="准备："><a href="#准备：" class="headerlink" title="准备："></a>准备：</h4><p>epel源、mysql已安装(yum install mysql-server)、zabbix官方仓库（<a href="http://repo.zabbix.com/" target="_blank" rel="external">http://repo.zabbix.com/</a>）</p>
+<ol>
+<li><strong>安装epel源</strong></li>
+</ol>
+<p># wget –O  /etc/yum.repos.d/epel.repo <a href="http://mirrors.aliyun.com/repo/epel-6.repo" target="_blank" rel="external">http://mirrors.aliyun.com/repo/epel-6.repo</a></p>
+<ol>
+<li><strong>安装Zabbix官方源码：</strong></li>
+</ol>
+<p>#rpm -ivh <a href="http://repo.zabbix.com/zabbix/2.2/rhel/6/x86_64/zabbix-release-2.2-1.el6.noarch.rpm" target="_blank" rel="external">http://repo.zabbix.com/zabbix/2.2/rhel/6/x86_64/zabbix-release-2.2-1.el6.noarch.rpm</a></p>
+<h4 id="安装zabbix-server："><a href="#安装zabbix-server：" class="headerlink" title="安装zabbix server："></a>安装zabbix server：</h4><p>\3. 安装依赖包yum install -y OpenIPMI</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
+<p>\4. yum install -y zabbix-server zabbix-server-mysql</p>
+<p><a href="http://images2015.cnblogs.com/blog/856286/201603/856286-20160302231232455-351075957.jpg" target="_blank" rel="external"><img src="http://images2015.cnblogs.com/blog/856286/201603/856286-20160302231233033-482209523.jpg" alt="clip_image008"></a></p>
+<ol>
+<li><strong>创建数据库</strong></li>
+</ol>
+<p><a href="javascript:void(0" target="_blank" rel="external"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>;)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">mysql&gt; create database zabbix;</div><div class="line"></div><div class="line">mysql&gt; grant all on zabbix.* to zabbix@localhost identified by &quot;zabbix_pass&quot;;</div><div class="line"></div><div class="line"># mysql -uzabbix -pzabbix_pass -hlocalhost zabbix # 测试</div><div class="line"></div><div class="line"># rpm -ql zabbix-server-mysql</div><div class="line"></div><div class="line">导入server端数据表（注意顺序）：</div><div class="line"></div><div class="line"># mysql -uzabbix -pzabbix_pass -hlocalhost zabbix &lt;/usr/share/doc/zabbix-server-mysql-2.2.11/create/schema.sql  &lt;--导入数据结构</div><div class="line"></div><div class="line">#mysql -uzabbix -pzabbix_pass -hlocalhost zabbix &lt;/usr/share/doc/zabbix-server-mysql-2.2.11/create/images.sql  &lt;--导入图片</div><div class="line"></div><div class="line"># mysql -uzabbix -pzabbix_pass -hlocalhost zabbix &lt;/usr/share/doc/zabbix-server-mysql-2.2.11/create/data.sql   &lt;--导入数据</div></pre></td></tr></table></figure>
+<p><a href="javascript:void(0" target="_blank" rel="external"><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>;)</p>
+<ol>
+<li><strong>修改配置文件</strong> # vim /etc/zabbix/zabbix_server.conf   &lt;–增加zabbix使用数据库的密码</li>
+</ol>
+<p>[root@zabbix-server ~]# egrep -v “^#|^$” /etc/zabbix/zabbix_server.conf</p>
+<p>LogFile=/var/log/zabbix/zabbix_server.log</p>
+<p>LogFileSize=0</p>
+<p>PidFile=/var/run/zabbix/zabbix_server.pid</p>
+<p><strong>DBHost=localhost</strong></p>
+<p><strong>DBName=zabbix</strong></p>
+<p><strong>DBUser=zabbix</strong></p>
+<p><strong>DBPassword=zabbix_pass </strong>  &lt;–需修改同数据库设置<em>**</em></p>
+<p>DBSocket=/tmp/mysql.sock </p>
+<p>SNMPTrapperFile=/var/log/snmptt/snmptt.log</p>
+<p>AlertScriptsPath=/usr/lib/zabbix/alertscripts</p>
+<p>ExternalScripts=/usr/lib/zabbix/externalscripts</p>
+<ol>
+<li><strong>启动zabbix server</strong>：</li>
+</ol>
+<p>#service zabbix-server start</p>
+<p># netstat -ntlpu|grep 10051 ß检查启动状态</p>
+<p># chkconfig zabbix-server on   ß添加开机启动</p>
+<h4 id="server端安装zabbix-web："><a href="#server端安装zabbix-web：" class="headerlink" title="server端安装zabbix web："></a>server端安装zabbix web：</h4><p>\1. # yum install zabbix-web zabbix-web-mysql</p>
+<p><a href="http://images2015.cnblogs.com/blog/856286/201603/856286-20160302231233658-602110986.jpg" target="_blank" rel="external"><img src="http://images2015.cnblogs.com/blog/856286/201603/856286-20160302231234408-600666281.jpg" alt="clip_image012"></a></p>
+<p>默认安装了httpd服务，启动httpd</p>
+<p># chkconfig httpd on    ß添加开机启动</p>
+<p>\2. 访问<a href="http://ip/zabbix" target="_blank" rel="external">http://ip/zabbix</a>进入安装</p>
+<p><a href="http://images2015.cnblogs.com/blog/856286/201603/856286-20160302231234876-404563067.jpg" target="_blank" rel="external"><img src="http://images2015.cnblogs.com/blog/856286/201603/856286-20160302231235564-1308699009.jpg" alt="clip_image014"></a></p>
+<p>==&gt;<strong>解决</strong>：修改时区 # vim /etc/httpd/conf.d/zabbix.conf</p>
+<p><a href="http://images2015.cnblogs.com/blog/856286/201603/856286-20160302231236158-1130877742.jpg" target="_blank" rel="external"><img src="http://images2015.cnblogs.com/blog/856286/201603/856286-20160302231236705-822655594.jpg" alt="clip_image016"></a></p>
+<ol>
+<li><p><strong>登录</strong>默认用户admin 密码：zabbix</p>
+</li>
+<li><p><strong>修改字体</strong></p>
+</li>
+</ol>
+<p>vim /usr/share/zabbix/include/locales.inc.php</p>
+<p>yum -y install wqy-microhei-fonts ß安装中文字体集</p>
+<p>rm -f /etc/alternatives/zabbix-web-font #删除原有字体连接文件</p>
+<p>ln -s /usr/share/fonts/wqy-microhei/wqy-microhei.ttc /etc/alternatives/zabbix-web-font</p>
+<h4 id="安装agent"><a href="#安装agent" class="headerlink" title="安装agent"></a>安装agent</h4><p>客户端和服务端都安装</p>
+<p>\1. # yum install -y zabbix-agent</p>
+<p><a href="http://images2015.cnblogs.com/blog/856286/201603/856286-20160302231237220-1600455322.jpg" target="_blank" rel="external"><img src="http://images2015.cnblogs.com/blog/856286/201603/856286-20160302231237642-429558313.jpg" alt="clip_image018"></a></p>
+<p># vim /etc/zabbix/zabbix_agentd.conf     //修改被动模式IP为zabbix server ip</p>
+<p><a href="http://images2015.cnblogs.com/blog/856286/201603/856286-20160302231238033-1708506885.jpg" target="_blank" rel="external"><img src="http://images2015.cnblogs.com/blog/856286/201603/856286-20160302231238455-857696247.jpg" alt="clip_image020"></a></p>
+<p><strong>注</strong>：（一个Agent是可以同时向多个服务器端发送数据，多个Ip用逗号隔开）</p>
+<p>Server：被动模式，允许哪台服务器连接Agent。</p>
+<p>ServerActive：主动模式，向哪台服务器传送数据。</p>
+<p># /etc/init.d/zabbix-agent start //启动agent</p>
+<p># netstat -lntp |grep 10050 //验证端口</p>
+<p>如果提示不能正常运行，分别检查zabbix_server.conf中的各项配置文件、Selinux、Iptables等。配置文件请检查以下文件的正确配置参数。</p>
+<p>1./etc/zabbix/zabbix_server.conf中的参数。</p>
+<p>#<br>DBHost=localhost         ß数据库的IP(域名)地址</p>
+<p>DBName=zabbix              ß数据库的名称</p>
+<p>DBUser=zabbix                ß数据库的用户</p>
+<p>DBPassword=zabbix        ß数据库的密码</p>
+<p>2./etc/zabbix/web/zabbix.conf.php中的配置。</p>
+<p>[root@linux-node1 ~]# cat<br>/etc/zabbix/web/zabbix.conf.php</p>
+<p>&lt;?php</p>
+<p>// Zabbix GUI configuration file.</p>
+<p>global $DB;</p>
+<p>$DB[‘TYPE’]    = ‘MYSQL’;          //数据库类型</p>
+<p>$DB[‘SERVER’]  = ‘localhost’;              //数据库的IP（域名）地址</p>
+<p>$DB[‘PORT’]    = ‘0’;           //数据库的端口</p>
+<p>$DB[‘DATABASE’] = ‘zabbix’;           //数据库的名称</p>
+<p>$DB[‘USER’]    = ‘zabbix’;            //数据库的用户</p>
+<p>$DB[‘PASSWORD’] = ‘zabbix’;          //数据库的密码</p>
+<p>// Schema name. Used for IBM DB2 and PostgreSQL.</p>
+<p>$DB[‘SCHEMA’] = ”;</p>
+<p>$ZBX_SERVER     = ‘localhost’;          ßZabbix-Server的IP（域名）地址</p>
+<p>$ZBX_SERVER_PORT = ‘10051’;              ßZabbix-Server的端口</p>
+<p>$ZBX_SERVER_NAME = ‘Zabbix-Xuliangwei’;          ßZabbix-Server web界面的标识</p>
+<p>$IMAGE_FORMAT_DEFAULT = IMAGE_FORMAT_PNG;</p>
+<p>?&gt;</p>
+<h3 id="监控流程"><a href="#监控流程" class="headerlink" title="监控流程"></a>监控流程</h3><p><a href="http://images2015.cnblogs.com/blog/856286/201603/856286-20160302231238970-1704404905.png" target="_blank" rel="external"><img src="http://images2015.cnblogs.com/blog/856286/201603/856286-20160302231239658-629855012.png" alt="image"></a></p>
+<h3 id="Zabbix-Get使用"><a href="#Zabbix-Get使用" class="headerlink" title="Zabbix-Get使用"></a>Zabbix-Get使用</h3><p>Zabbix-Get是Zabbix中的一个程序，用于Zabbix-Server到Zabbix-Agent的数据获取，通常可以用来检测验证Agent的配置是否正确。</p>
+<p>用法：zabbix_get [-hV] -s <host name="" or="" ip=""> [-p <port>] [-I <ip address="">] -k <key></key></ip></port></host></p>
+<p>-s：远程Zabbix-Agent的IP地址或者是主机名。</p>
+<p>-p：远程Zabbix-Agent的端口。</p>
+<p>-l：本机出去的IP地址，用于一台机器中又多个网卡的情况。</p>
+<p>-k：获取远程Zabbix-Agent数据所使用的Key。</p>
+<h4 id="实现监控cpu（zabbix-server主机上操作）"><a href="#实现监控cpu（zabbix-server主机上操作）" class="headerlink" title="实现监控cpu（zabbix server主机上操作）"></a>实现监控cpu（zabbix server主机上操作）</h4><p># yum install -y zabbix-get //安装zabbix-get工具</p>
+<p># zabbix_get -s 192.168.3.113 -k system.cpu.util[,user]</p>
+<p><a href="http://images2015.cnblogs.com/blog/856286/201603/856286-20160302231240095-1864992364.jpg" target="_blank" rel="external"><img src="http://images2015.cnblogs.com/blog/856286/201603/856286-20160302231241064-270046254.jpg" alt="clip_image024"></a></p>
+<p>Agent数据采集方式：passive、active</p>
+<p>Other Agent：SNMP、IPMI、Java Gateway</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://laile168.com/blog/doc/2017-09-18/开源监控软件对比_zabbix/" data-id="cj8sub0qv0007l0m16jpetq1g" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/blog/doc/2017-09-20/开放式 ETL 系统的设计与实践/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    开放式 ETL 系统的设计与实践
+                
+            </div>
+        </a>
+    
+    
+        <a href="/blog/doc/2017-09-16/Hexo使用笔记/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">Hexo基础使用</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/doc/2017-09-28/正则表达式30分钟入门教程/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/css/images/banner.png)" alt="正则表达式30分钟入门教程" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/blog/doc/2017-09-28/正则表达式30分钟入门教程/" class="title">正则表达式30分钟入门教程</a></p>
+                            <p class="item-date"><time datetime="2017-09-28T07:42:33.000Z" itemprop="datePublished">2017-09-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/doc/2017-09-21/Markdown基本使用/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/css/images/banner.png)" alt="Markdown基本使用" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/blog/doc/2017-09-21/Markdown基本使用/" class="title">Markdown基本使用</a></p>
+                            <p class="item-date"><time datetime="2017-09-21T07:42:33.000Z" itemprop="datePublished">2017-09-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/doc/2017-09-20/开放式 ETL 系统的设计与实践/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/css/images/banner.png)" alt="开放式 ETL 系统的设计与实践" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/blog/doc/2017-09-20/开放式 ETL 系统的设计与实践/" class="title">开放式 ETL 系统的设计与实践</a></p>
+                            <p class="item-date"><time datetime="2017-09-20T07:42:33.000Z" itemprop="datePublished">2017-09-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/doc/2017-09-18/开源监控软件对比_zabbix/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/css/images/favicon.gif)" alt="开源监控软件对比_zabbix" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/blog/doc/2017-09-18/开源监控软件对比_zabbix/" class="title">开源监控软件对比_zabbix</a></p>
+                            <p class="item-date"><time datetime="2017-09-18T07:42:33.000Z" itemprop="datePublished">2017-09-18</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/blog/doc/2017-09-16/Hexo使用笔记/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/blog/doc/2017-09-16/Hexo使用笔记/" class="title">Hexo基础使用</a></p>
+                            <p class="item-date"><time datetime="2017-09-16T07:42:33.000Z" itemprop="datePublished">2017-09-16</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/09/">九月 2017</a><span class="archive-list-count">5</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/软文收集/">软文收集</a><span class="tag-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/blog/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/blog/tags/软文收集/" style="font-size: 20px;">软文收集</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 mingzi li<br>
+            <!--Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>-->
+        </div>
+    </div>
+</footer>
+        
+
+
+    
+        <script src="/blog/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/blog/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/blog/js/main.js"></script>
+
+    </div>
+</body>
+</html>
