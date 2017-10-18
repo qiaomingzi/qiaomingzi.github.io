@@ -9,16 +9,37 @@
 <meta name="keywords" content="软文收集">
 <meta property="og:type" content="article">
 <meta property="og:title" content="开放式 ETL 系统的设计与实践">
-<meta property="og:url" content="http://laile168.com/doc/2017-09-20/开放式 ETL 系统的设计与实践/index.html">
+<meta property="og:url" content="http://yoursite.com/doc/2017-09-20/开放式 ETL 系统的设计与实践/index.html">
 <meta property="og:site_name" content="李明梓个人空间">
 <meta property="og:description" content="开放式 ETL 系统的设计与实践大家晚上好，感谢大家能来参加本次的在线分享，首先自我介绍一下，我是14年校招加入百度，之前在百度质量部参与EP相关的一些项目研发，15年加入百度外卖，主要负责数据仓库和ETL以及部分数据产品的开发。  今天主要给大家介绍一下百度外卖这边在ETL方向的一些实践。整体分四块，第一块先介绍下ETL的需求来源，以及外卖这个业务在ETL中的一些场景特征，这些场景特征和后面讲到">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://laile168.com/css/images/banner.png">
-<meta property="og:updated_time" content="2017-10-15T08:18:40.382Z">
+<meta property="og:image" content="http://yoursite.com/doc/2017-09-20/开放式%20ETL%20系统的设计与实践/0.jpg">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/pJE78Atczrnep17bMEVRX5NgjEvqvvIVFhMLzuHD9WCVtUSE4WoywJZQNZA7Y0VwicwonebJBDiamT8tia4jibZQFg/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/pJE78Atczrnep17bMEVRX5NgjEvqvvIVoJJldy1KaXb9gBYbvcQdSq8Bxicrkxty0zibicACjMMpiaE8hC6tr7tq5w/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/pJE78Atczrnep17bMEVRX5NgjEvqvvIVicz0kzcjkicPZSrYpw6QZeL6cszotnAxMywZictKbXFY9KKDpFOicsrUqw/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/pJE78Atczrnep17bMEVRX5NgjEvqvvIVbho4SUiaGIBficACATBhdQmPOvBBiar4aSKJictTIV1Gb4WNRibictCnhECg/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/pJE78Atczrnep17bMEVRX5NgjEvqvvIVRGElBrIJ2XIQ3H7aBbQs1uyzlzWIQ6UPiaZk5IrhPPmxZTias9tENV6w/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/pJE78Atczrnep17bMEVRX5NgjEvqvvIVkvAPZlJfRtrx1U6DJ6PTq44TTWWNs1YMrTiaLcTVKxVqrjEsVEvIU2Q/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/pJE78Atczrnep17bMEVRX5NgjEvqvvIVMd5jhqjIJyR99HOHUCboNcM616FkkDn1ZOqO2UO7iacS3brVKamU3vA/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/pJE78Atczrnep17bMEVRX5NgjEvqvvIV0gBmKqFPLUwJmSmgRpO2Rf2ic6EN4EUIX11l2ibqydVKEEHNjRyL9J5A/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/pJE78Atczrnep17bMEVRX5NgjEvqvvIVBSa2FZ1gkCWztqMm7U0542EI6vzUjRcqxaIYRV7sOLv6v3kNyJLl2A/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/pJE78Atczrnep17bMEVRX5NgjEvqvvIVqN7f0BQ0OOOZia2RIDicloicE3cZmUyDdZib2vk2OibichC3aBcBAsUuEdQQ/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/pJE78Atczrnep17bMEVRX5NgjEvqvvIVoJ257r2via4Zs7fq2CV0qVzdLk11mYtwnDglDwaGV0g6TthTIcvF3Yw/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/pJE78Atczrnep17bMEVRX5NgjEvqvvIV26AccyNbCltt1gzLzRqzuLian65n4n2xoLq3tVMp5bQ18VBobsziaaVQ/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/pJE78Atczrnep17bMEVRX5NgjEvqvvIV51dQI377Axd7JWZYdc1kFF0kD2ibMzjSfyFuJ2AQvgHyB0VucgGLLGA/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/pJE78Atczrnep17bMEVRX5NgjEvqvvIVhx9YxCEVqXpolxksFf2s1uJOibhGdroQMzdU5fJ8pk2e7PUA5cCwndA/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/pJE78Atczrnep17bMEVRX5NgjEvqvvIVugJamGQ7zxWlv9Vvf4O6BYMibBribLsN1xqCVYW6icfPXMBEAMAEAI3Yw/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/pJE78Atczrnep17bMEVRX5NgjEvqvvIVfJx9A4OXVg0BEOMY0nle0uZsjdic7EIJLZzaV014dtlKI5Q9bn8y0ZA/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/pJE78Atczrnep17bMEVRX5NgjEvqvvIVt9e9QbSVH58ib2lTphr8SeMVaZFCY39HwA5ugXyHUxmHxbLNQr5JzUg/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/pJE78Atczrnep17bMEVRX5NgjEvqvvIVwfaTRp1fwB5hGS3cVo1ibRRanBLty0IOdybf4nkR8RgU09Um6GiblV1A/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/pJE78Atczrnep17bMEVRX5NgjEvqvvIVHvB71aDC3UImvWSwARqUtVlJxdq4m9jIibnrqZ0U8HFgFbIKnIKNiaiaA/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/pJE78Atczrnep17bMEVRX5NgjEvqvvIVYUfp9cxwqhpY8Wd3r0lSGF2WsRG0ibXbsTktVehfMMySXUP8Rz4mnqw/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/pJE78Atczrnep17bMEVRX5NgjEvqvvIVbs5VjFa2ic8W4ufrroewsVic0McXJ4icUwqWFdibuULtm2qJs9bXnszBkw/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:updated_time" content="2017-10-18T14:11:28.994Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="开放式 ETL 系统的设计与实践">
 <meta name="twitter:description" content="开放式 ETL 系统的设计与实践大家晚上好，感谢大家能来参加本次的在线分享，首先自我介绍一下，我是14年校招加入百度，之前在百度质量部参与EP相关的一些项目研发，15年加入百度外卖，主要负责数据仓库和ETL以及部分数据产品的开发。  今天主要给大家介绍一下百度外卖这边在ETL方向的一些实践。整体分四块，第一块先介绍下ETL的需求来源，以及外卖这个业务在ETL中的一些场景特征，这些场景特征和后面讲到">
-<meta name="twitter:image" content="http://laile168.com/css/images/banner.png">
+<meta name="twitter:image" content="http://yoursite.com/doc/2017-09-20/开放式%20ETL%20系统的设计与实践/0.jpg">
     
 
     
@@ -216,14 +237,6 @@
             <section id="main"><article id="post-开放式 ETL 系统的设计与实践" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
-            
-	
-		<img src="/css/images/banner.png" class="article-banner" />
-	
-
-
-
-        
         
             <header class="article-header">
                 
@@ -260,7 +273,7 @@
         
             
             <h2 id="开放式-ETL-系统的设计与实践"><a href="#开放式-ETL-系统的设计与实践" class="headerlink" title="开放式 ETL 系统的设计与实践"></a>开放式 ETL 系统的设计与实践</h2><p>大家晚上好，感谢大家能来参加本次的在线分享，首先自我介绍一下，我是14年校招加入百度，之前在百度质量部参与EP相关的一些项目研发，15年加入百度外卖，主要负责数据仓库和ETL以及部分数据产品的开发。</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/pJE78Atczrnep17bMEVRX5NgjEvqvvIVugFVoWbNuSpE1GPdGZHvjmTqic8NopmHeRY4CgL0cAFW51deqUdUyvg/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="img"></p>
+<p><img src="/doc/2017-09-20/开放式 ETL 系统的设计与实践/0.jpg" alt="img"></p>
 <p>今天主要给大家介绍一下百度外卖这边在ETL方向的一些实践。整体分四块，第一块先介绍下ETL的需求来源，以及外卖这个业务在ETL中的一些场景特征，这些场景特征和后面讲到的ETL系统设计联系比较紧密。第二部分讲基于这些场景和业务，ETL都需要满足哪些特性，都针对性的做出了什么样的设计。第三部分介绍了整个数据的交付体系，在数据交付给业务使用时如何保证其可用性，如何做到生产进度透明化。第四部分是介绍如何通过数据的血缘关系，来做到数据可解释，同时基于数据血缘关系还可以做那些事，能带来什么样的特性。</p>
 <p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/pJE78Atczrnep17bMEVRX5NgjEvqvvIVFhMLzuHD9WCVtUSE4WoywJZQNZA7Y0VwicwonebJBDiamT8tia4jibZQFg/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt="img"></p>
 <p>聊ETL自然离不开仓库，ETL服务将数据入到仓库，最终也都是为了在仓库层面提供结构或半结构化的数据存储、提供面向主题的明细和聚合数据，更好的支持上层应用及业务。</p>
@@ -321,7 +334,7 @@
 
 </div>
 
-    <a data-url="http://laile168.com/doc/2017-09-20/开放式 ETL 系统的设计与实践/" data-id="cj8suhybm0006b8m1tonzvrmh" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://yoursite.com/doc/2017-09-20/开放式 ETL 系统的设计与实践/" data-id="cj8x49dob0007msm1w2u2f65g" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -438,7 +451,7 @@
                             <a href="/doc/2017-09-28/正则表达式30分钟入门教程/" class="thumbnail">
     
     
-        <span style="background-image:url(/css/images/banner.png)" alt="正则表达式30分钟入门教程" class="thumbnail-image"></span>
+        <span class="thumbnail-image thumbnail-none"></span>
     
 </a>
 
@@ -457,7 +470,7 @@
                             <a href="/doc/2017-09-21/Markdown基本使用/" class="thumbnail">
     
     
-        <span style="background-image:url(/css/images/banner.png)" alt="Markdown基本使用" class="thumbnail-image"></span>
+        <span class="thumbnail-image thumbnail-none"></span>
     
 </a>
 
@@ -476,7 +489,7 @@
                             <a href="/doc/2017-09-20/开放式 ETL 系统的设计与实践/" class="thumbnail">
     
     
-        <span style="background-image:url(/css/images/banner.png)" alt="开放式 ETL 系统的设计与实践" class="thumbnail-image"></span>
+        <span class="thumbnail-image thumbnail-none"></span>
     
 </a>
 
