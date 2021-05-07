@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>WinDock on Henrik Sommerfeld's blog</title><link>https://www.henriksommerfeld.se/tags/windock/</link><description>Recent content in WinDock on Henrik Sommerfeld's blog</description><generator>Hugo -- gohugo.io</generator><language>en-gb</language><lastBuildDate>Sat, 30 Apr 2016 16:59:15 +0000</lastBuildDate><atom:link href="https://www.henriksommerfeld.se/tags/windock/index.xml" rel="self" type="application/rss+xml"/><item><title>WinDock Configuration for my 21:9 Screen</title><link>https://www.henriksommerfeld.se/windock-configuration-for-my-219-screen/</link><pubDate>Sat, 30 Apr 2016 16:59:15 +0000</pubDate><guid>https://www.henriksommerfeld.se/windock-configuration-for-my-219-screen/</guid><description>Hi have recently bought an ultra-wide monitor for my desk at home, a Dell U3415W. I&amp;rsquo;m using it both for work as a coder and for my personal needs such as photo editing, web browsing and watching films. I have previously used a dual monitor setup, so I wanted to find a way of organising windows to be used side-by-side in a productive manner.
-figure.lazy {
-display: none;
-}
-Dell U3415W Monitor, 34″ 3440×1440
-Dell U3415W Monitor, 34″ 3440×1440
-Of course Windows has had the feature to add two windows side-by-side built-in since Windows 7.</description></item></channel></rss>
