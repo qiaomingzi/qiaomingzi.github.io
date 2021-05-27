@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>前端 on mingzi.li blog</title><link>http://qiaomingzi.github.io/categories/%E5%89%8D%E7%AB%AF/</link><description>Recent content in 前端 on mingzi.li blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Thu, 27 May 2021 09:46:19 +0800</lastBuildDate><atom:link href="http://qiaomingzi.github.io/categories/%E5%89%8D%E7%AB%AF/index.xml" rel="self" type="application/rss+xml"/><item><title>Yarn相关</title><link>http://qiaomingzi.github.io/yarn%E7%9B%B8%E5%85%B3/</link><pubDate>Thu, 27 May 2021 09:46:19 +0800</pubDate><guid>http://qiaomingzi.github.io/yarn%E7%9B%B8%E5%85%B3/</guid><description>1.概述 Yarn是您的代码的包管理器，yarn和npm的对比
+速度
+npm 是按照队列执行每个 package，也就是说必须要等到当前 package 安装完成之后，才能继续后面的安装。而 Yarn 是同步执行所有任务，提高了性能。
+安装版本统一
+更简洁的输出
+参考：</description></item></channel></rss>

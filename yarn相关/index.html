@@ -1,0 +1,195 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=referrer content="no-referrer"><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Yarn相关 | mingzi.li blog</title><meta property="og:type" content="website"><meta property="og:title" content="Yarn相关"><meta property="og:url" content="http://qiaomingzi.github.io/yarn%E7%9B%B8%E5%85%B3/"><meta property="og:locale" content="en_GB"><meta property="og:image" content="http://qiaomingzi.github.io/images/og-image.png"><link rel=canonical href=http://qiaomingzi.github.io/yarn%E7%9B%B8%E5%85%B3/><meta name=twitter:card content="summary"><meta name=twitter:site content="@p4lm"><link rel=stylesheet type=text/css href=/styles/main-bundle.108386b285ad502399f3a8ab890a333c177e59d922733a408892e466a7a87f70d143ace3585f247b62a75a780bd7bcff68b60fc6760b5ae1414e52c78fe708e7.css integrity media="screen, tv, projection"><link rel=stylesheet type=text/css href=/styles/print-bundle.f3d1ea3e2e864e24f7a26ff871aef6875b8e6246aad31fa6e63fdc9c91c629f6b4cdd7dca9beb3949f8b61a0db4c6fe8ec1bfc44ccf3a2cd9a91ea8e9eb20d44.css integrity media=print><link rel=preload as=font href=/fonts/muli1.woff2 type=font/woff2 crossorigin=anonymous><link rel=preload as=font href=/fonts/muli2.woff2 type=font/woff2 crossorigin=anonymous><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#04396c><meta name=theme-color content="#ffffff"><meta name=generator content="Hugo 0.83.1"><svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><symbol id="icon-arrow-right" viewBox="0 0 32 32"><path d="M19.414 27.414l10-10c.781-.781.781-2.047.0-2.828l-10-10c-.781-.781-2.047-.781-2.828.0s-.781 2.047.0 2.828L23.172 14H4c-1.105.0-2 .895-2 2s.895 2 2 2h19.172l-6.586 6.586c-.39.39-.586.902-.586 1.414s.195 1.024.586 1.414c.781.781 2.047.781 2.828.0z"/></symbol><symbol id="icon-arrow-left" viewBox="0 0 32 32"><path d="M12.586 27.414l-10-10c-.781-.781-.781-2.047.0-2.828l10-10c.781-.781 2.047-.781 2.828.0s.781 2.047.0 2.828L8.828 14H28c1.105.0 2 .895 2 2s-.895 2-2 2H8.828l6.586 6.586c.39.39.586.902.586 1.414s-.195 1.024-.586 1.414c-.781.781-2.047.781-2.828.0z"/></symbol><symbol id="icon-calendar" viewBox="0 0 32 32"><path d="M27.2 4.8h-1.6V8h-4.8V4.8h-9.6V8H6.4V4.8H4.8C3.038 4.8 1.6 6.24 1.6 8v19.2c0 1.76 1.438 3.2 3.2 3.2h22.4c1.76.0 3.2-1.44 3.2-3.2V8c0-1.76-1.44-3.2-3.2-3.2zm0 22.4H4.8V14.4h22.4v12.8zM10.4 1.6H7.2v5.6h3.2V1.6zm14.4.0h-3.2v5.6h3.2V1.6z"/></symbol><symbol id="icon-expand" viewBox="0 0 32 32"><path d="M11.179 17.579l-4.69 4.85-3.29-3.886v10.258h10.219l-3.888-3.33 4.848-4.691-3.2-3.2zM18.581 3.2l3.888 3.33-4.848 4.691 3.2 3.2 4.69-4.85 3.29 3.886V3.199H18.582z"/></symbol><symbol id="icon-collapse" viewBox="0 0 32 32"><path d="M6.56 22.56 1.6 27.2l3.2 3.2 4.64-4.96 3.36 3.36v-9.6H3.2l3.36 3.36zM30.4 4.8l-3.2-3.2-4.64 4.96L19.2 3.2v9.6h9.6l-3.36-3.36L30.4 4.8z"/></symbol><symbol id="icon-bubble" viewBox="0 0 32 32"><path d="M16 2c8.837.0 16 5.82 16 13s-7.163 13-16 13c-.849.0-1.682-.054-2.495-.158C10.068 31.279 5.966 31.895 2 31.986v-.841C4.142 30.096 6 28.184 6 26c0-.305-.024-.604-.068-.897-3.619-2.383-5.932-6.024-5.932-10.103.0-7.18 7.163-13 16-13z"/></symbol><symbol id="icon-folder" viewBox="0 0 32 32"><path d="M29.448 7.678C29.27 6.974 28.4 6.4 27.512 6.4H16.61c-.886.0-2.128-.509-2.755-1.131l-.954-.941c-.627-.622-1.867-1.128-2.754-1.128H4.939c-.888.0-1.694.715-1.792 1.59L2.68 9.6h27.09l-.322-1.922zM31.059 11.2h-30.118c-.547.0-.976.47-.923 1.016l1.477 15.47c.059.63.59 1.114 1.226 1.114h26.56c.635.0 1.165-.483 1.226-1.114l1.477-15.47c.053-.546-.376-1.016-.923-1.016z"/></symbol><symbol id="icon-tag" viewBox="0 0 32 32"><path d="M31.021.648c-.178-.502-.726-.768-1.23-.594s-.77.728-.595 1.232c1.486 4.272-1.464 7.462-3.714 9.171l-.909-1.302c-.306-.437-.989-.8-1.52-.806l-5.101.022c-.531-.01-1.32.234-1.755.541l-15.03 10.539c-.728.512-.904 1.515-.395 2.246l6.83 9.773c.512.728 1.33.64 2.059.131l15.03-10.541c.432-.306.931-.965 1.107-1.469l1.597-5.032c.176-.502.069-1.269-.237-1.706l-.554-.794c3.021-2.315 6.157-6.406 4.416-11.413zM24.027 15.621c-1.163.816-2.77.531-3.584-.634-.818-1.168-.533-2.774.632-3.594.925-.648 2.125-.602 2.989.027-.435.262-.734.416-.79.44-.482.229-.688.806-.461 1.288.166.35.514.557.875.557.138.0.278-.032.411-.094.31-.147.643-.322.99-.528.155.95-.222 1.947-1.062 2.538z"/></symbol><symbol id="icon-circle-with-cross" viewBox="0 0 32 32"><title>Close (Esc)</title><path d="M16 2.56C8.578 2.56 2.56 8.578 2.56 16S8.578 29.44 16 29.44 29.44 23.422 29.44 16 23.422 2.56 16 2.56zm7.662 18.338-2.766 2.766L16 18.766l-4.898 4.896-2.766-2.766L13.235 16l-4.898-4.898 2.766-2.765 4.896 4.896 4.898-4.898 2.766 2.766-4.899 4.898 4.898 4.898z"/></symbol></defs></svg></head><body x-data=window.blog :class="{ 'modal-open': isModalOpen, 'keyboard-navigation' : keyboardNavigation }" @mouseup="keyboardNavigation = false" @keydown.tab="keyboardNavigation = true" @keydown.escape=closeModals()><script>try{const a=window.localStorage.getItem('theme');a==='dark'&&document.querySelector('body').classList.add('dark'),a==='light'&&document.querySelector('body').classList.add('light')}catch(a){}</script><link rel=stylesheet type=text/css href=/styles/post-bundle.min.a3c415b51dea409e064708f705f91702ddddb4aaf1c7522073113ac5c6941f198ce5f39ea63cfaf21674b905146c1bdf3eeb0eaa41d22b9d013117c9bb72d81e.css integrity="sha512-o8QVtR3qQJ4GRwj3BfkXAt3dtKrxx1IgcxE6xcaUHxmM5fOepjz68hZ0uQUUbBvfPusOqkHSK50BMRfJu3LYHg==" media="screen, tv, projection"><div id=page-wrapper><header><svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><symbol id="icon-home" viewBox="0 0 32 32"><path d="M32 18.451 16 6.031.0 18.451v-5.064l16-12.42 16 12.42zM28 18v12h-8v-8h-8v8H4V18l12-9z"/></symbol><symbol id="icon-user" viewBox="0 0 32 32"><path d="M18 22.082v-1.649c2.203-1.241 4-4.337 4-7.432.0-4.971.0-9-6-9s-6 4.029-6 9c0 3.096 1.797 6.191 4 7.432v1.649C7.216 22.637 2 25.97 2 30h28c0-4.03-5.216-7.364-12-7.918z"/></symbol><symbol id="icon-search" viewBox="0 0 32 32"><path d="M31.008 27.231l-7.58-6.447c-.784-.705-1.622-1.029-2.299-.998 1.789-2.096 2.87-4.815 2.87-7.787.0-6.627-5.373-12-12-12s-12 5.373-12 12 5.373 12 12 12c2.972.0 5.691-1.081 7.787-2.87-.031.677.293 1.515.998 2.299l6.447 7.58c1.104 1.226 2.907 1.33 4.007.23s.997-2.903-.23-4.007zM12 20c-4.418.0-8-3.582-8-8s3.582-8 8-8 8 3.582 8 8-3.582 8-8 8z"/></symbol></defs></svg><div class=header-content @click.away=menu.close()><div class=site-title>mingzi.li blog<span style=font-size:.5rem;margin-top:20px>&nbsp;&nbsp;行到水穷处，坐看风云起</span></div><div class=theme-switcher :class="{'has-javascript': true}"><div class=switch><input type=checkbox name=toggle id=theme-switcher-indicator aria-label="Switch theme" @click=theme.toggleChanged($event.target) checked>
+<label for=theme-switcher-indicator><i></i></label>
+<span></span></div></div><a href=#content id=skip-link class=skip-link @click.prevent=skipLink.skipToContent($refs.content) @click.away=skipLink.removeContentTabIndex($refs.content)>Skip to content</a>
+<button @click=menu.toggle() class=hamburger-trigger>Menu<div class=hamburger-menu><div class=bar :class="{'animate': menu.hamburgerIsOpen()}"></div></div></button><nav :class="{'open': menu.isOpen() || menu.isOpening(), 'open closing': menu.isClosing()}"><a href=/ class=home><svg class="icon icon-home"><use xlink:href="#icon-home"/></svg>首页</a>
+<a href=/about/ class=about><svg class="icon icon-user"><use xlink:href="#icon-user"/></svg>关于我</a>
+<a href=/search-requires-javascript/ rel=nofollow class=search x-ref=searchMenuLink @click.prevent="menu.close(); search.open();$nextTick(() => $refs.searchInput.focus())"><svg class="icon icon-search"><use xlink:href="#icon-search"/></svg>搜索</a></nav></div></header><div class=body><div class=body-max-width><main id=content x-ref=content><article class=full-article><h1>Yarn相关</h1><div class=entry-meta><time class=published datetime="2021-05-27 09:46:19 +0800 +0800"><svg class="icon icon-calendar"><use xlink:href="#icon-calendar"/></svg>2021 May 27</time></div><h3 id=1概述>1.概述</h3><p>Yarn是您的代码的包管理器，yarn和npm的对比</p><ul><li><p>速度</p><p>npm 是按照队列执行每个 package，也就是说必须要等到当前 package 安装完成之后，才能继续后面的安装。而 Yarn 是同步执行所有任务，提高了性能。</p></li><li><p>安装版本统一</p></li><li><p>更简洁的输出</p></li></ul><p>参考：</p><p><code>https://classic.yarnpkg.com</code> yarn官网</p><h3 id=2基础配置>2.基础配置</h3><p>使用安装包安装</p><p><code>https://github.com/yarnpkg/yarn/releases</code> 下载路径</p><p>使用npm安装</p><p><code>npm install --g yarn</code></p><p>window下 配置文件路径 <code>C:\Users\Administrator\.yarnrc</code></p><h4 id=21修改缓存路径>2.1.修改缓存路径</h4><p>#修改yarn 缓存位置
+yarn config set cache-folder &ldquo;你的磁盘路径&rdquo;
+#这里是我的路径
+yarn config set cache-folder &ldquo;D:\Software\yarn\cache&rdquo;</p><h4 id=22修改包源>2.2.修改包源</h4><p><code>yarn config set registry https://registry.npm.taobao.org/</code></p><h4 id=23yarn-全局安装位置>2.3.yarn 全局安装位置</h4><p><code>yarn config set global-folder "D:\yarnData\global"</code></p><h4 id=24改变yarn-bin位置>2.4.改变yarn bin位置</h4><p><code>yarn config set prefix D:\yarnData\global\bin</code></p><h3 id=3yarn版本号>3.yarn版本号</h3><pre><code>yarn的包遵守 semver，即语义化版本。 SemVer 是一套语义化版本控制的约定，定义的格式为
+X.Y.Z（主版本号.次版本号.修订号）：
+X.主版本号：进行不向下兼容的修改时，递增主版本号
+Y.次版本号: 做了向下兼容的新增功能或修改
+Z.修订号：做了向下兼容的问题修复
+ 
+yarn 中依赖版本范围的表示方法有以下几种：
+1. 通过比较器
+	表示	含义描述
+	&lt;2.0.0	任何小于 2.0.0 的版本
+	&lt;=3.1.4	任何小于或等于 3.1.4 的版本
+	&gt;0.4.2	任何大于 0.4.2 的版本
+	&gt;=2.7.1	任何大于或等于 2.7.1 的版本
+	=4.6.6	任何等于 4.6.6 的版本
+	&gt;=2.0.0 &lt;3.1.4	交集，大于或等于 2.0.0 并小于 3.1.4
+	&lt;2.0.0 || &gt;3.1.4	并集 小于 2.0.0 或者大于 3.1.4
+          如果没有指定运算符，默认为 =
+2. 通过连字符
+	表示	含义描述
+	2.0.0 - 3.1.4	&gt;=2.0.0 &lt;=3.1.4
+	0.4 - 2	&gt;=0.4.0 &lt;=2.0.0
+      版本号中缺少的那些部分会用数字 0 填充。
+3. X范围
+字符 X、x 或者 * 都可以作为通配符，用于填充部分或全部版本号。 被省略的那部分版本号默认为 x 范围。
+	表示	含义描述
+	*	&gt;=0.0.0 (任意版本)
+	2.x	&gt;=2.0.0 &lt;3.0.0（匹配主要版本）
+	3.1.x	&gt; = 3.1.0 &lt; 3.2.0（匹配主要和次要版本）
+	``（空字符串）	* 或 &gt; = 0.0.0
+	2	2.x.x 或 &gt; = 2.0.0 &lt; 3.0.0
+	3.1	3.1.x 或 &gt; = 3.1.0 &lt; 3.2.0
+4. ～ 字符范围
+同时使用字符 ~ 和次版本号，表明允许 修订号 变更。同时使用字符 ~ 和主版本号，表明允许 次版本 号变更。
+	表示	含义描述
+	~3.1.4	&gt;=3.1.4 &lt;3.2.0
+	~3.1	3.1.x 或 &gt; = 3.1.0 &lt; 3.2.0
+	~3	3.x 或 &gt; = 3.0.0 &lt; 4.0.0
+5. ^ 字符范围
+字符 ^ 表明不会修改版本号中的第一个非零数字，3.1.4 里的 3 或者 0.4.2 里的 4。版本号中缺少的部分将被 0 填充，且在匹配时这些位置允许改变。
+	表示	含义描述
+	^3.1.4	&gt;=3.1.4 &lt;4.0.0
+	^0.4.2	&gt;=0.4.2 &lt;0.5.0
+	^0.0.2	&gt;=0.0.2 &lt;0.0.3
+使用 yarn add [package-name] 命令安装依赖，默认使用的是 ^ 范围。
+需要注意的是，如果一个比较器包含有预发布标签的版本，它将只匹配有相同 major.minor.patch 的版本。 例如 &gt;=3.1.4-beta.2，可以匹配 3.1.4-beta.3，但不会匹配 3.1.5-beta.3 版本。
+</code></pre><h3 id=3yarn依赖类型>3.yarn依赖类型</h3><pre><code>dependences 代码运行时所需要的依赖，比如vue，vue-router。
+devDependences 开发依赖，就是那些只在开发过程中需要，而运行时不需要的依赖，比如babel，webpack。
+peerDependences 同伴依赖，它用来告知宿主环境需要什么依赖以及依赖的版本范围。如果宿主环境没有对应版本的依赖，在安装依赖时会报出警告。比如包 eslint-plugin-import 中有依赖：
+  &quot;peerDependencies&quot;: {
+    &quot;eslint&quot;: &quot;2.x - 5.x&quot;
+  },
+ 
+optionalDependencies 可选依赖，这种依赖即便安装失败，Yarn也会认为整个依赖安装过程是成功的。可选依赖适用于那些即便没有成功安装可选依赖，也有后备方案的情况。
+
+bundledDependencies 打包依赖，在发布包时，这个数组里的包都会被打包打包到最终的发布包里，需要注意 bundledDependencies 中的包必须是在devDependencies或dependencies声明过的。
+
+</code></pre><h3 id=4yarn-包缓存>4.yarn 包缓存</h3><p>yarn 会将安装过的包缓存下来，这样再次安装相同包的时候，就不需要再去下载，而是直接从缓存文件中直接copy进来。</p><p>可以通过命令 yarn cache dir 查看yarn的全局缓存目录。我的缓存目录在 /Library/Caches/Yarn/v1 下。</p><p>可以看出，yarn 会将不通版本解压后的包存放在不同目录下，目录以</p><p>npm-[package name]-[version]-[shasum]`</p><p>来命名。shasum 即上文中 registry 获取的 dist.shasum。</p><p>我们可以通过命令查看已经缓存过的包。</p><p>yarn cache list 列出已缓存的每个包</p><p>yarn cache list &ndash;pattern 列出匹配指定模式的已缓存的包</p><p>例如执行 yarn cache list &ndash;pattern vue</p><h3 id=5yarn-install过程>5.yarn install过程</h3><p>首次执行 yarn install 安装，会按照 package.json 中的语义化版本，去向 registry 进行查询，并获取到符合版本规则的最新的依赖包进行下载，并构建构建依赖关系树。 比如在 package.json 中指定 vue 的版本为 ^2.0.0，就会获取符合 2.x.x 的最高版本的包。然后自动生成 yarn.lock 文件，并生成缓存。</p><p>之后再执行 yarn install，会对比 package.json 中依赖版本范围和 yarn.lock 中版本号是否匹配。</p><ol><li>版本号匹配，会根据 yarn.lock 中的 resolved 字段去查看缓存， 如果有缓存，直接copy，没有缓存则按照 resolved 字段的url去下载包。</li><li>版本号不匹配，根据 package.json 中的版本范围去 registry 查询，下载符合版本规则最新的包，并更新至 yarn.lock 中。</li></ol><h3 id=6yarnlock>6.yarn.lock</h3><pre><code>yarn.lock 中会准确的存储每个依赖的具体版本信息，以保证在不同机器安装可以得到相同的结果。
+下面以@babel/code-frame为例，看看yarn.lock 中会记录哪些信息。
+	1. 第一行 &quot;@babel/code-frame@7.0.0-beta.54&quot; 包的name和语义化版本号，这些都来自package.json中的定义。
+	2. version 字段，记录的是一个确切的版本。
+	3. resolved 字段记录的是包的URL地址。其中hash值，即上文的 dist.shasum。
+	4. dependencies 字段记录的是当前包的依赖，即当前包在 package.json 的 dependencies 字段中的所有依赖。
+	
+Yarn 在安装期间，只会使用当前项目的 yarn.lock 文件（即 顶级 yarn.lock 文件），会忽略任何依赖里面的 yarn.lock 文件。在顶级 yarn.lock 中包含需要锁定的整个依赖树里全部包版本的所有信息。
+yarn.lock文件是在安装期间，由 Yarn 自动生成的，并且由yarn来管理，不应该手动去更改，更不应该删除yarn.lock文件，且要提交到版本控制系统中，以免因为不同机器安装的包版本不一致引发问题。
+</code></pre><h3 id=7模块扁平化>7.模块扁平化</h3><pre><code>上面提到，在安装依赖时，会解析依赖构建出依赖关系树。 比如我项目的首层依赖(即当前项目的dependence和devDependences中的依赖，不包括依赖的依赖)中有A，B，C三个包，A 和 B包同时依赖了相同版本范围的D包。那么这部分的依赖关系树是这样的：
+├── A    				
+│ └── D    
+├── B    				
+│ └── D  
+├── C 
+ 
+如果按照这样的依赖关系树直接安装的话，D模块会在A包和B包的 node_modules中都安装，这样会导致模块冗余。
+为了保证依赖关系树中没有大量重复模块，yarn在安装时会做dedupe（去重）操作，它会遍历所有节点，逐个将模块放在根节点下面，也就是当前项目的 node-modules 中。当发现有相同的模块时，会判断当前模块指定的 semver 版本范围是否交集，如果有，则只保留兼容版本，如果没有则在当前的包的 node-modules 下安装。
+所以上面的说的情况，最终安装完成是下面这样的，A，B，C，D包都会安装在第一层 node-modules 下。
+├── A    				
+├── B    				
+├── C 
+├── D
+ 
+如果A包和B包依赖的是不兼容的版本，假设A包依赖的是D@1版本的包，B包依赖的是D@2版本。则最终安装的结果如下：
+├── A    				
+├── B    
+│ └── D@2 
+├── C 
+├── D@1
+ 
+当代码中 require 或 import 某个模块时，会从当前 package 的 node-modules 里中开始找，找不到就到当前package的上一层 node-modules 里找，这样一直找到全局的node_modules。 所以上面的安装的树结构，可以保证每个 package 都能获取到所需要版本的包。 
+</code></pre><h3 id=8基本命令>8.基本命令</h3><pre><code>1.查看配置
+yarn --version 
+yarn global bin 查看bin路径
+yarn global dir 查看安装路径
+
+
+2.显示当前依赖
+yarn list 列出所有依赖
+yarn list --depth=0 列出所有依赖,并指定深度
+yarn list --pattern gulp
+yarn list --pattern &quot;gulp|grunt&quot;
+yarn list --pattern &quot;gulp|grunt&quot; --depth=1
+
+3.查看配置
+yarn config get init-license  获取配置
+yarn config delete test-key  删除配置
+yarn config list 显示当前配置
+yarn config set init-license BSD-2-Clause 设置配置
+
+查看当前使用的镜像源
+yarn config get registry
+修改镜像源（以修改成淘宝源为例）
+yarn config set registry https://registry.npm.taobao.org/
+
+4.基础使用
+新项目初始化
+yarn init 
+
+添加依赖关系
+yarn add [package]
+yarn add [package]@[version]
+yarn add [package]@[tag]
+
+将依赖关系添加到不同类别的依赖项
+添加到devDependencies，peerDependencies和optionalDependencies分别为：
+yarn add [package] --dev
+yarn add [package] --peer 
+yarn add [package] --optional
+
+升级依赖项
+yarn upgrade [package]
+yarn upgrade [package]@[version]
+yarn upgrade [package]@[tag]
+
+删除依赖项
+yarn remove [package]
+
+安装项目的所有依赖项
+yarn
+或
+yarn install
+
+执行package.json文件中定义scripts
+yarn run build/test -o --watch
+
+
+5.项目文件
+package.json：这包含您的包的所有当前依赖项。
+yarn.lock：这存储了包的每个依赖项的确切版本。
+
+6.其他命令
+yarn versions  查看所有包的版本信息
+
+
+7. yarn install 安装依赖
+yarn install / yarn  在本地 node_modules 目录安装 package.json 里列出的所有依赖
+yarn install --force 重新拉取所有包，即使之前已经安装的（所以以后别在删除node-modules了...）
+yarn install --modules-folder &lt;path&gt; 为 node_modules 目录指定另一位置，代替默认的 ./node_modules
+yarn install --no-lockfile 不读取或生成 yarn.lock 文件
+yarn install --production[=true|false] / --production / --prod 只安装 dependence下的包，不安装 devDependencies 的包
+ 
+8. yarn add
+yarn add package-name 会安装 latest 最新版本。
+yarn add &lt;package...&gt;  安装包到dependencies中
+yarn add &lt;package...&gt; [--dev/-D]  用 --dev 或 -D 安装包到 devDependencies
+yarn add &lt;package...&gt; [--peer/-P]  用 --peer 或者 -P 安装包到 peerDependencies
+yarn add &lt;package...&gt; [--optional/-O] 用 --optional 或者 -O 安装包到 optionalDependencies 
+yarn add &lt;package...&gt; [--exact/-E] 用 --exact 或者 -E 会安装包的精确版本。默认是安装包的主要版本里的最新版本。 比如说， yarn add foo@1.2.3 会接受 1.9.1 版，但是 yarn add foo@1.2.3 --exact 只会接受 1.2.3 版。
+yarn add &lt;package...&gt; [--tilde/-T]  用 --tilde 或者 -T 来安装包的次要版本里的最新版。 默认是安装包的主要版本里的最新版本。 比如说，yarn add foo@1.2.3 --tilde 会接受 1.2.9，但不接受 1.3.0。
+ 
+
+ 
+9. 其他常用命令
+yarn list 查询当前工作文件夹所有的依赖
+yarn info &lt;package&gt; [&lt;field&gt;]  查看包信息，可以查看特定
+yarn remove &lt;package...&gt;  从依赖里移除名包，同时更新你 package.json 和 yarn.lock 文件。
+yarn &lt;script&gt; [&lt;args&gt;] 执行用户自定义的脚本
+ 
+10. 详细日志模式 运行yarn命令时，增加参数 --verbose，这对排查错误时很有帮助
+yarn &lt;command&gt; --verbose
+</code></pre><h3 id=9问题>9.问题</h3><h4 id=yarn------the-platform-win32-is-incompatible-with-this-module>yarn The platform &ldquo;win32&rdquo; is incompatible with this module</h4><p><code>yarn config set ignore-engines true</code></p><footer><section class=categories-tags><span><svg class="icon icon-folder"><use xlink:href="#icon-folder"/></svg><span class=screen-reader-text>This entry was posted in</span>
+<a href=/categories/%E5%89%8D%E7%AB%AF>前端</a></span> <span><svg class="icon icon-tag"><use xlink:href="#icon-tag"/></svg><a class=article-tags href=/tags/yarn>yarn</a></span></section></footer><div id=comments-button-container class=comments-button-container><button type=button onclick=loadDisqus() class=comments-button><svg class="icon icon-bubble"><use xlink:href="#icon-bubble"/></svg> <span>Show Comments</span></button></div><div id=disqus_thread></div><script type=text/javascript>function loadDisqus(){var a,b;document.getElementById('comments-button-container').style.display='none',a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='李明梓',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)}</script><noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></article></main><aside id=sidebar><div class=widget><div class=widget-title>Recent posts</div><ol class="recent-widget widget-content"><li><a href=/go%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/>GO入门学习</a></li><li><a href=/hugo%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/>Hugo基本使用</a></li><li><a href=/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F30%E5%88%86%E9%92%9F%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/>正则表达式30分钟入门教程</a></li><li><a href=/markdown%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/>Markdown基本使用</a></li><li><a href=/%E5%BC%80%E6%BA%90%E7%9B%91%E6%8E%A7%E8%BD%AF%E4%BB%B6%E5%AF%B9%E6%AF%94_zabbix/>开源监控软件对比_zabbix</a></li></ol></div><div class=widget><div class=widget-title>Categories</div><ol class="all-categories widget-content"><li><a href=/categories/devops>devops</a> (1)</li><li><a href=/categories/%E5%85%B6%E4%BB%96>其他</a> (3)</li><li><a href=/categories/%E5%89%8D%E7%AB%AF>前端</a> (1)</li><li><a href=/categories/%E5%9F%BA%E7%A1%80>基础</a> (1)</li></ol></div><div class=widget><div class=widget-title>Tags</div><div class="tag-cloud-tags widget-content"><a href=/tags/hexo aria-label="hexo (1 posts)" style=font-size:1rem>hexo</a>
+<a href=/tags/yarn aria-label="yarn (1 posts)" style=font-size:1rem>yarn</a>
+<a href=/tags/zabbix aria-label="zabbix (1 posts)" style=font-size:1rem>zabbix</a>
+<a href=/tags/%E8%BD%AF%E6%96%87%E6%94%B6%E9%9B%86 aria-label="软文收集 (2 posts)" style=font-size:1rem>软文收集</a></div></div></aside></div></div><svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><symbol id="icon-github" viewBox="0 0 32 32"><path d="M16 .395c-8.836.0-16 7.163-16 16 0 7.069 4.585 13.067 10.942 15.182.8.148 1.094-.347 1.094-.77.0-.381-.015-1.642-.022-2.979-4.452.968-5.391-1.888-5.391-1.888-.728-1.849-1.776-2.341-1.776-2.341-1.452-.993.11-.973.11-.973 1.606.113 2.452 1.649 2.452 1.649 1.427 2.446 3.743 1.739 4.656 1.33.143-1.034.558-1.74 1.016-2.14-3.554-.404-7.29-1.777-7.29-7.907.0-1.747.625-3.174 1.649-4.295-.166-.403-.714-2.03.155-4.234.0.0 1.344-.43 4.401 1.64 1.276-.355 2.645-.532 4.005-.539 1.359.006 2.729.184 4.008.539 3.054-2.07 4.395-1.64 4.395-1.64.871 2.204.323 3.831.157 4.234 1.026 1.12 1.647 2.548 1.647 4.295.0 6.145-3.743 7.498-7.306 7.895.574.497 1.085 1.47 1.085 2.963.0 2.141-.019 3.864-.019 4.391.0.426.288.925 1.099.768C27.421 29.457 32 23.462 32 16.395c0-8.837-7.164-16-16-16z"/></symbol><symbol id="icon-arrow-with-circle-up" viewBox="0 0 32 32"><path d="M16 .64C7.515.64.638 7.517.638 16c0 8.485 6.877 15.362 15.362 15.362 8.482.0 15.36-6.877 15.36-15.362.0-8.483-6.878-15.36-15.36-15.36zM15.998 28.16c-6.715.0-12.16-5.443-12.16-12.16S9.281 3.84 15.998 3.84 28.16 9.285 28.16 16s-5.446 12.16-12.162 12.16zM16 8.8l7.2 7.2h-4v6.4h-6.4V16h-4L16 8.8z"/></symbol></defs></svg><footer id=page-footer><div class=footer-content><a href=https://github.com/qiaomingzi/limz-blog-hugo target=_blank rel=noopener title="Source Code for this Blog"><div class=footer-text><svg class="icon icon-github"><use xlink:href="#icon-github"/></svg>Blog code</div></a><a href=#page-wrapper title="Go to top" id=go-to-top-link><div class=footer-text>To top<svg class="icon icon-arrow-with-circle-up"><use xlink:href="#icon-arrow-with-circle-up"/></svg></div></a><script>document.getElementById("go-to-top-link").onclick=function(){return window.scroll(0,0),!1}</script></div></footer></div><div id=lightbox-container :class="{'open': lightbox.isOpen, 'close': !lightbox.isOpen}"><button type=button aria-label="Close image modal" class=modal-close-button @click=lightbox.close()><svg class="icon icon-circle-with-cross"><use xlink:href="#icon-circle-with-cross"/></svg>
+(ESC)</button><div id=lightbox-loading-container x-ref=lightboxLoadingContainer x-show=lightbox.showLoading><div id=lightbox-loading><div aria-busy=true aria-label="Loading, please wait." role=progressbar class=spinner @click=lightbox.cancel() @click.away=lightbox.cancel()></div></div></div><div id=lightbox x-ref=lightbox :class="{'open': lightbox.openImage, 'close': !lightbox.openImage}" @click=lightbox.close()></div></div><div id=code-container :class="{'open': code.isOpening, 'close': !code.isOpening}"><button class=modal-close-button><svg class="icon icon-circle-with-cross"><use xlink:href="#icon-circle-with-cross"/></svg>
+(ESC)</button><div id=code-container-inner class=close :class="{'open': code.isOpening, 'close': !code.isOpening}"><div class=box-shadow-container @click.away=code.close()><div id=code-placeholder></div></div></div></div><div id=searchbox-container :class="{'open': search.isOpen}" x-show=search.isOpen x-on:keydown.escape="$nextTick(() => $refs.searchMenuLink.focus())"><button type=button aria-label="Close search modal" class=modal-close-button @click="search.close();$nextTick(() => $refs.searchMenuLink.focus())"><svg class="icon icon-circle-with-cross"><use xlink:href="#icon-circle-with-cross"/></svg>
+(ESC)</button><div id=searchbox :class="{'open': search.isOpen}"><svg class="icon icon-search"><use xlink:href="#icon-search"/></svg><label for=search-input class=sr-only>Searchbox</label>
+<input id=search-input type=search placeholder=Search... class=search-input x-ref=searchInput autocomplete=off autocorrect=off autocapitalize=off spellcheck=false x-model=search.textInSearchBox x-on:input=search.searchBoxChanged($event.target.value) x-on:keydown.enter="search.focusFirstAnchor($event, $refs.hits)" x-on:keydown.arrow-down="search.focusFirstAnchor($event, $refs.hits)"><svg class="icon icon-circle-with-cross close-search" role="button" aria-label="Close search" @click="search.close();$nextTick(() => $refs.searchMenuLink.focus())"><use xlink:href="#icon-circle-with-cross"/></svg></div><div class=search-results-container><div id=search-output x-show=search.textInSearchBox><div id=no-results-message x-show="search.store && search.textInSearchBox && !search.hits.length">No matching posts found. You can use wildcards and search only in titles, e.g. <code>title:iot</code></div><div id=index-loading-message x-show="!search.indexLoadFailed && search.indexLoading && search.textInSearchBox"><span class=icon-spinner aria-hidden=true></span>Loading search index, please wait...</div><div id=index-failed-message x-show="search.indexLoadFailed && search.textInSearchBox">Search index failed to download 😢</div><div id=number-of-hits-message x-text=search.getHitsText() x-show=search.hits.length></div><ol class=result-list x-show=search.hits.length x-ref=hits><template x-for="hit in search.hits" :key=hit.ref><li><h2><a :href=hit.ref x-text=search.fromStore(hit).title></a></h2><div class=entry-meta><time class=published :datetime=search.fromStore(hit).dateiso><svg class="icon icon-calendar"><use xlink:href="#icon-calendar"/></svg><span x-text=search.fromStore(hit).dateformatted></span></time></div><p x-text=search.fromStore(hit).summary></p></li></template></ol></div></div></div><script src=/bundle.d969e7811744a912e4a95d442be0c0f42bf900a7a2b534c5942a8186f31138f3a0eb00df75e75ff1711191bc48948cfbffa129a1afb01af449abe8b34351266c.js integrity="sha512-2WnngRdEqRLkqV1EK+DA9Cv5AKeitTTFlCqBhvMROPOg6wDfdedf8XERkbxIlIz7/6Epoa+wGvRJq+izQ1EmbA=="></script></body></html>
