@@ -1,12 +1,14 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Articles on mingzi.li blog</title><link>http://qiaomingzi.github.io/article/</link><description>Recent content in Articles on mingzi.li blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Thu, 27 May 2021 09:46:19 +0800</lastBuildDate><atom:link href="http://qiaomingzi.github.io/article/index.xml" rel="self" type="application/rss+xml"/><item><title>Yarn相关</title><link>http://qiaomingzi.github.io/yarn%E7%9B%B8%E5%85%B3/</link><pubDate>Thu, 27 May 2021 09:46:19 +0800</pubDate><guid>http://qiaomingzi.github.io/yarn%E7%9B%B8%E5%85%B3/</guid><description>1.概述 Yarn是您的代码的包管理器，yarn和npm的对比
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Articles on mingzi.li blog</title><link>http://qiaomingzi.github.io/article/</link><description>Recent content in Articles on mingzi.li blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sat, 16 Oct 2021 15:42:33 +0000</lastBuildDate><atom:link href="http://qiaomingzi.github.io/article/index.xml" rel="self" type="application/rss+xml"/><item><title>master-slave</title><link>http://qiaomingzi.github.io/master-slave/</link><pubDate>Sat, 16 Oct 2021 15:42:33 +0000</pubDate><guid>http://qiaomingzi.github.io/master-slave/</guid><description>1.环境准备 安装 下载https://cdn.mysql.com//Downloads/MySQL-8.0/mysql-8.0.27-winx64.zip
+1.目录结构 E:. ├─mysql-8.0.27-winx64 ├─master │ └─data │ └─my.ini ├─slave_1 │ └─data │ └─my.ini └─slave_2 │ └─data │ └─my.</description></item><item><title>maven-wrapper基础使用</title><link>http://qiaomingzi.github.io/maven-wrapper%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/</link><pubDate>Sat, 16 Oct 2021 15:42:33 +0000</pubDate><guid>http://qiaomingzi.github.io/maven-wrapper%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/</guid><description>1.maven-wrapper安装使用 安装 在项目中使用命令安装mvn -N io.takari:maven:0.7.7:wrapper，参考官网 ,如果需要指定maven版本则使用mvn -N io.takari:maven:0.7.7:wrapper -Dmaven=3.5.4,安装完成后，目录如下
+my-project ├── .mvn │ └── wrapper │ ├── MavenWrapperDownloader.java │ ├── maven-wrapper.</description></item><item><title>Yarn相关</title><link>http://qiaomingzi.github.io/yarn%E7%9B%B8%E5%85%B3/</link><pubDate>Thu, 27 May 2021 09:46:19 +0800</pubDate><guid>http://qiaomingzi.github.io/yarn%E7%9B%B8%E5%85%B3/</guid><description>1.概述 Yarn是您的代码的包管理器，yarn和npm的对比
 速度
 npm 是按照队列执行每个 package，也就是说必须要等到当前 package 安装完成之后，才能继续后面的安装。而 Yarn 是同步执行所有任务，提高了性能。
 安装版本统一
 更简洁的输出
-参考：</description></item><item><title>GO学习</title><link>http://qiaomingzi.github.io/go%E5%AD%A6%E4%B9%A0/</link><pubDate>Tue, 25 May 2021 09:34:28 +0800</pubDate><guid>http://qiaomingzi.github.io/go%E5%AD%A6%E4%B9%A0/</guid><description>相关链接 https://github.com/golang 源码 https://golang.org/ref/mod 官方文档 https://golang.org/doc/code.html#Workspaces http://www.flysnow.org/categories/Golang/ go专栏 https://golanglibs.com/top 流行的GO应用和GO库 一：读书笔记 Limbo语言被认为是Go语言的前身,Limbo语言中继承了众多优秀的特性。包括肯·汤普逊在内的Plan 9项目原班人马加入了Google。在Google，他们创造了Go语言，Google是Go语言的主推。
+参考：</description></item><item><title>GO学习</title><link>http://qiaomingzi.github.io/go%E5%AD%A6%E4%B9%A0/</link><pubDate>Tue, 25 May 2021 09:34:28 +0800</pubDate><guid>http://qiaomingzi.github.io/go%E5%AD%A6%E4%B9%A0/</guid><description>相关链接 https://github.com/golang 源码 https://golang.org/ref/mod 官方文档 https://golang.org/doc/code.html#Workspaces http://www.flysnow.org/categories/Golang/ go专栏 https://golanglibs.com/top 流行的GO应用和GO库 https://gitee.com/pengzhile/ide-eval-resetterv GoLand试用更新插件 一：读书笔记 Limbo语言被认为是Go语言的前身,Limbo语言中继承了众多优秀的特性。包括肯·汤普逊在内的Plan 9项目原班人马加入了Google。在Google，他们创造了Go语言，Google是Go语言的主推。
 学习书籍
 《GO并发编程实战 第2版》《Go****语言核心编程》《Go语言高级编程》《Go Web编程》
-初识GO语言 1.Go语言最主要的特性  自动垃圾回收  更丰富的内置类型  函数多返回值  错误处理  匿名函数和闭包  类型和接口  并发编程  反射  语言交互性 Go语言的main()函数不能带参数，也不能定义返回值。命令行传入的参数在os.</description></item><item><title>Hugo基本使用</title><link>http://qiaomingzi.github.io/hugo%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link><pubDate>Fri, 07 May 2021 17:03:36 +0800</pubDate><guid>http://qiaomingzi.github.io/hugo%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid><description>hugo基本使用，通过hugo搭建个人blog
+初识GO语言 1.</description></item><item><title>Hugo基本使用</title><link>http://qiaomingzi.github.io/hugo%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link><pubDate>Fri, 07 May 2021 17:03:36 +0800</pubDate><guid>http://qiaomingzi.github.io/hugo%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid><description>hugo基本使用，通过hugo搭建个人blog
 参考 [hugo] :https://gohugo.io/1.hugo结构说明 # 站点结构 ├── archetypes # 原型 ├── config.toml # 站点配置 ├── content # 站点内容目录 ├── data # 数据模板 ├── layouts # 站点布局模板 ├── static # 静态内容 └── themes # 内容目录 content └── post ├── first-post │ ├── images │ │ ├── a.</description></item><item><title>正则表达式30分钟入门教程</title><link>http://qiaomingzi.github.io/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F30%E5%88%86%E9%92%9F%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/</link><pubDate>Thu, 28 Sep 2017 15:42:33 +0000</pubDate><guid>http://qiaomingzi.github.io/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F30%E5%88%86%E9%92%9F%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/</guid><description>目录 跳过目录
 本文目标 如何使用本教程 正则表达式到底是什么东西？ 入门 测试正则表达式 元字符 字符转义 重复 字符类 分枝条件 反义 分组 后向引用 零宽断言 负向零宽断言 注释 贪婪与懒惰 处理选项 平衡组/递归匹配 还有些什么东西没提到 联系作者 网上的资源及本文参考文献 更新纪录 本文目标 30分钟内让你明白正则表达式是什么，并对它有一些基本的了解，让你可以在自己的程序或网页里使用它。</description></item><item><title>Markdown基本使用</title><link>http://qiaomingzi.github.io/markdown%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link><pubDate>Thu, 21 Sep 2017 15:42:33 +0000</pubDate><guid>http://qiaomingzi.github.io/markdown%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid><description>图片嵌入 使用URL链接的形式插入图片：
 ![image][url_to_image]1 这样做一个明显的麻烦之处在于处理图片与Markdown文档的一致性上。如果我们要拷贝文档，或者图片遭到误删/云端链接失效，就会变得不便。最让我们省心的方法便是将图片直接放到文档内部。
@@ -19,4 +21,20 @@ Nagios 可以监控的功能有： 1、监控网络服务（SMTP、POP3、HTTP�
 概述 Hugo Hexo Jekyll 博客工具
 Hexo Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。
 安装hexo 安装 Hexo 相当简单。然而在安装前，您必须检查电脑中是否已安装下列应用程序：
-Node.js Git 如果您的电脑中已经安装上述必备程序，那么恭喜您！接下来只需要使用 npm 即可完成 Hexo 的安装。</description></item></channel></rss>
+Node.js Git 如果您的电脑中已经安装上述必备程序，那么恭喜您！接下来只需要使用 npm 即可完成 Hexo 的安装。</description></item><item><title/><link>http://qiaomingzi.github.io/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://qiaomingzi.github.io/</guid><description>划分音节的五个步骤 音节简介
+开音节是以发音的元音a，e，i，o，u结尾的单词，或辅音+不发音e音节。r除外。开音节在和后面有辅音连续时很容易犯错，如，I like Bob，这句如果不懂得E是不发音的那句子就会读错。
+以一个或几个辅音字母（r除外）结尾而中间只有一个元音音素的音节，称为闭音节。例：map，desk，dog，pig
+注：在闭音节中，元音字母不发“字母”本身的音。重读的闭音节中元音字母读作短元音。
+重读闭音节是指在一个音节中，以辅音因素结尾的而且是重读音节的音节。重读闭音节中元音字母不是发它本身的字母音，而是发短元音，要注意其三要素
+（1）一个元音字母后跟一个或几个辅音字母，他们组成的音节必须是重读音节，如：apple。
+（2）以一个辅音字母结尾，如：fish。
+（3）元音字母发短元音。
+1.一个单词中有几个发音的元音字母，就有几个音节。
+2.两个元音间有两个辅音，则辅音分开，一边一个。
+3.两个元音间只有一个辅音，该辅音划分到后一个音节。
+4.字母组合要划分到同一个音节。
+5.词尾不发音的e不构成音节。
+6.两个元音字母在一起，一般为字母组合，发一个元音、构成一个音节。
+步骤：从后往前找到元音：单词中有多个元音时，方法都一样。
+元音往前找辅音。元音找到辅音，形成拼音，算一个音节。
+元音找不到辅音，自行发音，形成一个音节。</description></item></channel></rss>
