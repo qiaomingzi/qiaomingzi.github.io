@@ -3,27 +3,27 @@
 <span></span></div></div><a href=#content id=skip-link class=skip-link @click.prevent=skipLink.skipToContent($refs.content) @click.away=skipLink.removeContentTabIndex($refs.content)>Skip to content</a>
 <button @click=menu.toggle() class=hamburger-trigger>Menu<div class=hamburger-menu><div class=bar :class="{'animate': menu.hamburgerIsOpen()}"></div></div></button><nav :class="{'open': menu.isOpen() || menu.isOpening(), 'open closing': menu.isClosing()}"><a href=/ class=home><svg class="icon icon-home"><use xlink:href="#icon-home"/></svg>首页</a>
 <a href=/about/ class=about><svg class="icon icon-user"><use xlink:href="#icon-user"/></svg>关于我</a>
-<a href=/search-requires-javascript/ rel=nofollow class=search x-ref=searchMenuLink @click.prevent="menu.close(); search.open();$nextTick(() => $refs.searchInput.focus())"><svg class="icon icon-search"><use xlink:href="#icon-search"/></svg>搜索</a></nav></div></header><div class=body><div class=body-max-width><main id=content x-ref=content><article class=summary><h1><a href=/maven-wrapper%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/>maven-wrapper基础使用</a></h1><div class=entry-meta><time class=published datetime="2021-10-16 15:42:33 +0000 UTC"><svg class="icon icon-calendar"><use xlink:href="#icon-calendar"/></svg>2021 October 16</time></div><p>1.maven-wrapper安装使用 安装 在项目中使用命令安装mvn -N io.takari:maven:0.7.7:wrapper，参考官网 ,如果需要指定maven版本则使用mvn -N io.takari:maven:0.7.7:wrapper -Dmaven=3.5.4,安装完成后，目录如下
-my-project ├── .mvn │ └── wrapper │ ├── MavenWrapperDownloader.java │ ├── maven-wrapper.
-<a href=/maven-wrapper%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/ aria-label="To post 'maven-wrapper基础使用'">全文&nbsp;→</a></p></article><article class=summary><h1><a href=/mysql-master-slave/>mysql master-slave</a></h1><div class=entry-meta><time class=published datetime="2021-10-16 15:42:33 +0000 UTC"><svg class="icon icon-calendar"><use xlink:href="#icon-calendar"/></svg>2021 October 16</time></div><p>1.参考 【mysql8.0手册】https://dev.mysql.com/doc/refman/8.0/en/
-2.主从同步 1)当从节点连接主节点时，主节点会为其创建一个 log dump 线程，用于发送和读取 Binlog 的内容。在读取 Binlog 中的操作时，log dump 线程会对主节点上的 Binlog 加锁；当读取完成发送给从节点之前，锁会被释放。主节点会为自己的每一个从节点创建一个 log dump 线程。
-2)当从节点上执行start slave命令之后，从节点会创建一个 I/O 线程用来连接主节点，请求主库中更新的Binlog。I/O 线程接收到主节点的 log dump 进程发来的更新之后，保存在本地 relay-log（中继日志）中
-<a href=/mysql-master-slave/ aria-label="To post 'mysql master-slave'">全文&nbsp;→</a></p></article><article class=summary><h1><a href=/yarn%E7%9B%B8%E5%85%B3/>Yarn相关</a></h1><div class=entry-meta><time class=published datetime="2021-05-27 09:46:19 +0800 +0800"><svg class="icon icon-calendar"><use xlink:href="#icon-calendar"/></svg>2021 May 27</time></div><p>1.概述 Yarn是您的代码的包管理器，yarn和npm的对比
-速度
-npm 是按照队列执行每个 package，也就是说必须要等到当前 package 安装完成之后，才能继续后面的安装。而 Yarn 是同步执行所有任务，提高了性能。
-安装版本统一
-更简洁的输出
-参考：
-<a href=/yarn%E7%9B%B8%E5%85%B3/ aria-label="To post 'Yarn相关'">全文&nbsp;→</a></p></article><article class=summary><h1><a href=/go%E5%AD%A6%E4%B9%A0/>GO学习</a></h1><div class=entry-meta><time class=published datetime="2021-05-25 09:34:28 +0800 +0800"><svg class="icon icon-calendar"><use xlink:href="#icon-calendar"/></svg>2021 May 25</time></div><p>相关链接 https://github.com/golang 源码 https://golang.org/ref/mod 官方文档 https://golang.org/doc/code.html#Workspaces http://www.flysnow.org/categories/Golang/ go专栏 https://golanglibs.com/top 流行的GO应用和GO库 https://gitee.com/pengzhile/ide-eval-resetterv GoLand试用更新插件 一：读书笔记 Limbo语言被认为是Go语言的前身,Limbo语言中继承了众多优秀的特性。包括肯·汤普逊在内的Plan 9项目原班人马加入了Google。在Google，他们创造了Go语言，Google是Go语言的主推。
-学习书籍
-《GO并发编程实战 第2版》《Go****语言核心编程》《Go语言高级编程》《Go Web编程》
-初识GO语言 1.
-<a href=/go%E5%AD%A6%E4%B9%A0/ aria-label="To post 'GO学习'">全文&nbsp;→</a></p></article><article class=summary><h1><a href=/hugo%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/>Hugo基本使用</a></h1><div class=entry-meta><time class=published datetime="2021-05-07 17:03:36 +0800 +0800"><svg class="icon icon-calendar"><use xlink:href="#icon-calendar"/></svg>2021 May 7</time></div><p>hugo基本使用，通过hugo搭建个人blog
-参考 [hugo] :https://gohugo.io/1.hugo结构说明 # 站点结构 ├── archetypes # 原型 ├── config.toml # 站点配置 ├── content # 站点内容目录 ├── data # 数据模板 ├── layouts # 站点布局模板 ├── static # 静态内容 └── themes # 内容目录 content └── post ├── first-post │ ├── images │ │ ├── a.
-<a href=/hugo%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/ aria-label="To post 'Hugo基本使用'">全文&nbsp;→</a></p></article><div class="paging-controls has-prev-false has-next-true has-dots-false has-max-pages-false"><span class="page-numbers current">1</span>
+<a href=/search-requires-javascript/ rel=nofollow class=search x-ref=searchMenuLink @click.prevent="menu.close(); search.open();$nextTick(() => $refs.searchInput.focus())"><svg class="icon icon-search"><use xlink:href="#icon-search"/></svg>搜索</a></nav></div></header><div class=body><div class=body-max-width><main id=content x-ref=content><article class=summary><h1><a href=/></a></h1><div class=entry-meta><time class=published datetime="0001-01-01 00:00:00 +0000 UTC"><svg class="icon icon-calendar"><use xlink:href="#icon-calendar"/></svg>0001 January 1</time></div><p>划分音节的五个步骤 音节简介
+开音节是以发音的元音a，e，i，o，u结尾的单词，或辅音+不发音e音节。r除外。开音节在和后面有辅音连续时很容易犯错，如，I like Bob，这句如果不懂得E是不发音的那句子就会读错。
+以一个或几个辅音字母（r除外）结尾而中间只有一个元音音素的音节，称为闭音节。例：map，desk，dog，pig
+注：在闭音节中，元音字母不发“字母”本身的音。重读的闭音节中元音字母读作短元音。
+重读闭音节是指在一个音节中，以辅音因素结尾的而且是重读音节的音节。重读闭音节中元音字母不是发它本身的字母音，而是发短元音，要注意其三要素
+（1）一个元音字母后跟一个或几个辅音字母，他们组成的音节必须是重读音节，如：apple。
+（2）以一个辅音字母结尾，如：fish。
+（3）元音字母发短元音。
+1.一个单词中有几个发音的元音字母，就有几个音节。
+2.两个元音间有两个辅音，则辅音分开，一边一个。
+3.两个元音间只有一个辅音，该辅音划分到后一个音节。
+4.字母组合要划分到同一个音节。
+5.词尾不发音的e不构成音节。
+6.两个元音字母在一起，一般为字母组合，发一个元音、构成一个音节。
+步骤：从后往前找到元音：单词中有多个元音时，方法都一样。
+元音往前找辅音。元音找到辅音，形成拼音，算一个音节。
+元音找不到辅音，自行发音，形成一个音节。
+<a href=/ aria-label="To post ''">全文&nbsp;→</a></p></article><div class="paging-controls has-prev-true has-next-false has-dots-false has-max-pages-false"><a class="page-numbers newer" href=/page/2/ role=button><svg class="icon icon-arrow-left"><use xlink:href="#icon-arrow-left"/></svg>Newer</a>
+<a class=page-numbers href=/ role=button>1</a>
 <a class=page-numbers href=/page/2/ role=button>2</a>
-<a class=page-numbers href=/page/3/ role=button>3</a>
-<a class="page-numbers older" href=/page/2/ role=button>Older<svg class="icon icon-arrow-right"><use xlink:href="#icon-arrow-right"/></svg></a></div></main><aside id=sidebar><div class=widget><div class=widget-title>Categories</div><ol class="all-categories widget-content"><li><a href=/categories/devops>devops</a> (1)</li><li><a href=/categories/java>java</a> (1)</li><li><a href=/categories/mysql>mysql</a> (1)</li><li><a href=/categories/%E5%85%B6%E4%BB%96>其他</a> (4)</li><li><a href=/categories/%E5%89%8D%E7%AB%AF>前端</a> (1)</li><li><a href=/categories/%E5%90%8E%E7%AB%AF>后端</a> (1)</li><li><a href=/categories/%E5%9F%BA%E7%A1%80>基础</a> (1)</li></ol></div><div class=widget><div class=widget-title>Tags</div><div class="tag-cloud-tags widget-content"><a href=/tags/git aria-label="git (1 posts)" style=font-size:1rem>git</a>
+<span class="page-numbers current">3</span></div></main><aside id=sidebar><div class=widget><div class=widget-title>Categories</div><ol class="all-categories widget-content"><li><a href=/categories/devops>devops</a> (1)</li><li><a href=/categories/java>java</a> (1)</li><li><a href=/categories/mysql>mysql</a> (1)</li><li><a href=/categories/%E5%85%B6%E4%BB%96>其他</a> (4)</li><li><a href=/categories/%E5%89%8D%E7%AB%AF>前端</a> (1)</li><li><a href=/categories/%E5%90%8E%E7%AB%AF>后端</a> (1)</li><li><a href=/categories/%E5%9F%BA%E7%A1%80>基础</a> (1)</li></ol></div><div class=widget><div class=widget-title>Tags</div><div class="tag-cloud-tags widget-content"><a href=/tags/git aria-label="git (1 posts)" style=font-size:1rem>git</a>
 <a href=/tags/go aria-label="go (1 posts)" style=font-size:1rem>go</a>
 <a href=/tags/hexo aria-label="hexo (1 posts)" style=font-size:1rem>hexo</a>
 <a href=/tags/maven aria-label="maven (1 posts)" style=font-size:1rem>maven</a>

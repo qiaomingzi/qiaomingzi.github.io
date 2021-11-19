@@ -7,4 +7,6 @@
 概述 Hugo Hexo Jekyll 博客工具
 Hexo Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。
 安装hexo 安装 Hexo 相当简单。然而在安装前，您必须检查电脑中是否已安装下列应用程序：
-Node.js Git 如果您的电脑中已经安装上述必备程序，那么恭喜您！接下来只需要使用 npm 即可完成 Hexo 的安装。</description></item></channel></rss>
+Node.js Git 如果您的电脑中已经安装上述必备程序，那么恭喜您！接下来只需要使用 npm 即可完成 Hexo 的安装。</description></item><item><title>开源项目索引</title><link>http://qiaomingzi.github.io/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E7%B4%A2%E5%BC%95/</link><pubDate>Sat, 16 Sep 2017 15:42:33 +0000</pubDate><guid>http://qiaomingzi.github.io/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E7%B4%A2%E5%BC%95/</guid><description>alibaba 1.https://github.com/alibaba/canal.git canal [kə&amp;rsquo;næl]，译意为水道/管道/沟渠，主要用途是基于 MySQL 数据库增量日志解析，提供增量数据订阅和消费
+工作原理
+canal 模拟 MySQL slave 的交互协议，伪装自己为 MySQL slave ，向 MySQL master 发送 dump 协议 MySQL master 收到 dump 请求，开始推送 binary log 给 slave (即 canal ) canal 解析 binary log 对象(原始为 byte 流) 待整理</description></item></channel></rss>
