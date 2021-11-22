@@ -3,7 +3,7 @@
 <span></span></div></div><a href=#content id=skip-link class=skip-link @click.prevent=skipLink.skipToContent($refs.content) @click.away=skipLink.removeContentTabIndex($refs.content)>Skip to content</a>
 <button @click=menu.toggle() class=hamburger-trigger>Menu<div class=hamburger-menu><div class=bar :class="{'animate': menu.hamburgerIsOpen()}"></div></div></button><nav :class="{'open': menu.isOpen() || menu.isOpening(), 'open closing': menu.isClosing()}"><a href=/ class=home><svg class="icon icon-home"><use xlink:href="#icon-home"/></svg>首页</a>
 <a href=/about/ class=about><svg class="icon icon-user"><use xlink:href="#icon-user"/></svg>关于我</a>
-<a href=/search-requires-javascript/ rel=nofollow class=search x-ref=searchMenuLink @click.prevent="menu.close(); search.open();$nextTick(() => $refs.searchInput.focus())"><svg class="icon icon-search"><use xlink:href="#icon-search"/></svg>搜索</a></nav></div></header><div class=body><div class=body-max-width><main id=content x-ref=content><article class=full-article><h1>mysql master-slave</h1><div class=entry-meta><time class=published datetime="2021-10-16 15:42:33 +0000 UTC"><svg class="icon icon-calendar"><use xlink:href="#icon-calendar"/></svg>2021 October 16</time></div><h3 id=1参考>1.参考</h3><p>【mysql8.0手册】https://dev.mysql.com/doc/refman/8.0/en/</p><h3 id=2主从同步>2.主从同步</h3><p><img src=3.jpg alt></p><p>1)当从节点连接主节点时，主节点会为其创建一个 log dump 线程，用于发送和读取 Binlog 的内容。在读取 Binlog 中的操作时，log dump 线程会对主节点上的 Binlog 加锁；当读取完成发送给从节点之前，锁会被释放。<strong>主节点会为自己的每一个从节点创建一个 log dump 线程</strong>。</p><p>2)当从节点上执行<code>start slave</code>命令之后，从节点会创建一个 I/O 线程用来连接主节点，请求主库中更新的Binlog。I/O 线程接收到主节点的 log dump 进程发来的更新之后，保存在本地 relay-log（中继日志）中</p><p>3)SQL 线程,会读取 relay log 文件中的日志，并解析成 SQL 语句逐一执行,查看相关参数<code>show variables like '%relay%';</code>。</p><h3 id=2环境准备>2.环境准备</h3><h4 id=安装>安装</h4><p>下载<code>https://cdn.mysql.com//Downloads/MySQL-8.0/mysql-8.0.27-winx64.zip</code></p><h5 id=1目录结构>1.目录结构</h5><pre><code>├─mysql-8.0.27-winx64
+<a href=/search-requires-javascript/ rel=nofollow class=search x-ref=searchMenuLink @click.prevent="menu.close(); search.open();$nextTick(() => $refs.searchInput.focus())"><svg class="icon icon-search"><use xlink:href="#icon-search"/></svg>搜索</a></nav></div></header><div class=body><div class=body-max-width><main id=content x-ref=content><article class=full-article><h1>mysql master-slave</h1><div class=entry-meta><time class=published datetime="2021-10-16 15:42:33 +0000 UTC"><svg class="icon icon-calendar"><use xlink:href="#icon-calendar"/></svg>2021 October 16</time></div><h3 id=1参考>1.参考</h3><p>【mysql8.0手册】https://dev.mysql.com/doc/refman/8.0/en/</p><p>【alibaba canal】https://github.com/alibaba/canal</p><h3 id=2主从同步>2.主从同步</h3><p><img src=3.jpg alt></p><p>1)当从节点连接主节点时，主节点会为其创建一个 log dump 线程，用于发送和读取 Binlog 的内容。在读取 Binlog 中的操作时，log dump 线程会对主节点上的 Binlog 加锁；当读取完成发送给从节点之前，锁会被释放。<strong>主节点会为自己的每一个从节点创建一个 log dump 线程</strong>。</p><p>2)当从节点上执行<code>start slave</code>命令之后，从节点会创建一个 I/O 线程用来连接主节点，请求主库中更新的Binlog。I/O 线程接收到主节点的 log dump 进程发来的更新之后，保存在本地 relay-log（中继日志）中</p><p>3)SQL 线程,会读取 relay log 文件中的日志，并解析成 SQL 语句逐一执行,查看相关参数<code>show variables like '%relay%';</code>。</p><h3 id=3环境准备>3.环境准备</h3><h4 id=31环境目录结构>3.1.环境目录结构</h4><pre><code>├─mysql-8.0.27-winx64
 ├─master
 │  └─data
 │  └─my.ini
@@ -21,8 +21,7 @@
 │  │  ├─canal
 │  │  └─example
 │  └─plugin
-
-</code></pre><h5 id=2master>2.master</h5><p>1.配置my.ini</p><pre><code>[mysql]
+</code></pre><h4 id=32安装mysql>3.2.安装mysql</h4><p>下载<code>https://cdn.mysql.com//Downloads/MySQL-8.0/mysql-8.0.27-winx64.zip</code></p><h5 id=321master>3.2.1.master</h5><h6 id=1配置myini>1).配置my.ini</h6><pre><code>[mysql]
 # 设置mysql客户端默认字符集
 default-character-set=utf8mb4
 
@@ -56,7 +55,7 @@ binlog-ignore-db=mysql
 binlog-ignore-db=sys
 binlog-ignore-db=information_schema
 binlog-ignore-db=performance_schema
-</code></pre><p>2.安装mysql</p><pre><code>
+</code></pre><h6 id=2安装mysql>2).安装mysql</h6><pre><code>
 1.创建配置文件
 2.cmd初始化
 &gt;&gt;E:/db/mysql_cluster/mysql-8.0.27-winx64/bin/mysqld --defaults-file=E:/db/mysql_cluster/master/my.ini --initialize --basedir=E:/db/mysql_cluster/mysql-8.0.27-winx64 --datadir=E:/db/mysql_cluster/master/data
@@ -72,13 +71,13 @@ binlog-ignore-db=performance_schema
 &gt;&gt;alter user 'root'@'localhost' identified with mysql_native_password by '123456';
 &gt;&gt;flush privileges; 
 &gt;&gt;exit;
-</code></pre><p>3.配置slave用户</p><p>创建slaveuser，允许从slave节点连接复制binlog。</p><p>授予所有权限<code>GRANT ALL PRIVILEGES ON *.* TO 'canal'@'%'</code></p><pre><code>mysql&gt;CREATE USER slaveuser@'%' IDENTIFIED WITH mysql_native_password BY '123456';
+</code></pre><h6 id=3配置slave用户>3).配置slave用户</h6><p>创建slaveuser，允许从slave节点连接复制binlog。</p><p>授予所有权限<code>GRANT ALL PRIVILEGES ON *.* TO 'canal'@'%'</code></p><pre><code>mysql&gt;CREATE USER slaveuser@'%' IDENTIFIED WITH mysql_native_password BY '123456';
 mysql&gt;grant replication slave on *.* to slaveuser@'%';
 mysql&gt;GRANT SELECT, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'slaveuser'@'%';
 mysql&gt;flush privileges;
 mysql&gt;show grants for slaveuser@'%';
-</code></pre><p>4.查看master状态</p><pre><code>mysql&gt; show master status；
-</code></pre><p><img src=1.png alt></p><h5 id=3slave>3.slave</h5><p>参考 <a href=https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html>https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html</a> slave配置参数</p><p>1.配置my.ini</p><pre><code>[mysql]
+</code></pre><h6 id=4查看master状态>4).查看master状态</h6><pre><code>mysql&gt; show master status；
+</code></pre><p><img src=1.png alt></p><h5 id=322slave>3.2.2.slave</h5><p>参考 <a href=https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html>https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html</a> slave配置参数</p><h6 id=1配置myini-1>1).配置my.ini</h6><pre><code>[mysql]
 # 设置mysql客户端默认字符集
 default-character-set=utf8mb4
 
@@ -113,7 +112,7 @@ binlog-ignore-db=mysql
 binlog-ignore-db=sys
 binlog-ignore-db=information_schema
 binlog-ignore-db=performance_schema
-</code></pre><p>2.安装mysql</p><p>参考maseter</p><p>3.配置slave</p><p>参考 master【查看master状态】</p><pre><code># 配置连接master信息
+</code></pre><h6 id=2安装mysql-1>2）.安装mysql</h6><p>参考maseter</p><h6 id=3配置slave>3).配置slave</h6><p>参考 master【查看master状态】</p><pre><code># 配置连接master信息
 mysql&gt; CHANGE MASTER TO MASTER_HOST='127.0.0.1', master_port = 3307,MASTER_USER='slaveuser', MASTER_PASSWORD='123456', MASTER_LOG_FILE='bin.000001', MASTER_LOG_POS=1673,master_connect_retry = 15,master_retry_count = 0;
 mysql&gt; start slave;
 mysql&gt; show slave status;
@@ -124,8 +123,8 @@ mysql&gt; show slave status;
 </code></pre><p>创建只读用户，防止用root操作同步库</p><pre><code>CREATE USER 'readuser'@'%' IDENTIFIED WITH mysql_native_password BY '123456'; 
 GRANT SELECT ON *.* TO 'readuser'@'%';
 FLUSH PRIVILEGES;
-</code></pre><p>4.查看master状态</p><pre><code>mysql&gt; show master status；
-</code></pre><p><img src=2.png alt></p><h4 id=测试>测试</h4><p>在master执行一下语句，查看slave库是否同步。</p><pre><code>CREATE DATABASE IF NOT EXISTS test DEFAULT CHARSET utf8 COLLATE utf8_general_ci;`
+</code></pre><h6 id=4查看master状态-1>4).查看master状态</h6><pre><code>mysql&gt; show master status；
+</code></pre><p><img src=2.png alt></p><h4 id=33-测试>3.3 测试</h4><p>在master执行一下语句，查看slave库是否同步。</p><pre><code>CREATE DATABASE IF NOT EXISTS test DEFAULT CHARSET utf8 COLLATE utf8_general_ci;`
 
 create table t_data
 (
@@ -137,7 +136,7 @@ create table t_data
 ) ENGINE=InnoDB  COMMENT='测试表';
 
 insert into t_data(name) values(1);
-</code></pre><h3 id=3开启gtid>3.开启GTID</h3><p>全局事务标识符 (GTID) 是在源服务器（源）上创建并与提交的每个事务相关联的唯一标识符。此标识符不仅对于它起源的服务器是唯一的，而且对于给定复制拓扑中的所有服务器也是唯一的。</p><p>从MySQL5.6开始增加了强大的GTID（Global Transaction ID，全局事务ID）这个特性，用来强化数据库的主备一致性， 故障恢复， 以及容错能力。用于取代过去传统的主从复制（即：基于binlog和position的异步复制）。</p><p>借助GTID，在发生主备切换的情况下，MySQL的其他slave可以自动在新主上找到正确的复制位置，这大大简化了复杂复制拓扑下集群的维护，也减少了人为设置复制position发生误操作的风险。另外，基于GTID的复制可以忽略已经执行过的事务，减少了数据发生不一致的风险。</p><p>参考：https://dev.mysql.com/doc/refman/8.0/en/replication-mode-change-online-enable-gtids.html</p><pre><code>1.修改master、slave 节点my.conf or my.ini
+</code></pre><h3 id=4开启gtid>4.开启GTID</h3><p>全局事务标识符 (GTID) 是在源服务器（源）上创建并与提交的每个事务相关联的唯一标识符。此标识符不仅对于它起源的服务器是唯一的，而且对于给定复制拓扑中的所有服务器也是唯一的。</p><p>从MySQL5.6开始增加了强大的GTID（Global Transaction ID，全局事务ID）这个特性，用来强化数据库的主备一致性， 故障恢复， 以及容错能力。用于取代过去传统的主从复制（即：基于binlog和position的异步复制）。</p><p>借助GTID，在发生主备切换的情况下，MySQL的其他slave可以自动在新主上找到正确的复制位置，这大大简化了复杂复制拓扑下集群的维护，也减少了人为设置复制position发生误操作的风险。另外，基于GTID的复制可以忽略已经执行过的事务，减少了数据发生不一致的风险。</p><p>参考：https://dev.mysql.com/doc/refman/8.0/en/replication-mode-change-online-enable-gtids.html</p><pre><code>1.修改master、slave 节点my.conf or my.ini
 # GTID
 gtid_mode=ON
 enforce_gtid_consistency=ON
@@ -157,15 +156,56 @@ START REPLICA ;
 3.查看状态
 show slave status \G;
 show variables like 'gtid_%';
-</code></pre><h3 id=4canal>4.canal</h3><p>下载 <code>https://github.com/alibaba/canal/releases</code></p><pre><code>1）解压到目录./slave_canal
-2) 修改配置 slave_canal/conf/example/instance.properties
+</code></pre><h3 id=5canal-slave>5.canal slave</h3><h4 id=51下载-canal>5.1下载 canal</h4><p><code>https://github.com/alibaba/canal/releases</code></p><h4 id=52-配置>5.2 配置</h4><pre><code>1）确认mysql配置
+[mysqld]  
+log-bin=mysql-bin #添加这一行就ok  
+binlog-format=ROW #选择row模式   
 
-3) 启动 slave_canal、bin/startup.bat
+mysql&gt; show variables like 'binlog_format';
++---------------+-------+
+| Variable_name | Value |
++---------------+-------+
+| binlog_format | ROW   |
++---------------+-------+
+mysql&gt; show variables like 'log_bin';
++---------------+-------+
+| Variable_name | Value |
++---------------+-------+
+| log_bin       | ON    |
++---------------+-------+
+
+2）解压到目录./slave_canal
+
+3) 修改配置 slave_canal/conf/example/instance.properties
+# 基础配置
+canal.port = 11111 #端口
+canal.serverMode = tcp   # canal client的模式: tcp kafka rocketMQ
+
+# 配置destinations
+canal.destinations = instance_1 # 指定实例    
+canal.conf.dir = ../conf  # 实例配置目录
+canal.auto.scan = true   # 自动扫描实列目录,实现实列动态加载、移除
+canal.auto.scan.interval = 5 
+canal.auto.reset.latest.pos.mode = false
+canal.instance.tsdb.spring.xml = classpath:spring/tsdb/h2-tsdb.xml
+canal.instance.global.mode = spring
+canal.instance.global.lazy = false
+canal.instance.global.manager.address = ${canal.admin.manager} 
+canal.instance.global.spring.xml = classpath:spring/file-instance.xml 
+
+4) 修改配置 slave_canal/conf/instance_1/instance.properties
+canal.instance.master.address=127.0.0.1:3307 #指向mysql master配置
+canal.instance.dbUsername=slaveuser   # 拥有主从复制、连接权限的用户
+canal.instance.dbPassword=123456  # 对应dbUsername的密码
+
+5) 启动 slave_canal、bin/startup.bat
 slave_canal/logs/canal/canal.log
-slave_canal/logs/example/example.log
+slave_canal/logs/instance_1/instance_1.log
+
+
  
-</code></pre><p>canal客户端测试</p><pre><code>com.alibaba.otter.canal.example.BaseCanalClientTest
-</code></pre><h3 id=5问题>5.问题</h3><h4 id=1error_code-1032-handler-error-ha_err_key_not_found-the-events-master-log-first-end_log_pos-429-error_code-my-001032>1.Error_code: 1032; handler error HA_ERR_KEY_NOT_FOUND; the event&rsquo;s master log FIRST, end_log_pos 429, Error_code: MY-001032</h4><pre><code>在从库删除数据后，出现主从同步问题
+</code></pre><h4 id=51-canal客户端测试>5.1 canal客户端测试</h4><p>see <code>https://github.com/alibaba/canal.git</code></p><pre><code>运行 com.alibaba.otter.canal.example.BaseCanalClientTest.main
+</code></pre><p>在master节点执行 insert,可以看到bingnlog消息</p><p><img src=./canal_1.png alt></p><p>在master节点执行 update,可以看到bingnlog消息</p><p><img src=./canal_2.png alt></p><h3 id=6问题>6.问题</h3><h4 id=61error_code-1032-handler-error-ha_err_key_not_found-the-events-master-log-first-end_log_pos-429-error_code-my-001032>6.1.Error_code: 1032; handler error HA_ERR_KEY_NOT_FOUND; the event&rsquo;s master log FIRST, end_log_pos 429, Error_code: MY-001032</h4><pre><code>在从库删除数据后，出现主从同步问题
 1)stop slave;
 2)找出被删除的记录，重新插入从库
 E:/db/mysql_cluster/mysql-8.0.27-winx64/bin/mysqlbinlog --no-defaults --base64-output=decode-rows -v  bin.000001 &gt;bin.sql
@@ -177,9 +217,9 @@ E:/db/mysql_cluster/mysql-8.0.27-winx64/bin/mysqlbinlog --no-defaults  --base64-
 3)start slave;
 
  
-</code></pre><h4 id=2client-does-not-support-authentication-protocol-requested-by-server-consider-upgrading-mysql-client>2.client does not support authentication protocol requested by server consider upgrading mysql client</h4><p>创建用户时指定mysql_native_password ， mysql8之后,加密规则是caching_sha2_password。</p><p><code>CREATE USER slaveuser@'%' IDENTIFIED WITH mysql_native_password BY '123456';</code></p><h4 id=3access-denied-you-need-at-least-one-of-the-super-replication-client-privileges>3.Access denied; you need (at least one of) the SUPER, REPLICATION CLIENT privilege(s)</h4><p>为用户增加 REPLICATION CLIENT 权限</p><p><code>GRANT SELECT, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO '用户名'@'%';</code></p><h3 id=6相关命令>6.相关命令</h3><h4 id=1查看从节点数量>1.查看从节点数量</h4><pre><code>show slave hosts;
+</code></pre><h4 id=62client-does-not-support-authentication-protocol-requested-by-server-consider-upgrading-mysql-client>6.2.client does not support authentication protocol requested by server consider upgrading mysql client</h4><p>创建用户时指定mysql_native_password ， mysql8之后,加密规则是caching_sha2_password。</p><p><code>CREATE USER slaveuser@'%' IDENTIFIED WITH mysql_native_password BY '123456';</code></p><h4 id=63access-denied-you-need-at-least-one-of-the-super-replication-client-privileges>6.3.Access denied; you need (at least one of) the SUPER, REPLICATION CLIENT privilege(s)</h4><p>为用户增加 REPLICATION CLIENT 权限</p><p><code>GRANT SELECT, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO '用户名'@'%';</code></p><h3 id=7相关命令>7.相关命令</h3><h4 id=71查看从节点数量>7.1.查看从节点数量</h4><pre><code>show slave hosts;
 select * from information_schema.processlist as p where p.command = 'Binlog Dump'; 
-</code></pre><h4 id=2查看版本>2.查看版本</h4><p><code>select version();</code></p><h3 id=6数据参考>6.数据参考:</h3><p>1.机器信息<code>DB型(内存(12*32G)384G硬盘2*480G(s4500)SSD+8*960G(s4500)SSD)</code></p><pre><code>show variables like '%binlog%';
+</code></pre><h4 id=72查看版本>7.2.查看版本</h4><p><code>select version();</code></p><h5 id=72mysqlbinlog>7.2.mysqlbinlog</h5><p>查看binlog信息 <code>mysqlbinlog -v --base64-output=DECODE-ROWS ./bin.000001</code></p><p>查看binglog文件 <code>SHOW BINARY LOGS</code></p><h3 id=8数据参考>8.数据参考:</h3><p>1.机器信息<code>DB型(内存(12*32G)384G硬盘2*480G(s4500)SSD+8*960G(s4500)SSD)</code></p><pre><code>show variables like '%binlog%';
 1	binlog_cache_size	1048576
 2	binlog_checksum	NONE
 3	binlog_direct_non_transactional_updates	OFF
@@ -224,7 +264,8 @@ show variables like '%relay%';
 10	sync_relay_log	10000
 11	sync_relay_log_info	10000
 </code></pre><footer><section class=categories-tags><span><svg class="icon icon-folder"><use xlink:href="#icon-folder"/></svg><span class=screen-reader-text>This entry was posted in</span>
-<a href=/categories/mysql>mysql</a></span> <span><svg class="icon icon-tag"><use xlink:href="#icon-tag"/></svg><a class=article-tags href=/tags/mysql>mysql</a></span></section></footer><div id=comments-button-container class=comments-button-container><button type=button onclick=loadDisqus() class=comments-button><svg class="icon icon-bubble"><use xlink:href="#icon-bubble"/></svg> <span>Show Comments</span></button></div><div id=disqus_thread></div><script type=text/javascript>function loadDisqus(){var a,b;document.getElementById('comments-button-container').style.display='none',a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='李明梓',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)}</script><noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></article></main><aside id=sidebar><div class=widget><div class=widget-title>Recent posts</div><ol class="recent-widget widget-content"><li><a href=/maven-wrapper%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/>maven-wrapper基础使用</a></li><li><a href=/yarn%E7%9B%B8%E5%85%B3/>Yarn相关</a></li><li><a href=/go%E5%AD%A6%E4%B9%A0/>GO学习</a></li><li><a href=/hugo%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/>Hugo基本使用</a></li><li><a href=/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F30%E5%88%86%E9%92%9F%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/>正则表达式30分钟入门教程</a></li></ol></div><div class=widget><div class=widget-title>Categories</div><ol class="all-categories widget-content"><li><a href=/categories/devops>devops</a> (1)</li><li><a href=/categories/java>java</a> (1)</li><li><a href=/categories/mysql>mysql</a> (1)</li><li><a href=/categories/%E5%85%B6%E4%BB%96>其他</a> (4)</li><li><a href=/categories/%E5%89%8D%E7%AB%AF>前端</a> (1)</li><li><a href=/categories/%E5%90%8E%E7%AB%AF>后端</a> (1)</li><li><a href=/categories/%E5%9F%BA%E7%A1%80>基础</a> (1)</li></ol></div><div class=widget><div class=widget-title>Tags</div><div class="tag-cloud-tags widget-content"><a href=/tags/git aria-label="git (1 posts)" style=font-size:1rem>git</a>
+<a href=/categories/mysql>mysql</a></span> <span><svg class="icon icon-tag"><use xlink:href="#icon-tag"/></svg><a class=article-tags href=/tags/mysql>mysql</a></span></section></footer><div id=comments-button-container class=comments-button-container><button type=button onclick=loadDisqus() class=comments-button><svg class="icon icon-bubble"><use xlink:href="#icon-bubble"/></svg> <span>Show Comments</span></button></div><div id=disqus_thread></div><script type=text/javascript>function loadDisqus(){var a,b;document.getElementById('comments-button-container').style.display='none',a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='李明梓',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)}</script><noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></article></main><aside id=sidebar><div class=widget><div class=widget-title>Recent posts</div><ol class="recent-widget widget-content"><li><a href=/canal-mysql-binlog%E6%97%A5%E5%BF%97%E8%A7%A3%E6%9E%90/>canal-mysql binlog日志解析</a></li><li><a href=/maven-wrapper%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/>maven-wrapper基础使用</a></li><li><a href=/yarn%E7%9B%B8%E5%85%B3/>Yarn相关</a></li><li><a href=/go%E5%AD%A6%E4%B9%A0/>GO学习</a></li><li><a href=/hugo%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/>Hugo基本使用</a></li></ol></div><div class=widget><div class=widget-title>Categories</div><ol class="all-categories widget-content"><li><a href=/categories/devops>devops</a> (1)</li><li><a href=/categories/java>java</a> (2)</li><li><a href=/categories/mysql>mysql</a> (1)</li><li><a href=/categories/%E5%85%B6%E4%BB%96>其他</a> (4)</li><li><a href=/categories/%E5%89%8D%E7%AB%AF>前端</a> (1)</li><li><a href=/categories/%E5%90%8E%E7%AB%AF>后端</a> (1)</li><li><a href=/categories/%E5%9F%BA%E7%A1%80>基础</a> (1)</li></ol></div><div class=widget><div class=widget-title>Tags</div><div class="tag-cloud-tags widget-content"><a href=/tags/canal aria-label="canal (1 posts)" style=font-size:1rem>canal</a>
+<a href=/tags/git aria-label="git (1 posts)" style=font-size:1rem>git</a>
 <a href=/tags/go aria-label="go (1 posts)" style=font-size:1rem>go</a>
 <a href=/tags/hexo aria-label="hexo (1 posts)" style=font-size:1rem>hexo</a>
 <a href=/tags/maven aria-label="maven (1 posts)" style=font-size:1rem>maven</a>
