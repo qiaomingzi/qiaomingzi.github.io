@@ -7,6 +7,9 @@
 【mysql doc】https://dev.mysql.com/doc/
 【alibaba canal】https://github.com/alibaba/canal
 2.概要 通过本文可以了解主从同步原理，快速搭建一个主从环境,实现复制场景，并且利用canal实现订阅binglog日志，实现跨实例同步。
+中间件版本:
+mysql-8.0.27
+canal 1.1.5
 3.主从同步 创建容错系统的最常见方法就是冗余，复制模式分普通复制、组复制，普通复制即传统的 MySQL复制 提供了一种简单的源(mater)到副本复制方法,。
 master-slave syn MySQL 复制功能允许服务器 -主服务器 - 将所有更改发送到另一台服务器 -从服务器 -从服务器尝试应用所有更改以与主服务器保持同步。复制工作如下：
 <a href=/mysql-master-slave/ aria-label="To post 'mysql master-slave'">全文&nbsp;→</a></p></article></main><aside id=sidebar><div class=widget><div class=widget-title>Recent posts</div><ol class="recent-widget widget-content"><li><a href=/canal-mysql-binlog%E6%97%A5%E5%BF%97%E8%A7%A3%E6%9E%90/>canal-mysql binlog日志解析</a></li><li><a href=/maven-wrapper%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/>maven-wrapper基础使用</a></li><li><a href=/mysql-master-slave/>mysql master-slave</a></li><li><a href=/yarn%E7%9B%B8%E5%85%B3/>Yarn相关</a></li><li><a href=/go%E5%AD%A6%E4%B9%A0/>GO学习</a></li></ol></div><div class=widget><div class=widget-title>Categories</div><ol class="all-categories widget-content"><li><a href=/categories/devops>devops</a> (1)</li><li><a href=/categories/java>java</a> (2)</li><li><a href=/categories/mysql>mysql</a> (1)</li><li><a href=/categories/%E5%85%B6%E4%BB%96>其他</a> (4)</li><li><a href=/categories/%E5%89%8D%E7%AB%AF>前端</a> (1)</li><li><a href=/categories/%E5%90%8E%E7%AB%AF>后端</a> (1)</li><li><a href=/categories/%E5%9F%BA%E7%A1%80>基础</a> (1)</li></ol></div><div class=widget><div class=widget-title>Tags</div><div class="tag-cloud-tags widget-content"><a href=/tags/canal aria-label="canal (1 posts)" style=font-size:1rem>canal</a>

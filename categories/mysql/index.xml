@@ -2,5 +2,8 @@
 【mysql doc】https://dev.mysql.com/doc/
 【alibaba canal】https://github.com/alibaba/canal
 2.概要 通过本文可以了解主从同步原理，快速搭建一个主从环境,实现复制场景，并且利用canal实现订阅binglog日志，实现跨实例同步。
+中间件版本:
+mysql-8.0.27
+canal 1.1.5
 3.主从同步 创建容错系统的最常见方法就是冗余，复制模式分普通复制、组复制，普通复制即传统的 MySQL复制 提供了一种简单的源(mater)到副本复制方法,。
 master-slave syn MySQL 复制功能允许服务器 -主服务器 - 将所有更改发送到另一台服务器 -从服务器 -从服务器尝试应用所有更改以与主服务器保持同步。复制工作如下：</description></item></channel></rss>
