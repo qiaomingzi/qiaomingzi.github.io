@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>mysql on mingzi.li blog</title><link>http://qiaomingzi.github.io/tags/mysql/</link><description>Recent content in mysql on mingzi.li blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sat, 16 Oct 2021 15:42:33 +0000</lastBuildDate><atom:link href="http://qiaomingzi.github.io/tags/mysql/index.xml" rel="self" type="application/rss+xml"/><item><title>mysql master-slave</title><link>http://qiaomingzi.github.io/mysql-master-slave/</link><pubDate>Sat, 16 Oct 2021 15:42:33 +0000</pubDate><guid>http://qiaomingzi.github.io/mysql-master-slave/</guid><description>1.参考 【mysql8.0手册】https://dev.mysql.com/doc/refman/8.0/en/
+【mysql doc】https://dev.mysql.com/doc/
 【alibaba canal】https://github.com/alibaba/canal
-2.主从同步 MySQL 复制功能允许服务器 -主服务器 - 将所有更改发送到另一台服务器 -从服务器 -从服务器尝试应用所有更改以与主服务器保持同步。复制工作如下：
-每当 master 的数据库被修改时，更改都会写入一个文件，即所谓的二进制日志或binlog。这是由执行修改数据库的查询的客户端线程完成的。
-master 有一个线程，称为dump thread，它不断读取 master 的 binlog 并将其发送给 slave。</description></item></channel></rss>
+2.概要 通过本文可以了解主从同步原理，快速搭建一个主从环境,实现复制场景，并且利用canal实现订阅binglog日志，实现跨实例同步。
+3.主从同步 创建容错系统的最常见方法就是冗余，复制模式分普通复制、组复制，普通复制即传统的 MySQL复制 提供了一种简单的源(mater)到副本复制方法,。
+master-slave syn MySQL 复制功能允许服务器 -主服务器 - 将所有更改发送到另一台服务器 -从服务器 -从服务器尝试应用所有更改以与主服务器保持同步。复制工作如下：</description></item></channel></rss>

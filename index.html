@@ -12,10 +12,11 @@
 <a href=/canal-mysql-binlog%E6%97%A5%E5%BF%97%E8%A7%A3%E6%9E%90/ aria-label="To post 'canal-mysql binlog日志解析'">全文&nbsp;→</a></p></article><article class=summary><h1><a href=/maven-wrapper%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/>maven-wrapper基础使用</a></h1><div class=entry-meta><time class=published datetime="2021-10-16 15:42:33 +0000 UTC"><svg class="icon icon-calendar"><use xlink:href="#icon-calendar"/></svg>2021 October 16</time></div><p>1.maven-wrapper安装使用 安装 在项目中使用命令安装mvn -N io.takari:maven:0.7.7:wrapper，参考官网 ,如果需要指定maven版本则使用mvn -N io.takari:maven:0.7.7:wrapper -Dmaven=3.5.4,安装完成后，目录如下
 my-project ├── .mvn │ └── wrapper │ ├── MavenWrapperDownloader.java │ ├── maven-wrapper.
 <a href=/maven-wrapper%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/ aria-label="To post 'maven-wrapper基础使用'">全文&nbsp;→</a></p></article><article class=summary><h1><a href=/mysql-master-slave/>mysql master-slave</a></h1><div class=entry-meta><time class=published datetime="2021-10-16 15:42:33 +0000 UTC"><svg class="icon icon-calendar"><use xlink:href="#icon-calendar"/></svg>2021 October 16</time></div><p>1.参考 【mysql8.0手册】https://dev.mysql.com/doc/refman/8.0/en/
+【mysql doc】https://dev.mysql.com/doc/
 【alibaba canal】https://github.com/alibaba/canal
-2.主从同步 MySQL 复制功能允许服务器 -主服务器 - 将所有更改发送到另一台服务器 -从服务器 -从服务器尝试应用所有更改以与主服务器保持同步。复制工作如下：
-每当 master 的数据库被修改时，更改都会写入一个文件，即所谓的二进制日志或binlog。这是由执行修改数据库的查询的客户端线程完成的。
-master 有一个线程，称为dump thread，它不断读取 master 的 binlog 并将其发送给 slave。
+2.概要 通过本文可以了解主从同步原理，快速搭建一个主从环境,实现复制场景，并且利用canal实现订阅binglog日志，实现跨实例同步。
+3.主从同步 创建容错系统的最常见方法就是冗余，复制模式分普通复制、组复制，普通复制即传统的 MySQL复制 提供了一种简单的源(mater)到副本复制方法,。
+master-slave syn MySQL 复制功能允许服务器 -主服务器 - 将所有更改发送到另一台服务器 -从服务器 -从服务器尝试应用所有更改以与主服务器保持同步。复制工作如下：
 <a href=/mysql-master-slave/ aria-label="To post 'mysql master-slave'">全文&nbsp;→</a></p></article><article class=summary><h1><a href=/yarn%E7%9B%B8%E5%85%B3/>Yarn相关</a></h1><div class=entry-meta><time class=published datetime="2021-05-27 09:46:19 +0800 +0800"><svg class="icon icon-calendar"><use xlink:href="#icon-calendar"/></svg>2021 May 27</time></div><p>1.概述 Yarn是您的代码的包管理器，yarn和npm的对比
 速度
 npm 是按照队列执行每个 package，也就是说必须要等到当前 package 安装完成之后，才能继续后面的安装。而 Yarn 是同步执行所有任务，提高了性能。

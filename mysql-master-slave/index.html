@@ -3,7 +3,7 @@
 <span></span></div></div><a href=#content id=skip-link class=skip-link @click.prevent=skipLink.skipToContent($refs.content) @click.away=skipLink.removeContentTabIndex($refs.content)>Skip to content</a>
 <button @click=menu.toggle() class=hamburger-trigger>Menu<div class=hamburger-menu><div class=bar :class="{'animate': menu.hamburgerIsOpen()}"></div></div></button><nav :class="{'open': menu.isOpen() || menu.isOpening(), 'open closing': menu.isClosing()}"><a href=/ class=home><svg class="icon icon-home"><use xlink:href="#icon-home"/></svg>首页</a>
 <a href=/about/ class=about><svg class="icon icon-user"><use xlink:href="#icon-user"/></svg>关于我</a>
-<a href=/search-requires-javascript/ rel=nofollow class=search x-ref=searchMenuLink @click.prevent="menu.close(); search.open();$nextTick(() => $refs.searchInput.focus())"><svg class="icon icon-search"><use xlink:href="#icon-search"/></svg>搜索</a></nav></div></header><div class=body><div class=body-max-width><main id=content x-ref=content><article class=full-article><h1>mysql master-slave</h1><div class=entry-meta><time class=published datetime="2021-10-16 15:42:33 +0000 UTC"><svg class="icon icon-calendar"><use xlink:href="#icon-calendar"/></svg>2021 October 16</time></div><div style=text-align:center;display:block;color:#999><div>本文仅为个人笔记,作为学习使用,如有雷同请联系作者 mingzi.li 处理,mail: qiaomingzi100@sina.com</div></div><h3 id=1参考>1.参考</h3><p>【mysql8.0手册】https://dev.mysql.com/doc/refman/8.0/en/</p><p>【alibaba canal】https://github.com/alibaba/canal</p><h3 id=2主从同步>2.主从同步</h3><p><img src=3.jpg alt></p><p>MySQL 复制功能允许服务器 -<strong>主</strong>服务器 - 将所有更改发送到另一台服务器 -<strong>从</strong>服务器 -<strong>从</strong>服务器尝试应用所有更改以与主服务器保持同步。复制工作如下：</p><ul><li><p>每当 master 的数据库被修改时，更改都会写入一个文件，即所谓的<strong>二进制日志</strong>或<strong>binlog</strong>。这是由执行修改数据库的查询的客户端线程完成的。</p></li><li><p>master 有一个线程，称为<strong>dump thread</strong>，它不断读取 master 的 binlog 并将其发送给 slave。</p></li><li><p>slave有一个线程，称为<strong>IO线程</strong>，它接收master的dump线程发送的binlog，并将其写入一个文件： <strong>relay log</strong>，show variables like &lsquo;%relay%'。</p></li><li><p>从服务器有另一个线程，称为 <strong>SQL 线程</strong>，它不断读取中继日志并将更改应用到从服务器。</p></li></ul><h3 id=3环境准备>3.环境准备</h3><h4 id=31环境目录结构>3.1.环境目录结构</h4><pre><code>├─mysql-8.0.27-winx64
+<a href=/search-requires-javascript/ rel=nofollow class=search x-ref=searchMenuLink @click.prevent="menu.close(); search.open();$nextTick(() => $refs.searchInput.focus())"><svg class="icon icon-search"><use xlink:href="#icon-search"/></svg>搜索</a></nav></div></header><div class=body><div class=body-max-width><main id=content x-ref=content><article class=full-article><h1>mysql master-slave</h1><div class=entry-meta><time class=published datetime="2021-10-16 15:42:33 +0000 UTC"><svg class="icon icon-calendar"><use xlink:href="#icon-calendar"/></svg>2021 October 16</time></div><div style=text-align:center;display:block;color:#999><div>本文仅为个人笔记,作为学习使用,如有雷同请联系作者 mingzi.li 处理,mail: qiaomingzi100@sina.com</div></div><h3 id=1参考>1.参考</h3><p>【mysql8.0手册】https://dev.mysql.com/doc/refman/8.0/en/</p><p>【mysql doc】https://dev.mysql.com/doc/</p><p>【alibaba canal】https://github.com/alibaba/canal</p><h3 id=2概要>2.概要</h3><p>通过本文可以了解主从同步原理，快速搭建一个主从环境,实现复制场景，并且利用canal实现订阅binglog日志，实现跨实例同步。</p><h3 id=3主从同步>3.主从同步</h3><p>创建容错系统的最常见方法就是冗余，复制模式分普通复制、组复制，普通复制即传统的 MySQL复制 提供了一种简单的源(mater)到副本复制方法,。</p><h4 id=master-slave-syn>master-slave syn</h4><p><img src=3.jpg alt></p><p>MySQL 复制功能允许服务器 -<strong>主</strong>服务器 - 将所有更改发送到另一台服务器 -<strong>从</strong>服务器 -<strong>从</strong>服务器尝试应用所有更改以与主服务器保持同步。复制工作如下：</p><ul><li><p>每当 master 的数据库被修改时，更改都会写入一个文件，即所谓的<strong>二进制日志</strong>或<strong>binlog</strong>。这是由执行修改数据库的查询的客户端线程完成的。</p></li><li><p>master 有一个线程，称为<strong>dump thread</strong>，它不断读取 master 的 binlog 并将其发送给 slave。</p></li><li><p>slave有一个线程，称为<strong>IO线程</strong>，它接收master的dump线程发送的binlog，并将其写入一个文件： <strong>relay log</strong>，show variables like &lsquo;%relay%'。</p></li><li><p>从服务器有另一个线程，称为 <strong>SQL 线程</strong>，它不断读取中继日志并将更改应用到从服务器。</p></li></ul><p>MySQL 复制功能使用三个主线程实现，一个在源服务器上，两个在副本上：</p><ul><li><p><strong>二进制日志转储线程。</strong> 当副本连接时，源创建一个线程将二进制日志内容发送到副本。该线程可以<a href=https://dev.mysql.com/doc/refman/8.0/en/show-processlist.html><code>SHOW PROCESSLIST</code></a>在源上的输出中标识为<code>Binlog Dump</code>线程。</p><p>二进制日志转储线程获取源二进制日志的锁，用于读取要发送到副本的每个事件。一旦事件被读取，锁就会被释放，甚至在事件被发送到副本之前。</p></li><li><p><strong>复制 I/O 接收器线程。</strong> 当<a href=https://dev.mysql.com/doc/refman/8.0/en/start-replica.html><code>START REPLICA</code></a>在副本服务器上发出一条语句时，副本会创建一个 I/O（接收器）线程，该线程连接到源并要求它发送记录在其二进制日志中的更新。</p><p>复制接收者线程读取源<code>Binlog Dump</code>线程发送的更新（参见上一项）并将它们复制到包含副本中继日志的本地文件。</p><p>该线程的状态显示 <code>Slave_IO_running</code>在 的输出中 <a href=https://dev.mysql.com/doc/refman/8.0/en/show-slave-status.html><code>SHOW SLAVE STATUS</code></a>。</p></li><li><p><strong>复制 SQL 应用程序线程。</strong> 副本创建一个 SQL（应用程序）线程来读取由复制接收器线程写入的中继日志并执行其中包含的事务。</p></li></ul><h5 id=异步复制>异步复制</h5><p><img src=./async-replication-diagram.png alt></p><h5 id=半同步复制>半同步复制</h5><p><img src=./semisync-replication-diagram.png alt></p><h5 id=组复制>组复制</h5><p><img src=./gr-replication-diagram.png alt></p><h4 id=mysql集群>Mysql集群</h4><p>InnoDB ReplicaSet 不提供 InnoDB Cluster 提供的所有功能，例如自动故障转移或多主模式。但是您可以手动切换或故障转移到辅助实例，例如在发生故障时。您甚至可以采用现有的复制部署，然后将其作为 InnoDB ReplicaSet 进行管理。</p><p>mysql集群主要基于 MySQL Group Replication构建，提供自动成员管理、容错、自动故障转移等功能。</p><p><img src=./innodb_cluster.png alt></p><h3 id=4环境准备>4.环境准备</h3><h4 id=41环境目录结构>4.1.环境目录结构</h4><pre><code>├─mysql-8.0.27-winx64
 ├─master
 │  └─data
 │  └─my.ini
@@ -21,7 +21,7 @@
 │  │  ├─canal
 │  │  └─example
 │  └─plugin
-</code></pre><h4 id=32安装mysql>3.2.安装mysql</h4><p>下载<code>https://cdn.mysql.com//Downloads/MySQL-8.0/mysql-8.0.27-winx64.zip</code></p><h5 id=321master>3.2.1.master</h5><h6 id=1配置myini>1).配置my.ini</h6><pre><code>[mysql]
+</code></pre><h4 id=42安装mysql>4.2.安装mysql</h4><p>下载<code>https://cdn.mysql.com//Downloads/MySQL-8.0/mysql-8.0.27-winx64.zip</code></p><h5 id=421master>4.2.1.master</h5><h6 id=1配置myini>1).配置my.ini</h6><pre><code>[mysql]
 # 设置mysql客户端默认字符集
 default-character-set=utf8mb4
 
@@ -77,7 +77,7 @@ mysql&gt;GRANT SELECT, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'slaveuse
 mysql&gt;flush privileges;
 mysql&gt;show grants for slaveuser@'%';
 </code></pre><h6 id=4查看master状态>4).查看master状态</h6><pre><code>mysql&gt; show master status；
-</code></pre><p><img src=1.png alt></p><h5 id=322slave>3.2.2.slave</h5><p>参考 <a href=https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html>https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html</a> slave配置参数</p><h6 id=1配置myini-1>1).配置my.ini</h6><pre><code>[mysql]
+</code></pre><p><img src=1.png alt></p><h5 id=422slave>4.2.2.slave</h5><p>参考 <a href=https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html>https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html</a> slave配置参数</p><h6 id=1配置myini-1>1).配置my.ini</h6><pre><code>[mysql]
 # 设置mysql客户端默认字符集
 default-character-set=utf8mb4
 
@@ -124,7 +124,7 @@ mysql&gt; show slave status;
 GRANT SELECT ON *.* TO 'readuser'@'%';
 FLUSH PRIVILEGES;
 </code></pre><h6 id=4查看master状态-1>4).查看master状态</h6><pre><code>mysql&gt; show master status；
-</code></pre><p><img src=2.png alt></p><h4 id=33-测试>3.3 测试</h4><p>在master执行一下语句，查看slave库是否同步。</p><pre><code>CREATE DATABASE IF NOT EXISTS test DEFAULT CHARSET utf8 COLLATE utf8_general_ci;`
+</code></pre><p><img src=2.png alt></p><h4 id=43-测试>4.3 测试</h4><p>在master执行一下语句，查看slave库是否同步。</p><pre><code>CREATE DATABASE IF NOT EXISTS test DEFAULT CHARSET utf8 COLLATE utf8_general_ci;`
 
 create table t_data
 (
@@ -136,7 +136,7 @@ create table t_data
 ) ENGINE=InnoDB  COMMENT='测试表';
 
 insert into t_data(name) values(1);
-</code></pre><h3 id=4开启gtid>4.开启GTID</h3><p>全局事务标识符 (GTID) 是在源服务器（源）上创建并与提交的每个事务相关联的唯一标识符。此标识符不仅对于它起源的服务器是唯一的，而且对于给定复制拓扑中的所有服务器也是唯一的。</p><p>从MySQL5.6开始增加了强大的GTID（Global Transaction ID，全局事务ID）这个特性，用来强化数据库的主备一致性， 故障恢复， 以及容错能力。用于取代过去传统的主从复制（即：基于binlog和position的异步复制）。</p><p>借助GTID，在发生主备切换的情况下，MySQL的其他slave可以自动在新主上找到正确的复制位置，这大大简化了复杂复制拓扑下集群的维护，也减少了人为设置复制position发生误操作的风险。另外，基于GTID的复制可以忽略已经执行过的事务，减少了数据发生不一致的风险。</p><p>参考：https://dev.mysql.com/doc/refman/8.0/en/replication-mode-change-online-enable-gtids.html</p><pre><code>1.修改master、slave 节点my.conf or my.ini
+</code></pre><h3 id=5开启gtid>5.开启GTID</h3><p>全局事务标识符 (GTID) 是在源服务器（源）上创建并与提交的每个事务相关联的唯一标识符。此标识符不仅对于它起源的服务器是唯一的，而且对于给定复制拓扑中的所有服务器也是唯一的。</p><p>从MySQL5.6开始增加了强大的GTID（Global Transaction ID，全局事务ID）这个特性，用来强化数据库的主备一致性， 故障恢复， 以及容错能力。用于取代过去传统的主从复制（即：基于binlog和position的异步复制）。</p><p>借助GTID，在发生主备切换的情况下，MySQL的其他slave可以自动在新主上找到正确的复制位置，这大大简化了复杂复制拓扑下集群的维护，也减少了人为设置复制position发生误操作的风险。另外，基于GTID的复制可以忽略已经执行过的事务，减少了数据发生不一致的风险。</p><p>参考：https://dev.mysql.com/doc/refman/8.0/en/replication-mode-change-online-enable-gtids.html</p><pre><code>1.修改master、slave 节点my.conf or my.ini
 # GTID
 gtid_mode=ON
 enforce_gtid_consistency=ON
@@ -156,7 +156,7 @@ START REPLICA ;
 3.查看状态
 show slave status \G;
 show variables like 'gtid_%';
-</code></pre><h3 id=5canal-slave>5.canal slave</h3><h4 id=51下载-canal>5.1下载 canal</h4><p><code>https://github.com/alibaba/canal/releases</code></p><h4 id=52-配置>5.2 配置</h4><pre><code>1）确认mysql配置
+</code></pre><h3 id=6canal-slave>6.canal slave</h3><h4 id=61下载-canal>6.1下载 canal</h4><p><code>https://github.com/alibaba/canal/releases</code></p><h4 id=62-配置>6.2 配置</h4><pre><code>1）确认mysql配置
 [mysqld]  
 log-bin=mysql-bin #添加这一行就ok  
 binlog-format=ROW #选择row模式   
@@ -205,7 +205,7 @@ slave_canal/logs/instance_1/instance_1.log
 
  
 </code></pre><h4 id=51-canal客户端测试>5.1 canal客户端测试</h4><p>see <code>https://github.com/alibaba/canal.git</code></p><pre><code>运行 com.alibaba.otter.canal.example.BaseCanalClientTest.main
-</code></pre><p>在master节点执行 insert,可以看到bingnlog消息</p><p><img src=./canal_1.png alt></p><p>在master节点执行 update,可以看到bingnlog消息</p><p><img src=./canal_2.png alt></p><h3 id=6问题>6.问题</h3><h4 id=61error_code-1032-handler-error-ha_err_key_not_found-the-events-master-log-first-end_log_pos-429-error_code-my-001032>6.1.Error_code: 1032; handler error HA_ERR_KEY_NOT_FOUND; the event&rsquo;s master log FIRST, end_log_pos 429, Error_code: MY-001032</h4><pre><code>在从库删除数据后，出现主从同步问题
+</code></pre><p>在master节点执行 insert,可以看到bingnlog消息</p><p><img src=./canal_1.png alt></p><p>在master节点执行 update,可以看到bingnlog消息</p><p><img src=./canal_2.png alt></p><h3 id=7问题>7.问题</h3><h4 id=71error_code-1032-handler-error-ha_err_key_not_found-the-events-master-log-first-end_log_pos-429-error_code-my-001032>7.1.Error_code: 1032; handler error HA_ERR_KEY_NOT_FOUND; the event&rsquo;s master log FIRST, end_log_pos 429, Error_code: MY-001032</h4><pre><code>在从库删除数据后，出现主从同步问题
 1)stop slave;
 2)找出被删除的记录，重新插入从库
 E:/db/mysql_cluster/mysql-8.0.27-winx64/bin/mysqlbinlog --no-defaults --base64-output=decode-rows -v  bin.000001 &gt;bin.sql
@@ -217,9 +217,9 @@ E:/db/mysql_cluster/mysql-8.0.27-winx64/bin/mysqlbinlog --no-defaults  --base64-
 3)start slave;
 
  
-</code></pre><h4 id=62client-does-not-support-authentication-protocol-requested-by-server-consider-upgrading-mysql-client>6.2.client does not support authentication protocol requested by server consider upgrading mysql client</h4><p>创建用户时指定mysql_native_password ， mysql8之后,加密规则是caching_sha2_password。</p><p><code>CREATE USER slaveuser@'%' IDENTIFIED WITH mysql_native_password BY '123456';</code></p><h4 id=63access-denied-you-need-at-least-one-of-the-super-replication-client-privileges>6.3.Access denied; you need (at least one of) the SUPER, REPLICATION CLIENT privilege(s)</h4><p>为用户增加 REPLICATION CLIENT 权限</p><p><code>GRANT SELECT, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO '用户名'@'%';</code></p><h3 id=7相关命令>7.相关命令</h3><h4 id=71查看从节点数量>7.1.查看从节点数量</h4><pre><code>show slave hosts;
+</code></pre><h4 id=72client-does-not-support-authentication-protocol-requested-by-server-consider-upgrading-mysql-client>7.2.client does not support authentication protocol requested by server consider upgrading mysql client</h4><p>创建用户时指定mysql_native_password ， mysql8之后,加密规则是caching_sha2_password。</p><p><code>CREATE USER slaveuser@'%' IDENTIFIED WITH mysql_native_password BY '123456';</code></p><h4 id=73access-denied-you-need-at-least-one-of-the-super-replication-client-privileges>7.3.Access denied; you need (at least one of) the SUPER, REPLICATION CLIENT privilege(s)</h4><p>为用户增加 REPLICATION CLIENT 权限</p><p><code>GRANT SELECT, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO '用户名'@'%';</code></p><h3 id=8相关命令>8.相关命令</h3><h4 id=81查看从节点数量>8.1.查看从节点数量</h4><pre><code>show slave hosts;
 select * from information_schema.processlist as p where p.command = 'Binlog Dump'; 
-</code></pre><h4 id=72查看版本>7.2.查看版本</h4><p><code>select version();</code></p><h5 id=72mysqlbinlog>7.2.mysqlbinlog</h5><p>查看binlog信息 <code>mysqlbinlog -v --base64-output=DECODE-ROWS ./bin.000001</code></p><p>查看binglog文件 <code>SHOW BINARY LOGS</code></p><h3 id=8数据参考>8.数据参考:</h3><p>1.机器信息<code>DB型(内存(12*32G)384G硬盘2*480G(s4500)SSD+8*960G(s4500)SSD)</code></p><pre><code>show variables like '%binlog%';
+</code></pre><h4 id=82查看版本>8.2.查看版本</h4><p><code>select version();</code></p><h5 id=82mysqlbinlog>8.2.mysqlbinlog</h5><p>查看binlog信息 <code>mysqlbinlog -v --base64-output=DECODE-ROWS ./bin.000001</code></p><p>查看binglog文件 <code>SHOW BINARY LOGS</code></p><h3 id=9数据参考>9.数据参考:</h3><p>1.机器信息<code>DB型(内存(12*32G)384G硬盘2*480G(s4500)SSD+8*960G(s4500)SSD)</code></p><pre><code>show variables like '%binlog%';
 1	binlog_cache_size	1048576
 2	binlog_checksum	NONE
 3	binlog_direct_non_transactional_updates	OFF
