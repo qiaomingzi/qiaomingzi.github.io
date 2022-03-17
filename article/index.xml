@@ -1,4 +1,12 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Articles on mingzi.li blog</title><link>http://qiaomingzi.github.io/article/</link><description>Recent content in Articles on mingzi.li blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sat, 16 Oct 2021 15:42:33 +0000</lastBuildDate><atom:link href="http://qiaomingzi.github.io/article/index.xml" rel="self" type="application/rss+xml"/><item><title>canal-mysql binlog日志解析</title><link>http://qiaomingzi.github.io/canal-mysql-binlog%E6%97%A5%E5%BF%97%E8%A7%A3%E6%9E%90/</link><pubDate>Sat, 16 Oct 2021 15:42:33 +0000</pubDate><guid>http://qiaomingzi.github.io/canal-mysql-binlog%E6%97%A5%E5%BF%97%E8%A7%A3%E6%9E%90/</guid><description>1.参考 【alibaba canal】https://github.com/alibaba/canal
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Articles on mingzi.li blog</title><link>http://qiaomingzi.github.io/article/</link><description>Recent content in Articles on mingzi.li blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Wed, 16 Mar 2022 15:42:33 +0000</lastBuildDate><atom:link href="http://qiaomingzi.github.io/article/index.xml" rel="self" type="application/rss+xml"/><item><title>位运算基础知识</title><link>http://qiaomingzi.github.io/%E4%BD%8D%E8%BF%90%E7%AE%97%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</link><pubDate>Wed, 16 Mar 2022 15:42:33 +0000</pubDate><guid>http://qiaomingzi.github.io/%E4%BD%8D%E8%BF%90%E7%AE%97%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</guid><description>一：参考 [算法心得] http://graphics.stanford.edu/~seander/bithacks.html#IntegerLogIEEE64Float
+[运算符优先级] https://tool.oschina.net/commons?type=6
+[位运算技巧]https://www.zhihu.com/question/38206659
+[思考题解法]https://www.iteye.com/blog/yacare-1969931
+二：概要 通过本文可以让我们温习下位运算、进制转换，为写出更精良的代码奠定理论基础。现在我们从一个题目说开去：
+问：如何载预计有10亿个int的数据中，剔除其中重复的数据并排序输出?
+分析：首先要进行排序、排重必须得把相关数据加载到内存中，那么要用哪种数据结构来存储呢?
+10 0000 0000 = 10^9
+int[10^9] 需要内存 10^9 * 4(B) =&amp;gt; ((10^9 * 4)/1000 * 1000)(M) =&amp;gt; 4000M =&amp;gt; 4GB</description></item><item><title>canal-mysql binlog日志解析</title><link>http://qiaomingzi.github.io/canal-mysql-binlog%E6%97%A5%E5%BF%97%E8%A7%A3%E6%9E%90/</link><pubDate>Sat, 16 Oct 2021 15:42:33 +0000</pubDate><guid>http://qiaomingzi.github.io/canal-mysql-binlog%E6%97%A5%E5%BF%97%E8%A7%A3%E6%9E%90/</guid><description>1.参考 【alibaba canal】https://github.com/alibaba/canal
 【mysql binlog】https://dev.mysql.com/doc/refman/8.0/en/binary-log.html
 【mysql event】https://dev.mysql.com/doc/internals/en/event-meanings.html
 【mysqlbinlog 命令】https://dev.mysql.com/doc/refman/8.0/en/mysqlbinlog.html
@@ -13,15 +21,7 @@ my-project ├── .mvn │ └── wrapper │ ├── MavenWrapperDownlo
 mysql-8.0.27
 canal 1.1.5
 3.主从同步 创建容错系统的最常见方法就是冗余，复制模式分普通复制、组复制，普通复制即传统的 MySQL复制 提供了一种简单的源(mater)到副本复制方法,。
-master-slave syn MySQL 复制功能允许服务器 -主服务器 - 将所有更改发送到另一台服务器 -从服务器 -从服务器尝试应用所有更改以与主服务器保持同步。复制工作如下：</description></item><item><title>sonarqube基础使用</title><link>http://qiaomingzi.github.io/sonarqube%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/</link><pubDate>Sat, 16 Oct 2021 15:42:33 +0000</pubDate><guid>http://qiaomingzi.github.io/sonarqube%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/</guid><description/></item><item><title>位运算基础知识</title><link>http://qiaomingzi.github.io/%E4%BD%8D%E8%BF%90%E7%AE%97%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</link><pubDate>Sat, 16 Oct 2021 15:42:33 +0000</pubDate><guid>http://qiaomingzi.github.io/%E4%BD%8D%E8%BF%90%E7%AE%97%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</guid><description>一：参考 [算法心得] http://graphics.stanford.edu/~seander/bithacks.html#IntegerLogIEEE64Float
-[运算符优先级] https://tool.oschina.net/commons?type=6
-[位运算技巧]https://www.zhihu.com/question/38206659
-[思考题解法]https://www.iteye.com/blog/yacare-1969931
-二：概要 通过本文可以让我们温习下位运算、进制转换，为写出更精良的代码奠定理论基础。现在我们从一个题目说开去：
-问：如何载预计有10亿个int的数据中，剔除其中重复的数据并排序输出?
-分析：首先要进行排序、排重必须得把相关数据加载到内存中，那么要用哪种数据结构来存储呢?
-10 0000 0000 = 10^9
-int[10^9] 需要内存 10^9 * 4(B) =&amp;gt; ((10^9 * 4)/1000 * 1000)(M) =&amp;gt; 4000M =&amp;gt; 4GB</description></item><item><title>Yarn相关</title><link>http://qiaomingzi.github.io/yarn%E7%9B%B8%E5%85%B3/</link><pubDate>Thu, 27 May 2021 09:46:19 +0800</pubDate><guid>http://qiaomingzi.github.io/yarn%E7%9B%B8%E5%85%B3/</guid><description>1.概述 Yarn是您的代码的包管理器，yarn和npm的对比
+master-slave syn MySQL 复制功能允许服务器 -主服务器 - 将所有更改发送到另一台服务器 -从服务器 -从服务器尝试应用所有更改以与主服务器保持同步。复制工作如下：</description></item><item><title>sonarqube基础使用</title><link>http://qiaomingzi.github.io/sonarqube%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/</link><pubDate>Sat, 16 Oct 2021 15:42:33 +0000</pubDate><guid>http://qiaomingzi.github.io/sonarqube%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/</guid><description/></item><item><title>Yarn相关</title><link>http://qiaomingzi.github.io/yarn%E7%9B%B8%E5%85%B3/</link><pubDate>Thu, 27 May 2021 09:46:19 +0800</pubDate><guid>http://qiaomingzi.github.io/yarn%E7%9B%B8%E5%85%B3/</guid><description>1.概述 Yarn是您的代码的包管理器，yarn和npm的对比
 速度
 npm 是按照队列执行每个 package，也就是说必须要等到当前 package 安装完成之后，才能继续后面的安装。而 Yarn 是同步执行所有任务，提高了性能。
 安装版本统一

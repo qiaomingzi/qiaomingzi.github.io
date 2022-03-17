@@ -3,16 +3,7 @@
 <span></span></div></div><a href=#content id=skip-link class=skip-link @click.prevent=skipLink.skipToContent($refs.content) @click.away=skipLink.removeContentTabIndex($refs.content)>Skip to content</a>
 <button @click=menu.toggle() class=hamburger-trigger>Menu<div class=hamburger-menu><div class=bar :class="{'animate': menu.hamburgerIsOpen()}"></div></div></button><nav :class="{'open': menu.isOpen() || menu.isOpening(), 'open closing': menu.isClosing()}"><a href=/ class=home><svg class="icon icon-home"><use xlink:href="#icon-home"/></svg>首页</a>
 <a href=/about/ class=about><svg class="icon icon-user"><use xlink:href="#icon-user"/></svg>关于我</a>
-<a href=/search-requires-javascript/ rel=nofollow class=search x-ref=searchMenuLink @click.prevent="menu.close(); search.open();$nextTick(() => $refs.searchInput.focus())"><svg class="icon icon-search"><use xlink:href="#icon-search"/></svg>搜索</a></nav></div></header><div class=body><div class=body-max-width><main id=content x-ref=content><article class=summary><h1><a href=/%E4%BD%8D%E8%BF%90%E7%AE%97%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/>位运算基础知识</a></h1><div class=entry-meta><time class=published datetime="2021-10-16 15:42:33 +0000 UTC"><svg class="icon icon-calendar"><use xlink:href="#icon-calendar"/></svg>2021 October 16</time></div><p>一：参考 [算法心得] http://graphics.stanford.edu/~seander/bithacks.html#IntegerLogIEEE64Float
-[运算符优先级] https://tool.oschina.net/commons?type=6
-[位运算技巧]https://www.zhihu.com/question/38206659
-[思考题解法]https://www.iteye.com/blog/yacare-1969931
-二：概要 通过本文可以让我们温习下位运算、进制转换，为写出更精良的代码奠定理论基础。现在我们从一个题目说开去：
-问：如何载预计有10亿个int的数据中，剔除其中重复的数据并排序输出?
-分析：首先要进行排序、排重必须得把相关数据加载到内存中，那么要用哪种数据结构来存储呢?
-10 0000 0000 = 10^9
-int[10^9] 需要内存 10^9 * 4(B) => ((10^9 * 4)/1000 * 1000)(M) => 4000M => 4GB
-<a href=/%E4%BD%8D%E8%BF%90%E7%AE%97%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/ aria-label="To post '位运算基础知识'">全文&nbsp;→</a></p></article><article class=summary><h1><a href=/yarn%E7%9B%B8%E5%85%B3/>Yarn相关</a></h1><div class=entry-meta><time class=published datetime="2021-05-27 09:46:19 +0800 +0800"><svg class="icon icon-calendar"><use xlink:href="#icon-calendar"/></svg>2021 May 27</time></div><p>1.概述 Yarn是您的代码的包管理器，yarn和npm的对比
+<a href=/search-requires-javascript/ rel=nofollow class=search x-ref=searchMenuLink @click.prevent="menu.close(); search.open();$nextTick(() => $refs.searchInput.focus())"><svg class="icon icon-search"><use xlink:href="#icon-search"/></svg>搜索</a></nav></div></header><div class=body><div class=body-max-width><main id=content x-ref=content><article class=summary><h1><a href=/sonarqube%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/>sonarqube基础使用</a></h1><div class=entry-meta><time class=published datetime="2021-10-16 15:42:33 +0000 UTC"><svg class="icon icon-calendar"><use xlink:href="#icon-calendar"/></svg>2021 October 16</time></div><p><a href=/sonarqube%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/ aria-label="To post 'sonarqube基础使用'">全文&nbsp;→</a></p></article><article class=summary><h1><a href=/yarn%E7%9B%B8%E5%85%B3/>Yarn相关</a></h1><div class=entry-meta><time class=published datetime="2021-05-27 09:46:19 +0800 +0800"><svg class="icon icon-calendar"><use xlink:href="#icon-calendar"/></svg>2021 May 27</time></div><p>1.概述 Yarn是您的代码的包管理器，yarn和npm的对比
 速度
 npm 是按照队列执行每个 package，也就是说必须要等到当前 package 安装完成之后，才能继续后面的安装。而 Yarn 是同步执行所有任务，提高了性能。
 安装版本统一
