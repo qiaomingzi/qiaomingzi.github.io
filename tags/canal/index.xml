@@ -3,4 +3,5 @@
 【mysql event】https://dev.mysql.com/doc/internals/en/event-meanings.html
 【mysqlbinlog 命令】https://dev.mysql.com/doc/refman/8.0/en/mysqlbinlog.html
 2.基本简介 canal [kə&amp;rsquo;næl]，译意为水道/管道/沟渠，主要用途是基于 MySQL 数据库增量日志解析，提供增量数据订阅和消费
-2.1 mysql主备复制实现 master将改变记录到二进制日志(binary log)中（这些记录叫做二进制日志事件，binary log events，可以通过show binlog events进行查看）； slave将master的binary log events拷贝到它的中继日志(relay log)； slave重做中继日志中的事件，将改变反映它自己的数据。 2.</description></item></channel></rss>
+2.1 mysql主备复制实现 master将改变记录到二进制日志(binary log)中（这些记录叫做二进制日志事件，binary log events，可以通过show binlog events进行查看）； slave将master的binary log events拷贝到它的中继日志(relay log)； slave重做中继日志中的事件，将改变反映它自己的数据。 2.</description></item><item><title>GO 36讲</title><link>http://qiaomingzi.github.io/go-36%E8%AE%B2/</link><pubDate>Sat, 16 Oct 2021 15:42:33 +0000</pubDate><guid>http://qiaomingzi.github.io/go-36%E8%AE%B2/</guid><description>1.参考 【环境设置】https://www.liwenzhou.com/posts/Go/install_go_dev_old/
+2.基本简介 3.问题 1）Main file has non-main package or doesn&amp;rsquo;t contain main function 如果为程序入口的main方法文件，则包应为package main,注意与目录无关。</description></item></channel></rss>

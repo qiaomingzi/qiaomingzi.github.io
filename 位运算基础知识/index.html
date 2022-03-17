@@ -1,0 +1,241 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=referrer content="no-referrer"><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><title>位运算基础知识 | mingzi.li blog</title><meta property="og:type" content="website"><meta property="og:title" content="位运算基础知识"><meta property="og:url" content="http://qiaomingzi.github.io/%E4%BD%8D%E8%BF%90%E7%AE%97%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"><meta property="og:locale" content="en_GB"><meta property="og:image" content="http://qiaomingzi.github.io/images/og-image.png"><link rel=canonical href=http://qiaomingzi.github.io/%E4%BD%8D%E8%BF%90%E7%AE%97%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/><meta name=twitter:card content="summary"><meta name=twitter:site content="@p4lm"><link rel=stylesheet type=text/css href=/styles/main-bundle.108386b285ad502399f3a8ab890a333c177e59d922733a408892e466a7a87f70d143ace3585f247b62a75a780bd7bcff68b60fc6760b5ae1414e52c78fe708e7.css integrity media="screen, tv, projection"><link rel=stylesheet type=text/css href=/styles/print-bundle.f3d1ea3e2e864e24f7a26ff871aef6875b8e6246aad31fa6e63fdc9c91c629f6b4cdd7dca9beb3949f8b61a0db4c6fe8ec1bfc44ccf3a2cd9a91ea8e9eb20d44.css integrity media=print><link rel=preload as=font href=/fonts/muli1.woff2 type=font/woff2 crossorigin=anonymous><link rel=preload as=font href=/fonts/muli2.woff2 type=font/woff2 crossorigin=anonymous><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#04396c><meta name=theme-color content="#ffffff"><meta name=generator content="Hugo 0.83.1"><svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><symbol id="icon-arrow-right" viewBox="0 0 32 32"><path d="M19.414 27.414l10-10c.781-.781.781-2.047.0-2.828l-10-10c-.781-.781-2.047-.781-2.828.0s-.781 2.047.0 2.828L23.172 14H4c-1.105.0-2 .895-2 2s.895 2 2 2h19.172l-6.586 6.586c-.39.39-.586.902-.586 1.414s.195 1.024.586 1.414c.781.781 2.047.781 2.828.0z"/></symbol><symbol id="icon-arrow-left" viewBox="0 0 32 32"><path d="M12.586 27.414l-10-10c-.781-.781-.781-2.047.0-2.828l10-10c.781-.781 2.047-.781 2.828.0s.781 2.047.0 2.828L8.828 14H28c1.105.0 2 .895 2 2s-.895 2-2 2H8.828l6.586 6.586c.39.39.586.902.586 1.414s-.195 1.024-.586 1.414c-.781.781-2.047.781-2.828.0z"/></symbol><symbol id="icon-calendar" viewBox="0 0 32 32"><path d="M27.2 4.8h-1.6V8h-4.8V4.8h-9.6V8H6.4V4.8H4.8C3.038 4.8 1.6 6.24 1.6 8v19.2c0 1.76 1.438 3.2 3.2 3.2h22.4c1.76.0 3.2-1.44 3.2-3.2V8c0-1.76-1.44-3.2-3.2-3.2zm0 22.4H4.8V14.4h22.4v12.8zM10.4 1.6H7.2v5.6h3.2V1.6zm14.4.0h-3.2v5.6h3.2V1.6z"/></symbol><symbol id="icon-expand" viewBox="0 0 32 32"><path d="M11.179 17.579l-4.69 4.85-3.29-3.886v10.258h10.219l-3.888-3.33 4.848-4.691-3.2-3.2zM18.581 3.2l3.888 3.33-4.848 4.691 3.2 3.2 4.69-4.85 3.29 3.886V3.199H18.582z"/></symbol><symbol id="icon-collapse" viewBox="0 0 32 32"><path d="M6.56 22.56 1.6 27.2l3.2 3.2 4.64-4.96 3.36 3.36v-9.6H3.2l3.36 3.36zM30.4 4.8l-3.2-3.2-4.64 4.96L19.2 3.2v9.6h9.6l-3.36-3.36L30.4 4.8z"/></symbol><symbol id="icon-bubble" viewBox="0 0 32 32"><path d="M16 2c8.837.0 16 5.82 16 13s-7.163 13-16 13c-.849.0-1.682-.054-2.495-.158C10.068 31.279 5.966 31.895 2 31.986v-.841C4.142 30.096 6 28.184 6 26c0-.305-.024-.604-.068-.897-3.619-2.383-5.932-6.024-5.932-10.103.0-7.18 7.163-13 16-13z"/></symbol><symbol id="icon-folder" viewBox="0 0 32 32"><path d="M29.448 7.678C29.27 6.974 28.4 6.4 27.512 6.4H16.61c-.886.0-2.128-.509-2.755-1.131l-.954-.941c-.627-.622-1.867-1.128-2.754-1.128H4.939c-.888.0-1.694.715-1.792 1.59L2.68 9.6h27.09l-.322-1.922zM31.059 11.2h-30.118c-.547.0-.976.47-.923 1.016l1.477 15.47c.059.63.59 1.114 1.226 1.114h26.56c.635.0 1.165-.483 1.226-1.114l1.477-15.47c.053-.546-.376-1.016-.923-1.016z"/></symbol><symbol id="icon-tag" viewBox="0 0 32 32"><path d="M31.021.648c-.178-.502-.726-.768-1.23-.594s-.77.728-.595 1.232c1.486 4.272-1.464 7.462-3.714 9.171l-.909-1.302c-.306-.437-.989-.8-1.52-.806l-5.101.022c-.531-.01-1.32.234-1.755.541l-15.03 10.539c-.728.512-.904 1.515-.395 2.246l6.83 9.773c.512.728 1.33.64 2.059.131l15.03-10.541c.432-.306.931-.965 1.107-1.469l1.597-5.032c.176-.502.069-1.269-.237-1.706l-.554-.794c3.021-2.315 6.157-6.406 4.416-11.413zM24.027 15.621c-1.163.816-2.77.531-3.584-.634-.818-1.168-.533-2.774.632-3.594.925-.648 2.125-.602 2.989.027-.435.262-.734.416-.79.44-.482.229-.688.806-.461 1.288.166.35.514.557.875.557.138.0.278-.032.411-.094.31-.147.643-.322.99-.528.155.95-.222 1.947-1.062 2.538z"/></symbol><symbol id="icon-circle-with-cross" viewBox="0 0 32 32"><title>Close (Esc)</title><path d="M16 2.56C8.578 2.56 2.56 8.578 2.56 16S8.578 29.44 16 29.44 29.44 23.422 29.44 16 23.422 2.56 16 2.56zm7.662 18.338-2.766 2.766L16 18.766l-4.898 4.896-2.766-2.766L13.235 16l-4.898-4.898 2.766-2.765 4.896 4.896 4.898-4.898 2.766 2.766-4.899 4.898 4.898 4.898z"/></symbol></defs></svg></head><body x-data=window.blog :class="{ 'modal-open': isModalOpen, 'keyboard-navigation' : keyboardNavigation }" @mouseup="keyboardNavigation = false" @keydown.tab="keyboardNavigation = true" @keydown.escape=closeModals()><script>try{const a=window.localStorage.getItem('theme');a==='dark'&&document.querySelector('body').classList.add('dark'),a==='light'&&document.querySelector('body').classList.add('light')}catch(a){}</script><link rel=stylesheet type=text/css href=/styles/post-bundle.min.a3c415b51dea409e064708f705f91702ddddb4aaf1c7522073113ac5c6941f198ce5f39ea63cfaf21674b905146c1bdf3eeb0eaa41d22b9d013117c9bb72d81e.css integrity="sha512-o8QVtR3qQJ4GRwj3BfkXAt3dtKrxx1IgcxE6xcaUHxmM5fOepjz68hZ0uQUUbBvfPusOqkHSK50BMRfJu3LYHg==" media="screen, tv, projection"><div id=page-wrapper><header><svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><symbol id="icon-home" viewBox="0 0 32 32"><path d="M32 18.451 16 6.031.0 18.451v-5.064l16-12.42 16 12.42zM28 18v12h-8v-8h-8v8H4V18l12-9z"/></symbol><symbol id="icon-user" viewBox="0 0 32 32"><path d="M18 22.082v-1.649c2.203-1.241 4-4.337 4-7.432.0-4.971.0-9-6-9s-6 4.029-6 9c0 3.096 1.797 6.191 4 7.432v1.649C7.216 22.637 2 25.97 2 30h28c0-4.03-5.216-7.364-12-7.918z"/></symbol><symbol id="icon-search" viewBox="0 0 32 32"><path d="M31.008 27.231l-7.58-6.447c-.784-.705-1.622-1.029-2.299-.998 1.789-2.096 2.87-4.815 2.87-7.787.0-6.627-5.373-12-12-12s-12 5.373-12 12 5.373 12 12 12c2.972.0 5.691-1.081 7.787-2.87-.031.677.293 1.515.998 2.299l6.447 7.58c1.104 1.226 2.907 1.33 4.007.23s.997-2.903-.23-4.007zM12 20c-4.418.0-8-3.582-8-8s3.582-8 8-8 8 3.582 8 8-3.582 8-8 8z"/></symbol></defs></svg><div class=header-content @click.away=menu.close()><div class=site-title>mingzi.li blog<span style=font-size:.5rem;margin-top:20px>&nbsp;&nbsp;行到水穷处，坐看风云起</span></div><div class=theme-switcher :class="{'has-javascript': true}"><div class=switch><input type=checkbox name=toggle id=theme-switcher-indicator aria-label="Switch theme" @click=theme.toggleChanged($event.target) checked>
+<label for=theme-switcher-indicator><i></i></label>
+<span></span></div></div><a href=#content id=skip-link class=skip-link @click.prevent=skipLink.skipToContent($refs.content) @click.away=skipLink.removeContentTabIndex($refs.content)>Skip to content</a>
+<button @click=menu.toggle() class=hamburger-trigger>Menu<div class=hamburger-menu><div class=bar :class="{'animate': menu.hamburgerIsOpen()}"></div></div></button><nav :class="{'open': menu.isOpen() || menu.isOpening(), 'open closing': menu.isClosing()}"><a href=/ class=home><svg class="icon icon-home"><use xlink:href="#icon-home"/></svg>首页</a>
+<a href=/about/ class=about><svg class="icon icon-user"><use xlink:href="#icon-user"/></svg>关于我</a>
+<a href=/search-requires-javascript/ rel=nofollow class=search x-ref=searchMenuLink @click.prevent="menu.close(); search.open();$nextTick(() => $refs.searchInput.focus())"><svg class="icon icon-search"><use xlink:href="#icon-search"/></svg>搜索</a></nav></div></header><div class=body><div class=body-max-width><main id=content x-ref=content><article class=full-article><h1>位运算基础知识</h1><div class=entry-meta><time class=published datetime="2021-10-16 15:42:33 +0000 UTC"><svg class="icon icon-calendar"><use xlink:href="#icon-calendar"/></svg>2021 October 16</time></div><div style=text-align:center;display:block;color:#999><div>本文仅为个人笔记,作为学习使用,如有雷同请联系作者 mingzi.li 处理,mail: qiaomingzi100@sina.com</div></div><h2 id=一参考>一：参考</h2><p>[算法心得] <a href=http://graphics.stanford.edu/~seander/bithacks.html#IntegerLogIEEE64Float>http://graphics.stanford.edu/~seander/bithacks.html#IntegerLogIEEE64Float</a></p><p>[运算符优先级] <a href="https://tool.oschina.net/commons?type=6">https://tool.oschina.net/commons?type=6</a></p><p>[位运算技巧]https://www.zhihu.com/question/38206659</p><p>[思考题解法]https://www.iteye.com/blog/yacare-1969931</p><h2 id=二概要>二：概要</h2><p>通过本文可以让我们温习下位运算、进制转换，为写出更精良的代码奠定理论基础。现在我们从一个题目说开去：</p><p>问：如何载预计有10亿个int的数据中，剔除其中重复的数据并排序输出?</p><p>分析：首先要进行排序、排重必须得把相关数据加载到内存中，那么要用哪种数据结构来存储呢?</p><p>10 0000 0000 = 10^9</p><p>int[10^9] 需要内存 10^9 * 4(B) => ((10^9 * 4)/1000 * 1000)(M) => 4000M => 4GB</p><p>对于普通32位最大理论内存为4G的PC来说，这个计算资源是无法实现需求的，那么有没有更好的解决方法呢？在此之前先做些知识点温故。</p><h2 id=三知识点回顾>三：知识点回顾</h2><h3 id=1java基本类型>1.java基本类型</h3><p><img src=./images/java-data-types.png alt=数据类型></p><table><thead><tr><th style=text-align:left><strong>Data Type</strong></th><th style=text-align:left><strong>Default Value</strong></th><th style=text-align:left><strong>Default size</strong></th><th>range</th><th>range value</th></tr></thead><tbody><tr><td style=text-align:left>boolean</td><td style=text-align:left>false</td><td style=text-align:left>1 bit</td><td></td><td></td></tr><tr><td style=text-align:left>char</td><td style=text-align:left>&lsquo;\u0000&rsquo;</td><td style=text-align:left>2 byte</td><td>&lsquo;\u0000&rsquo;~'\uFFFF'</td><td></td></tr><tr><td style=text-align:left>byte</td><td style=text-align:left>0</td><td style=text-align:left>1 byte</td><td>-2^7~2^7-1</td><td>-128~127</td></tr><tr><td style=text-align:left>short</td><td style=text-align:left>0</td><td style=text-align:left>2 byte</td><td>-2^15~2^15-1</td><td>-32768~32767</td></tr><tr><td style=text-align:left>int</td><td style=text-align:left>0</td><td style=text-align:left>4 byte</td><td>-2^31~2^31-1</td><td>0x80000000~0x7fffffff</td></tr><tr><td style=text-align:left>long</td><td style=text-align:left>0L</td><td style=text-align:left>8 byte</td><td>-2^63~2^63-1</td><td></td></tr><tr><td style=text-align:left>float</td><td style=text-align:left>0.0f</td><td style=text-align:left>4 byte</td><td></td><td></td></tr><tr><td style=text-align:left>double</td><td style=text-align:left>0.0d</td><td style=text-align:left>8 byte</td><td></td><td></td></tr></tbody></table><h3 id=2进制>2.进制</h3><p>**二进制：**由0，1组成，运算规律是逢二进一，计算机只能识别二进制表示的数据；</p><p>**八进制：**由0、1、2、3、4、5、6、7组成，运算规律是逢八进一；用前导0区别，例如 012；</p><p>**十进制：**由0，1，2、3、4、5、6、7、8、9组成，运算规律是逢十进一；例如 12；</p><p>**十六进制：**由数字0～9以及字母A (10)，B (11)，C (12)，D (13)，E (14)，F (15)组成,大小写均可，运算规律是逢十六进一；例如 0XC；</p><h4 id=21-十进制转二进制>2.1 十进制转二进制</h4><p>除2取余倒排，每发生一次除必须要有一个余数，必须除倒商是0的时候，最后把所得的余数倒排。</p><p><img src=./images/10to2.png alt=十转二></p><h4 id=22-二进制转十进制>2.2 二进制转十进制</h4><p>按位乘权相加</p><p><img src=./images/2to10.png alt=十转二></p><h4 id=23-十进制转八进制>2.3 十进制转八进制</h4><p>10进制数转换成8进制的方法，和转换为2进制的方法类似，唯一变化：将图1中的基数由2变成8，然后依次计算。</p><h4 id=24-八进制转十进制>2.4 八进制转十进制</h4><p>可参考图2中二进制的计算过程: 进制数第1位的权值为8的0次方，第2位权值为8的1次方，第3位权值为8的2次方，依次计算，公式：第N位 * 8的N-1次方，结果再相加便是最后结果。</p><h4 id=25-十进制转十六进制>2.5 十进制转十六进制:</h4><p>10进制数转换成16进制的方法，和转换为2进制的方法类似，唯一变化：将图1中的基数由2变成16，然后依次计算。</p><h4 id=26-十六进制转十进制>2.6 十六进制转十进制:</h4><p>第0位的权值为16的0次方，第1位的权值为16的1次方，第2位的权值为16的2次方，依次计算，公式：第N位 * 16的N-1次方，结果再相加便是最后结果。</p><h4 id=27-二进制与八进制的转换>2.7 二进制与八进制的转换</h4><p>1）二进制转八进制，3位二进制位压缩为1位，</p><p>2）八进制转二进制，1位展开为3位</p><p><img src=./images/2to8.png alt=二与八></p><p>3）可先转换为十进制在转换为二进制或者八进制</p><h4 id=28-二进制与十六进制的转换>2.8 二进制与十六进制的转换</h4><p>1）二进制转十六进制，4位二进制位压缩为1位，</p><p>2）十六进制转二进制，1位展开为4位</p><p><img src=./images/2to16.png alt=二与十六></p><p>3）可先转换为十进制在转换为二进制或者十六进制</p><h4 id=29-八进制与十六进制的转换>2.9 八进制与十六进制的转换</h4><p>可先转换为十进制在转换为十六进制或者八进制</p><h3 id=3进制存储单位>3.进制存储单位</h3><p><strong>在计算机的二进制数系统中，位简记为bit，也称为比特，是数据存储的最小单位</strong>，每个二进制数字0或1就是一个位(bit)，也就是一比特；也可以把二进制中的0和1看做开关中的“开”和“关”，1表示“开”，0表示“关”。</p><p>8 bit（位）= 1B，也就是一个字节（Byte），然而1KB却不等于1000B，下面是详细的计算规则：</p><p><strong>1B（byte，字节）= 8 bit；</strong></p><p>1KB（Kilobyte，千字节）= 1024B = 2^10 B；</p><p>1MB（Megabyte，兆字节，百万字节，简称“兆”）= 1024KB = 2^20 B；</p><p>1GB（Gigabyte，吉字节，十亿字节，又称“千兆”）= 1024MB = 2^30 B；</p><p>1TB（Terabyte，万亿字节，太字节）= 1024GB = 2^40 B；</p><p>1PB（Petabyte，千万亿字节，拍字节）= 1024TB = 2^50 B；</p><h3 id=4原码反码和补码>4.原码、反码和补码</h3><p>在计算机内，有符号数（这里的符号指的是正负符号，有符号数指的就是正负数）有3种表示法：<strong>原码、反码和补码</strong>，所有数据的运算都是采用补码进行的：</p><p><strong>1). 正数的原码，反码，补码都相同；</strong></p><p><strong>2). 负数的有些不同，详情如下：</strong></p><p>**原码：**根据二进制定点表示法，二进制最高位为符号位，“0”表示正，“1”表示负，其余位表示数值的大小。</p><p>**反码：**负数的反码是对其原码逐位取反（0变1，1变0），但符号位除外。</p><p>**补码：**负数的补码是在其反码的末位加1（逢二进一）。</p><p>需要注意的是：求反码的时候，最高位（符号位）是不能被改变的， 正数的符号位是0，负数的符号位是1。</p><p>例子：分别求出5和-5的原码、反码和补码</p><p><img src=./images/ym.jfif alt=二与十六></p><h3 id=5位运算>5.位运算</h3><p>位运算只能整型或者字符型，计算时将非二进制转成二进制后在进行按位运算，按位运算不产生进位、借位，最后在还原成十进制。</p><h4 id=51-运算符>5.1 运算符</h4><h5 id=511-位运算符>5.1.1 位运算符</h5><table><thead><tr><th style=text-align:left>运算符</th><th style=text-align:left>描述</th><th style=text-align:left>运算规则</th></tr></thead><tbody><tr><td style=text-align:left>&</td><td style=text-align:left>按位与</td><td style=text-align:left>两个位都为1时，结果才为11&1=1 1&0=0 0&1=0 0&0=0</td></tr><tr><td style=text-align:left>|</td><td style=text-align:left>按位或</td><td style=text-align:left>两个位都为0时，结果才为01|1=1 1|0=1 0|1=1 0|0=0</td></tr><tr><td style=text-align:left>^</td><td style=text-align:left>按位异或</td><td style=text-align:left>两个位相同为0，相异为11^1=0 1^0=1 0^1=1 0^0=0</td></tr><tr><td style=text-align:left>~</td><td style=text-align:left>按位取反</td><td style=text-align:left>0变1，1变0,属于单目运算符</td></tr><tr><td style=text-align:left>&#171;</td><td style=text-align:left>左移</td><td style=text-align:left>各二进位全部左移若干位，高位丢弃，低位补0</td></tr><tr><td style=text-align:left>&#187;</td><td style=text-align:left>右移</td><td style=text-align:left>各二进位全部右移若干位，对无符号数，高位补0，有符号数，各编译器处理方法不一样，有的补符号位（算术右移），有的补0（逻辑右移）</td></tr></tbody></table><h5 id=512-复合赋值运算符>5.1.2 复合赋值运算符</h5><pre><code>&amp;=       例：a&amp;=b    相当于   a=a&amp;b
+
+|=       例：a|=b    相当于   a=a|b
+
+&gt;&gt;=      例：a&gt;&gt;=b   相当于   a=a&gt;&gt;b
+
+&lt;&lt;=      例：a&lt;&lt;=b   相当于   a=a&lt;&lt;b
+
+^=       例：a^=b    相当于   a=a^b
+
++=       例：a+=b    相当于   a=a+b
+
+-=       例：a-=b    相当于   a=a-b
+
+*=       例：a*=b    相当于   a=a*b
+
+/=       例：a/=b    相当于   a=a/b
+
+%=       例：a%=b    相当于   a=a%b          
+</code></pre><h5 id=513-逻辑运算符>5.1.3 逻辑运算符</h5><p>逻辑运算符有短路现象，&& 如果第一个数为0则会短路第2个结果为0，||如果第一个数非0短路第2个结果为1</p><table><thead><tr><th>运算符</th><th>含义</th><th>效 果</th></tr></thead><tbody><tr><td>&&</td><td>与</td><td>将两个表达式连接成一个。两个表达式必须都为 true，整个表达式才为 true</td></tr><tr><td>||</td><td>或</td><td>将两个表达式连接成一个。必须有一个或两个表达式为 true，才能使整个表达式为 true。只要其中有一个为 true，那么另外一个就变得无关紧要</td></tr><tr><td>！</td><td>非</td><td>反转一个表达式的“真相”。它使一个表达式从 true 变成了 false，或者从 false 变成了 true</td></tr></tbody></table><h4 id=52-按位运算>5.2 按位运算</h4><p>计算机中的数在内存中都是以二进制形式进行存储的，用位运算就是直接对整数在内存中的二进制位进行操作，因此其执行效率非常高，在程序中尽量使用位运算进行操作，这会大大提高程序的性能。</p><h5 id=521--按位与运算>5.2.1 & 按位与运算</h5><p>​ 1 0 0 1 1
+& 1 1 0 0 1
+<code>------------------------------</code>
+​ 1 0 0 0 1</p><p>全1为1，有0为0，也叫按位乘</p><p><strong>主要作用：</strong></p><p><strong>1）清零</strong></p><p>如果想将一个单元清零，即使其全部二进制位为0，只要与一个各位都为零的数值相与，结果为零。</p><p><strong>2）取一个数的指定位</strong></p><p>比如取数 X=1010 1110 的低4位，只需要另找一个数Y，令Y的低4位为1，其余位为0，即Y=0000 1111，然后将X与Y进行按位与运算（X&Y=0000 1110）即可得到X的指定位。</p><p><strong>3）判断奇偶</strong></p><p>只要根据最未位是0还是1来决定，为0就是偶数，为1就是奇数。因此可以用if ((a & 1) == 0)代替if (a % 2 == 0)来判断a是不是偶数。</p><h5 id=522--按位或运算>5.2.2 | 按位或运算</h5><p>​ 1 0 0 1 1
+| 1 1 0 0 1
+<code>------------------------------</code>
+​ 1 1 0 1 1</p><p>有1为1，全0为0，也叫按位加。注意：负数按补码形式参加按位或运算。</p><p><strong>主要作用：置1操作</strong></p><h5 id=523--按位异或运算>5.2.3 ^ 按位异或运算</h5><p>​ 1 0 0 1 1
+^ 1 1 0 0 1
+<code>-----------------------------</code>
+​ 0 1 0 1 0</p><p>相异为1，相同为0</p><p><strong>异或的几条性质:</strong></p><ul><li>1、交换律</li><li>2、结合律 (a^b)^c == a^(b^c)</li><li>3、对于任何数x，都有 x^x=0，x^0=x</li><li>4、自反性: a^b^b=a^0=a;</li></ul><p><strong>异或运算的用途：</strong></p><p><strong>1）翻转指定位</strong></p><p>比如将数 X=1010 1110 的低4位进行翻转，只需要另找一个数Y，令Y的低4位为1，其余位为0，即Y=0000 1111，然后将X与Y进行异或运算（X^Y=1010 0001）即可得到。</p><p><strong>2）与0相异或值不变</strong></p><p>例如：1010 1110 ^ 0000 0000 = 1010 1110</p><p><strong>3）交换两个数</strong></p><pre><code>void Swap(int &amp;a, int &amp;b){
+    if (a != b){
+        a ^= b;
+        b ^= a;
+        a ^= b;
+    }
+}
+</code></pre><h5 id=524--按位取反运算>5.2.4 ~ 按位取反运算</h5><p>~ 1 0 0 1 1
+<code>-----------------------------</code>
+0 1 1 0 0</p><p>对于一个数按位取反得到的值为该数+1后在乘以-1</p><p>**技巧：(该数+1) * (-1) **</p><p><strong>异或运算的用途：</strong></p><p><strong>1）使一个数的最低位为零</strong></p><p>使a的最低位为0，可以表示为：a & ~1。~1的值为 1111 1111 1111 1110，再按"与"运算，最低位一定为0。因为" ~&ldquo;运算符的优先级比算术运算符、关系运算符、逻辑运算符和其他运算符都高。</p><h5 id=525---按位左移运算>5.2.5 &#171; 按位左移运算</h5><div class=highlight><pre class=chroma><code class=language-text data-lang=text>int a = 8;
+a &lt;&lt; 3;
+移位前：0000 0000 0000 0000 0000 0000 0000 1000
+移位后：0000 0000 0000 0000 0000 0000 0100 0000
+</code></pre></div><p><strong>主要作用：将二进制位按位依序左移n位</strong></p><p>对于一个十进制数左移n位后得到的值为该数乘以2^n的积。</p><h5 id=526--按位右移运算>5.2.6 &#187; 按位右移运算</h5><p>向右进行移位操作，对无符号数，高位补 0，对于有符号数，高位补符号位，如</p><div class=highlight><pre class=chroma><code class=language-text data-lang=text>unsigned int a = 8;
+a &gt;&gt; 3;
+移位前：0000 0000 0000 0000 0000 0000 0000 1000
+移位后：0000 0000 0000 0000 0000 0000 0000 0001
+
+int a = -8;
+a &gt;&gt; 3;
+移位前：1111 1111 1111 1111 1111 1111 1111 1000
+移位前：1111 1111 1111 1111 1111 1111 1111 1111
+</code></pre></div><p><strong>主要作用：将二进制位按位依序右移n位</strong></p><p>对于一个十进制数，若该数为负数 并且 不能被2^n整除，则得到的数为商加-1。</p><p>正数||(负数 && 能被2^n整除)则结果为=> 数/2^n
+(负数 && 不能被2^n整除)则结果为=>数/2^n+(-1)</p><h4 id=53-位运算技巧>5.3 位运算技巧</h4><pre><code>1、
+a &amp; a = a
+a | a = a
+a ^ a = 0
+
+2、
+a &amp; 0 = 0
+a | 0 = a
+a ^ 0 = a
+
+3、
+a | ( a &amp; b ) = a
+a &amp; ( a | b ) = a
+
+4、交换值
+a ^= b;
+b ^= a;
+a ^= b;
+
+5、判断奇偶(取出最后一位)
+a &amp; 1 等价于 a % 2(结果等于,位运算效率高)
+
+
+6、比较两值是否相等
+a ^ b ==0
+
+7、i+1位 置1
+a |=1&lt;&lt;i
+
+8、i+1位 置0
+a &amp;=~(1&lt;&lt;i)
+
+9、取出i+1位(联系第5点)
+a &amp; (1&lt;&lt;i)
+
+10、在对应i+1位，插入b的对应位；
+a |=1&lt;&lt;i; （a的bit位置1）
+a &amp; (b &amp; 1&lt;&lt;i) （与b的bit位相与）
+
+11、删除最后的1；
+a &amp; (a-1)
+
+12、负数
+-a = ~a+1
+
+13、仅保留最后一个1;
+a&amp;(-a)
+
+14、得到全1
+~0
+
+15、保留最后i-1位；
+a &amp; ((1&lt;&lt;i)-1)
+
+16、清零最后i-1位；
+a &amp; ~((1&lt;&lt;i)-1)
+
+17、判断最高位是否为1
+a&amp;lt;0
+
+18、得到最高位的1；
+a = a |(a&gt;&gt;1);
+a = a |(a&gt;&gt;2);
+a = a |(a&gt;&gt;4);
+a = a |(a&gt;&gt;8);
+a = a |(a&gt;&gt;16);
+return (a+1)&gt;&gt;1;
+ 
+
+</code></pre><h2 id=四问题解答>四：问题解答</h2><p>对于概要的问题，有没有更好的方式来解决呢，答案是肯定的。</p><p>计算机中最小的存储单位是bit，它的值只有两个0或1，假如刚好有10亿个int的数据，那么我们是否可以构造出10个bit,然后以我们想象中的方式从左到右平铺开来，然后把这10亿个int的数据从小到大一一对应到这些bit中，如果数值存在则标记为1，那么所需空间为10^9位，换算成10^9/8/1000/1000 约为125M，</p><p>由于两位bit可以表示4位数即2^2，那么对于4个byte能表示的数据量为2^32个(bit)，<strong>2^32 bit =2^32 / 2^3(byte) = 2^29 byte= 512M</strong>；int数据范围为【-2^31,2^31-1】即[-21,4748,3648 ~ 21,4748,3648-1]</p><p>那么把10亿个数据平铺开的效果如下：</p><p><img src=./images/int-mapping.png alt=有符号int数据></p><p>那么可以得出</p><blockquote><p>long bitIndex = 任意int数 + (1l &#171; 31); 得出数字在理论bit数组中的位置
+int byteIndex = bitIndex / 8; 得出数字在真实byte[]数组的位置
+int innerByteIndex = bitIndex % 8; 得出数字在真实byte[byteIndex]中8个位置中的哪个位置byteData[index] = (byte) (byteData[byteIndex ] | (1 &lt; innerByteIndex)); 将定位到的innerByteIndex位置如果为0设置为1</p></blockquote><p><img src=./images/unsign-int-mapping.png alt=无符号></p><p>那么可以得出</p><blockquote><p>int bitIndex = 任意int数; 得出数字在理论bit数组中的位置
+int byteIndex = bitIndex / 8; 得出数字在真实byte[]数组的位置
+int innerByteIndex = bitIndex % 8; 得出数字在真实byte[byteIndex]中8个位置中的哪个位置byteData[index] = (byte) (byteData[byteIndex ] | (1 &lt; innerByteIndex)); 将定位到的innerByteIndex位置如果为0设置为1</p></blockquote><p>一下为有符号int的场景测试代码</p><pre><code>import java.util.Random;   
+public class BigDataSort {  
+    //数据容量
+    private final int CAPACITY = 1 000 000 000;  
+  
+    // 定义一个byte数组缓存所有的数据  
+    private byte[] byteData = new byte[1 &lt;&lt; 29];  
+  
+    public static void main(String[] args) {  
+        BigDataSort ms = new BigDataSort();   
+        Random random = new Random();  
+        for (int i = 0; i &lt; CAPACITY; i++) {  
+           int num = random.nextInt();  
+           System.out.println(&quot;读取了第 &quot; + (i + 1) + &quot;\t个数: &quot; + num);  
+           ms.setNumBit(num);  
+        }   
+        ms.output();  
+    }  
+  
+  
+    /** 
+     * 读取数据，并将对应数数据的 到对应的bit中，并返回byte数组 
+     * @param num 读取的数据  
+     */  
+    private void setNumBit(int num) {  
+        //获取num数据对应bit数组（虚拟）的索引 
+        long bitIndex = num + (1l &lt;&lt; 31);     
+        //bit数组（虚拟）在byte数组中的索引 
+        int index = (int) (bitIndex / 8);     
+        //bitIndex 在byte[]数组索引index 中的具体位置  
+        int innerIndex = (int) (bitIndex % 8);    
+  
+        System.out.println(&quot;byte[&quot; + index + &quot;] 中的索引：&quot; + innerIndex);  
+        byteData[index] = (byte) (byteData[index] | (1 &lt;&lt; innerIndex));  
+        return;  
+    }  
+  
+    /** 
+     * 输出数组中的数据  
+     */  
+    private void output() {  
+        int count = 0;  
+        for (int i = 0; i &lt; byteData.length; i++) {  
+            for (int j = 0; j &lt; 8; j++) { 
+                //判断是否对应的bit位为1则输出原始数据
+                if (!(((byteData[i]) &amp; (1 &lt;&lt; j)) == 0)) {  
+                    count++;  
+                    int number = (int) ((((long) i * 8 + j) - (1l &lt;&lt; 31)));  
+                    System.out.println(&quot;取出的第  &quot; + count + &quot;\t个数: &quot; +  number);  
+                }  
+            }  
+        }  
+    }  
+}  
+</code></pre><h2 id=五java无符号处理>五：java无符号处理</h2><h2 id=java-unsigned表示>java unsigned表示</h2><pre><code>// java 中没有 unsigned，所以为了实现 unsigned，需要使用比原本类型更大的类型，通过位运算获取其 unsigned 的值
+// unsigned byte &amp; short -&gt; int，unsigned int -&gt; long
+private static int getUnsignedByte(byte b) {
+    return b &amp; 0x0FF;
+}
+
+private static int getUnsignedShort(short data) {
+    return data &amp; 0x0FFFF;
+}
+
+private static long getUnsignedInt(int data) {
+    // data &amp; 0xFFFFFFFF 和 data &amp; 0xFFFFFFFFL 结果是不同的，需要注意，有可能与 JDK 版本有关
+    return data &amp; 0xFFFFFFFFL;
+}
+</code></pre><h3 id=shortint-和-long-转-bytes>short、int 和 long 转 bytes</h3><pre><code>import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+
+ByteOrder order = ByteOrder.LITTLE_ENDIAN;
+
+// long
+long l = 2147483648L;
+byte[] bytes = ByteBuffer.allocate(8).order(order).putLong(l).array();
+long data = ByteBuffer.wrap(bytes, 0, bytes.length).order(order).getLong();
+
+// int
+int i = 123456;
+byte[] bytes = ByteBuffer.allocate(4).order(order).putInt(i).array();
+int data = ByteBuffer.wrap(bytes, 0, bytes.length).order(order).getInt();
+
+// short
+
+short s = 32767;
+byte[] bytes = ByteBuffer.allocate(2).order(order).putShort(s).array();
+int data = ByteBuffer.wrap(bytes, 0, bytes.length).order(order).getShort();
+</code></pre><h3 id=string转byte>String转Byte</h3><pre><code>import java.nio.charset.Charset;
+
+Charset charset = Charset.forName(&quot;UTF-8&quot;);
+
+String data = &quot;abc&quot;;
+byte[] bytes = data.getBytes(charset);
+
+String newData = new String(bytes, 0, bytes.length, charset);
+</code></pre><footer><section class=categories-tags><span><svg class="icon icon-folder"><use xlink:href="#icon-folder"/></svg><span class=screen-reader-text>This entry was posted in</span>
+<a href=/categories/java>java</a></span> <span><svg class="icon icon-tag"><use xlink:href="#icon-tag"/></svg><a class=article-tags href=/tags/java>java</a></span></section></footer><div id=comments-button-container class=comments-button-container><button type=button onclick=loadDisqus() class=comments-button><svg class="icon icon-bubble"><use xlink:href="#icon-bubble"/></svg> <span>Show Comments</span></button></div><div id=disqus_thread></div><script type=text/javascript>function loadDisqus(){var a,b;document.getElementById('comments-button-container').style.display='none',a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='李明梓',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)}</script><noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></article></main><aside id=sidebar><div class=widget><div class=widget-title>Recent posts</div><ol class="recent-widget widget-content"><li><a href=/canal-mysql-binlog%E6%97%A5%E5%BF%97%E8%A7%A3%E6%9E%90/>canal-mysql binlog日志解析</a></li><li><a href=/go-36%E8%AE%B2/>GO 36讲</a></li><li><a href=/maven-wrapper%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/>maven-wrapper基础使用</a></li><li><a href=/mysql-master-slave/>mysql master-slave</a></li><li><a href=/sonarqube%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/>sonarqube基础使用</a></li></ol></div><div class=widget><div class=widget-title>Categories</div><ol class="all-categories widget-content"><li><a href=/categories/devops>devops</a> (1)</li><li><a href=/categories/java>java</a> (4)</li><li><a href=/categories/mysql>mysql</a> (1)</li><li><a href=/categories/%E5%85%B6%E4%BB%96>其他</a> (4)</li><li><a href=/categories/%E5%89%8D%E7%AB%AF>前端</a> (1)</li><li><a href=/categories/%E5%90%8E%E7%AB%AF>后端</a> (1)</li><li><a href=/categories/%E5%9F%BA%E7%A1%80>基础</a> (1)</li><li><a href=/categories/%E5%B7%A5%E5%85%B7>工具</a> (1)</li></ol></div><div class=widget><div class=widget-title>Tags</div><div class="tag-cloud-tags widget-content"><a href=/tags/canal aria-label="canal (2 posts)" style=font-size:1rem>canal</a>
+<a href=/tags/git aria-label="git (1 posts)" style=font-size:1rem>git</a>
+<a href=/tags/go aria-label="go (1 posts)" style=font-size:1rem>go</a>
+<a href=/tags/hexo aria-label="hexo (1 posts)" style=font-size:1rem>hexo</a>
+<a href=/tags/java aria-label="java (1 posts)" style=font-size:1rem>java</a>
+<a href=/tags/maven aria-label="maven (1 posts)" style=font-size:1rem>maven</a>
+<a href=/tags/mysql aria-label="mysql (1 posts)" style=font-size:1rem>mysql</a>
+<a href=/tags/yarn aria-label="yarn (1 posts)" style=font-size:1rem>yarn</a>
+<a href=/tags/zabbix aria-label="zabbix (1 posts)" style=font-size:1rem>zabbix</a>
+<a href=/tags/%E5%B7%A5%E5%85%B7 aria-label="工具 (1 posts)" style=font-size:1rem>工具</a>
+<a href=/tags/%E8%BD%AF%E6%96%87%E6%94%B6%E9%9B%86 aria-label="软文收集 (2 posts)" style=font-size:1rem>软文收集</a></div></div></aside></div></div><svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><symbol id="icon-github" viewBox="0 0 32 32"><path d="M16 .395c-8.836.0-16 7.163-16 16 0 7.069 4.585 13.067 10.942 15.182.8.148 1.094-.347 1.094-.77.0-.381-.015-1.642-.022-2.979-4.452.968-5.391-1.888-5.391-1.888-.728-1.849-1.776-2.341-1.776-2.341-1.452-.993.11-.973.11-.973 1.606.113 2.452 1.649 2.452 1.649 1.427 2.446 3.743 1.739 4.656 1.33.143-1.034.558-1.74 1.016-2.14-3.554-.404-7.29-1.777-7.29-7.907.0-1.747.625-3.174 1.649-4.295-.166-.403-.714-2.03.155-4.234.0.0 1.344-.43 4.401 1.64 1.276-.355 2.645-.532 4.005-.539 1.359.006 2.729.184 4.008.539 3.054-2.07 4.395-1.64 4.395-1.64.871 2.204.323 3.831.157 4.234 1.026 1.12 1.647 2.548 1.647 4.295.0 6.145-3.743 7.498-7.306 7.895.574.497 1.085 1.47 1.085 2.963.0 2.141-.019 3.864-.019 4.391.0.426.288.925 1.099.768C27.421 29.457 32 23.462 32 16.395c0-8.837-7.164-16-16-16z"/></symbol><symbol id="icon-arrow-with-circle-up" viewBox="0 0 32 32"><path d="M16 .64C7.515.64.638 7.517.638 16c0 8.485 6.877 15.362 15.362 15.362 8.482.0 15.36-6.877 15.36-15.362.0-8.483-6.878-15.36-15.36-15.36zM15.998 28.16c-6.715.0-12.16-5.443-12.16-12.16S9.281 3.84 15.998 3.84 28.16 9.285 28.16 16s-5.446 12.16-12.162 12.16zM16 8.8l7.2 7.2h-4v6.4h-6.4V16h-4L16 8.8z"/></symbol></defs></svg><footer id=page-footer><div class=footer-content><a href=https://github.com/qiaomingzi/limz-blog-hugo target=_blank rel=noopener title="Source Code for this Blog"><div class=footer-text><svg class="icon icon-github"><use xlink:href="#icon-github"/></svg>Blog code</div></a><a href=#page-wrapper title="Go to top" id=go-to-top-link><div class=footer-text>To top<svg class="icon icon-arrow-with-circle-up"><use xlink:href="#icon-arrow-with-circle-up"/></svg></div></a><script>document.getElementById("go-to-top-link").onclick=function(){return window.scroll(0,0),!1}</script></div></footer></div><div id=lightbox-container :class="{'open': lightbox.isOpen, 'close': !lightbox.isOpen}"><button type=button aria-label="Close image modal" class=modal-close-button @click=lightbox.close()><svg class="icon icon-circle-with-cross"><use xlink:href="#icon-circle-with-cross"/></svg>
+(ESC)</button><div id=lightbox-loading-container x-ref=lightboxLoadingContainer x-show=lightbox.showLoading><div id=lightbox-loading><div aria-busy=true aria-label="Loading, please wait." role=progressbar class=spinner @click=lightbox.cancel() @click.away=lightbox.cancel()></div></div></div><div id=lightbox x-ref=lightbox :class="{'open': lightbox.openImage, 'close': !lightbox.openImage}" @click=lightbox.close()></div></div><div id=code-container :class="{'open': code.isOpening, 'close': !code.isOpening}"><button class=modal-close-button><svg class="icon icon-circle-with-cross"><use xlink:href="#icon-circle-with-cross"/></svg>
+(ESC)</button><div id=code-container-inner class=close :class="{'open': code.isOpening, 'close': !code.isOpening}"><div class=box-shadow-container @click.away=code.close()><div id=code-placeholder></div></div></div></div><div id=searchbox-container :class="{'open': search.isOpen}" x-show=search.isOpen x-on:keydown.escape="$nextTick(() => $refs.searchMenuLink.focus())"><button type=button aria-label="Close search modal" class=modal-close-button @click="search.close();$nextTick(() => $refs.searchMenuLink.focus())"><svg class="icon icon-circle-with-cross"><use xlink:href="#icon-circle-with-cross"/></svg>
+(ESC)</button><div id=searchbox :class="{'open': search.isOpen}"><svg class="icon icon-search"><use xlink:href="#icon-search"/></svg><label for=search-input class=sr-only>Searchbox</label>
+<input id=search-input type=search placeholder=Search... class=search-input x-ref=searchInput autocomplete=off autocorrect=off autocapitalize=off spellcheck=false x-model=search.textInSearchBox x-on:input=search.searchBoxChanged($event.target.value) x-on:keydown.enter="search.focusFirstAnchor($event, $refs.hits)" x-on:keydown.arrow-down="search.focusFirstAnchor($event, $refs.hits)"><svg class="icon icon-circle-with-cross close-search" role="button" aria-label="Close search" @click="search.close();$nextTick(() => $refs.searchMenuLink.focus())"><use xlink:href="#icon-circle-with-cross"/></svg></div><div class=search-results-container><div id=search-output x-show=search.textInSearchBox><div id=no-results-message x-show="search.store && search.textInSearchBox && !search.hits.length">No matching posts found. You can use wildcards and search only in titles, e.g. <code>title:iot</code></div><div id=index-loading-message x-show="!search.indexLoadFailed && search.indexLoading && search.textInSearchBox"><span class=icon-spinner aria-hidden=true></span>Loading search index, please wait...</div><div id=index-failed-message x-show="search.indexLoadFailed && search.textInSearchBox">Search index failed to download 😢</div><div id=number-of-hits-message x-text=search.getHitsText() x-show=search.hits.length></div><ol class=result-list x-show=search.hits.length x-ref=hits><template x-for="hit in search.hits" :key=hit.ref><li><h2><a :href=hit.ref x-text=search.fromStore(hit).title></a></h2><div class=entry-meta><time class=published :datetime=search.fromStore(hit).dateiso><svg class="icon icon-calendar"><use xlink:href="#icon-calendar"/></svg><span x-text=search.fromStore(hit).dateformatted></span></time></div><p x-text=search.fromStore(hit).summary></p></li></template></ol></div></div></div><script src=/bundle.d969e7811744a912e4a95d442be0c0f42bf900a7a2b534c5942a8186f31138f3a0eb00df75e75ff1711191bc48948cfbffa129a1afb01af449abe8b34351266c.js integrity="sha512-2WnngRdEqRLkqV1EK+DA9Cv5AKeitTTFlCqBhvMROPOg6wDfdedf8XERkbxIlIz7/6Epoa+wGvRJq+izQ1EmbA=="></script></body></html>
