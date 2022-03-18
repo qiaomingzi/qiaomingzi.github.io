@@ -5,8 +5,8 @@
 <a href=/about/ class=about><svg class="icon icon-user"><use xlink:href="#icon-user"/></svg>关于我</a>
 <a href=/search-requires-javascript/ rel=nofollow class=search x-ref=searchMenuLink @click.prevent="menu.close(); search.open();$nextTick(() => $refs.searchInput.focus())"><svg class="icon icon-search"><use xlink:href="#icon-search"/></svg>搜索</a></nav></div></header><div class=body><div class=body-max-width><main id=content x-ref=content><article class=summary><h1><a href=/%E4%BD%8D%E8%BF%90%E7%AE%97%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/>位运算基础知识</a></h1><div class=entry-meta><time class=published datetime="2022-03-16 15:42:33 +0000 UTC"><svg class="icon icon-calendar"><use xlink:href="#icon-calendar"/></svg>2022 March 16</time></div><p>一：参考 [算法心得] http://graphics.stanford.edu/~seander/bithacks.html#IntegerLogIEEE64Float
 [运算符优先级] https://tool.oschina.net/commons?type=6
-[位运算技巧]https://www.zhihu.com/question/38206659
-[思考题解法]https://www.iteye.com/blog/yacare-1969931
+[位运算技巧] https://www.zhihu.com/question/38206659
+[思考题解法] https://www.iteye.com/blog/yacare-1969931
 二：概要 通过本文可以让我们温习下位运算、进制转换，为写出更精良的代码奠定理论基础。现在我们从一个题目说开去：
 问：如何载预计有10亿个int的数据中，剔除其中重复的数据并排序输出?
 分析：首先要进行排序、排重必须得把相关数据加载到内存中，那么要用哪种数据结构来存储呢?
