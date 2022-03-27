@@ -1,4 +1,16 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>mingzi.li blog</title><link>http://qiaomingzi.github.io/</link><description>Recent content on mingzi.li blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Wed, 16 Mar 2022 15:42:33 +0000</lastBuildDate><atom:link href="http://qiaomingzi.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>位运算基础知识</title><link>http://qiaomingzi.github.io/%E4%BD%8D%E8%BF%90%E7%AE%97%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</link><pubDate>Wed, 16 Mar 2022 15:42:33 +0000</pubDate><guid>http://qiaomingzi.github.io/%E4%BD%8D%E8%BF%90%E7%AE%97%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</guid><description>一：参考 [算法心得] http://graphics.stanford.edu/~seander/bithacks.html#IntegerLogIEEE64Float
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>mingzi.li blog</title><link>http://qiaomingzi.github.io/</link><description>Recent content on mingzi.li blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sun, 20 Mar 2022 15:42:33 +0000</lastBuildDate><atom:link href="http://qiaomingzi.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>jemeter基本适用</title><link>http://qiaomingzi.github.io/jemeter%E5%9F%BA%E6%9C%AC%E9%80%82%E7%94%A8/</link><pubDate>Sun, 20 Mar 2022 15:42:33 +0000</pubDate><guid>http://qiaomingzi.github.io/jemeter%E5%9F%BA%E6%9C%AC%E9%80%82%E7%94%A8/</guid><description>一：参考 [jemeter] https://jmeter.apache.org/
+二：概要 三：jemeter使用 3.1 启动 1）配置 jemeter/bin/setenv.bat set JVM_ARGS=-Xms1024m -Xmx1024m -Dpropname=value 2)启动方式 jmeter.bat run JMeter (in GUI mode by default) jmeterw.</description></item><item><title>&lt;&lt;大风歌>>王立群</title><link>http://qiaomingzi.github.io/%E5%A4%A7%E9%A3%8E%E6%AD%8C%E7%8E%8B%E7%AB%8B%E7%BE%A4/</link><pubDate>Sat, 19 Mar 2022 09:42:33 +0000</pubDate><guid>http://qiaomingzi.github.io/%E5%A4%A7%E9%A3%8E%E6%AD%8C%E7%8E%8B%E7%AB%8B%E7%BE%A4/</guid><description>&amp;laquo;大风歌&amp;raquo;王立群 55期：传奇皇帝 几个方面 1）出生传奇，2）好喝酒，4）婚姻传奇，50面相，6)经历
+刘邦和吕雉是在泗水亭中的任上，刘邦假“贺钱万“乘酒喝，吕公看中刘邦面相，并许配儿女给刘邦。
+在从江苏押送刑徒到江西骊山过程出现丰西泽纵徒，此后就藏匿芒砀山。
+&amp;laquo;史记&amp;raquo;神话刘邦，就为了体现刘邦不是一般人，通过感生说的人有炎帝、皇帝、颛顼、尧、舜、禹、刘邦，者几个都是大人物。
+刘邦通过三年反秦，四年刘项战争，后面就当了皇帝。
+故事
+1：刘邦母亲刘媪,大湖旁边，做了一场梦&amp;mdash;与神仙相遇，后面就怀孕生下刘邦，面相像蛟龙&amp;laquo;史记.高祖本纪&amp;raquo;，胡子很长，大腿上有72个黑痣。
+2：经常到人家賖酒喝，醉了之后睡觉，两个女老板在刘邦身上隐隐约约现出一条龙，
+3：老先生：相者夫人 因而皆似君 君相贵不可言，回曰：诚如父言 不敢望德
+4：刘邦挥剑斩蛇，白帝子化成一条白蛇被赤弟子斩了，
+5：刘邦藏匿芒砀山，吕雉每次都能找到他，因为刘邦头上有一股运气。
+56期：时代玉成 由于发生丰西泽事件，刘邦只能潜伏莽荡山，此时时代正巧赶上陈胜吴广起义 ”等死 死国可乎“，各地纷纷杀县令、郡守起义，</description></item><item><title>位运算基础知识</title><link>http://qiaomingzi.github.io/%E4%BD%8D%E8%BF%90%E7%AE%97%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</link><pubDate>Wed, 16 Mar 2022 15:42:33 +0000</pubDate><guid>http://qiaomingzi.github.io/%E4%BD%8D%E8%BF%90%E7%AE%97%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</guid><description>一：参考 [算法心得] http://graphics.stanford.edu/~seander/bithacks.html#IntegerLogIEEE64Float
 [运算符优先级] https://tool.oschina.net/commons?type=6
 [位运算技巧] https://www.zhihu.com/question/38206659
 [思考题解法] https://www.iteye.com/blog/yacare-1969931
@@ -29,11 +41,4 @@ npm 是按照队列执行每个 package，也就是说必须要等到当前 pack
 参考：</description></item><item><title>GO学习</title><link>http://qiaomingzi.github.io/go%E5%AD%A6%E4%B9%A0/</link><pubDate>Tue, 25 May 2021 09:34:28 +0800</pubDate><guid>http://qiaomingzi.github.io/go%E5%AD%A6%E4%B9%A0/</guid><description>相关链接 https://github.com/golang 源码 https://golang.org/ref/mod 官方文档 https://golang.org/doc/code.html#Workspaces http://www.flysnow.org/categories/Golang/ go专栏 https://golanglibs.com/top 流行的GO应用和GO库 https://gitee.com/pengzhile/ide-eval-resetterv GoLand试用更新插件 一：读书笔记 Limbo语言被认为是Go语言的前身,Limbo语言中继承了众多优秀的特性。包括肯·汤普逊在内的Plan 9项目原班人马加入了Google。在Google，他们创造了Go语言，Google是Go语言的主推。
 学习书籍
 《GO并发编程实战 第2版》《Go****语言核心编程》《Go语言高级编程》《Go Web编程》
-初识GO语言 1.</description></item><item><title>Hugo基本使用</title><link>http://qiaomingzi.github.io/hugo%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link><pubDate>Fri, 07 May 2021 17:03:36 +0800</pubDate><guid>http://qiaomingzi.github.io/hugo%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid><description>概要： 了解hugo基本使用，通过hugo搭建个人blog
-参考 【hugo 】https://gohugo.io/
-【函数】https://gohugo.io/functions/
-【变量】https://gohugo.io/variables/
-【github集成】https://github.com/peaceiris/actions-gh-pages
-【参考例子】https://github.com/henriksommerfeld/blog-hugo
-【hugo theme】https://themes.gohugo.io/hugo-clarity/
-1.hugo结构说明 # 站点结构 ├── archetypes # 原型 ├── config.toml # 站点配置 ├── content # 站点内容目录 ├── data # 数据模板 ├── layouts # 站点布局模板 ├── static # 静态内容 └── themes # 内容目录 content └── post ├── first-post │ ├── images │ │ ├── a.</description></item><item><title>Keyboard Shortcuts in Windows</title><link>http://qiaomingzi.github.io/keyboard-shortcuts-windows/</link><pubDate>Sat, 28 Mar 2020 13:43:59 +0200</pubDate><guid>http://qiaomingzi.github.io/keyboard-shortcuts-windows/</guid><description/></item></channel></rss>
+初识GO语言 1.</description></item></channel></rss>
