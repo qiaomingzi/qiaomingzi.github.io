@@ -3,7 +3,17 @@
 <span></span></div></div><a href=#content id=skip-link class=skip-link @click.prevent=skipLink.skipToContent($refs.content) @click.away=skipLink.removeContentTabIndex($refs.content)>Skip to content</a>
 <button @click=menu.toggle() class=hamburger-trigger>Menu<div class=hamburger-menu><div class=bar :class="{'animate': menu.hamburgerIsOpen()}"></div></div></button><nav :class="{'open': menu.isOpen() || menu.isOpening(), 'open closing': menu.isClosing()}"><a href=/ class=home><svg class="icon icon-home"><use xlink:href="#icon-home"/></svg>首页</a>
 <a href=/about/ class=about><svg class="icon icon-user"><use xlink:href="#icon-user"/></svg>关于我</a>
-<a href=/search-requires-javascript/ rel=nofollow class=search x-ref=searchMenuLink @click.prevent="menu.close(); search.open();$nextTick(() => $refs.searchInput.focus())"><svg class="icon icon-search"><use xlink:href="#icon-search"/></svg>搜索</a></nav></div></header><div class=body><div class=body-max-width><main id=content x-ref=content><article class=summary><h1><a href=/hugo%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/>Hugo基本使用</a></h1><div class=entry-meta><time class=published datetime="2021-05-07 17:03:36 +0800 +0800"><svg class="icon icon-calendar"><use xlink:href="#icon-calendar"/></svg>2021 May 7</time></div><p>概要： 了解hugo基本使用，通过hugo搭建个人blog
+<a href=/search-requires-javascript/ rel=nofollow class=search x-ref=searchMenuLink @click.prevent="menu.close(); search.open();$nextTick(() => $refs.searchInput.focus())"><svg class="icon icon-search"><use xlink:href="#icon-search"/></svg>搜索</a></nav></div></header><div class=body><div class=body-max-width><main id=content x-ref=content><article class=summary><h1><a href=/yarn%E7%9B%B8%E5%85%B3/>Yarn相关</a></h1><div class=entry-meta><time class=published datetime="2021-05-27 09:46:19 +0800 +0800"><svg class="icon icon-calendar"><use xlink:href="#icon-calendar"/></svg>2021 May 27</time></div><p>1.概述 Yarn是您的代码的包管理器，yarn和npm的对比
+速度
+npm 是按照队列执行每个 package，也就是说必须要等到当前 package 安装完成之后，才能继续后面的安装。而 Yarn 是同步执行所有任务，提高了性能。
+安装版本统一
+更简洁的输出
+参考：
+<a href=/yarn%E7%9B%B8%E5%85%B3/ aria-label="To post 'Yarn相关'">全文&nbsp;→</a></p></article><article class=summary><h1><a href=/go%E5%AD%A6%E4%B9%A0/>GO学习</a></h1><div class=entry-meta><time class=published datetime="2021-05-25 09:34:28 +0800 +0800"><svg class="icon icon-calendar"><use xlink:href="#icon-calendar"/></svg>2021 May 25</time></div><p>相关链接 https://github.com/golang 源码 https://golang.org/ref/mod 官方文档 https://golang.org/doc/code.html#Workspaces http://www.flysnow.org/categories/Golang/ go专栏 https://golanglibs.com/top 流行的GO应用和GO库 https://gitee.com/pengzhile/ide-eval-resetterv GoLand试用更新插件 一：读书笔记 Limbo语言被认为是Go语言的前身,Limbo语言中继承了众多优秀的特性。包括肯·汤普逊在内的Plan 9项目原班人马加入了Google。在Google，他们创造了Go语言，Google是Go语言的主推。
+学习书籍
+《GO并发编程实战 第2版》《Go****语言核心编程》《Go语言高级编程》《Go Web编程》
+初识GO语言 1.
+<a href=/go%E5%AD%A6%E4%B9%A0/ aria-label="To post 'GO学习'">全文&nbsp;→</a></p></article><article class=summary><h1><a href=/hugo%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/>Hugo基本使用</a></h1><div class=entry-meta><time class=published datetime="2021-05-07 17:03:36 +0800 +0800"><svg class="icon icon-calendar"><use xlink:href="#icon-calendar"/></svg>2021 May 7</time></div><p>概要： 了解hugo基本使用，通过hugo搭建个人blog
 参考 【hugo 】https://gohugo.io/
 【函数】https://gohugo.io/functions/
 【变量】https://gohugo.io/variables/
@@ -18,23 +28,14 @@
 一个将图片嵌入文档中的方法是使用base64编码。步骤比较简单：
 将图片或截图保存在本地； 使用在线工具将图片转码至base64编码；(link1, link2)； 在文档中插入编码： ![image][data:image/png;base64, ......]1 当然base64编码一般很长，直接将编码放入段落内部会影响正常编辑。通常的做法是将base64编码定义到一个中间变量中，将编码本体放到文档末：
 ![image][tmp] your document here ... [tmp]:data:image/png;base64, .
-<a href=/markdown%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/ aria-label="To post 'Markdown基本使用'">全文&nbsp;→</a></p></article><article class=summary><h1><a href=/%E5%BC%80%E6%BA%90%E7%9B%91%E6%8E%A7%E8%BD%AF%E4%BB%B6%E5%AF%B9%E6%AF%94_zabbix/>开源监控软件对比_zabbix</a></h1><div class=entry-meta><time class=published datetime="2017-09-18 15:42:33 +0000 UTC"><svg class="icon icon-calendar"><use xlink:href="#icon-calendar"/></svg>2017 September 18</time></div><p>开源监控软件对比 Cacti**（英文含义仙人掌）** 是一套基于PHP、MySQL、SNMP和RRDtool开发的网络流量监测图形分析工具，它通过snmpget来获取数据使用RRDtool绘图，简化RRDtool使用。提供了非常强大的数据和用户管理功能，可以指定每一个用户能查看树状结构、主机设备以及任何一张图，还可以与LDAP结合进行用户认证，同时也能自定义模板。在历史数据展示监控方面，其功能相当不错。
-Cacti通过添加模板，使不同设备的监控添加具有可复用性，并且具备可自定义绘图的功能，具有强大的运算能力（数据的叠加功能）
-nagios Nagios是一款开源的免费网络监视工具，能有效监控Windows、Linux和Unix的主机状态，交换机路由器等网络设置，打印机等。
-Nagios 可以监控的功能有： 1、监控网络服务（SMTP、POP3、HTTP、NNTP、PING等）； 2、监控主机资源（处理器负荷、磁盘利用率等）； 3、简单地插件设计使得用户可以方便地扩展自己服务的检测方法； 4、并行服务检查机制； 5、具备定义网络分层结构的能力，用"parent"主机定义来表达网络主机间的关系，这种关系可被用来发现和明晰主机宕机或不可达状态； 6、当服务或主机问题产生与解决时将告警发送给联系人（通过EMail、短信、用户定义方式）； 7、具备定义事件句柄功能，它可以在主机或服务的事件发生时获取更多问题定位； 8、自动的日志回滚； 9、可以支持并实现对主机的冗余监控； 10、可选的WEB界面用于查看当前的网络状态、通知和故障历史、日志文件等；
-<a href=/%E5%BC%80%E6%BA%90%E7%9B%91%E6%8E%A7%E8%BD%AF%E4%BB%B6%E5%AF%B9%E6%AF%94_zabbix/ aria-label="To post '开源监控软件对比_zabbix'">全文&nbsp;→</a></p></article><article class=summary><h1><a href=/hexo%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/>Hexo基础使用</a></h1><div class=entry-meta><time class=published datetime="2017-09-16 15:42:33 +0000 UTC"><svg class="icon icon-calendar"><use xlink:href="#icon-calendar"/></svg>2017 September 16</time></div><p>博客工具
-概述 Hugo Hexo Jekyll 博客工具
-Hexo Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。
-安装hexo 安装 Hexo 相当简单。然而在安装前，您必须检查电脑中是否已安装下列应用程序：
-Node.js Git 如果您的电脑中已经安装上述必备程序，那么恭喜您！接下来只需要使用 npm 即可完成 Hexo 的安装。
-<a href=/hexo%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/ aria-label="To post 'Hexo基础使用'">全文&nbsp;→</a></p></article><div class="paging-controls has-prev-true has-next-true has-dots-false has-max-pages-false"><a class="page-numbers newer" href=/page/2/ role=button><svg class="icon icon-arrow-left"><use xlink:href="#icon-arrow-left"/></svg>Newer</a>
+<a href=/markdown%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/ aria-label="To post 'Markdown基本使用'">全文&nbsp;→</a></p></article><div class="paging-controls has-prev-true has-next-true has-dots-false has-max-pages-false"><a class="page-numbers newer" href=/page/2/ role=button><svg class="icon icon-arrow-left"><use xlink:href="#icon-arrow-left"/></svg>Newer</a>
 <a class=page-numbers href=/ role=button>1</a>
 <a class=page-numbers href=/page/2/ role=button>2</a>
 <span class="page-numbers current">3</span>
 <a class=page-numbers href=/page/4/ role=button>4</a>
-<a class="page-numbers older" href=/page/4/ role=button>Older<svg class="icon icon-arrow-right"><use xlink:href="#icon-arrow-right"/></svg></a></div></main><aside id=sidebar><div class=widget><div class=widget-title>Categories</div><ol class="all-categories widget-content"><li><a href=/categories/devops>devops</a> (1)</li><li><a href=/categories/java>java</a> (5)</li><li><a href=/categories/mysql>mysql</a> (1)</li><li><a href=/categories/%E5%85%B6%E4%BB%96>其他</a> (4)</li><li><a href=/categories/%E5%89%8D%E7%AB%AF>前端</a> (1)</li><li><a href=/categories/%E5%90%8E%E7%AB%AF>后端</a> (1)</li><li><a href=/categories/%E5%9F%BA%E7%A1%80>基础</a> (1)</li><li><a href=/categories/%E5%B7%A5%E5%85%B7>工具</a> (3)</li></ol></div><div class=widget><div class=widget-title>Tags</div><div class="tag-cloud-tags widget-content"><a href=/tags/canal aria-label="canal (3 posts)" style=font-size:1rem>canal</a>
+<a class="page-numbers older" href=/page/4/ role=button>Older<svg class="icon icon-arrow-right"><use xlink:href="#icon-arrow-right"/></svg></a></div></main><aside id=sidebar><div class=widget><div class=widget-title>Categories</div><ol class="all-categories widget-content"><li><a href=/categories/devops>devops</a> (1)</li><li><a href=/categories/java>java</a> (6)</li><li><a href=/categories/mysql>mysql</a> (1)</li><li><a href=/categories/%E5%85%B6%E4%BB%96>其他</a> (4)</li><li><a href=/categories/%E5%89%8D%E7%AB%AF>前端</a> (1)</li><li><a href=/categories/%E5%90%8E%E7%AB%AF>后端</a> (2)</li><li><a href=/categories/%E5%9F%BA%E7%A1%80>基础</a> (1)</li><li><a href=/categories/%E5%B7%A5%E5%85%B7>工具</a> (3)</li></ol></div><div class=widget><div class=widget-title>Tags</div><div class="tag-cloud-tags widget-content"><a href=/tags/canal aria-label="canal (4 posts)" style=font-size:1rem>canal</a>
 <a href=/tags/git aria-label="git (1 posts)" style=font-size:1rem>git</a>
-<a href=/tags/go aria-label="go (1 posts)" style=font-size:1rem>go</a>
+<a href=/tags/go aria-label="go (2 posts)" style=font-size:1rem>go</a>
 <a href=/tags/hexo aria-label="hexo (1 posts)" style=font-size:1rem>hexo</a>
 <a href=/tags/java aria-label="java (1 posts)" style=font-size:1rem>java</a>
 <a href=/tags/maven aria-label="maven (1 posts)" style=font-size:1rem>maven</a>
