@@ -7,7 +7,19 @@
 GOPATH：若干工作区目录的路径。是我们自己定义的工作空间。
 你可以把GOPATH简单理解成Go语言的工作目录，它的值是一个目录的路径，也可以是多个目录路径，每个目录都代表Go语言的一个工作区（workspace）
 go mod init qiaomingzi.github.io/m/v1 GOBIN：GO程序生成的可执行文件（executable file）的路径。
-2.源码文件 2.1 运行程序 使用 go run 命令执行go源码main文件</description></item><item><title>GO SDK</title><link>http://qiaomingzi.github.io/go-sdk/</link><pubDate>Tue, 17 May 2022 21:34:28 +0800</pubDate><guid>http://qiaomingzi.github.io/go-sdk/</guid><description>all.bat all.rc archive bootstrap.bash bufio buildall.bash builtin bytes clean.bash clean.bat clean.rc cmd cmp.bash compress container context crypto database debug embed encoding errors expvar flag fmt 格 式 描 述 %v 按值的本来值输出 %+v 在 %v 基础上，对结构体字段名和值进行展开 %#v 输出 Go 语言语法格式的值 %T 输出 Go 语言语法格式的类型和值 %% 输出 % 本体 %b 整型以二进制方式显示 %o 整型以八进制方式显示 %d 整型以十进制方式显示 %x 整型以十六进制方式显示 %X 整型以十六进制、字母大写方式显示 %U Unicode 字符 %f 浮点数 %p 指针，十六进制方式显示 go go.</description></item><item><title>jemeter基本使用</title><link>http://qiaomingzi.github.io/jemeter%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link><pubDate>Sun, 20 Mar 2022 15:42:33 +0000</pubDate><guid>http://qiaomingzi.github.io/jemeter%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid><description>一：参考 [jemeter] https://jmeter.apache.org/
+2.源码文件 2.1 运行程序 使用 go run 命令执行go源码main文件</description></item><item><title>关于调音声卡</title><link>http://qiaomingzi.github.io/%E5%85%B3%E4%BA%8E%E8%B0%83%E9%9F%B3%E5%A3%B0%E5%8D%A1/</link><pubDate>Fri, 20 May 2022 15:42:33 +0000</pubDate><guid>http://qiaomingzi.github.io/%E5%85%B3%E4%BA%8E%E8%B0%83%E9%9F%B3%E5%A3%B0%E5%8D%A1/</guid><description>一：概要 本文用于解决
+1.1.参考 https://www.bilibili.com/read/cv11117891
+https://zhuanlan.zhihu.com/p/350530697
+二：关于声卡 声卡 (Sound Card)也叫音频卡、声效卡，是计算机多媒体系统中最基本的组成部分，是实现声波/数字信号相互转换的一种硬件。可在计算机程序的控制下向计算机提供音频信号的输入和输出。
+声卡从话筒中获取声音模拟信号，通过模数转换器(ADC)，将声波振幅信号采样转换成一串数字信号，存储到计算机中。播放音频文件时，这些数字信号送到数模转换器(DAC)，以同样的采样速度还原为模拟波形，放大后送到扬声器发声，这一技术称为脉冲编码调制技术(PCM)，
+声卡发展至今，主要分为板卡式、集成式和外置式三种接口类型
+2.1 相关名词 ASIO
+EQ
+WDM
+DSP
+DAC
+声卡使用数模转换器,它将记录或生成的数字信号数据转换为模拟格式。输出信号使用标准互连连接到放大器、耳机或外部设备
+HDMI</description></item><item><title>GO SDK</title><link>http://qiaomingzi.github.io/go-sdk/</link><pubDate>Tue, 17 May 2022 21:34:28 +0800</pubDate><guid>http://qiaomingzi.github.io/go-sdk/</guid><description>all.bat all.rc archive bootstrap.bash bufio buildall.bash builtin bytes clean.bash clean.bat clean.rc cmd cmp.bash compress container context crypto database debug embed encoding errors expvar flag fmt 格 式 描 述 %v 按值的本来值输出 %+v 在 %v 基础上，对结构体字段名和值进行展开 %#v 输出 Go 语言语法格式的值 %T 输出 Go 语言语法格式的类型和值 %% 输出 % 本体 %b 整型以二进制方式显示 %o 整型以八进制方式显示 %d 整型以十进制方式显示 %x 整型以十六进制方式显示 %X 整型以十六进制、字母大写方式显示 %U Unicode 字符 %f 浮点数 %p 指针，十六进制方式显示 go go.</description></item><item><title>jemeter基本使用</title><link>http://qiaomingzi.github.io/jemeter%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link><pubDate>Sun, 20 Mar 2022 15:42:33 +0000</pubDate><guid>http://qiaomingzi.github.io/jemeter%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid><description>一：参考 [jemeter] https://jmeter.apache.org/
 二：概要 三：jemeter使用 3.1 启动 1）配置 jemeter/bin/setenv.bat set JVM_ARGS=-Xms1024m -Xmx1024m -Dpropname=value 2)启动方式 jmeter.bat run JMeter (in GUI mode by default) jmeterw.</description></item><item><title>&lt;&lt;大风歌>>王立群</title><link>http://qiaomingzi.github.io/%E5%A4%A7%E9%A3%8E%E6%AD%8C%E7%8E%8B%E7%AB%8B%E7%BE%A4/</link><pubDate>Sat, 19 Mar 2022 09:42:33 +0000</pubDate><guid>http://qiaomingzi.github.io/%E5%A4%A7%E9%A3%8E%E6%AD%8C%E7%8E%8B%E7%AB%8B%E7%BE%A4/</guid><description>&amp;laquo;大风歌&amp;raquo;王立群 大风歌 歌手: 极泷 望华车 市井夺未央 尘沙起 鸿门巧对王 纳贤良 无畏得天下 三章法 垓下定汉疆 大风起兮云飞扬 威加海内兮归故乡 安得猛士兮守四方 大风起兮云飞扬 威加海内兮归故乡 安得猛士兮守四方 守四方 55期：传奇皇帝 公元前202年从山东定陶的一个土台上，一位五十五岁的中年男子，在群臣的欢呼声中，戴上了皇帝冠冕，他就是大汉王朝的开国皇帝刘邦，一个开创了从布衣到皇帝的神话，三年鏖战 摧毁强秦，四载奋斗 战胜项羽，创建了延续400多年的大汉王朝，然而这位不读书的皇帝,却写下了一首大气蓬勃的&amp;laquo;大风歌&amp;raquo;。</description></item><item><title>位运算基础知识</title><link>http://qiaomingzi.github.io/%E4%BD%8D%E8%BF%90%E7%AE%97%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</link><pubDate>Wed, 16 Mar 2022 15:42:33 +0000</pubDate><guid>http://qiaomingzi.github.io/%E4%BD%8D%E8%BF%90%E7%AE%97%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</guid><description>一：参考 [算法心得] http://graphics.stanford.edu/~seander/bithacks.html#IntegerLogIEEE64Float
 [运算符优先级] https://tool.oschina.net/commons?type=6
 [位运算技巧] https://www.zhihu.com/question/38206659
@@ -31,4 +43,4 @@ my-project ├── .mvn │ └── wrapper │ ├── MavenWrapperDownlo
 mysql-8.0.27
 canal 1.1.5
 3.主从同步 创建容错系统的最常见方法就是冗余，复制模式分普通复制、组复制，普通复制即传统的 MySQL复制 提供了一种简单的源(mater)到副本复制方法,。
-master-slave syn MySQL 复制功能允许服务器 -主服务器 - 将所有更改发送到另一台服务器 -从服务器 -从服务器尝试应用所有更改以与主服务器保持同步。复制工作如下：</description></item><item><title>sonarqube基础使用</title><link>http://qiaomingzi.github.io/sonarqube%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/</link><pubDate>Sat, 16 Oct 2021 15:42:33 +0000</pubDate><guid>http://qiaomingzi.github.io/sonarqube%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/</guid><description/></item></channel></rss>
+master-slave syn MySQL 复制功能允许服务器 -主服务器 - 将所有更改发送到另一台服务器 -从服务器 -从服务器尝试应用所有更改以与主服务器保持同步。复制工作如下：</description></item></channel></rss>

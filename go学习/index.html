@@ -11,24 +11,87 @@ http://www.flysnow.org/categories/Golang/ go专栏
 https://golanglibs.com/top  流行的GO应用和GO库
 
 https://gitee.com/pengzhile/ide-eval-resetterv  GoLand试用更新插件
-</code></pre><h2 id=一读书笔记>一：读书笔记</h2><p>Limbo语言被认为是Go语言的前身,Limbo语言中继承了众多优秀的特性。包括肯·汤普逊在内的Plan 9项目原班人马加入了Google。在Google，他们创造了Go语言，Google是Go语言的主推。</p><p>学习书籍</p><p>《GO并发编程实战 第2版》《<strong>Go****语言核心编程</strong>》《Go语言高级编程》《Go Web编程》</p><h3 id=初识go语言>初识GO语言</h3><h4 id=1go语言最主要的特性>1.Go语言最主要的特性</h4><pre><code> 自动垃圾回收     更丰富的内置类型     函数多返回值      错误处理
- 匿名函数和闭包     类型和接口     并发编程     反射      语言交互性
+</code></pre><h2 id=一前言>一：前言</h2><p>Limbo语言被认为是Go语言的前身,Limbo语言中继承了众多优秀的特性。包括肯·汤普逊在内的Plan 9项目原班人马加入了Google。在Google，他们创造了Go语言，Google是Go语言的主推。</p><p>学习书籍</p><p>《GO并发编程实战 第2版》《<strong>Go****语言核心编程</strong>》《Go语言高级编程》《Go Web编程》</p><h4 id=为什么需要go语言>为什么需要GO语言</h4><p>Go设计者认为C语言更值得学习，希望让它成为互联网时代的C语言。多数系统级语言（包括Java和C#）的根本编程哲学来源于C++，将C++的面向对象进一步发扬光大。C语言经久不衰的根源是它足够简单，Go语言也要
+足够简单。</p><h4 id=那么go需要关注哪些问题>那么GO需要关注哪些问题</h4><ul><li><p>与分布式支持</p><p><strong>并发执行体</strong>：多核化和集群化是互联网时代的典型特征，操作系统自己掌管的进程（process）、进程内的线程（thread）以及进程内的协程（coroutine，也叫轻量级线程）。Go语言在语言级别支持协程，叫goroutine。Go语言准库提供的所有系统调用（syscall）操作，当然也包括所有同步IO操作，都会出让CPU给其他goroutine</p><p><strong>执行体间的通信</strong>：</p><p>1）执行体之间的互斥与同步，互斥与同步是执行体间最基础
+的交互方式。多数语言在库层面提供了线程间的互斥与同步支持，并没有提供协程之间的互斥与同步。</p><p>2）执行体之间的消息传递，在并发编程模型的选择上，一个是共享内存模型，一个是消息传递模型。多数传统语言选择了前者；Go语言推荐采用“Erlang风格的并发模型”的编程范式，尽管传统的“共享内存模型”仍然
+被保留，在Go语言中内置了通道（channel）支持。两个goroutine之间可以通过通道来进行交互。</p></li><li><p>软件工程支持</p><p>随着工程规模的不断扩大,人们需要建立统一的交互语言来降低沟通的成本。规范化体现在多
+个层面，</p><p><strong>1)代码风格规范</strong></p><p>Go语言要求public的变量必须以大写字母开头，private变量则以小写字母开头，这种做法不仅免除public、private关键字，更重要的是统一了命名风格。</p><p>Go语言对{ }应该怎么写进行了强制，Go代码的花括号位置肯定是非常统一的。</p><pre><code>正例:
+if expression {
+...
+}
+反例:
+if expression
+{
+...
+}
+</code></pre><p><strong>2)错误处理规范</strong></p><p>Go语言的函数允许返回多个值。大多数函数的最后一个返回值会为error类型，以在错误情况下返回详细信息。</p><p>Go 语言首创的错误处理规范：</p><pre><code>f, err := os.Open(filename)
+if err != nil {
+log.Println(&quot;Open file failed:&quot;, err)
+return
+}
+defer f.Close()
+... // 操作已经打开的f文件
 
-Go语言的main()函数不能带参数，也不能定义返回值。命令行传入的参数在os.Args变量中保存。如果需要支持命令行开关，可使用flag包。
-Go程序的代码注释与C++保持一致：
-/*
-块注释
-*/
-// 行注释
+在Java中：
+try {
+  Statement stmt = ...;
+  try {
+    ResultSet rset = ...;
+    try {
+      ... // 正常代码
+    }finally {
+      rset.close();
+    }
+  }finally {
+    stmt.close();
+  }
+}finally {
+  conn.close();
+}
 
-不得包含在源代码文件中没有用到的包，否则Go编译器会报编译错误。
-强制左花括号{的放置位置,如果把左花括号{另起一行放置，这样做的结果是Go编译器报告编译错。
-Go程序并不要求开发者在每个语句后面加上分号表示语句结束。
-一个常规的函数定义包含以下部分：
+GO中：
+conn := ...
+defer conn.Close()
+stmt := ...
+defer stmt.Close()
+rset := ...
+defer rset.Close()
+... // 正常代码
+</code></pre><p><strong>3)包管理</strong>
+<strong>4)契约规范（接口）</strong>
+<strong>5)单元测试规范</strong>
+<strong>6)功能开发的流程规范</strong></p></li><li><p>编程哲学重塑</p><p>计算机软件经历了数十年的发展，形成了多种学术流派，有面向过程编程、面向对象编程、
+函数式编程、面向消息编程。</p><p>而Go语言用批判吸收的眼光，将所有编程思想做了一次梳理，融合众家之长，但时刻警惕特性复杂化，极力维持语言特性的简洁，力求小而精。从编程范式的角度来说，Go语言是变革派，而不是改良派。对于C++、Java和C#等语言为代表的面向对象（OO）思想体系，Go语言总体来说持保守态度，有限吸收，本着“如果一个特性并不对解决任何问题有显著的价值，那么Go就不提供它”的原则</p></li></ul><h2 id=二初识go语言>二：初识GO语言</h2><p>Go语言的出身与晶体管、通信技术、数码相机的感光元件CCD和光电池等一样，都源自贝尔实验。1969年肯·汤普逊（Ken Thompson）和丹尼斯·里奇（Dennis Ritchie）在贝尔实验室的计算科学研究中心里开发出了Unix操作系统，还因为开发Unix而衍生出了一门编程语言——C语言。</p><p>20世纪80年代又开始了一个名为Plan 9的操作系统研究项目，在之后的几十年中，该研究项目又演变出了另一个
+叫Inferno的项目分支，以及一个名为Limbo的编程语言。Limbo语言被认为是Go语言的前身，Go语言确实从Limbo语言中继承了众多优秀的特性。</p><p>贝尔实验室后来经历了多次的动荡，包括肯·汤普逊在内的Plan 9项目原班人马加入了Google。在Google，他们创造了Go语言。Go语言的第一个版本在2009年11月正式对外发布，并在此后的两年内快速迭代，发展迅猛。第一个正式版本于2012年3月28日正式发布，并使用BSD授权协议进行了开源。</p><p>Go语言的主要作者。</p><ol><li>肯·汤普逊（Ken Thompson，http://en.wikipedia.org/wiki/Ken_Thompson）：设计了B语言和C语言，创建了Unix和Plan 9操作系统，1983年图灵奖得主，Go语言的共同作者。
+2)罗布·派克（Rob Pike，http://en.wikipedia.org/wiki/Rob_Pike）：Unix小组的成员，参与Plan9和Inferno操作系统，参与 Limbo和Go语言的研发，《Unix编程环境》作者之一。</li><li>罗伯特·格里泽默（Robert Griesemer）：曾协助制作Java的HotSpot编译器和Chrome浏览器的JavaScript引擎V8。</li><li>拉斯· 考克斯（Russ Cox，http://swtch.com/~rsc/）：参与Plan 9操作系统的开发，Google CodeSearch项目负责人。</li><li>伊安·泰勒（Ian Lance Taylor）：GCC社区的活跃人物，gold连接器和GCC过程间优化LTO的主要设计者，Zembu公司的创始人。</li><li>布拉德·菲茨帕特里克（Brad Fitzpatrick，http://en.wikipedia.org/wiki/Brad_Fitzpatrick）：LiveJournal的创始人，著名开源项目memcached的作者。</li></ol><h3 id=1go语言最主要的特性>1.Go语言最主要的特性</h3><p>Go语言作为一门全新的静态类型开发语言，主要特性如下：</p><h4 id=1自动垃圾回收><strong>1)自动垃圾回收</strong></h4><p>​ C和C++语言在非常长的时间内都作为服务端系统的主要开发语言，然而，内存和资源管
+理一直是一个让人非常抓狂的难题。服务器的崩溃十有八九就是因为不正确的内存和资源管理导
+致，更讨厌的是这种内存和资源管理问题即使被发现了，也很难定位到具体的错误地点，导致无
+数程序员通宵达旦地调试程序。</p><p>​ 由于这个问题导致后面除了一些非常著名的内存检查工具，比如Rational Purify、Compuware BoundsChecker和英特尔的Parallel Inspector等。到目前为止，内存泄露的最佳解决方案是在语言级别引入自动垃圾回收算法（Garbage
+Collection，简称GC）所谓垃圾回收，</p><p>​ Go语言作为一门新生的开发语言，当然不能忽略内存管理这个问题。 因此Go语言中不需要delete关键字，也不需要free()方法来明确释放内存如果使用Go语言实现，我们就完全不用考虑何时需要释放之前分配的内存的问题，系统会自动帮我们判断，并在合适的时候（比如CPU相对空闲的时候）进行自动垃圾收集工作。</p><h4 id=2更丰富的内置类型><strong>2)更丰富的内置类型</strong></h4><h4 id=3函数多返回值><strong>3)函数多返回值</strong></h4><p>目前的主流语言中除Python外基本都不支持函数的多返回值功能；Go语言革命性地在静态开发语言阵营中率先提供了多返回值功能。
 func 函数名(参数列表)(返回值列表) {
 // 函数体
+}</p><p>并不是每一个返回值都必须赋值，可以直接用下划线作为占位符来忽略其他不关心的返回值。
+_, _, lastName, _ := getName()</p><h4 id=4错误处理><strong>4)错误处理</strong></h4><p>Go语言引入了3个关键字defer、panic和recover 用于标准的错误处理流程。Go语言的错误处理机制可以大量减少代码量，让开发者无需仅仅为了程序安全性而添加大量一层套一层的try-catch语句。</p><h4 id=5匿名函数和闭包><strong>5)匿名函数和闭包</strong></h4><p>在Go语言中，所有的函数也是值类型，可以作为参数传递。</p><h4 id=6类型和接口><strong>6)类型和接口</strong></h4><p>Go语言的类型定义非常接近于C语言中的结构（struct），甚至直接沿用了struct关键字。相并C++和Java，没有直接沿袭传统去设计一个超级复杂的类型系统，不支持继承和重载，而只是支持了最基本的类型组合功能。</p><p>Go语言也不是简单的对面向对象开发语言做减法，它还引入了一个无比强大的“非侵入式”接口的概念，让开发者从以往对C++和Java开发中的接口管理问题中解脱出来。</p><h4 id=7并发编程><strong>7)并发编程</strong></h4><p>Go语言引入了goroutine概念，通过在函数调用前使用关键字go，我们即可让该函数以goroutine方式执行。goroutine是一种比线程更加轻盈、更省资源的协程。Go语言通过系统的线程来多路派遣这些函数的执行，使得
+每个用go关键字执行的函数可以运行成为一个单位协程。而且调度的开销非常小，一颗CPU调度的规模不下于每秒百万次，这使得我们能够创建大量的goroutine。
+Go语言实现了CSP（通信顺序进程，Communicating Sequential Process）模型来作为goroutine间的推荐通信方式。在CSP模型中，进程之间只能通过一对通信原语实现协作。Go语言用channel（通道）这个概念来轻巧地实现了CSP模型。channel的使用方式比较接近Unix系统中的管道（pipe）概念，可以方便地进行跨goroutine的通信。
+一个进程内创建的所有goroutine运行在同一个内存地址空间中，如果需要访问共享的内存变量，可以通过Go语言标准库中的sync包提供了完备的读写锁功能来访问。</p><h4 id=8反射><strong>8)反射</strong></h4><p>​ 反射（reflection）是在Java语言出现后迅速流行起来的一种概念。通过反射，你可以获取对象类型的详细信息，并可动态操作对象。反射是把双刃剑，功能强大但代码可读性并不理想。若非必要，我们并不推荐使用反射。
+​ Go语言的反射实现了反射的大部分功能，但不能通过反射创建对象实例。在GO语言中反射最常见的使用场景是做对象的序列化（serialization，有时候也叫Marshal & Unmarshal）。例如，Go语言标准库的encoding/json、encoding/xml、encoding/gob、encoding/binary等包就大量
+依赖于反射功能来实现。</p><h4 id=9语言交互性><strong>9)语言交互性</strong></h4><p>由于Go语言与C语言之间的天生联系，Go语言可以用通过Cgo重用现有C模块，Cgo既是语言特性，同时也是一个工具的名称。与Java中的JNI不同，Cgo的用法非常简单。</p><h3 id=第一个go-程序>第一个Go 程序</h3><pre><code>package main
+import &quot;fmt&quot;// 我们需要使用fmt包中的Println()函数
+func main() {
+fmt.Println(&quot;Hello, world. 你好，世界！&quot;)
 }
-</code></pre><h4 id=2编译程序>2.编译程序</h4><pre><code>Go命令行工具只是一个源代码管理工具，或者说是一个前端。真正的Go编译器和链接器被Go命令行工具隐藏在后面，我们可以直接使用它们：
+</code></pre><ol><li><p>Go语言的main()函数不能带参数，也不能定义返回值。命令行传入的参数在os.Args变量中保存。如果需要支持命令行开关，可使用flag包。</p></li><li><p>Go程序的代码注释与C++保持一致：</p></li></ol><pre><code>/*
+块注释
+*/
+
+// 行注释
+</code></pre><ol start=3><li>不得包含在源代码文件中没有用到的包，否则Go编译器会报编译错误。</li><li>强制左花括号{的放置位置,如果把左花括号{另起一行放置，这样做的结果是Go编译器报告编译错。
+5)Go程序并不要求开发者在每个语句后面加上分号表示语句结束。
+6)一个常规的函数定义包含以下部分：</li></ol><pre><code>func 函数名(参数列表)(返回值列表) {
+// 函数体
+}
+</code></pre><h3 id=2编译程序>2.编译程序</h3><pre><code>Go命令行工具只是一个源代码管理工具，或者说是一个前端。真正的Go编译器和链接器被Go命令行工具隐藏在后面，我们可以直接使用它们：
 $ 6g helloworld.go
 $ 6l helloworld.6
 $ ./6.out
@@ -43,12 +106,12 @@ gdb calc
 
 go test simplemath
 
-</code></pre><h4 id=3开发工具>3.开发工具</h4><p> 文本编辑工具gedit（Linux）/Notepad++（Windows）/Fraise（Mac OS X）；
+</code></pre><h3 id=3开发工具>3.开发工具</h3><p> 文本编辑工具gedit（Linux）/Notepad++（Windows）/Fraise（Mac OS X）；
  安装了GoClipse插件的Eclipse，集成性做得很好；
  Vim/Emacs，万能开发工具；
  LiteIDE，一款专为Go语言开发的集成开发环境
  goland 非免费
- VScode</p><h3 id=顺序编程>顺序编程</h3><pre><code>
+ VScode</p><h2 id=三顺序编程>三：顺序编程</h2><pre><code>
 1. 变量申明
 var v1 int
 var v2 string
@@ -79,12 +142,12 @@ func GetName() (firstName, lastName, nickName string) {
 若只想获得nickName，则函数调用语句可以用如下方式编写：
 _, _, nickName := GetName()
 这种用法可以让代码非常清晰
-</code></pre><h2 id=二基本命令>二.基本命令</h2><h3 id=go-module>Go Module</h3><p>gomod 包源码和链接库保存在 <code>$GOPATH/pkg/mod</code> 目录下。</p><pre><code> go list -u -m all 查看所有依赖
+</code></pre><h3 id=fmt输出格式>fmt输出格式</h3><table><thead><tr><th>动 词</th><th>功 能</th></tr></thead><tbody><tr><td>%v</td><td>按值的本来值输出</td></tr><tr><td>%+v</td><td>在 %v 基础上，对结构体字段名和值进行展开</td></tr><tr><td>%#v</td><td>输出 Go 语言语法格式的值</td></tr><tr><td>%T</td><td>输出 Go 语言语法格式的类型和值</td></tr><tr><td>%%</td><td>输出 % 本体</td></tr><tr><td>%b</td><td>整型以二进制方式显示</td></tr><tr><td>%o</td><td>整型以八进制方式显示</td></tr><tr><td>%d</td><td>整型以十进制方式显示</td></tr><tr><td>%x</td><td>整型以十六进制方式显示</td></tr><tr><td>%X</td><td>整型以十六进制、字母大写方式显示</td></tr><tr><td>%U</td><td>Unicode 字符</td></tr><tr><td>%f</td><td>浮点数</td></tr><tr><td>%p</td><td>指针，十六进制方式显示</td></tr></tbody></table><h2 id=四面向对象编程>四：面向对象编程</h2><p>五：并发编程</p><p>六：网络编程</p><p>七：安全编程</p><p>八：进阶话题</p><p>九：工程管理</p><p>十：开发工具</p><h2 id=附录>附录</h2><h3 id=相关命令>相关命令</h3><h4 id=go-module>Go Module</h4><p>gomod 包源码和链接库保存在 <code>$GOPATH/pkg/mod</code> 目录下。</p><pre><code> go list -u -m all 查看所有依赖
  go mod tidy  移除不需要的依赖
  go mod edit -fmt 格式化go.mod文件
  go mod edit --require=rsc.io/quote@v3.1.0  更新 rsc.io/quote 到 v3.1.0 版
 
-</code></pre><h3 id=go安装>GO安装</h3><pre><code>1. MSI installer(https://golang.org/dl/)
+</code></pre><h4 id=go安装>GO安装</h4><pre><code>1. MSI installer(https://golang.org/dl/)
 
 Open the MSI file and follow the prompts to install the Go tools. By default, the installer puts the Go distribution in c:\Go.
 
@@ -144,7 +207,7 @@ Before rushing off to write Go code please read the How to Write Go Code documen
 Under Linux and FreeBSD you should edit /etc/profile or $HOME/.profile.
  Mac OS X   you should remove the /etc/paths.d/go file.
  Windows users should read the section about setting environment variables under Windows.
-</code></pre><h3 id=gopath-与goroot>GOPATH 与GOROOT</h3><pre><code>GOROOT
+</code></pre><h4 id=gopath-与goroot>GOPATH 与GOROOT</h4><pre><code>GOROOT
 指定Go的二进制编译包安装路径，假设你把Go安装在 /usr/local/go (或者Window是 c:\Go)目录下。当然你也可以安装在其他目录下，不过这时候你就需要设置GOROOT环境变量了。 http://golang.org/doc/install#install 例如，你如果安装Go在你的/usr/local/go目录下，你应该$HOME/.profile文件增加下面设置。
 export GOROOT=/usr/local/go
 export GOPATH=$PATH:$GOROOT/bin
@@ -178,8 +241,8 @@ GOPATH=/home/user/gocode
             foo/
                 bar.a          (installed package object)
 
-</code></pre><h2 id=三问题>三.问题</h2><h3 id=1go-githubcomburntsushitomlv031-get-httpsproxygolangorggithubcom21burnt21sushitomlvv031mod-dial-tcp-17221716081443-connectex-a-connection-attempt-failed-because-the-connected-party-did-not-properly-respond-after-a-period-of-time-or-established-connection-failed-because-connected-host-has-failed-to-respond>1.go: <a href=mailto:github.com/BurntSushi/toml@v0.3.1>github.com/BurntSushi/toml@v0.3.1</a>: Get &ldquo;<a href=https://proxy.golang.org/github.com/%21burnt%21sushi/toml/@v/v0.3.1.mod%22:>https://proxy.golang.org/github.com/%21burnt%21sushi/toml/@v/v0.3.1.mod":</a> dial tcp 172.217.160.81:443: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.</h3><p>设置国内代理地址<code>go env -w GOPROXY=https://goproxy.cn</code></p><footer><section class=categories-tags><span><svg class="icon icon-folder"><use xlink:href="#icon-folder"/></svg><span class=screen-reader-text>This entry was posted in</span>
-<a href=/categories/%E5%90%8E%E7%AB%AF>后端</a></span> <span><svg class="icon icon-tag"><use xlink:href="#icon-tag"/></svg><a class=article-tags href=/tags/go>GO</a></span></section></footer><div id=comments-button-container class=comments-button-container><button type=button onclick=loadDisqus() class=comments-button><svg class="icon icon-bubble"><use xlink:href="#icon-bubble"/></svg> <span>Show Comments</span></button></div><div id=disqus_thread></div><script type=text/javascript>function loadDisqus(){var a,b;document.getElementById('comments-button-container').style.display='none',a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='李明梓',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)}</script><noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></article></main><aside id=sidebar><div class=widget><div class=widget-title>Recent posts</div><ol class="recent-widget widget-content"><li><a href=/%E8%AF%BBgo%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%8336%E8%AE%B2/>读[GO语言核心36讲]</a></li><li><a href=/go-sdk/>GO SDK</a></li><li><a href=/jemeter%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/>jemeter基本使用</a></li><li><a href=/%E5%A4%A7%E9%A3%8E%E6%AD%8C%E7%8E%8B%E7%AB%8B%E7%BE%A4/>&lt;&lt;大风歌>>王立群</a></li><li><a href=/%E4%BD%8D%E8%BF%90%E7%AE%97%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/>位运算基础知识</a></li></ol></div><div class=widget><div class=widget-title>Categories</div><ol class="all-categories widget-content"><li><a href=/categories/devops>devops</a> (1)</li><li><a href=/categories/java>java</a> (4)</li><li><a href=/categories/mysql>mysql</a> (1)</li><li><a href=/categories/%E5%85%B6%E4%BB%96>其他</a> (4)</li><li><a href=/categories/%E5%89%8D%E7%AB%AF>前端</a> (1)</li><li><a href=/categories/%E5%90%8E%E7%AB%AF>后端</a> (4)</li><li><a href=/categories/%E5%9F%BA%E7%A1%80>基础</a> (1)</li><li><a href=/categories/%E5%B7%A5%E5%85%B7>工具</a> (3)</li></ol></div><div class=widget><div class=widget-title>Tags</div><div class="tag-cloud-tags widget-content"><a href=/tags/canal aria-label="canal (2 posts)" style=font-size:1rem>canal</a>
+</code></pre><h3 id=相关问题>相关问题</h3><h4 id=1go-githubcomburntsushitomlv031-get-httpsproxygolangorggithubcom21burnt21sushitomlvv031mod-dial-tcp-17221716081443-connectex-a-connection-attempt-failed-because-the-connected-party-did-not-properly-respond-after-a-period-of-time-or-established-connection-failed-because-connected-host-has-failed-to-respond>1.go: <a href=mailto:github.com/BurntSushi/toml@v0.3.1>github.com/BurntSushi/toml@v0.3.1</a>: Get &ldquo;<a href=https://proxy.golang.org/github.com/%21burnt%21sushi/toml/@v/v0.3.1.mod%22:>https://proxy.golang.org/github.com/%21burnt%21sushi/toml/@v/v0.3.1.mod":</a> dial tcp 172.217.160.81:443: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.</h4><p>设置国内代理地址<code>go env -w GOPROXY=https://goproxy.cn</code></p><footer><section class=categories-tags><span><svg class="icon icon-folder"><use xlink:href="#icon-folder"/></svg><span class=screen-reader-text>This entry was posted in</span>
+<a href=/categories/%E5%90%8E%E7%AB%AF>后端</a></span> <span><svg class="icon icon-tag"><use xlink:href="#icon-tag"/></svg><a class=article-tags href=/tags/go>GO</a></span></section></footer><div id=comments-button-container class=comments-button-container><button type=button onclick=loadDisqus() class=comments-button><svg class="icon icon-bubble"><use xlink:href="#icon-bubble"/></svg> <span>Show Comments</span></button></div><div id=disqus_thread></div><script type=text/javascript>function loadDisqus(){var a,b;document.getElementById('comments-button-container').style.display='none',a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='李明梓',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)}</script><noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></article></main><aside id=sidebar><div class=widget><div class=widget-title>Recent posts</div><ol class="recent-widget widget-content"><li><a href=/%E8%AF%BBgo%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%8336%E8%AE%B2/>读[GO语言核心36讲]</a></li><li><a href=/%E5%85%B3%E4%BA%8E%E8%B0%83%E9%9F%B3%E5%A3%B0%E5%8D%A1/>关于调音声卡</a></li><li><a href=/go-sdk/>GO SDK</a></li><li><a href=/jemeter%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/>jemeter基本使用</a></li><li><a href=/%E5%A4%A7%E9%A3%8E%E6%AD%8C%E7%8E%8B%E7%AB%8B%E7%BE%A4/>&lt;&lt;大风歌>>王立群</a></li></ol></div><div class=widget><div class=widget-title>Categories</div><ol class="all-categories widget-content"><li><a href=/categories/devops>devops</a> (1)</li><li><a href=/categories/java>java</a> (4)</li><li><a href=/categories/mysql>mysql</a> (1)</li><li><a href=/categories/%E5%85%B6%E4%BB%96>其他</a> (5)</li><li><a href=/categories/%E5%89%8D%E7%AB%AF>前端</a> (1)</li><li><a href=/categories/%E5%90%8E%E7%AB%AF>后端</a> (4)</li><li><a href=/categories/%E5%9F%BA%E7%A1%80>基础</a> (1)</li><li><a href=/categories/%E5%B7%A5%E5%85%B7>工具</a> (3)</li></ol></div><div class=widget><div class=widget-title>Tags</div><div class="tag-cloud-tags widget-content"><a href=/tags/canal aria-label="canal (2 posts)" style=font-size:1rem>canal</a>
 <a href=/tags/git aria-label="git (1 posts)" style=font-size:1rem>git</a>
 <a href=/tags/go aria-label="go (4 posts)" style=font-size:1rem>go</a>
 <a href=/tags/hexo aria-label="hexo (1 posts)" style=font-size:1rem>hexo</a>

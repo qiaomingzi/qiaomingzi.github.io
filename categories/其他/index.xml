@@ -1,4 +1,16 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>其他 on mingzi.li blog</title><link>http://qiaomingzi.github.io/categories/%E5%85%B6%E4%BB%96/</link><description>Recent content in 其他 on mingzi.li blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Fri, 07 May 2021 17:03:36 +0800</lastBuildDate><atom:link href="http://qiaomingzi.github.io/categories/%E5%85%B6%E4%BB%96/index.xml" rel="self" type="application/rss+xml"/><item><title>Hugo基本使用</title><link>http://qiaomingzi.github.io/hugo%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link><pubDate>Fri, 07 May 2021 17:03:36 +0800</pubDate><guid>http://qiaomingzi.github.io/hugo%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid><description>概要： 了解hugo基本使用，通过hugo搭建个人blog
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>其他 on mingzi.li blog</title><link>http://qiaomingzi.github.io/categories/%E5%85%B6%E4%BB%96/</link><description>Recent content in 其他 on mingzi.li blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Fri, 20 May 2022 15:42:33 +0000</lastBuildDate><atom:link href="http://qiaomingzi.github.io/categories/%E5%85%B6%E4%BB%96/index.xml" rel="self" type="application/rss+xml"/><item><title>关于调音声卡</title><link>http://qiaomingzi.github.io/%E5%85%B3%E4%BA%8E%E8%B0%83%E9%9F%B3%E5%A3%B0%E5%8D%A1/</link><pubDate>Fri, 20 May 2022 15:42:33 +0000</pubDate><guid>http://qiaomingzi.github.io/%E5%85%B3%E4%BA%8E%E8%B0%83%E9%9F%B3%E5%A3%B0%E5%8D%A1/</guid><description>一：概要 本文用于解决
+1.1.参考 https://www.bilibili.com/read/cv11117891
+https://zhuanlan.zhihu.com/p/350530697
+二：关于声卡 声卡 (Sound Card)也叫音频卡、声效卡，是计算机多媒体系统中最基本的组成部分，是实现声波/数字信号相互转换的一种硬件。可在计算机程序的控制下向计算机提供音频信号的输入和输出。
+声卡从话筒中获取声音模拟信号，通过模数转换器(ADC)，将声波振幅信号采样转换成一串数字信号，存储到计算机中。播放音频文件时，这些数字信号送到数模转换器(DAC)，以同样的采样速度还原为模拟波形，放大后送到扬声器发声，这一技术称为脉冲编码调制技术(PCM)，
+声卡发展至今，主要分为板卡式、集成式和外置式三种接口类型
+2.1 相关名词 ASIO
+EQ
+WDM
+DSP
+DAC
+声卡使用数模转换器,它将记录或生成的数字信号数据转换为模拟格式。输出信号使用标准互连连接到放大器、耳机或外部设备
+HDMI</description></item><item><title>Hugo基本使用</title><link>http://qiaomingzi.github.io/hugo%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link><pubDate>Fri, 07 May 2021 17:03:36 +0800</pubDate><guid>http://qiaomingzi.github.io/hugo%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid><description>概要： 了解hugo基本使用，通过hugo搭建个人blog
 参考 【hugo 】https://gohugo.io/
 【函数】https://gohugo.io/functions/
 【变量】https://gohugo.io/variables/
