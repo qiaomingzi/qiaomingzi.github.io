@@ -1,4 +1,20 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Articles on mingzi.li blog</title><link>http://qiaomingzi.github.io/article/</link><description>Recent content in Articles on mingzi.li blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sun, 29 May 2022 15:42:33 +0000</lastBuildDate><atom:link href="http://qiaomingzi.github.io/article/index.xml" rel="self" type="application/rss+xml"/><item><title>读[GO语言核心36讲]</title><link>http://qiaomingzi.github.io/%E8%AF%BBgo%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%8336%E8%AE%B2/</link><pubDate>Sun, 29 May 2022 15:42:33 +0000</pubDate><guid>http://qiaomingzi.github.io/%E8%AF%BBgo%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%8336%E8%AE%B2/</guid><description>一：概要 1.1.参考 【GO编程语言规范】https://golang.google.cn/ref/spec
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Articles on mingzi.li blog</title><link>http://qiaomingzi.github.io/article/</link><description>Recent content in Articles on mingzi.li blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Thu, 01 Dec 2022 13:42:33 +0000</lastBuildDate><atom:link href="http://qiaomingzi.github.io/article/index.xml" rel="self" type="application/rss+xml"/><item><title>英语音节划分</title><link>http://qiaomingzi.github.io/%E8%8B%B1%E8%AF%AD%E9%9F%B3%E8%8A%82%E5%88%92%E5%88%86/</link><pubDate>Thu, 01 Dec 2022 13:42:33 +0000</pubDate><guid>http://qiaomingzi.github.io/%E8%8B%B1%E8%AF%AD%E9%9F%B3%E8%8A%82%E5%88%92%E5%88%86/</guid><description>划分音节的五个步骤 音节简介
+开音节是以发音的元音a，e，i，o，u结尾的单词，或辅音+不发音e音节。r除外。开音节在和后面有辅音连续时很容易犯错，如，I like Bob，这句如果不懂得E是不发音的那句子就会读错。
+以一个或几个辅音字母（r除外）结尾而中间只有一个元音音素的音节，称为闭音节。例：map，desk，dog，pig
+注：在闭音节中，元音字母不发“字母”本身的音。重读的闭音节中元音字母读作短元音。
+重读闭音节是指在一个音节中，以辅音因素结尾的而且是重读音节的音节。重读闭音节中元音字母不是发它本身的字母音，而是发短元音，要注意其三要素
+（1）一个元音字母后跟一个或几个辅音字母，他们组成的音节必须是重读音节，如：apple。
+（2）以一个辅音字母结尾，如：fish。
+（3）元音字母发短元音。
+1.一个单词中有几个发音的元音字母，就有几个音节。
+2.两个元音间有两个辅音，则辅音分开，一边一个。
+3.两个元音间只有一个辅音，该辅音划分到后一个音节。
+4.字母组合要划分到同一个音节。
+5.词尾不发音的e不构成音节。
+6.两个元音字母在一起，一般为字母组合，发一个元音、构成一个音节。
+步骤：从后往前找到元音：单词中有多个元音时，方法都一样。
+元音往前找辅音。元音找到辅音，形成拼音，算一个音节。
+元音找不到辅音，自行发音，形成一个音节。</description></item><item><title>读[GO语言核心36讲]</title><link>http://qiaomingzi.github.io/%E8%AF%BBgo%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%8336%E8%AE%B2/</link><pubDate>Sun, 29 May 2022 15:42:33 +0000</pubDate><guid>http://qiaomingzi.github.io/%E8%AF%BBgo%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%8336%E8%AE%B2/</guid><description>一：概要 1.1.参考 【GO编程语言规范】https://golang.google.cn/ref/spec
 【GO命令】https://golang.google.cn/cmd/
 【环境设置】https://www.liwenzhou.com/posts/Go/install_go_dev_old/
 【Unicode】https://home.unicode.org/
@@ -35,12 +51,4 @@ int[10^9] 需要内存 10^9 * 4(B) =&amp;gt; ((10^9 * 4)/1000 * 1000)(M) =&amp;g
 2.基本简介 canal [kə&amp;rsquo;næl]，译意为水道/管道/沟渠，主要用途是基于 MySQL 数据库增量日志解析，提供增量数据订阅和消费
 2.1 mysql主备复制实现 master将改变记录到二进制日志(binary log)中（这些记录叫做二进制日志事件，binary log events，可以通过show binlog events进行查看）； slave将master的binary log events拷贝到它的中继日志(relay log)； slave重做中继日志中的事件，将改变反映它自己的数据。 2.</description></item><item><title>K8S</title><link>http://qiaomingzi.github.io/k8s/</link><pubDate>Sat, 16 Oct 2021 15:42:33 +0000</pubDate><guid>http://qiaomingzi.github.io/k8s/</guid><description>一：概要 1.1.参考 二：附录 log pod https://kubernetes.io/docs/concepts/cluster-administration/logging/
 apiVersion: v1 kind: Pod metadata: name: counter spec: containers: - name: count image: busybox:1.28 args: [/bin/sh, -c, 'i=0; while true; do echo &amp;quot;$i: $(date)&amp;quot;; i=$((i+1)); sleep 1; done']</description></item><item><title>maven-wrapper基础使用</title><link>http://qiaomingzi.github.io/maven-wrapper%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/</link><pubDate>Sat, 16 Oct 2021 15:42:33 +0000</pubDate><guid>http://qiaomingzi.github.io/maven-wrapper%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/</guid><description>1.maven-wrapper安装使用 安装 在项目中使用命令安装mvn -N io.takari:maven:0.7.7:wrapper，参考官网 ,如果需要指定maven版本则使用mvn -N io.takari:maven:0.7.7:wrapper -Dmaven=3.5.4,安装完成后，目录如下
-my-project ├── .mvn │ └── wrapper │ ├── MavenWrapperDownloader.java │ ├── maven-wrapper.</description></item><item><title>mysql master-slave</title><link>http://qiaomingzi.github.io/mysql-master-slave/</link><pubDate>Sat, 16 Oct 2021 15:42:33 +0000</pubDate><guid>http://qiaomingzi.github.io/mysql-master-slave/</guid><description>1.参考 【mysql8.0手册】https://dev.mysql.com/doc/refman/8.0/en/
-【mysql doc】https://dev.mysql.com/doc/
-【alibaba canal】https://github.com/alibaba/canal
-2.概要 通过本文可以了解主从同步原理，快速搭建一个主从环境,实现复制场景，并且利用canal实现订阅binglog日志，实现跨实例同步。
-中间件版本:
-mysql-8.0.27
-canal 1.1.5
-3.主从同步 创建容错系统的最常见方法就是冗余，复制模式分普通复制、组复制，普通复制即传统的 MySQL复制 提供了一种简单的源(mater)到副本复制方法,。
-master-slave syn MySQL 复制功能允许服务器 -主服务器 - 将所有更改发送到另一台服务器 -从服务器 -从服务器尝试应用所有更改以与主服务器保持同步。复制工作如下：</description></item></channel></rss>
+my-project ├── .mvn │ └── wrapper │ ├── MavenWrapperDownloader.java │ ├── maven-wrapper.</description></item></channel></rss>
