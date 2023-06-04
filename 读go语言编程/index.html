@@ -11,8 +11,7 @@ http://www.flysnow.org/categories/Golang/ go专栏
 https://golanglibs.com/top  流行的GO应用和GO库
 
 https://gitee.com/pengzhile/ide-eval-resetterv  GoLand试用更新插件
-</code></pre><h2 id=一前言>一：前言</h2><p>Limbo语言被认为是Go语言的前身,Limbo语言中继承了众多优秀的特性。包括肯·汤普逊在内的Plan 9项目原班人马加入了Google。在Google，他们创造了Go语言，Google是Go语言的主推。</p><p>学习书籍</p><p>《GO并发编程实战 第2版》《<strong>Go****语言核心编程</strong>》《Go语言高级编程》《Go Web编程》</p><h4 id=为什么需要go语言>为什么需要GO语言</h4><p>Go设计者认为C语言更值得学习，希望让它成为互联网时代的C语言。多数系统级语言（包括Java和C#）的根本编程哲学来源于C++，将C++的面向对象进一步发扬光大。C语言经久不衰的根源是它足够简单，Go语言也要
-足够简单。</p><h4 id=那么go需要关注哪些问题>那么GO需要关注哪些问题</h4><ul><li><p>与分布式支持</p><p><strong>并发执行体</strong>：多核化和集群化是互联网时代的典型特征，操作系统自己掌管的进程（process）、进程内的线程（thread）以及进程内的协程（goroutine，也叫轻量级线程）。Go语言在语言级别支持协程，叫goroutine。Go语言准库提供的所有系统调用（syscall）操作，当然也包括所有同步IO操作，都会出让CPU给其他goroutine</p><p><strong>执行体间的通信</strong>：</p><p>1）执行体之间的互斥与同步，互斥与同步是执行体间最基础
+</code></pre><h2 id=一前言>一：前言</h2><h4 id=为什么需要go语言>为什么需要GO语言</h4><p>Go设计者认为C语言更值得学习，希望让它成为互联网时代的C语言。多数系统级语言（包括Java和C#）的根本编程哲学来源于C++，将C++的面向对象进一步发扬光大。C语言经久不衰的根源是它足够简单，Go语言也要足够简单。</p><h4 id=那么go需要关注哪些问题>那么GO需要关注哪些问题</h4><ul><li><p>与分布式支持</p><p><strong>并发执行体</strong>：多核化和集群化是互联网时代的典型特征，操作系统自己掌管的进程（process）、进程内的线程（thread）以及进程内的协程（goroutine，也叫轻量级线程）。Go语言在语言级别支持协程，叫goroutine。Go语言准库提供的所有系统调用（syscall）操作，当然也包括所有同步IO操作，都会出让CPU给其他goroutine</p><p><strong>执行体间的通信</strong>：</p><p>1）执行体之间的互斥与同步，互斥与同步是执行体间最基础
 的交互方式。多数语言在库层面提供了线程间的互斥与同步支持，并没有提供协程之间的互斥与同步。</p><p>2）执行体之间的消息传递，在并发编程模型的选择上，一个是共享内存模型，一个是消息传递模型。多数传统语言选择了前者；Go语言推荐采用“Erlang风格的并发模型”的编程范式，尽管传统的“共享内存模型”仍然
 被保留，在Go语言中内置了通道（channel）支持。两个goroutine之间可以通过通道来进行交互。</p></li><li><p>软件工程支持</p><p>随着工程规模的不断扩大,人们需要建立统一的交互语言来降低沟通的成本。规范化体现在多
 个层面，</p><p><strong>1)代码风格规范</strong></p><p>Go语言要求public的变量必须以大写字母开头，private变量则以小写字母开头，这种做法不仅免除public、private关键字，更重要的是统一了命名风格。</p><p>Go语言对{ }应该怎么写进行了强制，Go代码的花括号位置肯定是非常统一的。</p><pre><code>正例:
@@ -60,13 +59,15 @@ defer rset.Close()
 </code></pre><p><strong>3)包管理</strong>
 <strong>4)契约规范（接口）</strong>
 <strong>5)单元测试规范</strong>
-<strong>6)功能开发的流程规范</strong></p></li><li><p>编程哲学重塑</p><p>计算机软件经历了数十年的发展，形成了多种学术流派，有面向过程编程、面向对象编程、
-函数式编程、面向消息编程。</p><p>而Go语言用批判吸收的眼光，将所有编程思想做了一次梳理，融合众家之长，但时刻警惕特性复杂化，极力维持语言特性的简洁，力求小而精。从编程范式的角度来说，Go语言是变革派，而不是改良派。对于C++、Java和C#等语言为代表的面向对象（OO）思想体系，Go语言总体来说持保守态度，有限吸收，本着“如果一个特性并不对解决任何问题有显著的价值，那么Go就不提供它”的原则</p></li></ul><h2 id=二初识go语言>二：初识GO语言</h2><p>Go语言的出身与晶体管、通信技术、数码相机的感光元件CCD和光电池等一样，都源自贝尔实验。1969年肯·汤普逊（Ken Thompson）和丹尼斯·里奇（Dennis Ritchie）在贝尔实验室的计算科学研究中心里开发出了Unix操作系统，还因为开发Unix而衍生出了一门编程语言——C语言。</p><p>20世纪80年代又开始了一个名为Plan 9的操作系统研究项目，在之后的几十年中，该研究项目又演变出了另一个
-叫Inferno的项目分支，以及一个名为Limbo的编程语言。Limbo语言被认为是Go语言的前身，Go语言确实从Limbo语言中继承了众多优秀的特性。</p><p>贝尔实验室后来经历了多次的动荡，包括肯·汤普逊在内的Plan 9项目原班人马加入了Google。在Google，他们创造了Go语言。Go语言的第一个版本在2009年11月正式对外发布，并在此后的两年内快速迭代，发展迅猛。第一个正式版本于2012年3月28日正式发布，并使用BSD授权协议进行了开源。</p><p>Go语言的主要作者。</p><ol><li>肯·汤普逊（Ken Thompson，http://en.wikipedia.org/wiki/Ken_Thompson）：设计了B语言和C语言，创建了Unix和Plan 9操作系统，1983年图灵奖得主，Go语言的共同作者。
-2)罗布·派克（Rob Pike，http://en.wikipedia.org/wiki/Rob_Pike）：Unix小组的成员，参与Plan9和Inferno操作系统，参与 Limbo和Go语言的研发，《Unix编程环境》作者之一。</li><li>罗伯特·格里泽默（Robert Griesemer）：曾协助制作Java的HotSpot编译器和Chrome浏览器的JavaScript引擎V8。</li><li>拉斯· 考克斯（Russ Cox，http://swtch.com/~rsc/）：参与Plan 9操作系统的开发，Google CodeSearch项目负责人。</li><li>伊安·泰勒（Ian Lance Taylor）：GCC社区的活跃人物，gold连接器和GCC过程间优化LTO的主要设计者，Zembu公司的创始人。</li><li>布拉德·菲茨帕特里克（Brad Fitzpatrick，http://en.wikipedia.org/wiki/Brad_Fitzpatrick）：LiveJournal的创始人，著名开源项目memcached的作者。</li></ol><h3 id=1go语言最主要的特性>1.Go语言最主要的特性</h3><p>Go语言作为一门全新的静态类型开发语言，主要特性如下：</p><h4 id=1自动垃圾回收><strong>1)自动垃圾回收</strong></h4><p>​ C和C++语言在非常长的时间内都作为服务端系统的主要开发语言，然而，内存和资源管
-理一直是一个让人非常抓狂的难题。服务器的崩溃十有八九就是因为不正确的内存和资源管理导
-致，更讨厌的是这种内存和资源管理问题即使被发现了，也很难定位到具体的错误地点，导致无
-数程序员通宵达旦地调试程序。</p><p>​ 由于这个问题导致后面除了一些非常著名的内存检查工具，比如Rational Purify、Compuware BoundsChecker和英特尔的Parallel Inspector等。到目前为止，内存泄露的最佳解决方案是在语言级别引入自动垃圾回收算法（Garbage Collection，简称GC）所谓垃圾回收，</p><p>​ Go语言作为一门新生的开发语言，当然不能忽略内存管理这个问题。 因此Go语言中不需要delete关键字，也不需要free()方法来明确释放内存如果使用Go语言实现，我们就完全不用考虑何时需要释放之前分配的内存的问题，系统会自动帮我们判断，并在合适的时候（比如CPU相对空闲的时候）进行自动垃圾收集工作。</p><h4 id=2更丰富的内置类型><strong>2)更丰富的内置类型</strong></h4><p><strong>引用类型</strong>：切片、字典、数组、通道、函数</p><p><strong>值类型</strong>：数组、基础数据类型、结构体</p><h4 id=3函数多返回值><strong>3)函数多返回值</strong></h4><p>目前的主流语言中除Python外基本都不支持函数的多返回值功能；Go语言革命性地在静态开发语言阵营中率先提供了多返回值功能。
+<strong>6)功能开发的流程规范</strong></p></li><li><p>编程哲学重塑</p><p>计算机软件经历了数十年的发展，形成了多种学术流派，有面向过程编程、面向对象编程、函数式编程、面向消息编程。</p></li></ul><p>而Go语言用批判吸收的眼光，将所有编程思想做了一次梳理，融合众家之长，但时刻警惕特性复杂化，极力维持语言特性的简洁，力求小而精。从编程范式的角度来说，Go语言是变革派，而不是改良派。对于C++、Java和C#等语言为代表的面向对象（OO）思想体系，Go语言总体来说持保守态度，有限吸收，本着“如果一个特性并不对解决任何问题有显著的价值，那么Go就不提供它”的原则</p><h2 id=二初识go语言>二：初识GO语言</h2><p>GO相关书籍：《GO并发编程实战 第2版》《<strong>Go****语言核心编程</strong>》《Go语言高级编程》《Go Web编程》</p><h4 id=贝尔实验室>贝尔实验室：</h4><p>​ 贝尔实验室已经走出了多位诺贝尔奖获得者，一些对于现在科技至关重要的研究成果，比如晶体管、通信技术、数码相机的感光元件CCD和光电池等都源自贝尔实验室。贝尔实验室中一个叫计算科学研究中心的部门，回溯至1969年，肯·汤普逊（Ken Thompson）和丹尼斯·里奇（Dennis Ritchie）在贝尔实验室的计算科学研究中心里开发出了Unix这个大名鼎鼎的操作系统，还因为开发Unix而衍生出了一门同样赫赫有名的编程语言——C语言。</p><p>​ 包括90年代如日中天的太阳微系统（Sun MicroSystems），现在的Mac OS X操作系统其实也可以认为是Unix
+的一个变种（FreeBSD）。</p><p>​ 从20世纪80年代又开始了一个名为Plan 9的操作系统研究项目，目的就是解决Unix中的一些问题，发展出一个Unix的后续替代系统。在之后的几十年中，该研究项目又演变出了另一个叫Inferno的项目分支，以及一个名为Limbo的编程语言。</p><p>​ Limbo是用于开发运行在小型计算机上的分布式应用的编程语言，它支持模块化编程，编译期和运行时的强类型检查，进程内基于具有类型的通信通道，原子性垃圾收集和简单的抽象数据类型。它被设计为：即便是在没有硬件内存保护的小型设备上，也能安全运行。Limbo语言被认为是Go语言的前身，不仅仅因为是同一批人设计的语言，而是Go语言确实从Limbo语言中继承了众多优秀的特性。</p><h4 id=go语言的前身>Go语言的前身</h4><p>​ Limbo语言被认为是Go语言的前身,Limbo语言中继承了众多优秀的特性。贝尔实验室后来经历了多次的动荡，包括肯·汤普逊在内的Plan 9项目原班人马加入了Google。在Google，他们创造了Go语言。Go语言的第一个版本在2009年11月正式对外发布，并在此后的两年内快速迭代，发展迅猛。第一个正式版本于2012年3月28日正式发布，并使用BSD授权协议进行了开源。</p><p>​ 基于Google对开源的一贯拥抱态度， Go语言也自然而然地选择了开源方式发布，并使用BSD授权协议。任何人可以查看Go语言的所有源代码，并可以为Go语言发展而奉献自己的力量。Google作为Go语言的主推者，在自家的服务中逐步增加对Go语言的支持，比如云计算平台GAE（Google AppEngine）很早就开始支持Go语言了。</p><h3 id=1go语言最主要的特性>1.Go语言最主要的特性</h3><p>Go语言作为一门全新的静态类型开发语言，主要特性如下：</p><h4 id=1自动垃圾回收><strong>1)自动垃圾回收</strong></h4><pre><code>void foo()
+{
+char* p = new char[128];
+... // 对p指向的内存块进行赋值
+func1(p); // 使用内存指针
+delete[] p;
+}
+</code></pre><p>​ C和C++语言在非常长的时间内都作为服务端系统的主要开发语言，然而，内存和资源管理一直是一个让人非常抓狂的难题。服务器的崩溃十有八九就是因为不正确的内存和资源管理导致，更讨厌的是这种内存和资源管理问题即使被发现了，也很难定位到具体的错误地点，导致无数程序员通宵达旦地调试程序。</p><p>​ 手动管理内存的另外一个问题就是由于指针的到处传递而无法确定何时可以释放该指针所指向的内存块。假如代码中某个位置释放了内存，而另一些地方还在使用指向这块内存的指针，那么这些指针就变成了所谓的“野指针”（wild pointer）或者“悬空指针”（dangling pointer），对这些指针进行的任何读写操作都会导致不可预料的后果。</p><p>​ 由于这个问题导致后面除了一些非常著名的内存检查工具，比如Rational Purify、Compuware BoundsChecker和英特尔的Parallel Inspector等。到目前为止，内存泄露的最佳解决方案是在语言级别引入自动垃圾回收算法（Garbage Collection，简称GC）所谓垃圾回收，</p><p>​ Go语言作为一门新生的开发语言，当然不能忽略内存管理这个问题。 因此Go语言中不需要delete关键字，也不需要free()方法来明确释放内存如果使用Go语言实现，我们就完全不用考虑何时需要释放之前分配的内存的问题，系统会自动帮我们判断，并在合适的时候（比如CPU相对空闲的时候）进行自动垃圾收集工作。</p><h4 id=2更丰富的内置类型><strong>2)更丰富的内置类型</strong></h4><p><strong>引用类型</strong>：切片、字典、数组、通道、函数</p><p><strong>值类型</strong>：数组、基础数据类型、结构体</p><h4 id=3函数多返回值><strong>3)函数多返回值</strong></h4><p>目前的主流语言中除Python外基本都不支持函数的多返回值功能；Go语言革命性地在静态开发语言阵营中率先提供了多返回值功能。
 func 函数名(参数列表)(返回值列表) {
 // 函数体
 }</p><p>并不是每一个返回值都必须赋值，可以直接用下划线作为占位符来忽略其他不关心的返回值。
@@ -75,10 +76,10 @@ _, _, lastName, _ := getName()</p><h4 id=4错误处理><strong>4)错误处理</s
 Go语言实现了CSP（通信顺序进程，Communicating Sequential Process）模型来作为goroutine间的推荐通信方式。在CSP模型中，进程之间只能通过一对通信原语实现协作。Go语言用channel（通道）这个概念来轻巧地实现了CSP模型。channel的使用方式比较接近Unix系统中的管道（pipe）概念，可以方便地进行跨goroutine的通信。
 一个进程内创建的所有goroutine运行在同一个内存地址空间中，如果需要访问共享的内存变量，可以通过Go语言标准库中的sync包提供了完备的读写锁功能来访问。</p><h4 id=8反射><strong>8)反射</strong></h4><p>​ 反射（reflection）是在Java语言出现后迅速流行起来的一种概念。通过反射，你可以获取对象类型的详细信息，并可动态操作对象。反射是把双刃剑，功能强大但代码可读性并不理想。若非必要，我们并不推荐使用反射。
 ​ Go语言的反射实现了反射的大部分功能，但不能通过反射创建对象实例。在GO语言中反射最常见的使用场景是做对象的序列化（serialization，有时候也叫Marshal & Unmarshal）。例如，Go语言标准库的encoding/json、encoding/xml、encoding/gob、encoding/binary等包就大量
-依赖于反射功能来实现。</p><h4 id=9语言交互性><strong>9)语言交互性</strong></h4><p>由于Go语言与C语言之间的天生联系，Go语言可以用通过Cgo重用现有C模块，Cgo既是语言特性，同时也是一个工具的名称。与Java中的JNI不同，Cgo的用法非常简单。</p><h3 id=2第一个go-程序>2.第一个Go 程序</h3><pre><code>package main
+依赖于反射功能来实现。</p><h4 id=9语言交互性><strong>9)语言交互性</strong></h4><p>由于Go语言与C语言之间的天生联系，Go语言可以用通过Cgo重用现有C模块，Cgo既是语言特性，同时也是一个工具的名称。与Java中的JNI不同，Cgo的用法非常简单。</p><h3 id=2第一个go-程序>2.第一个Go 程序</h3><p>每个Go源代码文件的开头都是一个package声明，表示该Go代码所属的包。包是Go语言里最基本的分发单位，也是工程管理中依赖关系的体现。要生成Go可执行程序，必须建立一个名字为main的包，并且在该包中包含一个叫main()的函数（该函数是Go可执行程序的执行起点）。</p><pre><code>package main
 import &quot;fmt&quot;// 我们需要使用fmt包中的Println()函数
 func main() {
-fmt.Println(&quot;Hello, world. 你好，世界！&quot;)
+   fmt.Println(&quot;Hello, world. 你好，世界！&quot;)
 }
 </code></pre><ol><li><p>Go语言的main()函数不能带参数，也不能定义返回值。命令行传入的参数在os.Args变量中保存。如果需要支持命令行开关，可使用flag包。</p></li><li><p>Go程序的代码注释与C++保持一致：</p></li></ol><pre><code>/*
 块注释
@@ -107,15 +108,13 @@ go test simplemath
 
 带参数运行
 go run ./src/qiaomingzi.github.io/base/fmt1/main.go -age=11 -name=limingzi
-
-
 </code></pre><h3 id=3开发工具>3.开发工具</h3><p> 文本编辑工具gedit（Linux）/Notepad++（Windows）/Fraise（Mac OS X）；
  安装了GoClipse插件的Eclipse，集成性做得很好；
  Vim/Emacs，万能开发工具；
  LiteIDE，一款专为Go语言开发的集成开发环境
  goland 非免费
- VScode</p><h2 id=三顺序编程>三：顺序编程</h2><pre><code>
-1. 变量申明
+ VScode</p><h3 id=4工程管理>4.工程管理</h3><p>早期Go语言使用makefile作为临时方案，到了Go 1发布时引入了强大无比的Go命令行工具。Go命令行工具的革命性之处在于彻底消除了工程文件的概念，完全用目录结构和包名来推导工程结构和构建顺序。</p><p>​ Go语言所提供的是尽量简单的语法和尽量完善的库，以尽可能降低问题的发生概率，还可以用打印日志和使用GDB进行逐步调试。</p><p>​ GDB调试：Go语言编译的二进制程序直接支持GDB调试，比如用go build calc编译出来的可执行文件calc，就可以直接用以下命令以调试模式运行：
+$ gdb calc</p><h2 id=三顺序编程>三：顺序编程</h2><p>Go语言是不折不扣的强类型语言（静态类型语言）。Go语言为什么会被称为“更好的C语言”！！！</p><p>同Go语言的其他符号（symbol）一样，以大写字母开头的常量在包外可见。</p><h3 id=1变量>1.变量</h3><pre><code>1. 变量申明
 var v1 int
 var v2 string
 var v3 [10]int // 数组
@@ -136,7 +135,144 @@ var (
 var v1 int = 10 // 正确的使用方式1
 var v2 = 10 // 正确的使用方式2，编译器可以自动推导出v2的类型
 v3 := 10 // 正确的使用方式3，编译器可以自动推导出v3的类型
-</code></pre><h3 id=fmt输出格式>fmt输出格式</h3><table><thead><tr><th>动 词</th><th>功 能</th></tr></thead><tbody><tr><td>%v</td><td>按值的本来值输出</td></tr><tr><td>%+v</td><td>在 %v 基础上，对结构体字段名和值进行展开</td></tr><tr><td>%#v</td><td>输出 Go 语言语法格式的值</td></tr><tr><td>%T</td><td>输出 Go 语言语法格式的类型和值</td></tr><tr><td>%%</td><td>输出 % 本体</td></tr><tr><td>%b</td><td>整型以二进制方式显示</td></tr><tr><td>%o</td><td>整型以八进制方式显示</td></tr><tr><td>%d</td><td>整型以十进制方式显示</td></tr><tr><td>%x</td><td>整型以十六进制方式显示</td></tr><tr><td>%X</td><td>整型以十六进制、字母大写方式显示</td></tr><tr><td>%U</td><td>Unicode 字符</td></tr><tr><td>%f</td><td>浮点数</td></tr><tr><td>%p</td><td>指针，十六进制方式显示</td></tr></tbody></table><h2 id=四面向对象编程>四：面向对象编程</h2><p>Go语言初始定位为高并发的服务器端程序，因此不太适合开发GUI程序</p><h2 id=五并发编程>五：并发编程</h2><h2 id=六网络编程>六：网络编程</h2><h2 id=七进阶话题>七：进阶话题</h2><h2 id=八安全编程>八：安全编程</h2><p>PKI，全称公钥基础设施，是使用非对称加密理论，提供数字签名、加密、数字证书等服务的体系。</p><p>数字签名，是指用于标记数字文件拥有者、创造者、分发者身份的字符串。数字签名拥有标记文件身份、分发的不可抵赖性等作用。</p><h4 id=数据加密>数据加密</h4><p>采用单密钥的加密算法，我们称为对称加密。整个系统由如下几部分构成：需要加密的明文、加密算法和密钥。在加密和解密中，使用的密钥只有一个。常见的单密钥加密算法有DES、AES、RC4等。</p><p>采用双密钥的加密算法，我们称为非对称加密。整个系统由如下几个部分构成：需要加密的明文、加密算法、私钥和公钥。在该系统中，私钥和公钥都可以被用作加密或者解密，但是用私钥加密的明文，必须要用对应的公钥解密，用公钥加密的明文，必须用对应的私钥解密。常见的双密钥加密算法有RSA等。</p><p>哈希算法是一种从任意数据中创建固定长度摘要信息的办法。一般我们要求，对于不同的数据，要求产生的摘要信息也是唯一的。常见的哈希算法包括MD5、SHA-1等。</p><h2 id=九工程管理>九：工程管理</h2><p>Go语言在设计之初就考虑了在语言层面如何更好地解决当前工程管理中的一些常见问题，让学习者在学习语言阶段自然而然地养成了工程的习惯，避免出现学院派和工程派两种明显不同的侧重点。</p><p>任何一门程序设计语言要能推广开来并投入到生产环境中，高效、易用、有好的开发环境都是必不可少的。</p><h4 id=1代码风格>1.代码风格</h4><p>“代码必须是本着写给人阅读的原则来编写，只不过顺便给机器执行而已。”，代码风格，是一个与人相关、与机器无关的问题。代码风格的好坏，不影响编译器的工作，但是影响团队协同，影响代码的复用、演进以及缺陷修复。</p><h5 id=强制性编码规范>强制性编码规范</h5><p>1)任何需要对外暴露的名字必须以大写字母开头，不需要对外暴露的则应该以小写字母开头。</p><p>2)而Go语言明确宣告了拥护骆驼命名法而排斥下划线法</p><p>3)花括号位置问题</p><pre><code>反例：
+
+3.变量赋值
+var v10 int
+v10 = 123
+
+多重赋值功能，如下面这个交换i和j变量的语句：
+i, j = j, i   &lt;= 其他语言需要中间变量：t = i; i = j; j = t;
+
+4.匿名变量
+func GetName() (firstName, lastName, nickName string) {
+  return &quot;May&quot;, &quot;Chan&quot;, &quot;Chibi Maruko&quot;
+}
+若只想获得nickName，可以使用_下划线屏蔽不相关返回值，则函数调用语句可以用如下方式编写：
+_, _, nickName := GetName()
+</code></pre><h3 id=3常量>3.常量</h3><p>在Go语言中，常量是指编译期间就已知且不可改变的值。常量可以是数值类型（包括整型、浮点型和复数类型）、布尔类型、字符串类型等。</p><p>如：-12在C语言中会认为是一个int类型的常量，如果要指定一个值为-12的long类型常量，需要写成-12l。Go语言
+的字面常量更接近我们自然语言中的常量概念，它是无类型的。只要这个常量在相应类型的值域范围内，就可以作为该类型的常量，比如上面的常量-12，它可以赋值给int、uint、int32、int64、float32、float64、complex64、complex128等类型的变量。</p><p>常量的赋值是一个编译期行为，所以右值不能出现任何需要运行期才能得出结果的表达式</p><pre><code>1).常量定义
+const Pi float64 = 3.14159265358979323846
+const zero = 0.0 // 无类型浮点常量
+const (
+size int64 = 1024
+eof = -1 // 无类型整型常量
+)
+const u, v float32 = 0, 3 // u = 0.0, v = 3.0，常量的多重赋值
+const a, b, c = 3, 4, &quot;foo&quot;
+// a = 3, b = 4, c = &quot;foo&quot;, 无类型整型和字符串常量
+
+const mask = 1 &lt;&lt; 3 //在编译期运算的常量表达式
+
+2)预定义常量
+Go语言预定义了这些常量：true、false和iota。
+iota比较特殊，可以被认为是一个可被编译器修改的常量，在每一个const关键字出现时被重置为0，然后在下一个const出现之前，每出现一次iota，其所代表的数字会自动增1。
+
+const ( // iota被重设为0
+c0 = iota // c0 == 0
+c1 = iota // c1 == 1
+c2 = iota // c2 == 2
+)
+
+const ( // iota被重设为0，如果两个const的赋值语句的表达式是一样的，那么可以省略后一个赋值表达式
+c0 = iota // c0 == 0
+c1 // c1 == 1
+c2 // c2 == 2
+)
+
+const x = iota // x == 0 (因为iota又被重设为0了)
+const y = iota // y == 0 (同上)
+
+3）枚举
+const (
+Sunday = iota
+Monday
+Tuesday
+Wednesday
+Thursday
+Friday
+Saturday
+numberOfDays // 这个常量没有导出
+)
+</code></pre><h3 id=4类型>4.类型</h3><p>Go语言内置以下这些基础类型：</p><blockquote><p>布尔类型：bool。
+整型：int8、byte、int16、>int、uint、uintptr等。
+浮点类型：float32、float64。
+复数类型：complex64、complex128。
+字符串：string。
+字符类型：rune。
+错误类型：error。</p></blockquote><p>此外，Go语言也支持以下这些复合类型：</p><blockquote><p>指针（pointer）
+数组（array）
+切片（slice）
+字典（map）
+通道（chan）
+结构体（struct）
+接口（interface）</p></blockquote><p><strong>类型表示</strong></p><p>在做强制类型转换时，需要注意数据长度被截短而发生的数据精度损失（比如将浮点数强制转为整数）和值溢出（值超过转换的目标类型的值范围时）问题。</p><pre><code>var value2 int32
+value1 := 64 // value1将会被自动推导为int类型
+value2 = int32(value1) // 编译通过
+value2 = value1 // 编译错误 ，int和int32在Go语言里被认为是两种不同的类型，编译器也不会帮你自动
+做类型转换
+</code></pre><p><strong>数值运算</strong></p><p>Go语言支持下面的常规整数运算：+、-、*、/和%</p><p><strong>比较运算</strong></p><p>Go语言支持以下的几种比较运算符：>、&lt;、==、>=、&lt;=和!=</p><pre><code>两个不同类型的整型数不能直接比较，比如int8类型的数和int类型的数不能直接比较，但各种类型的整型变量都可以直接与字面常量（literal）进行比较，比如：
+
+var i int32
+var j int64
+i, j = 1, 2
+if i == j { // 编译错误
+fmt.Println(&quot;i and j are equal.&quot;)
+}
+if i == 1 || j == 2 { // 编译通过
+fmt.Println(&quot;i and j are equal.&quot;)
+}
+</code></pre><p><strong>位运算</strong></p><p><img src=E:/workspace/limzWorkspace/limz-blog-hugo/content/article/%E8%AF%BB%E4%B9%A6/GO%E8%AF%AD%E8%A8%80%E7%BC%96%E7%A8%8B/images/gyybc_1.png alt></p><h4 id=1布尔类型>1)布尔类型</h4><p>布尔类型不能接受其他类型的赋值，不支持自动或强制的类型转换</p><pre><code>var v1 bool
+v1 = true
+v2 := (1 == 2) // v2也会被推导为bool类型
+</code></pre><h4 id=2整型>2)整型</h4><p><img src=./images/gyybc_0.png alt></p><h4 id=3浮点型><strong>3)浮点型</strong></h4><p>浮点型用于表示包含小数点的数据，Go语言中的浮点类型采用IEEE-754标准的表达方式。Go语言定义了两个类型float32和float64，其中float32等价于C语言的float类型，float64等价于C语言的double类型</p><p>浮点数不是一种精确的表达方式，所以像整型那样直接用==来判断两个浮点数是否相等是不可行的，这可能会导致不稳定的结果。</p><pre><code>var fvalue1 float32
+fvalue1 = 12
+fvalue2 := 12.0 // 如果不加小数点，fvalue2会被推导为整型而不是浮点型
+fvalue1 = float32(fvalue2) //强制类型转换
+</code></pre><h4 id=4复数><strong>4)复数</strong></h4><p>复数实际上由两个实数（在计算机中用浮点数表示）构成，一个表示实部（real），一个表示虚部（imag），对于一个复数z = complex(x, y)，就可以通过Go语言内置函数real(z)获得该复数的实
+部，也就是x，通过imag(z)获得该复数的虚部，也就是y。</p><pre><code>var value1 complex64 // 由2个float32构成的复数类型
+value1 = 3.2 + 12i
+value2 := 3.2 + 12i // value2是complex128类型
+value3 := complex(3.2, 12) // value3结果同 value2
+</code></pre><h4 id=5字符串><strong>5)字符串</strong></h4><p>在Go语言中，字符串也是一种基本类型。相比之下， C/C++语言中并不存在原生的字符串类型，通常使用字符数组来表示，并以字符指针来传递。Go语言仅支持UTF-8和Unicode编码。</p><pre><code>var str string // 声明一个字符串变量
+str = &quot;Hello world&quot; // 字符串赋值
+ch := str[0] // 取字符串的第一个字符
+fmt.Printf(&quot;The length of \&quot;%s\&quot; is %d \n&quot;, str, len(str))
+fmt.Printf(&quot;The first character of \&quot;%s\&quot; is %c.\n&quot;, str, ch)
+
+//字符串的内容可以用类似于数组下标的方式获取，但与数组不同，字符串的内容不能在初始化后被修改 
+str := &quot;Hello world&quot; // 字符串也支持声明时进行初始化的做法
+str[0] = 'X' // 编译错误
+</code></pre><h4 id=6字符类型><strong>6)字符类型</strong></h4><p>在Go语言中支持两个字符类型，一个是byte（实际上是uint8的别名），代表UTF-8字符串的单个字节的值；另一个是rune，代表单个Unicode字符。出于简化语言的考虑，Go语言的多数API都假设字符串为UTF-8编码。尽管Unicode字符在标准库中有支持，但实际上较少使用。</p><h4 id=7数组><strong>7)数组</strong></h4><p>数组就是指一系列同一类型数据的集合。在Go语言中，数组长度在定义后就不可更改。</p><p>在Go语言中数组是一个值类型（value type）。所有的值类型变量在赋值和作为参数传递时都将产生一次复制动作。</p><pre><code>[32]byte // 长度为32的数组，每个元素为一个字节
+[2*N] struct { x, y int32 } // 复杂类型数组
+[1000]*float64 // 指针数组
+[3][5]int // 二维数组
+[2][2][2]float64 // 等同于[2]([2]([2]float64))
+</code></pre><h4 id=8数组切片><strong>8)数组切片</strong></h4><p>数组切片的数据结构可以抽象为以下3个变量：</p><ul><li><p>一个指向原生数组的指针；</p></li><li><p>数组切片中的元素个数 len(slice)</p></li><li><p>数组切片已分配的存储空间。cap(slice)</p></li></ul><pre><code>基于数组创建数组切片
+var myArray [10]int = [10]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+var mySlice []int = myArray[:5]
+
+直接创建
+mySlice1 := make([]int, 5) //创建一个初始元素个数为5的数组切片，元素初始值为0
+mySlice2 := make([]int, 5, 10)//创建一个初始元素个数为5的数组切片，元素初始值为0，并预留10个元素的存储空间
+mySlice3 := []int{1, 2, 3, 4, 5} //直接创建并初始化包含5个元素的数组切片
+
+动态增减元素
+mySlice := make([]int, 5, 10)
+mySlice = append(mySlice, 1, 2, 3)
+
+mySlice2 := []int{8, 9, 10}
+mySlice = append(mySlice, mySlice2...)// 给mySlice后面添加另一个数组切片
+
+基于数组切片创建数组切片
+oldSlice := []int{1, 2, 3, 4, 5}
+newSlice := oldSlice[:3] // 基于oldSlice的前3个元素构建新数组切片
+
+内容复制
+slice1 := []int{1, 2, 3, 4, 5}
+slice2 := []int{5, 4, 3}
+copy(slice2, slice1) // 只会复制slice1的前3个元素到slice2中
+copy(slice1, slice2) // 只会复制slice2的3个元素到slice1的前3个位置
+</code></pre><p><strong>9)map字典</strong></p><p>map是一堆键值对的未排序集合。在C++/Java中，map一般都以库的方式提供，比如在C++中是STL std::map&lt;>，在C#中是Dictionary&lt;>，在Java中是Hashmap&lt;>，在这些语言中，如果要使用map，事先要引用相应的库。而在Go中，使用map不需要引入任何库</p><h2 id=四面向对象编程>四：面向对象编程</h2><p>Go语言初始定位为高并发的服务器端程序，因此不太适合开发GUI程序</p><h2 id=五并发编程>五：并发编程</h2><h2 id=六网络编程>六：网络编程</h2><h2 id=七进阶话题>七：进阶话题</h2><h2 id=八安全编程>八：安全编程</h2><p>PKI，全称公钥基础设施，是使用非对称加密理论，提供数字签名、加密、数字证书等服务的体系。</p><p>数字签名，是指用于标记数字文件拥有者、创造者、分发者身份的字符串。数字签名拥有标记文件身份、分发的不可抵赖性等作用。</p><h4 id=数据加密>数据加密</h4><p>采用单密钥的加密算法，我们称为对称加密。整个系统由如下几部分构成：需要加密的明文、加密算法和密钥。在加密和解密中，使用的密钥只有一个。常见的单密钥加密算法有DES、AES、RC4等。</p><p>采用双密钥的加密算法，我们称为非对称加密。整个系统由如下几个部分构成：需要加密的明文、加密算法、私钥和公钥。在该系统中，私钥和公钥都可以被用作加密或者解密，但是用私钥加密的明文，必须要用对应的公钥解密，用公钥加密的明文，必须用对应的私钥解密。常见的双密钥加密算法有RSA等。</p><p>哈希算法是一种从任意数据中创建固定长度摘要信息的办法。一般我们要求，对于不同的数据，要求产生的摘要信息也是唯一的。常见的哈希算法包括MD5、SHA-1等。</p><h2 id=九工程管理>九：工程管理</h2><p>Go语言在设计之初就考虑了在语言层面如何更好地解决当前工程管理中的一些常见问题，让学习者在学习语言阶段自然而然地养成了工程的习惯，避免出现学院派和工程派两种明显不同的侧重点。</p><p>任何一门程序设计语言要能推广开来并投入到生产环境中，高效、易用、有好的开发环境都是必不可少的。</p><h4 id=1代码风格>1.代码风格</h4><p>“代码必须是本着写给人阅读的原则来编写，只不过顺便给机器执行而已。”，代码风格，是一个与人相关、与机器无关的问题。代码风格的好坏，不影响编译器的工作，但是影响团队协同，影响代码的复用、演进以及缺陷修复。</p><h5 id=强制性编码规范>强制性编码规范</h5><p>1)任何需要对外暴露的名字必须以大写字母开头，不需要对外暴露的则应该以小写字母开头。</p><p>2)而Go语言明确宣告了拥护骆驼命名法而排斥下划线法</p><p>3)花括号位置问题</p><pre><code>反例：
 func Foo(a, b int)（ret int, err error） 
 {
     ....doSomthing..
@@ -237,10 +373,8 @@ func BenchmarkAdd1(t *testing.T)
  支持文档提取和展示
  集成语言文档
  开源，或者免费
- 最好能够支持代码自动完成（在Visual Studio中称之为IntelliSense）</p><h4 id=参考工具>参考工具</h4><p>gedit</p><p>Vim</p><p>Eclipse</p><p>Notepad++</p><p>LiteIDE</p><p>goland</p><h2 id=附录>附录</h2><h3 id=go标准库>Go标准库</h3><p>Go标准库可以大致按其中库的功能进行以下分类:
- 输入输出。这个分类包括二进制以及文本格式在屏幕、键盘、文件以及其他设备上的输入输出等，比如二进制文件的读写。对应于此分类的包有bufio、fmt、io、log和flag等，其中flag用于处理命令行参数。</p><p> 文本处理。这个分类包括字符串和文本内容的处理，比如字符编码转换等。对应于此分类的包有encoding、bytes、strings、strconv、text、mime、unicode、regexp、index和path等。其中path用于处理路径字符串。</p><p> 网络。这个分类包括开发网络程序所需要的包，比如Socket编程和网站开发等。对应于此分类的包有：net、http和expvar等。</p><p> 系统。这个分类包含对系统功能的封装，比如对操作系统的交互以及原子性操作等。对应于此分类的包有os、syscall、sync、time和unsafe等。</p><p>226 附录A
- 数据结构与算法。对应于此分类的包有math、sort、container、crypto、hash、archive、compress和image等。因为image包里提供的图像编解码都是算法，所以也归入此类。</p><p> 运行时。对应于此分类的包有：runtime、reflect和go等。</p><h3 id=常用包>常用包</h3><p> fmt。它实现了格式化的输入输出操作，其中的fmt.Printf()和fmt.Println()是开发者使用最为频繁的函数。</p><p> io。它实现了一系列非平台相关的IO相关接口和实现，比如提供了对os中系统相关的IO功能的封装。我们在进行流式读写（比如读写文件）时，通常会用到该包。</p><p> bufio。它在io的基础上提供了缓存功能。在具备了缓存功能后，bufio可以比较方便地提供ReadLine之类的操作。</p><p> strconv。本包提供字符串与基本数据类型互转的能力。</p><p> os。本包提供了对操作系统功能的非平台相关访问接口。接口为Unix风格。提供的功能包括文件操作、进程管理、信号和用户账号等。</p><p> sync。它提供了基本的同步原语。在多个goroutine访问共享资源的时候，需要使用sync中提供的锁机制。</p><p> flag。它提供命令行参数的规则定义和传入参数解析的功能。绝大部分的命令行程序都需要用到这个包。</p><p> encoding/json。JSON目前广泛用做网络程序中的通信格式。本包提供了对JSON的基本支持，比如从一个对象序列化为JSON字符串，或者从JSON字符串反序列化出一个具体的对象等。</p><p> http。它是一个强大而易用的包，也是Golang语言是一门“互联网语言”的最好佐证。通
-过http包，只需要数行代码，即可实现一个爬虫或者一个Web服务器，这在传统语言中是无法想象的。</p><h3 id=gotool命令>Gotool命令</h3><h4 id=go命令行>Go命令行</h4><pre><code>Usage:
+ 最好能够支持代码自动完成（在Visual Studio中称之为IntelliSense）</p><h4 id=参考工具>参考工具</h4><p>gedit、Vim、Eclipse、Notepad++、LiteIDE、goland</p><h2 id=附录>附录</h2><h3 id=1go标准库>1.Go标准库</h3><p>Go标准库可以大致按其中库的功能进行以下分类:</p><ul><li><p>输入输出。这个分类包括二进制以及文本格式在屏幕、键盘、文件以及其他设备上的输入输出等，比如二进制文件的读写。对应于此分类的包有bufio、fmt、io、log和flag等，其中flag用于处理命令行参数。</p></li><li><p>文本处理。这个分类包括字符串和文本内容的处理，比如字符编码转换等。对应于此分类的包有encoding、bytes、strings、strconv、text、mime、unicode、regexp、index和path等。其中path用于处理路径字符串。</p></li><li><p>网络。这个分类包括开发网络程序所需要的包，比如Socket编程和网站开发等。对应于此分类的包有：net、http和expvar等。</p></li><li><p>系统。这个分类包含对系统功能的封装，比如对操作系统的交互以及原子性操作等。对应于此分类的包有os、syscall、sync、time和unsafe等。</p></li><li><p>数据结构与算法。对应于此分类的包有math、sort、container、crypto、hash、archive、compress和image等。因为image包里提供的图像编解码都是算法，所以也归入此类。</p></li><li><p>运行时。对应于此分类的包有：runtime、reflect和go等。</p></li></ul><h3 id=2常用包>2.常用包</h3><p><strong>fmt</strong>。它实现了格式化的输入输出操作，其中的fmt.Printf()和fmt.Println()是开发者使用最为频繁的函数。</p><p><strong>io</strong>。它实现了一系列非平台相关的IO相关接口和实现，比如提供了对os中系统相关的IO功能的封装。我们在进行流式读写（比如读写文件）时，通常会用到该包。</p><p><strong>bufio</strong>。它在io的基础上提供了缓存功能。在具备了缓存功能后，bufio可以比较方便地提供ReadLine之类的操作。</p><p><strong>strconv</strong>。本包提供字符串与基本数据类型互转的能力。</p><p><strong>os</strong>。本包提供了对操作系统功能的非平台相关访问接口。接口为Unix风格。提供的功能包括文件操作、进程管理、信号和用户账号等。</p><p><strong>sync</strong>。它提供了基本的同步原语。在多个goroutine访问共享资源的时候，需要使用sync中提供的锁机制。</p><p><strong>flag</strong>。它提供命令行参数的规则定义和传入参数解析的功能。绝大部分的命令行程序都需要用到这个包。</p><p><strong>encoding/json</strong>。JSON目前广泛用做网络程序中的通信格式。本包提供了对JSON的基本支持，比如从一个对象序列化为JSON字符串，或者从JSON字符串反序列化出一个具体的对象等。</p><p><strong>http</strong>。它是一个强大而易用的包，也是Golang语言是一门“互联网语言”的最好佐证。通
+过http包，只需要数行代码，即可实现一个爬虫或者一个Web服务器，这在传统语言中是无法想象的。</p><h3 id=3gotool命令>3.Gotool命令</h3><h4 id=31go命令行>3.1Go命令行</h4><pre><code>Usage:
 
 	go &lt;command&gt; [arguments]
 
@@ -287,12 +421,12 @@ Additional help topics:
 	testflag        testing flags
 	testfunc        testing functions
 	vcs             controlling version control with GOVCS
-</code></pre><h4 id=go-module>Go Module</h4><p>gomod 包源码和链接库保存在 <code>$GOPATH/pkg/mod</code> 目录下。</p><pre><code> go list -u -m all 查看所有依赖
+</code></pre><h4 id=32go-module>3.2Go Module</h4><p>gomod 包源码和链接库保存在 <code>$GOPATH/pkg/mod</code> 目录下。</p><pre><code> go list -u -m all 查看所有依赖
  go mod tidy  移除不需要的依赖
  go mod edit -fmt 格式化go.mod文件
  go mod edit --require=rsc.io/quote@v3.1.0  更新 rsc.io/quote 到 v3.1.0 版
 
-</code></pre><h3 id=go安装>GO安装</h3><pre><code>1. MSI installer(https://golang.org/dl/)
+</code></pre><h3 id=4go安装>4.GO安装</h3><pre><code>1. MSI installer(https://golang.org/dl/)
 
 Open the MSI file and follow the prompts to install the Go tools. By default, the installer puts the Go distribution in c:\Go.
 
@@ -386,7 +520,7 @@ GOPATH=/home/user/gocode
             foo/
                 bar.a          (installed package object)
 
-</code></pre><h3 id=相关问题>相关问题</h3><h4 id=1go-githubcomburntsushitomlv031-get-httpsproxygolangorggithubcom21burnt21sushitomlvv031mod-dial-tcp-17221716081443-connectex-a-connection-attempt-failed-because-the-connected-party-did-not-properly-respond-after-a-period-of-time-or-established-connection-failed-because-connected-host-has-failed-to-respond>1.go: <a href=mailto:github.com/BurntSushi/toml@v0.3.1>github.com/BurntSushi/toml@v0.3.1</a>: Get &ldquo;<a href=https://proxy.golang.org/github.com/%21burnt%21sushi/toml/@v/v0.3.1.mod%22:>https://proxy.golang.org/github.com/%21burnt%21sushi/toml/@v/v0.3.1.mod":</a> dial tcp 172.217.160.81:443: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.</h4><p>设置国内代理地址<code>go env -w GOPROXY=https://goproxy.cn</code></p><h4 id=2运行出错-failed-to-build-the-application-go-githubcomastaxiebeegov1121-missing-gosum-entry-to-add-it>2.运行出错 Failed to build the application: go: <a href=mailto:github.com/astaxie/beego@v1.12.1>github.com/astaxie/beego@v1.12.1</a>: missing go.sum entry; to add it:</h4><p>go mod tidy</p><footer><section class=categories-tags><span><svg class="icon icon-folder"><use xlink:href="#icon-folder"/></svg><span class=screen-reader-text>This entry was posted in</span>
+</code></pre><h3 id=5fmt格式>5.fmt格式</h3><table><thead><tr><th>动 词</th><th>功 能</th></tr></thead><tbody><tr><td>%v</td><td>按值的本来值输出</td></tr><tr><td>%+v</td><td>在 %v 基础上，对结构体字段名和值进行展开</td></tr><tr><td>%#v</td><td>输出 Go 语言语法格式的值</td></tr><tr><td>%T</td><td>输出 Go 语言语法格式的类型和值</td></tr><tr><td>%%</td><td>输出 % 本体</td></tr><tr><td>%b</td><td>整型以二进制方式显示</td></tr><tr><td>%o</td><td>整型以八进制方式显示</td></tr><tr><td>%d</td><td>整型以十进制方式显示</td></tr><tr><td>%x</td><td>整型以十六进制方式显示</td></tr><tr><td>%X</td><td>整型以十六进制、字母大写方式显示</td></tr><tr><td>%U</td><td>Unicode 字符</td></tr><tr><td>%f</td><td>浮点数</td></tr><tr><td>%p</td><td>指针，十六进制方式显示</td></tr></tbody></table><h3 id=6相关问题>6.相关问题</h3><h4 id=1go-githubcomburntsushitomlv031-get-httpsproxygolangorggithubcom21burnt21sushitomlvv031mod-dial-tcp-17221716081443-connectex-a-connection-attempt-failed-because-the-connected-party-did-not-properly-respond-after-a-period-of-time-or-established-connection-failed-because-connected-host-has-failed-to-respond>1.go: <a href=mailto:github.com/BurntSushi/toml@v0.3.1>github.com/BurntSushi/toml@v0.3.1</a>: Get &ldquo;<a href=https://proxy.golang.org/github.com/%21burnt%21sushi/toml/@v/v0.3.1.mod%22:>https://proxy.golang.org/github.com/%21burnt%21sushi/toml/@v/v0.3.1.mod":</a> dial tcp 172.217.160.81:443: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.</h4><p>设置国内代理地址<code>go env -w GOPROXY=https://goproxy.cn</code></p><h4 id=2运行出错-failed-to-build-the-application-go-githubcomastaxiebeegov1121-missing-gosum-entry-to-add-it>2.运行出错 Failed to build the application: go: <a href=mailto:github.com/astaxie/beego@v1.12.1>github.com/astaxie/beego@v1.12.1</a>: missing go.sum entry; to add it:</h4><p>go mod tidy</p><footer><section class=categories-tags><span><svg class="icon icon-folder"><use xlink:href="#icon-folder"/></svg><span class=screen-reader-text>This entry was posted in</span>
 <a href=/categories/%E5%90%8E%E7%AB%AF>后端</a></span> <span><svg class="icon icon-tag"><use xlink:href="#icon-tag"/></svg><a class=article-tags href=/tags/go>GO</a></span></section></footer><div id=comments-button-container class=comments-button-container><button type=button onclick=loadDisqus() class=comments-button><svg class="icon icon-bubble"><use xlink:href="#icon-bubble"/></svg> <span>Show Comments</span></button></div><div id=disqus_thread></div><script type=text/javascript>function loadDisqus(){var a,b;document.getElementById('comments-button-container').style.display='none',a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='李明梓',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)}</script><noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript></article></main><aside id=sidebar><div class=widget><div class=widget-title>Recent posts</div><ol class="recent-widget widget-content"><li><a href=/%E8%8B%B1%E8%AF%AD%E8%87%AA%E7%84%B6%E6%8B%BC%E8%AF%BB/>英语自然拼读</a></li><li><a href=/%E8%8B%B1%E8%AF%AD%E9%9F%B3%E8%8A%82%E5%88%92%E5%88%86/>英语音节划分</a></li><li><a href=/%E8%AF%BBgo%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%8336%E8%AE%B2/>读[GO语言核心36讲]</a></li><li><a href=/%E5%85%B3%E4%BA%8E%E8%B0%83%E9%9F%B3%E5%A3%B0%E5%8D%A1/>关于调音声卡</a></li><li><a href=/go-sdk/>GO SDK</a></li></ol></div><div class=widget><div class=widget-title>Categories</div><ol class="all-categories widget-content"><li><a href=/categories/devops>devops</a> (1)</li><li><a href=/categories/java>java</a> (4)</li><li><a href=/categories/mysql>mysql</a> (1)</li><li><a href=/categories/%E5%85%B6%E4%BB%96>其他</a> (5)</li><li><a href=/categories/%E5%89%8D%E7%AB%AF>前端</a> (1)</li><li><a href=/categories/%E5%90%8E%E7%AB%AF>后端</a> (4)</li><li><a href=/categories/%E5%9F%BA%E7%A1%80>基础</a> (1)</li><li><a href=/categories/%E5%B7%A5%E5%85%B7>工具</a> (3)</li><li><a href=/categories/%E8%8B%B1%E8%AF%AD>英语</a> (2)</li></ol></div><div class=widget><div class=widget-title>Tags</div><div class="tag-cloud-tags widget-content"><a href=/tags/canal aria-label="canal (2 posts)" style=font-size:1rem>canal</a>
 <a href=/tags/git aria-label="git (1 posts)" style=font-size:1rem>git</a>
 <a href=/tags/go aria-label="go (4 posts)" style=font-size:1rem>go</a>
