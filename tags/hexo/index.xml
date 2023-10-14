@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>hexo on mingzi.li blog</title><link>http://qiaomingzi.github.io/tags/hexo/</link><description>Recent content in hexo on mingzi.li blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sat, 16 Sep 2017 15:42:33 +0000</lastBuildDate><atom:link href="http://qiaomingzi.github.io/tags/hexo/index.xml" rel="self" type="application/rss+xml"/><item><title>Hexo基础使用</title><link>http://qiaomingzi.github.io/hexo%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/</link><pubDate>Sat, 16 Sep 2017 15:42:33 +0000</pubDate><guid>http://qiaomingzi.github.io/hexo%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/</guid><description>博客工具
-概述 Hugo Hexo Jekyll 博客工具
-Hexo Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。
-安装hexo 安装 Hexo 相当简单。然而在安装前，您必须检查电脑中是否已安装下列应用程序：
-Node.js Git 如果您的电脑中已经安装上述必备程序，那么恭喜您！接下来只需要使用 npm 即可完成 Hexo 的安装。</description></item></channel></rss>

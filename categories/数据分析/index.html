@@ -1,30 +1,243 @@
-<!doctype html><html lang=en><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><title>数据分析 | mingzi.li blog</title><meta property="og:type" content="website"><meta property="og:title" content="数据分析"><meta property="og:url" content="http://qiaomingzi.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"><meta property="og:locale" content="en_GB"><meta property="og:image" content="http://qiaomingzi.github.io/images/og-image.png"><link rel=canonical href=http://qiaomingzi.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/><meta name=twitter:card content="summary"><meta name=twitter:site content="@p4lm"><link rel=stylesheet type=text/css href=/styles/main-bundle.108386b285ad502399f3a8ab890a333c177e59d922733a408892e466a7a87f70d143ace3585f247b62a75a780bd7bcff68b60fc6760b5ae1414e52c78fe708e7.css integrity media="screen, tv, projection"><link rel=stylesheet type=text/css href=/styles/print-bundle.f3d1ea3e2e864e24f7a26ff871aef6875b8e6246aad31fa6e63fdc9c91c629f6b4cdd7dca9beb3949f8b61a0db4c6fe8ec1bfc44ccf3a2cd9a91ea8e9eb20d44.css integrity media=print><link rel=preload as=font href=/fonts/muli1.woff2 type=font/woff2 crossorigin=anonymous><link rel=preload as=font href=/fonts/muli2.woff2 type=font/woff2 crossorigin=anonymous><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#04396c><meta name=theme-color content="#ffffff"><meta name=generator content="Hugo 0.83.1"><svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><symbol id="icon-arrow-right" viewBox="0 0 32 32"><path d="M19.414 27.414l10-10c.781-.781.781-2.047.0-2.828l-10-10c-.781-.781-2.047-.781-2.828.0s-.781 2.047.0 2.828L23.172 14H4c-1.105.0-2 .895-2 2s.895 2 2 2h19.172l-6.586 6.586c-.39.39-.586.902-.586 1.414s.195 1.024.586 1.414c.781.781 2.047.781 2.828.0z"/></symbol><symbol id="icon-arrow-left" viewBox="0 0 32 32"><path d="M12.586 27.414l-10-10c-.781-.781-.781-2.047.0-2.828l10-10c.781-.781 2.047-.781 2.828.0s.781 2.047.0 2.828L8.828 14H28c1.105.0 2 .895 2 2s-.895 2-2 2H8.828l6.586 6.586c.39.39.586.902.586 1.414s-.195 1.024-.586 1.414c-.781.781-2.047.781-2.828.0z"/></symbol><symbol id="icon-calendar" viewBox="0 0 32 32"><path d="M27.2 4.8h-1.6V8h-4.8V4.8h-9.6V8H6.4V4.8H4.8C3.038 4.8 1.6 6.24 1.6 8v19.2c0 1.76 1.438 3.2 3.2 3.2h22.4c1.76.0 3.2-1.44 3.2-3.2V8c0-1.76-1.44-3.2-3.2-3.2zm0 22.4H4.8V14.4h22.4v12.8zM10.4 1.6H7.2v5.6h3.2V1.6zm14.4.0h-3.2v5.6h3.2V1.6z"/></symbol><symbol id="icon-expand" viewBox="0 0 32 32"><path d="M11.179 17.579l-4.69 4.85-3.29-3.886v10.258h10.219l-3.888-3.33 4.848-4.691-3.2-3.2zM18.581 3.2l3.888 3.33-4.848 4.691 3.2 3.2 4.69-4.85 3.29 3.886V3.199H18.582z"/></symbol><symbol id="icon-collapse" viewBox="0 0 32 32"><path d="M6.56 22.56 1.6 27.2l3.2 3.2 4.64-4.96 3.36 3.36v-9.6H3.2l3.36 3.36zM30.4 4.8l-3.2-3.2-4.64 4.96L19.2 3.2v9.6h9.6l-3.36-3.36L30.4 4.8z"/></symbol><symbol id="icon-bubble" viewBox="0 0 32 32"><path d="M16 2c8.837.0 16 5.82 16 13s-7.163 13-16 13c-.849.0-1.682-.054-2.495-.158C10.068 31.279 5.966 31.895 2 31.986v-.841C4.142 30.096 6 28.184 6 26c0-.305-.024-.604-.068-.897-3.619-2.383-5.932-6.024-5.932-10.103.0-7.18 7.163-13 16-13z"/></symbol><symbol id="icon-folder" viewBox="0 0 32 32"><path d="M29.448 7.678C29.27 6.974 28.4 6.4 27.512 6.4H16.61c-.886.0-2.128-.509-2.755-1.131l-.954-.941c-.627-.622-1.867-1.128-2.754-1.128H4.939c-.888.0-1.694.715-1.792 1.59L2.68 9.6h27.09l-.322-1.922zM31.059 11.2h-30.118c-.547.0-.976.47-.923 1.016l1.477 15.47c.059.63.59 1.114 1.226 1.114h26.56c.635.0 1.165-.483 1.226-1.114l1.477-15.47c.053-.546-.376-1.016-.923-1.016z"/></symbol><symbol id="icon-tag" viewBox="0 0 32 32"><path d="M31.021.648c-.178-.502-.726-.768-1.23-.594s-.77.728-.595 1.232c1.486 4.272-1.464 7.462-3.714 9.171l-.909-1.302c-.306-.437-.989-.8-1.52-.806l-5.101.022c-.531-.01-1.32.234-1.755.541l-15.03 10.539c-.728.512-.904 1.515-.395 2.246l6.83 9.773c.512.728 1.33.64 2.059.131l15.03-10.541c.432-.306.931-.965 1.107-1.469l1.597-5.032c.176-.502.069-1.269-.237-1.706l-.554-.794c3.021-2.315 6.157-6.406 4.416-11.413zM24.027 15.621c-1.163.816-2.77.531-3.584-.634-.818-1.168-.533-2.774.632-3.594.925-.648 2.125-.602 2.989.027-.435.262-.734.416-.79.44-.482.229-.688.806-.461 1.288.166.35.514.557.875.557.138.0.278-.032.411-.094.31-.147.643-.322.99-.528.155.95-.222 1.947-1.062 2.538z"/></symbol><symbol id="icon-circle-with-cross" viewBox="0 0 32 32"><title>Close (Esc)</title><path d="M16 2.56C8.578 2.56 2.56 8.578 2.56 16S8.578 29.44 16 29.44 29.44 23.422 29.44 16 23.422 2.56 16 2.56zm7.662 18.338-2.766 2.766L16 18.766l-4.898 4.896-2.766-2.766L13.235 16l-4.898-4.898 2.766-2.765 4.896 4.896 4.898-4.898 2.766 2.766-4.899 4.898 4.898 4.898z"/></symbol></defs></svg></head><body x-data=window.blog class=articles-with-category :class="{ 'modal-open': isModalOpen, 'keyboard-navigation' : keyboardNavigation }" @mouseup="keyboardNavigation = false" @keydown.tab="keyboardNavigation = true" @keydown.escape=closeModals()><script>try{const a=window.localStorage.getItem('theme');a==='dark'&&document.querySelector('body').classList.add('dark'),a==='light'&&document.querySelector('body').classList.add('light')}catch(a){}</script><div id=page-wrapper><header><svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><symbol id="icon-home" viewBox="0 0 32 32"><path d="M32 18.451 16 6.031.0 18.451v-5.064l16-12.42 16 12.42zM28 18v12h-8v-8h-8v8H4V18l12-9z"/></symbol><symbol id="icon-user" viewBox="0 0 32 32"><path d="M18 22.082v-1.649c2.203-1.241 4-4.337 4-7.432.0-4.971.0-9-6-9s-6 4.029-6 9c0 3.096 1.797 6.191 4 7.432v1.649C7.216 22.637 2 25.97 2 30h28c0-4.03-5.216-7.364-12-7.918z"/></symbol><symbol id="icon-search" viewBox="0 0 32 32"><path d="M31.008 27.231l-7.58-6.447c-.784-.705-1.622-1.029-2.299-.998 1.789-2.096 2.87-4.815 2.87-7.787.0-6.627-5.373-12-12-12s-12 5.373-12 12 5.373 12 12 12c2.972.0 5.691-1.081 7.787-2.87-.031.677.293 1.515.998 2.299l6.447 7.58c1.104 1.226 2.907 1.33 4.007.23s.997-2.903-.23-4.007zM12 20c-4.418.0-8-3.582-8-8s3.582-8 8-8 8 3.582 8 8-3.582 8-8 8z"/></symbol></defs></svg><div class=header-content @click.away=menu.close()><div class=site-title>mingzi.li blog<span style=font-size:.5rem;margin-top:20px>&nbsp;&nbsp;行到水穷处，坐看风云起</span></div><div class=theme-switcher :class="{'has-javascript': true}"><div class=switch><input type=checkbox name=toggle id=theme-switcher-indicator aria-label="Switch theme" @click=theme.toggleChanged($event.target) checked>
-<label for=theme-switcher-indicator><i></i></label>
-<span></span></div></div><a href=#content id=skip-link class=skip-link @click.prevent=skipLink.skipToContent($refs.content) @click.away=skipLink.removeContentTabIndex($refs.content)>Skip to content</a>
-<button @click=menu.toggle() class=hamburger-trigger>Menu<div class=hamburger-menu><div class=bar :class="{'animate': menu.hamburgerIsOpen()}"></div></div></button><nav :class="{'open': menu.isOpen() || menu.isOpening(), 'open closing': menu.isClosing()}"><a href=/ class=home><svg class="icon icon-home"><use xlink:href="#icon-home"/></svg>首页</a>
-<a href=/about/ class=about><svg class="icon icon-user"><use xlink:href="#icon-user"/></svg>关于我</a>
-<a href=/search-requires-javascript/ rel=nofollow class=search x-ref=searchMenuLink @click.prevent="menu.close(); search.open();$nextTick(() => $refs.searchInput.focus())"><svg class="icon icon-search"><use xlink:href="#icon-search"/></svg>搜索</a></nav></div></header><div class=body><div class=body-max-width><main id=content x-ref=content><h1><span class=taxonomy-heading>Category:</span> 数据分析</h1><article class=summary><h2><a href=/article/%E8%AF%BB%E4%B9%A6/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%9845%E8%AE%B2/>读[数据分析实战45讲]</a></h2><div class=entry-meta><time class=published datetime="2023-07-30 20:46:33 +0000 UTC"><svg class="icon icon-calendar"><use xlink:href="#icon-calendar"/></svg>2023 July 30</time></div><p>一：概要 1.1.参考 1.2 基础概念 为什么要数据挖掘
+<!doctype html><html class=no-js lang=cn>
+<head>
+<meta charset=utf-8>
+<link rel=preload href=https://qiaomingzi.github.io/fonts/muli-latin-200.woff2 as=font type=font/woff2 crossorigin>
+<link rel=preload href=https://qiaomingzi.github.io/fonts/muli-latin-400.woff2 as=font type=font/woff2 crossorigin>
+<link rel=preload href=https://qiaomingzi.github.io/fonts/muli-latin-800.woff2 as=font type=font/woff2 crossorigin>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<title>
+数据分析 | 李明梓
+</title><meta name=viewport content="width=device-width,minimum-scale=1">
+<meta name=generator content="Hugo 0.116.0">
+<meta name=robots content="index, follow">
+<link rel=alternate type=application/rss+xml href=https://qiaomingzi.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/index.xml>
+<link rel=stylesheet href=/output/css/app.min.a832962a67e26bb64619e3de5faeaf124462d791802743409826bb5788adf48e.css integrity="sha256-qDKWKmfia7ZGGePeX66vEkRi15GAJ0NAmCa7V4it9I4=" crossorigin=anonymous>
+<meta name=description content="
+        李明梓个人站点
+      
+      ">
+<script type=text/javascript src=/output/js/app.5a802739f9b2407f0d3a1f84a20731b6705a5a4df051c35686f22bd3aea90731.js integrity="sha256-WoAnOfmyQH8NOh+EogcxtnBaWk3wUcNWhvIr066pBzE=" crossorigin=anonymous defer></script>
+<script async defer src=https://buttons.github.io/buttons.js></script>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png href=/favicon-32x32.png sizes=32x32>
+<link rel=icon type=image/png href=/favicon-16x16.png sizes=16x16>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#0594cb>
+<meta name=theme-color content="#ffffff">
+<meta property="og:title" content="数据分析">
+<meta property="og:description" content="李明梓个人站点">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://qiaomingzi.github.io/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"><meta property="og:image" content="https://qiaomingzi.github.io/opengraph/gohugoio-card-base-1_huf001e7df4fd9c00c4355abac7d4ca455_242906_filter_92792831270117115.png">
+<meta itemprop=name content="数据分析">
+<meta itemprop=description content="李明梓个人站点"><meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://qiaomingzi.github.io/opengraph/gohugoio-card-base-1_huf001e7df4fd9c00c4355abac7d4ca455_242906_filter_92792831270117115.png">
+<meta name=twitter:title content="数据分析">
+<meta name=twitter:description content="李明梓个人站点">
+<meta name=twitter:site content="@GoHugoIO">
+<script>var _hmt=_hmt||[];(function(){var e,t=document.createElement("script");t.src="https://hm.baidu.com/hm.js?245212315af876cae36fd6880abbfa41",e=document.getElementsByTagName("script")[0],e.parentNode.insertBefore(t,e)})()</script>
+</head><body class="ma0 sans-serif bg-primary-color-light">
+<nav class="bg-primary-color-dark pv4 w-100" role=navigation>
+<div class="center flex-ns flex-wrap items-center justify-start mw9">
+<h1 class="dim f3 lh-solid ml0-ns mr0 mr4-l mv0 pl3 pl4-ns">
+<a href=javascript:void(0); class="link white">
+李明梓
+</a>
+</h1><div class="db dib-ns pl3"><form id=site-search-form role=search>
+<fieldset class="bn ma0 pa0">
+<label class=clip for=search-input>Search</label>
+<input type=search id=search-input class="needs-js bg-left bn f5 input-reset lh-solid mt3 mt0-ns pl4 pv2 w5 white" placeholder="Search the Docs" name=search-input style="background:url(/images/icon-search.png)5px 11px/16px 16px no-repeat;background-color:rgba(255,255,255,0)">
+</fieldset></form></div><ul class="list ma0 pa0 dn dib-l" role=menu>
+<li class="f5 dib mr4" role=menuitem>
+<a href=https://qiaomingzi.github.io/ class="dim link light-silver">
+首页
+</a>
+</li><li class="f5 dib mr4" role=menuitem>
+<a href=/documentation/ class="dim link light-silver">
+文档
+</a>
+</li><li class="f5 dib mr4" role=menuitem>
+<a href=/about/ class="dim link light-silver">
+关于我
+</a>
+</li></ul></div></nav><main role=main class="content-with-sidebar min-vh-100 pb7 pb0-ns">
+<div class="w-100 ph4 pb5 pb6-ns pt1 mt4 pt3-ns">
+<div class=flex>
+<div class="dn db-l w-20">
+<nav role=navigation>
+<ul class="list pa0 nl2">
+<li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.article>文章BLOG</a>
+<ul class="article desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+<li class="f6 fw4">
+<a href=/article/%E8%AF%BB%E4%B9%A6/%E5%A4%A7%E9%A3%8E%E6%AD%8C/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+&lt;&lt;大风歌>>王立群
+</a>
+</li><li class="f6 fw4">
+<a href=/article/%E8%AF%BB%E4%B9%A6/go-sdk/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+GO SDK
+</a>
+</li><li class="f6 fw4">
+<a href=/article/hexo%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+Hexo基础使用
+</a>
+</li><li class="f6 fw4">
+<a href=/article/markdown%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+Markdown基本使用
+</a>
+</li><li class="f6 fw4">
+<a href=/article/yarn%E7%9B%B8%E5%85%B3/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+Yarn相关
+</a>
+</li><li class="f6 fw4">
+<a href=/article/%E5%BC%80%E6%BA%90%E7%9B%91%E6%8E%A7%E8%BD%AF%E4%BB%B6%E5%AF%B9%E6%AF%94_zabbix/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+开源监控软件对比_zabbix
+</a>
+</li><li class="f6 fw4">
+<a href=/article/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E7%B4%A2%E5%BC%95/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+开源项目索引
+</a>
+</li><li class="f6 fw4">
+<a href=/article/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F30%E5%88%86%E9%92%9F%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+正则表达式30分钟入门教程
+</a>
+</li><li class="f6 fw4">
+<a href=/article/%E8%AF%BB%E4%B9%A6/go%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%8336%E8%AE%B2/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+读[GO语言核心36讲]
+</a>
+</li><li class="f6 fw4">
+<a href=/article/%E8%AF%BB%E4%B9%A6/go%E8%AF%AD%E8%A8%80%E7%BC%96%E7%A8%8B/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+读[GO语言编程]
+</a>
+</li><li class="f6 fw4">
+<a href=/article/%E8%AF%BB%E4%B9%A6/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%9845%E8%AE%B2/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+读[数据分析实战45讲]
+</a>
+</li></ul></li><li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+<a href=/sources/ class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.sources>源码探究</a>
+</li></ul></nav></div><div class="w-100 w-80-l ph0 ph4-l">
+<article class="w-100 nested-copy-line-height nested-links nested-img">
+<h1 class="primary-color-dark f2">
+Category: 数据分析
+</h1><div class="mid-gray f5 f4-l">
+</div></article><div class="flex flex-wrap">
+<section class="flex-ns flex-wrap justify-between w-100">
+<div class="relative flex-auto w-100 w-40-l mr3 mb3 bg-white ba b--moon-gray nested-copy-line-height weight-30">
+<div class="bg-white mb2 pa3 pa4-l gray">
+<h1 class="near-black f3">
+<a href=/article/%E8%AF%BB%E4%B9%A6/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%9845%E8%AE%B2/python%E5%9F%BA%E7%A1%80/ class="link primary-color dim">python基础</a>
+</h1><div class="lh-copy links">
+python基础 pytyon与数据分析 Python 已经成为发展最快的主流编程语言，从众多开发语言中脱颖而出，深受开发者喜爱。其次，在数据分析领域中，使用 Python 的开发者是最多的，远超其他语言之和。最后，Python 语言简洁，有大量的第三方库，功能强大，能解决数据分析的大部分问题。
+Python 语言最大的优点是简洁，它虽然是 C 语言写的，但是摒弃了 C 语言的指针，这就让代码非常简洁明了。
+Python 还有强大的开发者工具。在数据科学领域，Python 有许多非常著名的工具库：比如科学计算工具 NumPy 和 Pandas 库，深度学习工具 Keras 和 TensorFlow，以及机器学习工具 Scikit-learn，使用率都非常高。
+如果想在数据分析、机器学习等数据科学领域有所作为，那么掌握Python 语言的使用是非常有必要的，熟练掌握相关工具会让你事半功倍。
+python版本选择 Python 主要有两个版本： 2.7.x 和 3.x。两个版本之间存在一些差异，但并不大，它们语法不一样的地方不到 10%。
+另一个事实就是：大部分 Python 库都同时支持 Python 2.7.x 和 3.x 版本。虽然官方称 Python2.7 只维护到 2020 年，但它的寿命远不止到 2020 年，一份调查显示：在 2017 年的商业项目中 2.7 版本依然是主流，占到了 63.7%，即使这两年 Python3.x 版本使用的增速较快，但实际上 Python3.x 在 2008 年就已经有了。
+版本选择的标准就是看你的项目是否会依赖于 Python2.7 的包，如果有依赖的就只能使用 Python2.7，否则你可以用 Python 3.x 开始全新的项目。
+python ide PyCharm 这是一个跨平台的 Python 开发工具，可以帮助用户在使用 Python 时提升效率，比如：调试、语法高亮、代码跳转、自动完成、智能提示等。 Sublime Text SublimeText 是个著名的编辑器，Sublime Text3 基本上可以 1 秒即启动，反应速度很快。同时它对 Python 的支持也很到位，具有代码高亮、语法提示、自动完成等功能。 Vim Vim 是一个简洁、高效的工具，速度很快，可以做任何事，从来不崩溃。不过 Vim 相比于 Sublime Text 上手有一定难度，配置起来有些麻烦。 Eclipse+PyDev 习惯使用 Java 的人一定对 Eclipse 这个 IDE 不陌生，那么使用 Eclipse+PyDev 插件会是一个很好的选择，这样熟悉 Eclipse 的开发者可以轻易上手。 如果上面这些 IDE 你之前都没有怎么用过，那么推荐你使用 Sublime Text，上手简单，反应速度快。
+<a href=/article/%E8%AF%BB%E4%B9%A6/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%9845%E8%AE%B2/python%E5%9F%BA%E7%A1%80/ class="f6 mt2 db link primary-color dim">
+Read More &#187;
+</a>
+</div></div></div><div class="relative flex-auto w-100 w-40-l mr3 mb3 bg-white ba b--moon-gray nested-copy-line-height weight-30">
+<div class="bg-white mb2 pa3 pa4-l gray">
+<h1 class="near-black f3">
+<a href=/cn/article/%E8%AF%BB%E4%B9%A6/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%9845%E8%AE%B2/python%E5%9F%BA%E7%A1%80/ class="link primary-color dim">python基础</a>
+</h1><div class="lh-copy links">
+python基础 pytyon与数据分析 Python 已经成为发展最快的主流编程语言，从众多开发语言中脱颖而出，深受开发者喜爱。其次，在数据分析领域中，使用 Python 的开发者是最多的，远超其他语言之和。最后，Python 语言简洁，有大量的第三方库，功能强大，能解决数据分析的大部分问题。
+Python 语言最大的优点是简洁，它虽然是 C 语言写的，但是摒弃了 C 语言的指针，这就让代码非常简洁明了。
+Python 还有强大的开发者工具。在数据科学领域，Python 有许多非常著名的工具库：比如科学计算工具 NumPy 和 Pandas 库，深度学习工具 Keras 和 TensorFlow，以及机器学习工具 Scikit-learn，使用率都非常高。
+如果想在数据分析、机器学习等数据科学领域有所作为，那么掌握Python 语言的使用是非常有必要的，熟练掌握相关工具会让你事半功倍。
+python版本选择 Python 主要有两个版本： 2.7.x 和 3.x。两个版本之间存在一些差异，但并不大，它们语法不一样的地方不到 10%。
+另一个事实就是：大部分 Python 库都同时支持 Python 2.7.x 和 3.x 版本。虽然官方称 Python2.7 只维护到 2020 年，但它的寿命远不止到 2020 年，一份调查显示：在 2017 年的商业项目中 2.7 版本依然是主流，占到了 63.7%，即使这两年 Python3.x 版本使用的增速较快，但实际上 Python3.x 在 2008 年就已经有了。
+版本选择的标准就是看你的项目是否会依赖于 Python2.7 的包，如果有依赖的就只能使用 Python2.7，否则你可以用 Python 3.x 开始全新的项目。
+python ide PyCharm 这是一个跨平台的 Python 开发工具，可以帮助用户在使用 Python 时提升效率，比如：调试、语法高亮、代码跳转、自动完成、智能提示等。 Sublime Text SublimeText 是个著名的编辑器，Sublime Text3 基本上可以 1 秒即启动，反应速度很快。同时它对 Python 的支持也很到位，具有代码高亮、语法提示、自动完成等功能。 Vim Vim 是一个简洁、高效的工具，速度很快，可以做任何事，从来不崩溃。不过 Vim 相比于 Sublime Text 上手有一定难度，配置起来有些麻烦。 Eclipse+PyDev 习惯使用 Java 的人一定对 Eclipse 这个 IDE 不陌生，那么使用 Eclipse+PyDev 插件会是一个很好的选择，这样熟悉 Eclipse 的开发者可以轻易上手。 如果上面这些 IDE 你之前都没有怎么用过，那么推荐你使用 Sublime Text，上手简单，反应速度快。
+<a href=/cn/article/%E8%AF%BB%E4%B9%A6/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%9845%E8%AE%B2/python%E5%9F%BA%E7%A1%80/ class="f6 mt2 db link primary-color dim">
+Read More &#187;
+</a>
+</div></div></div><div class="relative flex-auto w-100 w-40-l mr3 mb3 bg-white ba b--moon-gray nested-copy-line-height weight-30">
+<div class="bg-white mb2 pa3 pa4-l gray">
+<h1 class="near-black f3">
+<a href=/article/%E8%AF%BB%E4%B9%A6/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%9845%E8%AE%B2/%E8%AF%BB%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%9845%E8%AE%B2/ class="link primary-color dim">读[数据分析实战45讲]</a>
+</h1><div class="lh-copy links">
+一：概要 1.1.参考 1.2 基础概念 为什么要数据挖掘
 我们生活在数据驱动一切的时代，数据挖掘和数据分析就是这个时代的“淘金”，从国家、企业、组织到个人，都一定会关注各种数据，从这些数据中得到价值。通过数据挖掘学会如何从海量的数据中找到关联关系，以及如何进行价值挖掘。
 通过数据分析，我们可以更好地了解用户画像，为企业做留存率、流失率等指标分析，进而精细化产品运营。
 如果你关注比特币，数据分析可以帮助你预测比特币的走势。
 面对生活中遇到的种种麻烦，数据分析也可以提供解决方案，比如信用卡反欺诈，自动屏蔽垃圾邮件等
 MAS 方法
 Multi-Dimension：想要掌握一个事物，就要从多个角度去认识它。 Ask：不懂就问，突破这一点，不懂就问最重要。 Sharing：最好的学习就是分享。用自己的语言讲出来，是对知识的进一步梳理。 怎么和数据分析建立多维度连接呢？
-<a href=/article/%E8%AF%BB%E4%B9%A6/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%9845%E8%AE%B2/ aria-label="To post '读[数据分析实战45讲]'">全文&nbsp;→</a></p></article></main><aside id=sidebar><div class=widget><div class=widget-title>Recent posts</div><ol class="recent-widget widget-content"><li><a href=/article/%E8%AF%BB%E4%B9%A6/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%9845%E8%AE%B2/>读[数据分析实战45讲]</a></li><li><a href=/%E8%8B%B1%E8%AF%AD%E8%87%AA%E7%84%B6%E6%8B%BC%E8%AF%BB/>英语自然拼读</a></li><li><a href=/%E8%8B%B1%E8%AF%AD%E9%9F%B3%E8%8A%82%E5%88%92%E5%88%86/>英语音节划分</a></li><li><a href=/%E8%AF%BBgo%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%8336%E8%AE%B2/>读[GO语言核心36讲]</a></li><li><a href=/%E5%85%B3%E4%BA%8E%E8%B0%83%E9%9F%B3%E5%A3%B0%E5%8D%A1/>关于调音声卡</a></li></ol></div><div class=widget><div class=widget-title>Categories</div><ol class="all-categories widget-content"><li><a href=/categories/devops>devops</a> (1)</li><li><a href=/categories/java>java</a> (4)</li><li><a href=/categories/mysql>mysql</a> (1)</li><li><a href=/categories/%E5%85%B6%E4%BB%96>其他</a> (5)</li><li><a href=/categories/%E5%89%8D%E7%AB%AF>前端</a> (1)</li><li><a href=/categories/%E5%90%8E%E7%AB%AF>后端</a> (4)</li><li><a href=/categories/%E5%9F%BA%E7%A1%80>基础</a> (1)</li><li><a href=/categories/%E5%B7%A5%E5%85%B7>工具</a> (3)</li><li><a href=/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90>数据分析</a> (1)</li><li><a href=/categories/%E8%8B%B1%E8%AF%AD>英语</a> (2)</li></ol></div><div class=widget><div class=widget-title>Tags</div><div class="tag-cloud-tags widget-content"><a href=/tags/canal aria-label="canal (2 posts)" style=font-size:1rem>canal</a>
-<a href=/tags/git aria-label="git (1 posts)" style=font-size:1rem>git</a>
-<a href=/tags/go aria-label="go (4 posts)" style=font-size:1rem>go</a>
-<a href=/tags/hexo aria-label="hexo (1 posts)" style=font-size:1rem>hexo</a>
-<a href=/tags/java aria-label="java (1 posts)" style=font-size:1rem>java</a>
-<a href=/tags/maven aria-label="maven (1 posts)" style=font-size:1rem>maven</a>
-<a href=/tags/mysql aria-label="mysql (1 posts)" style=font-size:1rem>mysql</a>
-<a href=/tags/python aria-label="python (1 posts)" style=font-size:1rem>python</a>
-<a href=/tags/yarn aria-label="yarn (1 posts)" style=font-size:1rem>yarn</a>
-<a href=/tags/zabbix aria-label="zabbix (1 posts)" style=font-size:1rem>zabbix</a>
-<a href=/tags/%E5%9F%BA%E7%A1%80 aria-label="基础 (1 posts)" style=font-size:1rem>基础</a>
-<a href=/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE aria-label="大数据 (1 posts)" style=font-size:1rem>大数据</a>
-<a href=/tags/%E5%B7%A5%E5%85%B7 aria-label="工具 (2 posts)" style=font-size:1rem>工具</a>
-<a href=/tags/%E6%8B%BC%E8%AF%BB aria-label="拼读 (1 posts)" style=font-size:1rem>拼读</a>
-<a href=/tags/%E8%BD%AF%E6%96%87%E6%94%B6%E9%9B%86 aria-label="软文收集 (2 posts)" style=font-size:1rem>软文收集</a>
-<a href=/tags/%E9%9F%B3%E8%8A%82 aria-label="音节 (1 posts)" style=font-size:1rem>音节</a></div></div></aside></div></div><svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><symbol id="icon-github" viewBox="0 0 32 32"><path d="M16 .395c-8.836.0-16 7.163-16 16 0 7.069 4.585 13.067 10.942 15.182.8.148 1.094-.347 1.094-.77.0-.381-.015-1.642-.022-2.979-4.452.968-5.391-1.888-5.391-1.888-.728-1.849-1.776-2.341-1.776-2.341-1.452-.993.11-.973.11-.973 1.606.113 2.452 1.649 2.452 1.649 1.427 2.446 3.743 1.739 4.656 1.33.143-1.034.558-1.74 1.016-2.14-3.554-.404-7.29-1.777-7.29-7.907.0-1.747.625-3.174 1.649-4.295-.166-.403-.714-2.03.155-4.234.0.0 1.344-.43 4.401 1.64 1.276-.355 2.645-.532 4.005-.539 1.359.006 2.729.184 4.008.539 3.054-2.07 4.395-1.64 4.395-1.64.871 2.204.323 3.831.157 4.234 1.026 1.12 1.647 2.548 1.647 4.295.0 6.145-3.743 7.498-7.306 7.895.574.497 1.085 1.47 1.085 2.963.0 2.141-.019 3.864-.019 4.391.0.426.288.925 1.099.768C27.421 29.457 32 23.462 32 16.395c0-8.837-7.164-16-16-16z"/></symbol><symbol id="icon-arrow-with-circle-up" viewBox="0 0 32 32"><path d="M16 .64C7.515.64.638 7.517.638 16c0 8.485 6.877 15.362 15.362 15.362 8.482.0 15.36-6.877 15.36-15.362.0-8.483-6.878-15.36-15.36-15.36zM15.998 28.16c-6.715.0-12.16-5.443-12.16-12.16S9.281 3.84 15.998 3.84 28.16 9.285 28.16 16s-5.446 12.16-12.162 12.16zM16 8.8l7.2 7.2h-4v6.4h-6.4V16h-4L16 8.8z"/></symbol></defs></svg><footer id=page-footer><div class=footer-content><a href=https://github.com/qiaomingzi/limz-blog-hugo target=_blank rel=noopener title="Source Code for this Blog"><div class=footer-text><svg class="icon icon-github"><use xlink:href="#icon-github"/></svg>Blog code</div></a><a href=#page-wrapper title="Go to top" id=go-to-top-link><div class=footer-text>To top<svg class="icon icon-arrow-with-circle-up"><use xlink:href="#icon-arrow-with-circle-up"/></svg></div></a><script>document.getElementById("go-to-top-link").onclick=function(){return window.scroll(0,0),!1}</script></div></footer><script>var _hmt=_hmt||[];(function(){var a=document.createElement("script"),b;a.src="https://hm.baidu.com/hm.js?245212315af876cae36fd6880abbfa41",b=document.getElementsByTagName("script")[0],b.parentNode.insertBefore(a,b)})()</script></div><div id=searchbox-container :class="{'open': search.isOpen}" x-show=search.isOpen x-on:keydown.escape="$nextTick(() => $refs.searchMenuLink.focus())"><button type=button aria-label="Close search modal" class=modal-close-button @click="search.close();$nextTick(() => $refs.searchMenuLink.focus())"><svg class="icon icon-circle-with-cross"><use xlink:href="#icon-circle-with-cross"/></svg>
-(ESC)</button><div id=searchbox :class="{'open': search.isOpen}"><svg class="icon icon-search"><use xlink:href="#icon-search"/></svg><label for=search-input class=sr-only>Searchbox</label>
-<input id=search-input type=search placeholder=Search... class=search-input x-ref=searchInput autocomplete=off autocorrect=off autocapitalize=off spellcheck=false x-model=search.textInSearchBox x-on:input=search.searchBoxChanged($event.target.value) x-on:keydown.enter="search.focusFirstAnchor($event, $refs.hits)" x-on:keydown.arrow-down="search.focusFirstAnchor($event, $refs.hits)"><svg class="icon icon-circle-with-cross close-search" role="button" aria-label="Close search" @click="search.close();$nextTick(() => $refs.searchMenuLink.focus())"><use xlink:href="#icon-circle-with-cross"/></svg></div><div class=search-results-container><div id=search-output x-show=search.textInSearchBox><div id=no-results-message x-show="search.store && search.textInSearchBox && !search.hits.length">No matching posts found. You can use wildcards and search only in titles, e.g. <code>title:iot</code></div><div id=index-loading-message x-show="!search.indexLoadFailed && search.indexLoading && search.textInSearchBox"><span class=icon-spinner aria-hidden=true></span>Loading search index, please wait...</div><div id=index-failed-message x-show="search.indexLoadFailed && search.textInSearchBox">Search index failed to download 😢</div><div id=number-of-hits-message x-text=search.getHitsText() x-show=search.hits.length></div><ol class=result-list x-show=search.hits.length x-ref=hits><template x-for="hit in search.hits" :key=hit.ref><li><h2><a :href=hit.ref x-text=search.fromStore(hit).title></a></h2><div class=entry-meta><time class=published :datetime=search.fromStore(hit).dateiso><svg class="icon icon-calendar"><use xlink:href="#icon-calendar"/></svg><span x-text=search.fromStore(hit).dateformatted></span></time></div><p x-text=search.fromStore(hit).summary></p></li></template></ol></div></div></div><script src=/bundle.326b2331e4a76c824b17b8d379095b25394912a8f7f1c8a6162a06f763a2caabe6226dee31773ec698c47b06f1de9bb7133091e9260d4d95b4011c7351300442.js integrity="sha512-MmsjMeSnbIJLF7jTeQlbJTlJEqj38cimFioG92OiyqvmIm3uMXc+xpjEewbx3pu3EzCR6SYNTZW0ARxzUTAEQg=="></script></body></html>
+与数据分析建立多维度连接的过程，也是我们从“思维”到“工具”再到“实践”的一个突破过程。学习数据分析的核心就是培养数据思维，掌握挖掘工具，熟练实践并积累经验。
+第一类是基础概念。这是我们学习的基础，一定不能落下。
+第二类是工具。这个部分可以很好地锻炼你的实操能力。
+第三类是题库。题库的作用是帮你查漏补缺，在这个过程中，你会情不自禁地进行思考。
+第一模块：数据分析基础篇 01丨数据分析全景图及修炼指南 掌握数据，就是掌握规律。当你了解了市场数据，对它进行分析，就可以得到市场规律。当你掌握了产品自身的数据，对它进行分析，就可以了解产品的用户来源、用户画像等等。所以说数据是个全新的视角。数据分析如此重要，它不仅是新时代的“数据结构 + 算法”，也更是企业争夺人才的高地。数据分析分成三个重要的组成部分。
+数据采集。它是我们的原材料，也是最“接地气”的部分，因为任何分析都要有数据源。 数据挖掘。它可以说是最“高大上”的部分，也是整个商业价值所在。之所以要进行数据分析，就是要找到其中的规律，来指导我们的业务。因此数据挖掘的核心是挖掘数据的商业价值，也就是我们所谈的商业智能 BI。 数据可视化。它可以说是数据领域中万金油的技能，可以让我们直观地了解到数据分析的结果。 数据采集 数据挖掘 数据可视化 数据往往是隐性的，尤其是当数据量大的时候很难感知，可视化可以帮我们很好地理解这些数据的结构，以及分析结果的呈现。
+修炼指南 借用傅盛的话来说，人与人最大的差别在于“认知”，所谓成长就是认知的升级。 我们只有把知识转化为自己的语言，它才真正变成了我们自己的东西。这个转换的过程，就是认知的过程。
+通过“知行合一”提升自己的学习吸收能力。 如果说认知是大脑，那么工具就好比我们的双手，数据工程师和算法科学家每天打交道最多的就是工具。
+如果你开始做数据分析的项目，你脑海中已经思考好了数据挖掘的算法模型，请牢记下面这两点原则。
+不重复造轮子
+工具决定效率 “不要重复造轮子”意味着首先需要找到一个可以用的轮子，也就是工具。工具没有好坏之分，只有适合与否。
+工具没有好坏之分，只有适合与否。工程师会选择使用者最多的工具。因为：Bug 少、文档全、案例多
+最后就是积累 “资产”了。我们很难记住大段的知识点，也背不下来工具的指令，但是我们通常能记住故事、做过的项目、做过的题目。这些题目和项目是你最先行的“资产”。 通过熟练度快速积累这些“资产”，当熟练度增加的时候，你的思考认知模型也在逐渐提升
+02丨学习数据挖掘的最佳路径是什么？ 举个例子，对于普通人来说，大海是很难感知的，就更不用说找到宝藏了。但对于熟练的石油开采人员来说，大海是有坐标的。他们对地质做勘探，分析地质构造，从而发现哪些地方更可能有石油。然后用开采工具，进行深度挖掘，直到打到石油为止。 大海、地质信息、石油对开采人员来说就是数据源、地理位置、以及分析得到的结果。
+我们要做的数据挖掘工作，就好像这个钻井一样，通过分析这些数据，从庞大的数据中发现规律，找到宝藏。只有对知识有全面的认知，才能确保在以后的工作中即使遇到了问题，也可以快速定位问题所在，然后找方法去对应和解决。
+数据挖掘的基本流程 商业理解：数据挖掘不是我们的目的，我们的目的是更好地帮助业务，所以第一步我们要从商业的角度理解项目需求，在这个基础上，再对数据挖掘的目标进行定义。
+数据理解：尝试收集部分数据，然后对数据进行探索，包括数据描述、数据质量验证等。这有助于你对收集的数据有个初步的认知。
+数据准备：开始收集数据，并对数据进行清洗、数据集成等操作，完成数据挖掘前的准备工作。
+模型建立：选择和应用各种数据挖掘模型，并进行优化，以便得到更好的分类结果。
+模型评估：对模型进行评价，并检查构建模型的每个步骤，确认模型是否实现了预定的商业目标。
+上线发布：模型的作用是从数据中找到金矿，也就是我们所说的“知识”，获得的知识需要转化成用户可以使用的方式，呈现的形式可以是一份报告，也可以是实现一个比较复杂的、可重复的数据挖掘过程。数据挖掘结果如果是日常运营的一部分，那么后续的监控和维护就会变得重要。
+数据挖掘的十大算法 为了进行数据挖掘任务，数据科学家们提出了各种模型，在众多的数据挖掘模型中，国际权威的学术组织 ICDM （the IEEE International Conference on Data Mining）评选出了十大经典的算法。
+按照不同的目的，我可以将这些算法分成四类
+分类算法：C4.5，朴素贝叶斯（Naive Bayes），SVM，KNN，Adaboost，CART C4.
+<a href=/article/%E8%AF%BB%E4%B9%A6/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%9845%E8%AE%B2/%E8%AF%BB%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%9845%E8%AE%B2/ class="f6 mt2 db link primary-color dim">
+Read More &#187;
+</a>
+</div></div></div><div class="relative flex-auto w-100 w-40-l mr3 mb3 bg-white ba b--moon-gray nested-copy-line-height weight-30">
+<div class="bg-white mb2 pa3 pa4-l gray">
+<h1 class="near-black f3">
+<a href=/cn/article/%E8%AF%BB%E4%B9%A6/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%9845%E8%AE%B2/%E8%AF%BB%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%9845%E8%AE%B2/ class="link primary-color dim">读[数据分析实战45讲]</a>
+</h1><div class="lh-copy links">
+一：概要 1.1.参考 1.2 基础概念 为什么要数据挖掘
+我们生活在数据驱动一切的时代，数据挖掘和数据分析就是这个时代的“淘金”，从国家、企业、组织到个人，都一定会关注各种数据，从这些数据中得到价值。通过数据挖掘学会如何从海量的数据中找到关联关系，以及如何进行价值挖掘。
+通过数据分析，我们可以更好地了解用户画像，为企业做留存率、流失率等指标分析，进而精细化产品运营。
+如果你关注比特币，数据分析可以帮助你预测比特币的走势。
+面对生活中遇到的种种麻烦，数据分析也可以提供解决方案，比如信用卡反欺诈，自动屏蔽垃圾邮件等
+MAS 方法
+Multi-Dimension：想要掌握一个事物，就要从多个角度去认识它。 Ask：不懂就问，突破这一点，不懂就问最重要。 Sharing：最好的学习就是分享。用自己的语言讲出来，是对知识的进一步梳理。 怎么和数据分析建立多维度连接呢？
+与数据分析建立多维度连接的过程，也是我们从“思维”到“工具”再到“实践”的一个突破过程。学习数据分析的核心就是培养数据思维，掌握挖掘工具，熟练实践并积累经验。
+第一类是基础概念。这是我们学习的基础，一定不能落下。
+第二类是工具。这个部分可以很好地锻炼你的实操能力。
+第三类是题库。题库的作用是帮你查漏补缺，在这个过程中，你会情不自禁地进行思考。
+第一模块：数据分析基础篇 01丨数据分析全景图及修炼指南 掌握数据，就是掌握规律。当你了解了市场数据，对它进行分析，就可以得到市场规律。当你掌握了产品自身的数据，对它进行分析，就可以了解产品的用户来源、用户画像等等。所以说数据是个全新的视角。数据分析如此重要，它不仅是新时代的“数据结构 + 算法”，也更是企业争夺人才的高地。数据分析分成三个重要的组成部分。
+数据采集。它是我们的原材料，也是最“接地气”的部分，因为任何分析都要有数据源。 数据挖掘。它可以说是最“高大上”的部分，也是整个商业价值所在。之所以要进行数据分析，就是要找到其中的规律，来指导我们的业务。因此数据挖掘的核心是挖掘数据的商业价值，也就是我们所谈的商业智能 BI。 数据可视化。它可以说是数据领域中万金油的技能，可以让我们直观地了解到数据分析的结果。 数据采集 数据挖掘 数据可视化 数据往往是隐性的，尤其是当数据量大的时候很难感知，可视化可以帮我们很好地理解这些数据的结构，以及分析结果的呈现。
+修炼指南 借用傅盛的话来说，人与人最大的差别在于“认知”，所谓成长就是认知的升级。 我们只有把知识转化为自己的语言，它才真正变成了我们自己的东西。这个转换的过程，就是认知的过程。
+通过“知行合一”提升自己的学习吸收能力。 如果说认知是大脑，那么工具就好比我们的双手，数据工程师和算法科学家每天打交道最多的就是工具。
+如果你开始做数据分析的项目，你脑海中已经思考好了数据挖掘的算法模型，请牢记下面这两点原则。
+不重复造轮子
+工具决定效率 “不要重复造轮子”意味着首先需要找到一个可以用的轮子，也就是工具。工具没有好坏之分，只有适合与否。
+工具没有好坏之分，只有适合与否。工程师会选择使用者最多的工具。因为：Bug 少、文档全、案例多
+最后就是积累 “资产”了。我们很难记住大段的知识点，也背不下来工具的指令，但是我们通常能记住故事、做过的项目、做过的题目。这些题目和项目是你最先行的“资产”。 通过熟练度快速积累这些“资产”，当熟练度增加的时候，你的思考认知模型也在逐渐提升
+02丨学习数据挖掘的最佳路径是什么？ 举个例子，对于普通人来说，大海是很难感知的，就更不用说找到宝藏了。但对于熟练的石油开采人员来说，大海是有坐标的。他们对地质做勘探，分析地质构造，从而发现哪些地方更可能有石油。然后用开采工具，进行深度挖掘，直到打到石油为止。 大海、地质信息、石油对开采人员来说就是数据源、地理位置、以及分析得到的结果。
+我们要做的数据挖掘工作，就好像这个钻井一样，通过分析这些数据，从庞大的数据中发现规律，找到宝藏。只有对知识有全面的认知，才能确保在以后的工作中即使遇到了问题，也可以快速定位问题所在，然后找方法去对应和解决。
+数据挖掘的基本流程 商业理解：数据挖掘不是我们的目的，我们的目的是更好地帮助业务，所以第一步我们要从商业的角度理解项目需求，在这个基础上，再对数据挖掘的目标进行定义。
+数据理解：尝试收集部分数据，然后对数据进行探索，包括数据描述、数据质量验证等。这有助于你对收集的数据有个初步的认知。
+数据准备：开始收集数据，并对数据进行清洗、数据集成等操作，完成数据挖掘前的准备工作。
+模型建立：选择和应用各种数据挖掘模型，并进行优化，以便得到更好的分类结果。
+模型评估：对模型进行评价，并检查构建模型的每个步骤，确认模型是否实现了预定的商业目标。
+上线发布：模型的作用是从数据中找到金矿，也就是我们所说的“知识”，获得的知识需要转化成用户可以使用的方式，呈现的形式可以是一份报告，也可以是实现一个比较复杂的、可重复的数据挖掘过程。数据挖掘结果如果是日常运营的一部分，那么后续的监控和维护就会变得重要。
+数据挖掘的十大算法 为了进行数据挖掘任务，数据科学家们提出了各种模型，在众多的数据挖掘模型中，国际权威的学术组织 ICDM （the IEEE International Conference on Data Mining）评选出了十大经典的算法。
+按照不同的目的，我可以将这些算法分成四类
+分类算法：C4.5，朴素贝叶斯（Naive Bayes），SVM，KNN，Adaboost，CART C4.
+<a href=/cn/article/%E8%AF%BB%E4%B9%A6/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%9845%E8%AE%B2/%E8%AF%BB%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%9845%E8%AE%B2/ class="f6 mt2 db link primary-color dim">
+Read More &#187;
+</a>
+</div></div></div></section></div></div></div></div></main><footer class="bg-primary-color-dark ph4-ns pt4 relative w-100" role=contentinfo>
+<div class="center flex-ns flex-wrap justify-between mw9 w-90">
+<div class="pb3 pt4 w-100 w-50-ns">
+<div class="b f3 light-gray mb3 nested-links tc">
+李明梓-BLOG<br>
+</div><div class="center w4">
+<img src=/images/hugo-logo-wide.svg alt="Hugo Logo">
+</div></div><div class="w-100 w-50-l light-gray"> 
+本文仅为个人笔记,作为学习使用,如有雷同请联系作者 mingzi.li 处理,mail: qiaomingzi100@sina.com
+</div></div></footer></body></html>
