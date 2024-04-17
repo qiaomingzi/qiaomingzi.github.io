@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>java on 李明梓</title><link>https://qiaomingzi.github.io/cn/article/java/</link><description>Recent content in java on 李明梓</description><generator>Hugo -- gohugo.io</generator><language>cn</language><atom:link href="https://qiaomingzi.github.io/cn/article/java/index.xml" rel="self" type="application/rss+xml"/><item><title>位运算基础知识</title><link>https://qiaomingzi.github.io/cn/article/java/%E4%BD%8D%E8%BF%90%E7%AE%97/</link><pubDate>Wed, 16 Mar 2022 15:42:33 +0800</pubDate><guid>https://qiaomingzi.github.io/cn/article/java/%E4%BD%8D%E8%BF%90%E7%AE%97/</guid><description>一：参考 [算法心得] http://graphics.stanford.edu/~seander/bithacks.html#IntegerLogIEEE64Float
+[运算符优先级] https://tool.oschina.net/commons?type=6
+[位运算技巧] https://www.zhihu.com/question/38206659
+[思考题解法] https://www.iteye.com/blog/yacare-1969931
+二：概要 通过本文可以让我们温习下位运算、进制转换，为写出更精良的代码奠定理论基础。现在我们从一个题目说开去：
+问：如何载预计有10亿个int的数据中，剔除其中重复的数据并排序输出?
+分析：首先要进行排序、排重必须得把相关数据加载到内存中，那么要用哪种数据结构来存储呢?
+10 0000 0000 = 10^9
+int[10^9] 需要内存 10^9 * 4(B) =&amp;gt; ((10^9 * 4)/1000 * 1000)(M) =&amp;gt; 4000M =&amp;gt; 4GB
+对于普通32位最大理论内存为4G的PC来说，这个计算资源是无法实现需求的，那么有没有更好的解决方法呢？在此之前先做些知识点温故。
+三：知识点回顾 1.java基本类型 Data Type Default Value Default size range range value boolean false 1 bit char &amp;lsquo;\u0000&amp;rsquo; 2 byte &amp;lsquo;\u0000&amp;rsquo;~&amp;rsquo;\uFFFF&amp;rsquo; byte 0 1 byte -2^7~2^7-1 -128~127 short 0 2 byte -2^15~2^15-1 -32768~32767 int 0 4 byte -2^31~2^31-1 0x80000000~0x7fffffff long 0L 8 byte -2^63~2^63-1 float 0.</description></item><item><title>maven-wrapper基础使用</title><link>https://qiaomingzi.github.io/cn/article/java/maven/</link><pubDate>Sat, 16 Oct 2021 15:42:33 +0800</pubDate><guid>https://qiaomingzi.github.io/cn/article/java/maven/</guid><description>1.maven-wrapper安装使用 安装 在项目中使用命令安装mvn -N io.takari:maven:0.7.7:wrapper，参考官网 ,如果需要指定maven版本则使用mvn -N io.takari:maven:0.7.7:wrapper -Dmaven=3.5.4,安装完成后，目录如下
+my-project ├── .mvn │ └── wrapper │ ├── MavenWrapperDownloader.java │ ├── maven-wrapper.jar │ └── maven-wrapper.properties ├── mvnw ├── mvnw.cmd ├── pom.xml └── src ├── main │ ├── java │ └── resources └── test ├── java └── resources 使用 参考mvn命令, 指令切换成mvnw如: linux下 ./mvnw clean install windown下 mvnw.cmd clean install</description></item></channel></rss>

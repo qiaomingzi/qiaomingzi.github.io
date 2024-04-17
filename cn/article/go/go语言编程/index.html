@@ -1,0 +1,870 @@
+<!doctype html><html class=no-js lang=cn>
+<head>
+<meta charset=utf-8>
+<link rel=preload href=https://qiaomingzi.github.io/fonts/muli-latin-200.woff2 as=font type=font/woff2 crossorigin>
+<link rel=preload href=https://qiaomingzi.github.io/fonts/muli-latin-400.woff2 as=font type=font/woff2 crossorigin>
+<link rel=preload href=https://qiaomingzi.github.io/fonts/muli-latin-800.woff2 as=font type=font/woff2 crossorigin>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<title>
+读[GO语言编程] | 李明梓
+</title><meta name=viewport content="width=device-width,minimum-scale=1">
+<meta name=generator content="Hugo 0.116.0">
+<meta name=robots content="index, follow">
+<link rel=stylesheet href=/output/css/app.min.a832962a67e26bb64619e3de5faeaf124462d791802743409826bb5788adf48e.css integrity="sha256-qDKWKmfia7ZGGePeX66vEkRi15GAJ0NAmCa7V4it9I4=" crossorigin=anonymous>
+<meta name=description content="
+        The world’s fastest framework for building websites
+      
+      ">
+<script type=text/javascript src=/output/js/app.5a802739f9b2407f0d3a1f84a20731b6705a5a4df051c35686f22bd3aea90731.js integrity="sha256-WoAnOfmyQH8NOh+EogcxtnBaWk3wUcNWhvIr066pBzE=" crossorigin=anonymous defer></script>
+<script async defer src=https://buttons.github.io/buttons.js></script>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png href=/favicon-32x32.png sizes=32x32>
+<link rel=icon type=image/png href=/favicon-16x16.png sizes=16x16>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#0594cb>
+<meta name=theme-color content="#ffffff">
+<meta property="og:title" content="读[GO语言编程]">
+<meta property="og:description" content="相关链接 https://github.com/golang 源码 https://golang.org/ref/mod 官方文档 https://golang.org/doc/code.html#Workspaces http://www.flysnow.org/categories/Golang/ go专栏 https://golanglibs.com/top 流行的GO应用和GO库 https://gitee.com/pengzhile/ide-eval-resetterv GoLand试用更新插件 一：前言 为什么需要GO语言 Go设计者认为C语言更值得学习，希望让它成为互联网时代的C语言。多数系统级语言（包括Java和C#）的根本编程哲学来源于C++，将C++的面向对象进一步发扬光大。C语言经久不衰的根源是它足够简单，Go语言也要足够简单。
+那么GO需要关注哪些问题 与分布式支持
+并发执行体：多核化和集群化是互联网时代的典型特征，操作系统自己掌管的进程（process）、进程内的线程（thread）以及进程内的协程（goroutine，也叫轻量级线程）。Go语言在语言级别支持协程，叫goroutine。Go语言准库提供的所有系统调用（syscall）操作，当然也包括所有同步IO操作，都会出让CPU给其他goroutine
+执行体间的通信：
+1）执行体之间的互斥与同步，互斥与同步是执行体间最基础 的交互方式。多数语言在库层面提供了线程间的互斥与同步支持，并没有提供协程之间的互斥与同步。
+2）执行体之间的消息传递，在并发编程模型的选择上，一个是共享内存模型，一个是消息传递模型。多数传统语言选择了前者；Go语言推荐采用“Erlang风格的并发模型”的编程范式，尽管传统的“共享内存模型”仍然 被保留，在Go语言中内置了通道（channel）支持。两个goroutine之间可以通过通道来进行交互。
+软件工程支持
+随着工程规模的不断扩大,人们需要建立统一的交互语言来降低沟通的成本。规范化体现在多 个层面，
+1)代码风格规范
+Go语言要求public的变量必须以大写字母开头，private变量则以小写字母开头，这种做法不仅免除public、private关键字，更重要的是统一了命名风格。
+Go语言对{ }应该怎么写进行了强制，Go代码的花括号位置肯定是非常统一的。
+正例: if expression { ... } 反例: if expression { ... } 2)错误处理规范
+Go语言的函数允许返回多个值。大多数函数的最后一个返回值会为error类型，以在错误情况下返回详细信息。
+Go 语言首创的错误处理规范：
+f, err := os.Open(filename) if err != nil { log.Println(&#34;Open file failed:&#34;, err) return } defer f.Close() ... // 操作已经打开的f文件 在Java中： try { Statement stmt = .">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://qiaomingzi.github.io/cn/article/go/go%E8%AF%AD%E8%A8%80%E7%BC%96%E7%A8%8B/"><meta property="og:image" content="https://qiaomingzi.github.io/opengraph/gohugoio-card-base-1_huf001e7df4fd9c00c4355abac7d4ca455_242906_filter_8434414147584708247.png"><meta property="article:section" content="cn">
+<meta property="article:published_time" content="2021-05-25T09:34:28+08:00">
+<meta property="article:modified_time" content="2021-05-25T09:34:28+08:00">
+<meta itemprop=name content="读[GO语言编程]">
+<meta itemprop=description content="相关链接 https://github.com/golang 源码 https://golang.org/ref/mod 官方文档 https://golang.org/doc/code.html#Workspaces http://www.flysnow.org/categories/Golang/ go专栏 https://golanglibs.com/top 流行的GO应用和GO库 https://gitee.com/pengzhile/ide-eval-resetterv GoLand试用更新插件 一：前言 为什么需要GO语言 Go设计者认为C语言更值得学习，希望让它成为互联网时代的C语言。多数系统级语言（包括Java和C#）的根本编程哲学来源于C++，将C++的面向对象进一步发扬光大。C语言经久不衰的根源是它足够简单，Go语言也要足够简单。
+那么GO需要关注哪些问题 与分布式支持
+并发执行体：多核化和集群化是互联网时代的典型特征，操作系统自己掌管的进程（process）、进程内的线程（thread）以及进程内的协程（goroutine，也叫轻量级线程）。Go语言在语言级别支持协程，叫goroutine。Go语言准库提供的所有系统调用（syscall）操作，当然也包括所有同步IO操作，都会出让CPU给其他goroutine
+执行体间的通信：
+1）执行体之间的互斥与同步，互斥与同步是执行体间最基础 的交互方式。多数语言在库层面提供了线程间的互斥与同步支持，并没有提供协程之间的互斥与同步。
+2）执行体之间的消息传递，在并发编程模型的选择上，一个是共享内存模型，一个是消息传递模型。多数传统语言选择了前者；Go语言推荐采用“Erlang风格的并发模型”的编程范式，尽管传统的“共享内存模型”仍然 被保留，在Go语言中内置了通道（channel）支持。两个goroutine之间可以通过通道来进行交互。
+软件工程支持
+随着工程规模的不断扩大,人们需要建立统一的交互语言来降低沟通的成本。规范化体现在多 个层面，
+1)代码风格规范
+Go语言要求public的变量必须以大写字母开头，private变量则以小写字母开头，这种做法不仅免除public、private关键字，更重要的是统一了命名风格。
+Go语言对{ }应该怎么写进行了强制，Go代码的花括号位置肯定是非常统一的。
+正例: if expression { ... } 反例: if expression { ... } 2)错误处理规范
+Go语言的函数允许返回多个值。大多数函数的最后一个返回值会为error类型，以在错误情况下返回详细信息。
+Go 语言首创的错误处理规范：
+f, err := os.Open(filename) if err != nil { log.Println(&#34;Open file failed:&#34;, err) return } defer f.Close() ... // 操作已经打开的f文件 在Java中： try { Statement stmt = ."><meta itemprop=datePublished content="2021-05-25T09:34:28+08:00">
+<meta itemprop=dateModified content="2021-05-25T09:34:28+08:00">
+<meta itemprop=wordCount content="2060"><meta itemprop=image content="https://qiaomingzi.github.io/images/gohugoio-card.png">
+<meta itemprop=keywords content="GO,"><meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://qiaomingzi.github.io/opengraph/gohugoio-card-base-1_huf001e7df4fd9c00c4355abac7d4ca455_242906_filter_8434414147584708247.png">
+<meta name=twitter:title content="读[GO语言编程]">
+<meta name=twitter:description content="相关链接 https://github.com/golang 源码 https://golang.org/ref/mod 官方文档 https://golang.org/doc/code.html#Workspaces http://www.flysnow.org/categories/Golang/ go专栏 https://golanglibs.com/top 流行的GO应用和GO库 https://gitee.com/pengzhile/ide-eval-resetterv GoLand试用更新插件 一：前言 为什么需要GO语言 Go设计者认为C语言更值得学习，希望让它成为互联网时代的C语言。多数系统级语言（包括Java和C#）的根本编程哲学来源于C++，将C++的面向对象进一步发扬光大。C语言经久不衰的根源是它足够简单，Go语言也要足够简单。
+那么GO需要关注哪些问题 与分布式支持
+并发执行体：多核化和集群化是互联网时代的典型特征，操作系统自己掌管的进程（process）、进程内的线程（thread）以及进程内的协程（goroutine，也叫轻量级线程）。Go语言在语言级别支持协程，叫goroutine。Go语言准库提供的所有系统调用（syscall）操作，当然也包括所有同步IO操作，都会出让CPU给其他goroutine
+执行体间的通信：
+1）执行体之间的互斥与同步，互斥与同步是执行体间最基础 的交互方式。多数语言在库层面提供了线程间的互斥与同步支持，并没有提供协程之间的互斥与同步。
+2）执行体之间的消息传递，在并发编程模型的选择上，一个是共享内存模型，一个是消息传递模型。多数传统语言选择了前者；Go语言推荐采用“Erlang风格的并发模型”的编程范式，尽管传统的“共享内存模型”仍然 被保留，在Go语言中内置了通道（channel）支持。两个goroutine之间可以通过通道来进行交互。
+软件工程支持
+随着工程规模的不断扩大,人们需要建立统一的交互语言来降低沟通的成本。规范化体现在多 个层面，
+1)代码风格规范
+Go语言要求public的变量必须以大写字母开头，private变量则以小写字母开头，这种做法不仅免除public、private关键字，更重要的是统一了命名风格。
+Go语言对{ }应该怎么写进行了强制，Go代码的花括号位置肯定是非常统一的。
+正例: if expression { ... } 反例: if expression { ... } 2)错误处理规范
+Go语言的函数允许返回多个值。大多数函数的最后一个返回值会为error类型，以在错误情况下返回详细信息。
+Go 语言首创的错误处理规范：
+f, err := os.Open(filename) if err != nil { log.Println(&#34;Open file failed:&#34;, err) return } defer f.Close() ... // 操作已经打开的f文件 在Java中： try { Statement stmt = .">
+<meta name=twitter:site content="@GoHugoIO">
+<script>var _hmt=_hmt||[];(function(){var e,t=document.createElement("script");t.src="https://hm.baidu.com/hm.js?245212315af876cae36fd6880abbfa41",e=document.getElementsByTagName("script")[0],e.parentNode.insertBefore(t,e)})()</script>
+</head><body class="ma0 sans-serif bg-primary-color-light">
+<nav class="bg-primary-color-dark pv4 w-100" role=navigation>
+<div class="center flex-ns flex-wrap items-center justify-start mw9">
+<h1 class="dim f3 lh-solid ml0-ns mr0 mr4-l mv0 pl3 pl4-ns">
+<a href=javascript:void(0); class="link white">
+李明梓
+</a>
+</h1><div class="db dib-ns pl3"><form id=site-search-form role=search>
+<fieldset class="bn ma0 pa0">
+<label class=clip for=search-input>Search</label>
+<input type=search id=search-input class="needs-js bg-left bn f5 input-reset lh-solid mt3 mt0-ns pl4 pv2 w5 white" placeholder="Search the Docs" name=search-input style="background:url(/images/icon-search.png)5px 11px/16px 16px no-repeat;background-color:rgba(255,255,255,0)">
+</fieldset></form></div><ul class="list ma0 pa0 dn dib-l" role=menu>
+<li class="f5 dib mr4" role=menuitem>
+<a href=https://qiaomingzi.github.io/ class="dim link light-silver">
+首页
+</a>
+</li><li class="f5 dib mr4" role=menuitem>
+<a href=/article/documentation/ class="dim link light-silver">
+文档
+</a>
+</li><li class="f5 dib mr4" role=menuitem>
+<a href=/about/ class="dim link light-silver">
+关于我
+</a>
+</li></ul></div></nav><main role=main class="content-with-sidebar min-vh-100 pb7 pb0-ns">
+<article class="w-100 ph4 pb5 pb6-ns pt1 pt5-ns">
+<div class=flex-l>
+<div class="order-2 w-100 w-20-l ph5-m ph0-l mb4 sticky">
+<aside class="fixed-lTK mw5-l right-0 f6 bl-l b--moon-gray pv4 pv0-ns ph4-l nested-list-reset nested-links nested-copy-line-height">
+<p class=b>What's on this Page</p><nav id=TableOfContents>
+<ul>
+<li></li><li><a href=#一前言>一：前言</a></li><li><a href=#二初识go语言>二：初识GO语言</a></li><li><a href=#三顺序编程>三：顺序编程</a></li><li><a href=#四面向对象编程>四：面向对象编程</a></li><li><a href=#五并发编程>五：并发编程</a></li><li><a href=#六网络编程>六：网络编程</a></li><li><a href=#七进阶话题>七：进阶话题</a></li><li><a href=#八安全编程>八：安全编程</a></li><li><a href=#九工程管理>九：工程管理</a></li><li><a href=#十开发工具>十：开发工具</a></li><li><a href=#附录>附录</a></li></ul></nav><div date-pref>
+<a href=https://qiaomingzi.github.io/cn/article/go/k8s/ class="dib f6 pl1 hover-bg-light-gray br-100" title="K8S "><svg class="fill-current" height="30" viewBox="0 0 24 24" width="30" xmlns="http://www.w3.org/2000/svg"><path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
+</a>
+</div></aside></div><div class="order-1 w-60-l mw7 ph0 ph5-ns mid-gray nested-copy-line-height no-underline nested-links nested-img nested-copy-seperator nested-blockquote mt0-ns" style=flex-grow:1>
+<div class="documentation-copy center measure-wide-l">
+<div id=readout class="fixed right-0 bottom-0">
+</div><header class="flex-none w-100">
+<a href=/categories/%E5%90%8E%E7%AB%AF class="f6 fw8 mb0 link mid-gray dim mr3">
+后端
+</a>
+<h1 class="lh-title mb3 mv0 pt3 primary-color-dark">读[GO语言编程]</h1></header><aside class="bt bw1 pt3 mt2 mid-gray b--mid-gray fn w-100">
+</aside><div class=prose id=prose>
+<h3 id=相关链接>相关链接 <a class=header-link href=#%e7%9b%b8%e5%85%b3%e9%93%be%e6%8e%a5><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3><pre tabindex=0><code>https://github.com/golang 源码
+https://golang.org/ref/mod 官方文档
+https://golang.org/doc/code.html#Workspaces
+
+http://www.flysnow.org/categories/Golang/ go专栏
+https://golanglibs.com/top  流行的GO应用和GO库
+
+https://gitee.com/pengzhile/ide-eval-resetterv  GoLand试用更新插件
+</code></pre><h2 id=一前言>一：前言 <a class=header-link href=#%e4%b8%80%e5%89%8d%e8%a8%80><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h2><h4 id=为什么需要go语言>为什么需要GO语言 <a class=header-link href=#%e4%b8%ba%e4%bb%80%e4%b9%88%e9%9c%80%e8%a6%81go%e8%af%ad%e8%a8%80><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p>Go设计者认为C语言更值得学习，希望让它成为互联网时代的C语言。多数系统级语言（包括Java和C#）的根本编程哲学来源于C++，将C++的面向对象进一步发扬光大。C语言经久不衰的根源是它足够简单，Go语言也要足够简单。</p><h4 id=那么go需要关注哪些问题>那么GO需要关注哪些问题 <a class=header-link href=#%e9%82%a3%e4%b9%88go%e9%9c%80%e8%a6%81%e5%85%b3%e6%b3%a8%e5%93%aa%e4%ba%9b%e9%97%ae%e9%a2%98><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><ul>
+<li>
+<p>与分布式支持</p><p><strong>并发执行体</strong>：多核化和集群化是互联网时代的典型特征，操作系统自己掌管的进程（process）、进程内的线程（thread）以及进程内的协程（goroutine，也叫轻量级线程）。Go语言在语言级别支持协程，叫goroutine。Go语言准库提供的所有系统调用（syscall）操作，当然也包括所有同步IO操作，都会出让CPU给其他goroutine</p><p><strong>执行体间的通信</strong>：</p><p>1）执行体之间的互斥与同步，互斥与同步是执行体间最基础
+的交互方式。多数语言在库层面提供了线程间的互斥与同步支持，并没有提供协程之间的互斥与同步。</p><p>2）执行体之间的消息传递，在并发编程模型的选择上，一个是共享内存模型，一个是消息传递模型。多数传统语言选择了前者；Go语言推荐采用“Erlang风格的并发模型”的编程范式，尽管传统的“共享内存模型”仍然
+被保留，在Go语言中内置了通道（channel）支持。两个goroutine之间可以通过通道来进行交互。</p></li><li>
+<p>软件工程支持</p><p>随着工程规模的不断扩大,人们需要建立统一的交互语言来降低沟通的成本。规范化体现在多
+个层面，</p><p><strong>1)代码风格规范</strong></p><p>Go语言要求public的变量必须以大写字母开头，private变量则以小写字母开头，这种做法不仅免除public、private关键字，更重要的是统一了命名风格。</p><p>Go语言对{ }应该怎么写进行了强制，Go代码的花括号位置肯定是非常统一的。</p><pre tabindex=0><code>正例:
+if expression {
+...
+}
+反例:
+if expression
+{
+...
+}
+</code></pre><p><strong>2)错误处理规范</strong></p><p>Go语言的函数允许返回多个值。大多数函数的最后一个返回值会为error类型，以在错误情况下返回详细信息。</p><p>Go 语言首创的错误处理规范：</p><pre tabindex=0><code>f, err := os.Open(filename)
+if err != nil {
+log.Println(&#34;Open file failed:&#34;, err)
+return
+}
+defer f.Close()
+... // 操作已经打开的f文件
+
+在Java中：
+try {
+  Statement stmt = ...;
+  try {
+    ResultSet rset = ...;
+    try {
+      ... // 正常代码
+    }finally {
+      rset.close();
+    }
+  }finally {
+    stmt.close();
+  }
+}finally {
+  conn.close();
+}
+
+GO中：
+conn := ...
+defer conn.Close()
+stmt := ...
+defer stmt.Close()
+rset := ...
+defer rset.Close()
+... // 正常代码
+</code></pre><p><strong>3)包管理</strong>
+<strong>4)契约规范（接口）</strong>
+<strong>5)单元测试规范</strong>
+<strong>6)功能开发的流程规范</strong></p></li><li>
+<p>编程哲学重塑</p><p>计算机软件经历了数十年的发展，形成了多种学术流派，有面向过程编程、面向对象编程、函数式编程、面向消息编程。</p></li></ul><p>而Go语言用批判吸收的眼光，将所有编程思想做了一次梳理，融合众家之长，但时刻警惕特性复杂化，极力维持语言特性的简洁，力求小而精。从编程范式的角度来说，Go语言是变革派，而不是改良派。对于C++、Java和C#等语言为代表的面向对象（OO）思想体系，Go语言总体来说持保守态度，有限吸收，本着“如果一个特性并不对解决任何问题有显著的价值，那么Go就不提供它”的原则</p><h2 id=二初识go语言>二：初识GO语言 <a class=header-link href=#%e4%ba%8c%e5%88%9d%e8%af%86go%e8%af%ad%e8%a8%80><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h2><p>GO相关书籍：《GO并发编程实战 第2版》《<strong>Go****语言核心编程</strong>》《Go语言高级编程》《Go Web编程》</p><h4 id=贝尔实验室>贝尔实验室： <a class=header-link href=#%e8%b4%9d%e5%b0%94%e5%ae%9e%e9%aa%8c%e5%ae%a4><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p>​ 贝尔实验室已经走出了多位诺贝尔奖获得者，一些对于现在科技至关重要的研究成果，比如晶体管、通信技术、数码相机的感光元件CCD和光电池等都源自贝尔实验室。贝尔实验室中一个叫计算科学研究中心的部门，回溯至1969年，肯·汤普逊（Ken Thompson）和丹尼斯·里奇（Dennis Ritchie）在贝尔实验室的计算科学研究中心里开发出了Unix这个大名鼎鼎的操作系统，还因为开发Unix而衍生出了一门同样赫赫有名的编程语言——C语言。</p><p>​ 包括90年代如日中天的太阳微系统（Sun MicroSystems），现在的Mac OS X操作系统其实也可以认为是Unix
+的一个变种（FreeBSD）。</p><p>​ 从20世纪80年代又开始了一个名为Plan 9的操作系统研究项目，目的就是解决Unix中的一些问题，发展出一个Unix的后续替代系统。在之后的几十年中，该研究项目又演变出了另一个叫Inferno的项目分支，以及一个名为Limbo的编程语言。</p><p>​ Limbo是用于开发运行在小型计算机上的分布式应用的编程语言，它支持模块化编程，编译期和运行时的强类型检查，进程内基于具有类型的通信通道，原子性垃圾收集和简单的抽象数据类型。它被设计为：即便是在没有硬件内存保护的小型设备上，也能安全运行。Limbo语言被认为是Go语言的前身，不仅仅因为是同一批人设计的语言，而是Go语言确实从Limbo语言中继承了众多优秀的特性。</p><h4 id=go语言的前身>Go语言的前身 <a class=header-link href=#go%e8%af%ad%e8%a8%80%e7%9a%84%e5%89%8d%e8%ba%ab><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p>​ Limbo语言被认为是Go语言的前身,Limbo语言中继承了众多优秀的特性。贝尔实验室后来经历了多次的动荡，包括肯·汤普逊在内的Plan 9项目原班人马加入了Google。在Google，他们创造了Go语言。Go语言的第一个版本在2009年11月正式对外发布，并在此后的两年内快速迭代，发展迅猛。第一个正式版本于2012年3月28日正式发布，并使用BSD授权协议进行了开源。</p><p>​ 基于Google对开源的一贯拥抱态度， Go语言也自然而然地选择了开源方式发布，并使用BSD授权协议。任何人可以查看Go语言的所有源代码，并可以为Go语言发展而奉献自己的力量。Google作为Go语言的主推者，在自家的服务中逐步增加对Go语言的支持，比如云计算平台GAE（Google AppEngine）很早就开始支持Go语言了。</p><h3 id=1go语言最主要的特性>1.Go语言最主要的特性 <a class=header-link href=#1go%e8%af%ad%e8%a8%80%e6%9c%80%e4%b8%bb%e8%a6%81%e7%9a%84%e7%89%b9%e6%80%a7><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3><p>Go语言作为一门全新的静态类型开发语言，主要特性如下：</p><h4 id=1自动垃圾回收><strong>1)自动垃圾回收</strong> <a class=header-link href=#1%e8%87%aa%e5%8a%a8%e5%9e%83%e5%9c%be%e5%9b%9e%e6%94%b6><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><pre tabindex=0><code>void foo()
+{
+char* p = new char[128];
+... // 对p指向的内存块进行赋值
+func1(p); // 使用内存指针
+delete[] p;
+}
+</code></pre><p>​ C和C++语言在非常长的时间内都作为服务端系统的主要开发语言，然而，内存和资源管理一直是一个让人非常抓狂的难题。服务器的崩溃十有八九就是因为不正确的内存和资源管理导致，更讨厌的是这种内存和资源管理问题即使被发现了，也很难定位到具体的错误地点，导致无数程序员通宵达旦地调试程序。</p><p>​ 手动管理内存的另外一个问题就是由于指针的到处传递而无法确定何时可以释放该指针所指向的内存块。假如代码中某个位置释放了内存，而另一些地方还在使用指向这块内存的指针，那么这些指针就变成了所谓的“野指针”（wild pointer）或者“悬空指针”（dangling pointer），对这些指针进行的任何读写操作都会导致不可预料的后果。</p><p>​ 由于这个问题导致后面除了一些非常著名的内存检查工具，比如Rational Purify、Compuware BoundsChecker和英特尔的Parallel Inspector等。到目前为止，内存泄露的最佳解决方案是在语言级别引入自动垃圾回收算法（Garbage Collection，简称GC）所谓垃圾回收，</p><p>​ Go语言作为一门新生的开发语言，当然不能忽略内存管理这个问题。 因此Go语言中不需要delete关键字，也不需要free()方法来明确释放内存如果使用Go语言实现，我们就完全不用考虑何时需要释放之前分配的内存的问题，系统会自动帮我们判断，并在合适的时候（比如CPU相对空闲的时候）进行自动垃圾收集工作。</p><h4 id=2更丰富的内置类型><strong>2)更丰富的内置类型</strong> <a class=header-link href=#2%e6%9b%b4%e4%b8%b0%e5%af%8c%e7%9a%84%e5%86%85%e7%bd%ae%e7%b1%bb%e5%9e%8b><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p><strong>引用类型</strong>：切片、字典、数组、通道、函数</p><p><strong>值类型</strong>：数组、基础数据类型、结构体</p><h4 id=3函数多返回值><strong>3)函数多返回值</strong> <a class=header-link href=#3%e5%87%bd%e6%95%b0%e5%a4%9a%e8%bf%94%e5%9b%9e%e5%80%bc><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p>目前的主流语言中除Python外基本都不支持函数的多返回值功能；Go语言革命性地在静态开发语言阵营中率先提供了多返回值功能。
+func 函数名(参数列表)(返回值列表) {
+// 函数体
+}</p><p>并不是每一个返回值都必须赋值，可以直接用下划线作为占位符来忽略其他不关心的返回值。
+_, _, lastName, _ := getName()</p><h4 id=4错误处理><strong>4)错误处理</strong> <a class=header-link href=#4%e9%94%99%e8%af%af%e5%a4%84%e7%90%86><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p>Go语言引入了3个关键字defer、panic和recover 用于标准的错误处理流程。Go语言的错误处理机制可以大量减少代码量，让开发者无需仅仅为了程序安全性而添加大量一层套一层的try-catch语句。</p><h4 id=5匿名函数和闭包><strong>5)匿名函数和闭包</strong> <a class=header-link href=#5%e5%8c%bf%e5%90%8d%e5%87%bd%e6%95%b0%e5%92%8c%e9%97%ad%e5%8c%85><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p>在Go语言中，所有的函数也是值类型，可以作为参数传递。</p><h4 id=6类型和接口><strong>6)类型和接口</strong> <a class=header-link href=#6%e7%b1%bb%e5%9e%8b%e5%92%8c%e6%8e%a5%e5%8f%a3><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p>Go语言的类型定义非常接近于C语言中的结构（struct），甚至直接沿用了struct关键字。相并C++和Java，没有直接沿袭传统去设计一个超级复杂的类型系统，不支持继承和重载，而只是支持了最基本的类型组合功能。</p><p>Go语言也不是简单的对面向对象开发语言做减法，它还引入了一个无比强大的“非侵入式”接口的概念，让开发者从以往对C++和Java开发中的接口管理问题中解脱出来。</p><h4 id=7并发编程><strong>7)并发编程</strong> <a class=header-link href=#7%e5%b9%b6%e5%8f%91%e7%bc%96%e7%a8%8b><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p>Go语言引入了goroutine概念，通过在函数调用前使用关键字go，我们即可让该函数以goroutine方式执行。goroutine是一种比线程更加轻盈、更省资源的协程。Go语言通过系统的线程来多路派遣这些函数的执行，使得
+每个用go关键字执行的函数可以运行成为一个单位协程。而且调度的开销非常小，一颗CPU调度的规模不下于每秒百万次，这使得我们能够创建大量的goroutine。
+Go语言实现了CSP（通信顺序进程，Communicating Sequential Process）模型来作为goroutine间的推荐通信方式。在CSP模型中，进程之间只能通过一对通信原语实现协作。Go语言用channel（通道）这个概念来轻巧地实现了CSP模型。channel的使用方式比较接近Unix系统中的管道（pipe）概念，可以方便地进行跨goroutine的通信。
+一个进程内创建的所有goroutine运行在同一个内存地址空间中，如果需要访问共享的内存变量，可以通过Go语言标准库中的sync包提供了完备的读写锁功能来访问。</p><h4 id=8反射><strong>8)反射</strong> <a class=header-link href=#8%e5%8f%8d%e5%b0%84><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p>​ 反射（reflection）是在Java语言出现后迅速流行起来的一种概念。通过反射，你可以获取对象类型的详细信息，并可动态操作对象。反射是把双刃剑，功能强大但代码可读性并不理想。若非必要，我们并不推荐使用反射。
+​ Go语言的反射实现了反射的大部分功能，但不能通过反射创建对象实例。在GO语言中反射最常见的使用场景是做对象的序列化（serialization，有时候也叫Marshal & Unmarshal）。例如，Go语言标准库的encoding/json、encoding/xml、encoding/gob、encoding/binary等包就大量
+依赖于反射功能来实现。</p><h4 id=9语言交互性><strong>9)语言交互性</strong> <a class=header-link href=#9%e8%af%ad%e8%a8%80%e4%ba%a4%e4%ba%92%e6%80%a7><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p>由于Go语言与C语言之间的天生联系，Go语言可以用通过Cgo重用现有C模块，Cgo既是语言特性，同时也是一个工具的名称。与Java中的JNI不同，Cgo的用法非常简单。</p><h3 id=2第一个go-程序>2.第一个Go 程序 <a class=header-link href=#2%e7%ac%ac%e4%b8%80%e4%b8%aago-%e7%a8%8b%e5%ba%8f><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3><p>每个Go源代码文件的开头都是一个package声明，表示该Go代码所属的包。包是Go语言里最基本的分发单位，也是工程管理中依赖关系的体现。要生成Go可执行程序，必须建立一个名字为main的包，并且在该包中包含一个叫main()的函数（该函数是Go可执行程序的执行起点）。</p><pre tabindex=0><code>package main
+import &#34;fmt&#34;// 我们需要使用fmt包中的Println()函数
+func main() {
+   fmt.Println(&#34;Hello, world. 你好，世界！&#34;)
+}
+</code></pre><ol>
+<li>
+<p>Go语言的main()函数不能带参数，也不能定义返回值。命令行传入的参数在os.Args变量中保存。如果需要支持命令行开关，可使用flag包。</p></li><li>
+<p>Go程序的代码注释与C++保持一致：</p></li></ol><pre tabindex=0><code>/*
+块注释
+*/
+
+// 行注释
+</code></pre><ol start=3>
+<li>不得包含在源代码文件中没有用到的包，否则Go编译器会报编译错误。</li><li>强制左花括号{的放置位置,如果把左花括号{另起一行放置，这样做的结果是Go编译器报告编译错。
+5)Go程序并不要求开发者在每个语句后面加上分号表示语句结束。
+6)一个常规的函数定义包含以下部分：</li></ol><pre tabindex=0><code>func 函数名(参数列表)(返回值列表) {
+// 函数体
+}
+</code></pre><h3 id=2编译程序>2.编译程序 <a class=header-link href=#2%e7%bc%96%e8%af%91%e7%a8%8b%e5%ba%8f><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3><pre tabindex=0><code>Go命令行工具只是一个源代码管理工具，或者说是一个前端。真正的Go编译器和链接器被Go命令行工具隐藏在后面，我们可以直接使用它们：
+$ 6g helloworld.go
+$ 6l helloworld.6
+$ ./6.out
+Hello, world. 你好，世界！
+6g和6l是64位版本的Go编译器和链接器，对应的32位版本工具为8g和8l。Go还有另外一个
+GCC版本的编译器，名为 gccgo。
+
+构建
+GOPATH和PATH环境变量一样，也可以接受多个路径，并且路径和路径之间用冒号分割
+go build calc
+gdb calc
+
+go test simplemath
+
+带参数运行
+go run ./src/qiaomingzi.github.io/base/fmt1/main.go -age=11 -name=limingzi
+</code></pre><h3 id=3开发工具>3.开发工具 <a class=header-link href=#3%e5%bc%80%e5%8f%91%e5%b7%a5%e5%85%b7><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3><p> 文本编辑工具gedit（Linux）/Notepad++（Windows）/Fraise（Mac OS X）；
+ 安装了GoClipse插件的Eclipse，集成性做得很好；
+ Vim/Emacs，万能开发工具；
+ LiteIDE，一款专为Go语言开发的集成开发环境
+ goland 非免费
+ VScode</p><h3 id=4工程管理>4.工程管理 <a class=header-link href=#4%e5%b7%a5%e7%a8%8b%e7%ae%a1%e7%90%86><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3><p>早期Go语言使用makefile作为临时方案，到了Go 1发布时引入了强大无比的Go命令行工具。Go命令行工具的革命性之处在于彻底消除了工程文件的概念，完全用目录结构和包名来推导工程结构和构建顺序。</p><p>​ Go语言所提供的是尽量简单的语法和尽量完善的库，以尽可能降低问题的发生概率，还可以用打印日志和使用GDB进行逐步调试。</p><p>​ GDB调试：Go语言编译的二进制程序直接支持GDB调试，比如用go build calc编译出来的可执行文件calc，就可以直接用以下命令以调试模式运行：
+$ gdb calc</p><h2 id=三顺序编程>三：顺序编程 <a class=header-link href=#%e4%b8%89%e9%a1%ba%e5%ba%8f%e7%bc%96%e7%a8%8b><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h2><p>Go语言是不折不扣的强类型语言（静态类型语言）。Go语言为什么会被称为“更好的C语言”！！！</p><p>同Go语言的其他符号（symbol）一样，以大写字母开头的常量在包外可见。</p><h3 id=1变量>1.变量 <a class=header-link href=#1%e5%8f%98%e9%87%8f><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3><pre tabindex=0><code>1. 变量申明
+var v1 int
+var v2 string
+var v3 [10]int // 数组
+var v4 []int // 数组切片
+var v5 struct {
+   f int
+}
+var v6 *int // 指针
+var v7 map[string]int // 字典map，key为string类型，value为int类型
+var v8 func(a int) int //函数
+var (
+   v1 int
+   v2 string
+)
+变量声明语句不需要使用分号作为结束符。
+
+2. 变量初始化
+var v1 int = 10 // 正确的使用方式1
+var v2 = 10 // 正确的使用方式2，编译器可以自动推导出v2的类型
+v3 := 10 // 正确的使用方式3，编译器可以自动推导出v3的类型
+
+3.变量赋值
+var v10 int
+v10 = 123
+
+多重赋值功能，如下面这个交换i和j变量的语句：
+i, j = j, i   &lt;= 其他语言需要中间变量：t = i; i = j; j = t;
+
+4.匿名变量
+func GetName() (firstName, lastName, nickName string) {
+  return &#34;May&#34;, &#34;Chan&#34;, &#34;Chibi Maruko&#34;
+}
+若只想获得nickName，可以使用_下划线屏蔽不相关返回值，则函数调用语句可以用如下方式编写：
+_, _, nickName := GetName()
+</code></pre><h3 id=3常量>3.常量 <a class=header-link href=#3%e5%b8%b8%e9%87%8f><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3><p>在Go语言中，常量是指编译期间就已知且不可改变的值。常量可以是数值类型（包括整型、浮点型和复数类型）、布尔类型、字符串类型等。</p><p>如：-12在C语言中会认为是一个int类型的常量，如果要指定一个值为-12的long类型常量，需要写成-12l。Go语言
+的字面常量更接近我们自然语言中的常量概念，它是无类型的。只要这个常量在相应类型的值域范围内，就可以作为该类型的常量，比如上面的常量-12，它可以赋值给int、uint、int32、int64、float32、float64、complex64、complex128等类型的变量。</p><p>常量的赋值是一个编译期行为，所以右值不能出现任何需要运行期才能得出结果的表达式</p><pre tabindex=0><code>1).常量定义
+const Pi float64 = 3.14159265358979323846
+const zero = 0.0 // 无类型浮点常量
+const (
+size int64 = 1024
+eof = -1 // 无类型整型常量
+)
+const u, v float32 = 0, 3 // u = 0.0, v = 3.0，常量的多重赋值
+const a, b, c = 3, 4, &#34;foo&#34;
+// a = 3, b = 4, c = &#34;foo&#34;, 无类型整型和字符串常量
+
+const mask = 1 &lt;&lt; 3 //在编译期运算的常量表达式
+
+2)预定义常量
+Go语言预定义了这些常量：true、false和iota。
+iota比较特殊，可以被认为是一个可被编译器修改的常量，在每一个const关键字出现时被重置为0，然后在下一个const出现之前，每出现一次iota，其所代表的数字会自动增1。
+
+const ( // iota被重设为0
+c0 = iota // c0 == 0
+c1 = iota // c1 == 1
+c2 = iota // c2 == 2
+)
+
+const ( // iota被重设为0，如果两个const的赋值语句的表达式是一样的，那么可以省略后一个赋值表达式
+c0 = iota // c0 == 0
+c1 // c1 == 1
+c2 // c2 == 2
+)
+
+const x = iota // x == 0 (因为iota又被重设为0了)
+const y = iota // y == 0 (同上)
+
+3）枚举
+const (
+Sunday = iota
+Monday
+Tuesday
+Wednesday
+Thursday
+Friday
+Saturday
+numberOfDays // 这个常量没有导出
+)
+</code></pre><h3 id=4类型>4.类型 <a class=header-link href=#4%e7%b1%bb%e5%9e%8b><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3><p>Go语言内置以下这些基础类型：</p><blockquote>
+<p>布尔类型：bool。
+整型：int8、byte、int16、>int、uint、uintptr等。
+浮点类型：float32、float64。
+复数类型：complex64、complex128。
+字符串：string。
+字符类型：rune。
+错误类型：error。</p></blockquote><p>此外，Go语言也支持以下这些复合类型：</p><blockquote>
+<p>指针（pointer）
+数组（array）
+切片（slice）
+字典（map）
+通道（chan）
+结构体（struct）
+接口（interface）</p></blockquote><p><strong>类型表示</strong></p><p>在做强制类型转换时，需要注意数据长度被截短而发生的数据精度损失（比如将浮点数强制转为整数）和值溢出（值超过转换的目标类型的值范围时）问题。</p><pre tabindex=0><code>var value2 int32
+value1 := 64 // value1将会被自动推导为int类型
+value2 = int32(value1) // 编译通过
+value2 = value1 // 编译错误 ，int和int32在Go语言里被认为是两种不同的类型，编译器也不会帮你自动
+做类型转换
+</code></pre><p><strong>数值运算</strong></p><p>Go语言支持下面的常规整数运算：+、-、*、/和%</p><p><strong>比较运算</strong></p><p>Go语言支持以下的几种比较运算符：>、&lt;、==、>=、&lt;=和!=</p><pre tabindex=0><code>两个不同类型的整型数不能直接比较，比如int8类型的数和int类型的数不能直接比较，但各种类型的整型变量都可以直接与字面常量（literal）进行比较，比如：
+
+var i int32
+var j int64
+i, j = 1, 2
+if i == j { // 编译错误
+fmt.Println(&#34;i and j are equal.&#34;)
+}
+if i == 1 || j == 2 { // 编译通过
+fmt.Println(&#34;i and j are equal.&#34;)
+}
+</code></pre><p><strong>位运算</strong></p><p><img src=E:/workspace/limzWorkspace/limz-blog-hugo/content/article/%E8%AF%BB%E4%B9%A6/GO%E8%AF%AD%E8%A8%80%E7%BC%96%E7%A8%8B/images/gyybc_1.png alt></p><h4 id=1布尔类型>1)布尔类型 <a class=header-link href=#1%e5%b8%83%e5%b0%94%e7%b1%bb%e5%9e%8b><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p>布尔类型不能接受其他类型的赋值，不支持自动或强制的类型转换</p><pre tabindex=0><code>var v1 bool
+v1 = true
+v2 := (1 == 2) // v2也会被推导为bool类型
+</code></pre><h4 id=2整型>2)整型 <a class=header-link href=#2%e6%95%b4%e5%9e%8b><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p><img src=./images/gyybc_0.png alt></p><h4 id=3浮点型><strong>3)浮点型</strong> <a class=header-link href=#3%e6%b5%ae%e7%82%b9%e5%9e%8b><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p>浮点型用于表示包含小数点的数据，Go语言中的浮点类型采用IEEE-754标准的表达方式。Go语言定义了两个类型float32和float64，其中float32等价于C语言的float类型，float64等价于C语言的double类型</p><p>浮点数不是一种精确的表达方式，所以像整型那样直接用==来判断两个浮点数是否相等是不可行的，这可能会导致不稳定的结果。</p><pre tabindex=0><code>var fvalue1 float32
+fvalue1 = 12
+fvalue2 := 12.0 // 如果不加小数点，fvalue2会被推导为整型而不是浮点型
+fvalue1 = float32(fvalue2) //强制类型转换
+</code></pre><h4 id=4复数><strong>4)复数</strong> <a class=header-link href=#4%e5%a4%8d%e6%95%b0><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p>复数实际上由两个实数（在计算机中用浮点数表示）构成，一个表示实部（real），一个表示虚部（imag），对于一个复数z = complex(x, y)，就可以通过Go语言内置函数real(z)获得该复数的实
+部，也就是x，通过imag(z)获得该复数的虚部，也就是y。</p><pre tabindex=0><code>var value1 complex64 // 由2个float32构成的复数类型
+value1 = 3.2 + 12i
+value2 := 3.2 + 12i // value2是complex128类型
+value3 := complex(3.2, 12) // value3结果同 value2
+</code></pre><h4 id=5字符串><strong>5)字符串</strong> <a class=header-link href=#5%e5%ad%97%e7%ac%a6%e4%b8%b2><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p>在Go语言中，字符串也是一种基本类型。相比之下， C/C++语言中并不存在原生的字符串类型，通常使用字符数组来表示，并以字符指针来传递。Go语言仅支持UTF-8和Unicode编码。</p><pre tabindex=0><code>var str string // 声明一个字符串变量
+str = &#34;Hello world&#34; // 字符串赋值
+ch := str[0] // 取字符串的第一个字符
+fmt.Printf(&#34;The length of \&#34;%s\&#34; is %d \n&#34;, str, len(str))
+fmt.Printf(&#34;The first character of \&#34;%s\&#34; is %c.\n&#34;, str, ch)
+
+//字符串的内容可以用类似于数组下标的方式获取，但与数组不同，字符串的内容不能在初始化后被修改 
+str := &#34;Hello world&#34; // 字符串也支持声明时进行初始化的做法
+str[0] = &#39;X&#39; // 编译错误
+</code></pre><h4 id=6字符类型><strong>6)字符类型</strong> <a class=header-link href=#6%e5%ad%97%e7%ac%a6%e7%b1%bb%e5%9e%8b><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p>在Go语言中支持两个字符类型，一个是byte（实际上是uint8的别名），代表UTF-8字符串的单个字节的值；另一个是rune，代表单个Unicode字符。出于简化语言的考虑，Go语言的多数API都假设字符串为UTF-8编码。尽管Unicode字符在标准库中有支持，但实际上较少使用。</p><h4 id=7数组><strong>7)数组</strong> <a class=header-link href=#7%e6%95%b0%e7%bb%84><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p>数组就是指一系列同一类型数据的集合。在Go语言中，数组长度在定义后就不可更改。</p><p>在Go语言中数组是一个值类型（value type）。所有的值类型变量在赋值和作为参数传递时都将产生一次复制动作。</p><pre tabindex=0><code>[32]byte // 长度为32的数组，每个元素为一个字节
+[2*N] struct { x, y int32 } // 复杂类型数组
+[1000]*float64 // 指针数组
+[3][5]int // 二维数组
+[2][2][2]float64 // 等同于[2]([2]([2]float64))
+</code></pre><h4 id=8数组切片><strong>8)数组切片</strong> <a class=header-link href=#8%e6%95%b0%e7%bb%84%e5%88%87%e7%89%87><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p>数组切片的数据结构可以抽象为以下3个变量：</p><ul>
+<li>
+<p>一个指向原生数组的指针；</p></li><li>
+<p>数组切片中的元素个数 len(slice)</p></li><li>
+<p>数组切片已分配的存储空间。cap(slice)</p></li></ul><pre tabindex=0><code>基于数组创建数组切片
+var myArray [10]int = [10]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+var mySlice []int = myArray[:5]
+
+直接创建
+mySlice1 := make([]int, 5) //创建一个初始元素个数为5的数组切片，元素初始值为0
+mySlice2 := make([]int, 5, 10)//创建一个初始元素个数为5的数组切片，元素初始值为0，并预留10个元素的存储空间
+mySlice3 := []int{1, 2, 3, 4, 5} //直接创建并初始化包含5个元素的数组切片
+
+动态增减元素
+mySlice := make([]int, 5, 10)
+mySlice = append(mySlice, 1, 2, 3)
+
+mySlice2 := []int{8, 9, 10}
+mySlice = append(mySlice, mySlice2...)// 给mySlice后面添加另一个数组切片
+
+基于数组切片创建数组切片
+oldSlice := []int{1, 2, 3, 4, 5}
+newSlice := oldSlice[:3] // 基于oldSlice的前3个元素构建新数组切片
+
+内容复制
+slice1 := []int{1, 2, 3, 4, 5}
+slice2 := []int{5, 4, 3}
+copy(slice2, slice1) // 只会复制slice1的前3个元素到slice2中
+copy(slice1, slice2) // 只会复制slice2的3个元素到slice1的前3个位置
+</code></pre><p><strong>9)map字典</strong></p><p>map是一堆键值对的未排序集合。在C++/Java中，map一般都以库的方式提供，比如在C++中是STL std::map&lt;>，在C#中是Dictionary&lt;>，在Java中是Hashmap&lt;>，在这些语言中，如果要使用map，事先要引用相应的库。而在Go中，使用map不需要引入任何库</p><h2 id=四面向对象编程>四：面向对象编程 <a class=header-link href=#%e5%9b%9b%e9%9d%a2%e5%90%91%e5%af%b9%e8%b1%a1%e7%bc%96%e7%a8%8b><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h2><p>Go语言初始定位为高并发的服务器端程序，因此不太适合开发GUI程序</p><h2 id=五并发编程>五：并发编程 <a class=header-link href=#%e4%ba%94%e5%b9%b6%e5%8f%91%e7%bc%96%e7%a8%8b><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h2><h2 id=六网络编程>六：网络编程 <a class=header-link href=#%e5%85%ad%e7%bd%91%e7%bb%9c%e7%bc%96%e7%a8%8b><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h2><h2 id=七进阶话题>七：进阶话题 <a class=header-link href=#%e4%b8%83%e8%bf%9b%e9%98%b6%e8%af%9d%e9%a2%98><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h2><h2 id=八安全编程>八：安全编程 <a class=header-link href=#%e5%85%ab%e5%ae%89%e5%85%a8%e7%bc%96%e7%a8%8b><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h2><p>PKI，全称公钥基础设施，是使用非对称加密理论，提供数字签名、加密、数字证书等服务的体系。</p><p>数字签名，是指用于标记数字文件拥有者、创造者、分发者身份的字符串。数字签名拥有标记文件身份、分发的不可抵赖性等作用。</p><h4 id=数据加密>数据加密 <a class=header-link href=#%e6%95%b0%e6%8d%ae%e5%8a%a0%e5%af%86><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p>采用单密钥的加密算法，我们称为对称加密。整个系统由如下几部分构成：需要加密的明文、加密算法和密钥。在加密和解密中，使用的密钥只有一个。常见的单密钥加密算法有DES、AES、RC4等。</p><p>采用双密钥的加密算法，我们称为非对称加密。整个系统由如下几个部分构成：需要加密的明文、加密算法、私钥和公钥。在该系统中，私钥和公钥都可以被用作加密或者解密，但是用私钥加密的明文，必须要用对应的公钥解密，用公钥加密的明文，必须用对应的私钥解密。常见的双密钥加密算法有RSA等。</p><p>哈希算法是一种从任意数据中创建固定长度摘要信息的办法。一般我们要求，对于不同的数据，要求产生的摘要信息也是唯一的。常见的哈希算法包括MD5、SHA-1等。</p><h2 id=九工程管理>九：工程管理 <a class=header-link href=#%e4%b9%9d%e5%b7%a5%e7%a8%8b%e7%ae%a1%e7%90%86><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h2><p>Go语言在设计之初就考虑了在语言层面如何更好地解决当前工程管理中的一些常见问题，让学习者在学习语言阶段自然而然地养成了工程的习惯，避免出现学院派和工程派两种明显不同的侧重点。</p><p>任何一门程序设计语言要能推广开来并投入到生产环境中，高效、易用、有好的开发环境都是必不可少的。</p><h4 id=1代码风格>1.代码风格 <a class=header-link href=#1%e4%bb%a3%e7%a0%81%e9%a3%8e%e6%a0%bc><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p>“代码必须是本着写给人阅读的原则来编写，只不过顺便给机器执行而已。”，代码风格，是一个与人相关、与机器无关的问题。代码风格的好坏，不影响编译器的工作，但是影响团队协同，影响代码的复用、演进以及缺陷修复。</p><h5 id=强制性编码规范>强制性编码规范</h5><p>1)任何需要对外暴露的名字必须以大写字母开头，不需要对外暴露的则应该以小写字母开头。</p><p>2)而Go语言明确宣告了拥护骆驼命名法而排斥下划线法</p><p>3)花括号位置问题</p><pre tabindex=0><code>反例：
+func Foo(a, b int)（ret int, err error） 
+{
+    ....doSomthing..
+}
+正例：
+func Foo(a, b int)（ret int, err error） {
+}
+</code></pre><h5 id=非强制性编码风格建议>非强制性编码风格建议</h5><p>使用自带工具格式化代码</p><p><code>go fmt [packages]</code> 如：go fmt hello.go`</p><h5 id=import远程包>import远程包</h5><pre tabindex=0><code>package main
+import (
+&#34;fmt&#34;
+&#34;github.com/myteam/exp/crc32&#34;
+)
+拉取依赖 
+go get github.com/myteam/exp/crc32
+ 
+go工具会自动帮你获取位于远程的包源码，远程包 github.com/myteam/exp/crc32只是一个与fmt无异的本地路径而已。在随后的编译中，也会在pkg目录中生成对应的.a文件。
+</code></pre><h4 id=工程结构>工程结构 <a class=header-link href=#%e5%b7%a5%e7%a8%8b%e7%bb%93%e6%9e%84><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><pre tabindex=0><code>&lt;calcproj&gt;
+	├─README
+	├─AUTHORS
+	├─&lt;bin&gt;
+		├─calc
+	├─&lt;pkg&gt;
+		└─&lt;linux_amd64&gt;
+			└─simplemath.a
+	├─&lt;src&gt;
+		├─&lt;calc&gt;
+			└─calc.go
+		├─&lt;simplemath&gt;
+			├─add.go
+			├─add_test.go
+			├─sqrt.go
+			├─sqrt_test.go
+</code></pre><h4 id=工程文档>工程文档 <a class=header-link href=#%e5%b7%a5%e7%a8%8b%e6%96%87%e6%a1%a3><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p>程序，包括代码和文档。而软件产品，更是包括了：源代码（可选）、可执行程序、文档和服务。</p><p>若要让<code>go doc</code>将注释提取为文档，要遵守如下的基本规则:</p><ol>
+<li>注释需要紧贴在对应的包声明和函数之前，不能有空行。</li><li>注释如果要新起一个段落，应该用一个空白注释行隔开，因为直接换行书写会被认为是正常的段内折行。</li><li>开发者可以直接在代码内用// BUG(author): 的方式记录该代码片段中的遗留问题，这些遗留问题也会被抽取到文档中。</li></ol><pre tabindex=0><code>$ go doc [pacakge]   #提取包中的注释内容，并将其格式化输出到终端窗口
+$ godoc -http=:76 -path=&#34;.&#34;  #然后再访问http://localhost:76/就可以看到注释提取的效果
+</code></pre><h4 id=工程构建>工程构建 <a class=header-link href=#%e5%b7%a5%e7%a8%8b%e6%9e%84%e5%bb%ba><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><pre tabindex=0><code>$ go build calc   #它会在你运行该命令的目录中生成工程的目标二进制文
+$ go install calc   #将构建成功的包安装到恰当的位置
+</code></pre><h4 id=跨平台开发>跨平台开发 <a class=header-link href=#%e8%b7%a8%e5%b9%b3%e5%8f%b0%e5%bc%80%e5%8f%91><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p>跨平台泛指同一段程序可在不同硬件架构和操作系统的设备上运行，对于个人电脑和服务器通常为80×86架构，移动设备则以ARM架构为主。根据CPU的寻址能力，CPU又分为不同的位数，比如8位、16位、32位、64位等。位数越高，寻址能力就越强。
+程序的执行过程其实就是操作系统读取可执行文件的内容，依次调用相应CPU指令的过程。不同的操作系统所支持的可执行文件格式也各不相同，比如Windows支持PE格式，Linux支持ELF。</p><h5 id=交叉编译>交叉编译</h5><pre tabindex=0><code>在Linux平台下构建Windows 32位PE文件的详细步骤。
+(1) 获取Go源代码。
+(2) 构建本机编译器环境，具体代码如下：
+$ cd $GOROOT/src
+$ ./make.bash
+(3) 构建跨平台的编译器和链接器，具体代码如下：
+$ cat ~/bin/buildcmd
+#!/bin/sh
+set -e
+for arch in 8 6; do
+  for cmd in a c g l; do
+    go tool dist install -v cmd/$arch$cmd
+  done
+done
+exit 0
+
+(4) 构建Windows版本的标准命令工具和库，如下：
+$ cat ~/bin/buildpkg
+#!/bin/sh
+if [ -z &#34;$1&#34; ]; then
+  echo &#39;GOOS is not specified&#39; 1&gt;&amp;2
+  exit 2
+else
+  export GOOS=$1
+  if [ &#34;$GOOS&#34; = &#34;windows&#34; ]; then
+    export CGO_ENABLED=0
+  fi
+fi
+shift
+if [ -n &#34;$1&#34; ]; then
+  export GOARCH=$1
+fi
+cd $GOROOT/src
+go tool dist install -v pkg/runtime
+go install -v -a std
+
+然后执行下面这段脚本以准备好Windows交叉编译的环境：
+$ ~/bin/buildpkg windows 386
+
+(5) 在Linux上生成Windows x86的PE文件，具体代码如下：
+$ cat hello.go
+package main
+import &#34;fmt&#34;
+func main() {
+  fmt.Printf(&#34;Hello\n&#34;)
+}
+
+$ GOOS=windows GOARCH=386 go build -o hello.exe hello.go
+</code></pre><h4 id=单元测试>单元测试 <a class=header-link href=#%e5%8d%95%e5%85%83%e6%b5%8b%e8%af%95><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p>Go本身提供了一套轻量级的测试框架。符合规则的测试代码会在运行测试时被自动识别并执行。</p><p>单元测试源文件的命名规则如下：在需要测试的包下面创建以“_test”结尾的go文件，形如[^.]<em>_test.go。
+Go的单元测试函数分为两类：功能测试函数和性能测试函数，分别为以Test和Benchmark为函数名前缀并以</em>testing.T为单一参数的函数。下面是测试函数声明的例子：
+func TestAdd1(t *testing.T)
+func BenchmarkAdd1(t *testing.T)
+测试结果：功能测试函数会根据测试代码执行过程中是否发生错误来返回不同的结果，而性能测试函数仅仅打印整个测试过程的花费时间。</p><h4 id=打包分发>打包分发 <a class=header-link href=#%e6%89%93%e5%8c%85%e5%88%86%e5%8f%91><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p>由于Go语言对于兼容性控制的非常严格，任何一个版本号的不同都将导致无法链接包。因此，如果你使用Go语言开发了一个库，那么最合适的库分发方式是直接打包源代码包并进行分发，由使用者自行编译。</p><h2 id=十开发工具>十：开发工具 <a class=header-link href=#%e5%8d%81%e5%bc%80%e5%8f%91%e5%b7%a5%e5%85%b7><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h2><p>如果有一个扩展性较好的文本编辑器，搭配上go工具和gdb，再链接上go文档，那么整套环境就与成熟的IDE极为相似了。如果再整合进Git，就更可以升华为一个协同开发平台。</p><h4 id=选择开发工具>选择开发工具 <a class=header-link href=#%e9%80%89%e6%8b%a9%e5%bc%80%e5%8f%91%e5%b7%a5%e5%85%b7><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p>作为一个理想的开发工具，我们可以设定对其的期望，具体如下：
+ 支持语法高亮的文本编辑
+ 支持Unicode编码，便于在代码中直接使用非英文字符串
+ 支持工程构建
+ 直接执行构建结果
+ 单元测试
+ 支持执行性能测试
+ 支持代码调试，包括断点和逐行调试等
+ 支持文档提取和展示
+ 集成语言文档
+ 开源，或者免费
+ 最好能够支持代码自动完成（在Visual Studio中称之为IntelliSense）</p><h4 id=参考工具>参考工具 <a class=header-link href=#%e5%8f%82%e8%80%83%e5%b7%a5%e5%85%b7><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p>gedit、Vim、Eclipse、Notepad++、LiteIDE、goland</p><h2 id=附录>附录 <a class=header-link href=#%e9%99%84%e5%bd%95><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h2><h3 id=1go标准库>1.Go标准库 <a class=header-link href=#1go%e6%a0%87%e5%87%86%e5%ba%93><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3><p>Go标准库可以大致按其中库的功能进行以下分类:</p><ul>
+<li>
+<p>输入输出。这个分类包括二进制以及文本格式在屏幕、键盘、文件以及其他设备上的输入输出等，比如二进制文件的读写。对应于此分类的包有bufio、fmt、io、log和flag等，其中flag用于处理命令行参数。</p></li><li>
+<p>文本处理。这个分类包括字符串和文本内容的处理，比如字符编码转换等。对应于此分类的包有encoding、bytes、strings、strconv、text、mime、unicode、regexp、index和path等。其中path用于处理路径字符串。</p></li><li>
+<p>网络。这个分类包括开发网络程序所需要的包，比如Socket编程和网站开发等。对应于此分类的包有：net、http和expvar等。</p></li><li>
+<p>系统。这个分类包含对系统功能的封装，比如对操作系统的交互以及原子性操作等。对应于此分类的包有os、syscall、sync、time和unsafe等。</p></li><li>
+<p>数据结构与算法。对应于此分类的包有math、sort、container、crypto、hash、archive、compress和image等。因为image包里提供的图像编解码都是算法，所以也归入此类。</p></li><li>
+<p>运行时。对应于此分类的包有：runtime、reflect和go等。</p></li></ul><h3 id=2常用包>2.常用包 <a class=header-link href=#2%e5%b8%b8%e7%94%a8%e5%8c%85><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3><p><strong>fmt</strong>。它实现了格式化的输入输出操作，其中的fmt.Printf()和fmt.Println()是开发者使用最为频繁的函数。</p><p><strong>io</strong>。它实现了一系列非平台相关的IO相关接口和实现，比如提供了对os中系统相关的IO功能的封装。我们在进行流式读写（比如读写文件）时，通常会用到该包。</p><p><strong>bufio</strong>。它在io的基础上提供了缓存功能。在具备了缓存功能后，bufio可以比较方便地提供ReadLine之类的操作。</p><p><strong>strconv</strong>。本包提供字符串与基本数据类型互转的能力。</p><p><strong>os</strong>。本包提供了对操作系统功能的非平台相关访问接口。接口为Unix风格。提供的功能包括文件操作、进程管理、信号和用户账号等。</p><p><strong>sync</strong>。它提供了基本的同步原语。在多个goroutine访问共享资源的时候，需要使用sync中提供的锁机制。</p><p><strong>flag</strong>。它提供命令行参数的规则定义和传入参数解析的功能。绝大部分的命令行程序都需要用到这个包。</p><p><strong>encoding/json</strong>。JSON目前广泛用做网络程序中的通信格式。本包提供了对JSON的基本支持，比如从一个对象序列化为JSON字符串，或者从JSON字符串反序列化出一个具体的对象等。</p><p><strong>http</strong>。它是一个强大而易用的包，也是Golang语言是一门“互联网语言”的最好佐证。通
+过http包，只需要数行代码，即可实现一个爬虫或者一个Web服务器，这在传统语言中是无法想象的。</p><h3 id=3gotool命令>3.Gotool命令 <a class=header-link href=#3gotool%e5%91%bd%e4%bb%a4><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3><h4 id=31go命令行>3.1Go命令行 <a class=header-link href=#31go%e5%91%bd%e4%bb%a4%e8%a1%8c><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><pre tabindex=0><code>Usage:
+
+	go &lt;command&gt; [arguments]
+
+The commands are:
+
+	bug         start a bug report
+	build       compile packages and dependencies
+	clean       remove object files and cached files
+	doc         show documentation for package or symbol
+	env         print Go environment information
+	fix         update packages to use new APIs
+	fmt         gofmt (reformat) package sources
+	generate    generate Go files by processing source
+	get         add dependencies to current module and install them
+	install     compile and install packages and dependencies
+	list        list packages or modules
+	mod         module maintenance
+	run         compile and run Go program
+	test        test packages
+	tool        run specified go tool
+	version     print Go version
+	vet         report likely mistakes in packages
+
+Use &#34;go help &lt;command&gt;&#34; for more information about a command.
+
+Additional help topics:
+
+	buildconstraint build constraints
+	buildmode       build modes
+	c               calling between Go and C
+	cache           build and test caching
+	environment     environment variables
+	filetype        file types
+	go.mod          the go.mod file
+	gopath          GOPATH environment variable
+	gopath-get      legacy GOPATH go get
+	goproxy         module proxy protocol
+	importpath      import path syntax
+	modules         modules, module versions, and more
+	module-get      module-aware go get
+	module-auth     module authentication using go.sum
+	packages        package lists and patterns
+	private         configuration for downloading non-public code
+	testflag        testing flags
+	testfunc        testing functions
+	vcs             controlling version control with GOVCS
+</code></pre><h4 id=32go-module>3.2Go Module <a class=header-link href=#32go-module><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p>gomod 包源码和链接库保存在 <code>$GOPATH/pkg/mod</code> 目录下。</p><pre tabindex=0><code> go list -u -m all 查看所有依赖
+ go mod tidy  移除不需要的依赖
+ go mod edit -fmt 格式化go.mod文件
+ go mod edit --require=rsc.io/quote@v3.1.0  更新 rsc.io/quote 到 v3.1.0 版
+</code></pre><h3 id=4go安装>4.GO安装 <a class=header-link href=#4go%e5%ae%89%e8%a3%85><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3><pre tabindex=0><code>1. MSI installer(https://golang.org/dl/)
+
+Open the MSI file and follow the prompts to install the Go tools. By default, the installer puts the Go distribution in c:\Go.
+
+The installer should put the c:\Go\bin directory in your PATH environment variable. You may need to restart any open command prompts for the change to take effect.
+
+Setting environment variables under Windows
+
+Under Windows, you may set environment variables through the &#34;Environment Variables&#34; button on the &#34;Advanced&#34; tab of the &#34;System&#34; control panel. Some versions of Windows provide this control panel through the &#34;Advanced System Settings&#34; option inside the &#34;System&#34; control panel.
+
+2. linux下安装
+
+tar -C /usr/local -xzf go.tar.gz
+Add /usr/local/go/bin to the PATH environment variable. You can do this by adding this line to your /etc/profile(for a system-wide installation) or $HOME/.profile:
+export PATH=$PATH:/usr/local/go/bin
+
+
+3. 自定义安装
+The Go binary distributions assume they will be installed in /usr/local/go (or c:\Go under Windows), but it is possible to install the Go tools to a different location. In this case you must set the GOROOT environment variable to point to the directory in which it was installed. 
+For example, if you installed Go to your home directory you should add commands like the following to $HOME/.profile: 
+export GOROOT=$HOME/go1.X
+export PATH=$PATH:$GOROOT/bin
+ 
+4. 测试安装情况
+Check that Go is installed correctly by setting up a workspace and building a simple program, as follows.
+
+Create your workspace directory, %USERPROFILE%\go. (If you&#39;d like to use a different directory, you will need to set the GOPATH environment variable; see How to Write Go Code for details.)
+
+Next, make the directory src/hello inside your workspace, and in that directory create a file named hello.go that looks like:
+
+package main
+
+import &#34;fmt&#34;
+
+func main() {
+    fmt.Printf(&#34;hello, world\n&#34;)
+}
+Then build it with the go tool:
+
+C:\&gt; cd %USERPROFILE%\go\src\hello
+C:\Users\Gopher\go\src\hello&gt; go build
+The command above will build an executable named hello.exe in the directory alongside your source code. Execute it to see the greeting:
+
+C:\Users\Gopher\go\src\hello&gt; hello
+hello, world
+If you see the &#34;hello, world&#34; message then your Go installation is working.
+
+You can run go install to install the binary into your workspace&#39;s bin directory or go clean to remove it.
+
+Before rushing off to write Go code please read the How to Write Go Code document, which describes some essential concepts about using the Go tools.
+
+5. 删除go
+直接删除go的安装目录. 
+/usr/local/go under Linux, Mac OS X, and FreeBSD 
+ c:\Go under Windows.
+
+删除环境变量配置
+Under Linux and FreeBSD you should edit /etc/profile or $HOME/.profile.
+ Mac OS X   you should remove the /etc/paths.d/go file.
+ Windows users should read the section about setting environment variables under Windows.
+</code></pre><h4 id=gopath-与goroot>GOPATH 与GOROOT <a class=header-link href=#gopath-%e4%b8%8egoroot><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><pre tabindex=0><code>GOROOT
+指定Go的二进制编译包安装路径，假设你把Go安装在 /usr/local/go (或者Window是 c:\Go)目录下。当然你也可以安装在其他目录下，不过这时候你就需要设置GOROOT环境变量了。 http://golang.org/doc/install#install 例如，你如果安装Go在你的/usr/local/go目录下，你应该$HOME/.profile文件增加下面设置。
+export GOROOT=/usr/local/go
+export GOPATH=$PATH:$GOROOT/bin
+执行：source .bash_profile (即时生效)
+
+GOPATH
+GOPATH的作用是告诉Go命令和其他相关工具，在哪里去找到安装在你系统上的Go包。
+GOPATH是一个路径的列表，一个典型的GOPATH设置如下，类似PATH的设置，Win下用分号分割：
+GOPATH=/home/user/ext:/home/user/mygo 
+每一个列表中的路径是一个工作区的位置。每个工作区都有源文件、相关包的对象、执行文件。http://golang.org/doc/code.html
+下面是一个建立工作区的步骤：
+创建 $HOME/mygo 目录和作为源代码的 src 目录。
+$ mkdir -p $HOME/mygo/src # create a place to put source code 
+下一步就是设置 GOPATH，另外你应该把 这个目录下的bin目录放在 PATH 环境变量，这样你就可以直接在命令行执行而不用给出完整目录。
+export GOPATH=$HOME/mygo 
+export PATH=$PATH:$HOME/mygo/bin
+
+GOPATH 必须设置编译和安装包，即使用标准的Go目录树，类似如下：
+GOPATH=/home/user/gocode
+/home/user/gocode/
+    src/
+        foo/
+            bar/               (go code in package bar)
+                x.go
+            quux/              (go code in package main)
+                y.go
+    bin/
+        quux                   (installed command)
+    pkg/
+        linux_amd64/
+            foo/
+                bar.a          (installed package object)
+</code></pre><h3 id=5fmt格式>5.fmt格式 <a class=header-link href=#5fmt%e6%a0%bc%e5%bc%8f><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3><table>
+<thead>
+<tr>
+<th>动 词</th><th>功 能</th></tr></thead><tbody>
+<tr>
+<td>%v</td><td>按值的本来值输出</td></tr><tr>
+<td>%+v</td><td>在 %v 基础上，对结构体字段名和值进行展开</td></tr><tr>
+<td>%#v</td><td>输出 Go 语言语法格式的值</td></tr><tr>
+<td>%T</td><td>输出 Go 语言语法格式的类型和值</td></tr><tr>
+<td>%%</td><td>输出 % 本体</td></tr><tr>
+<td>%b</td><td>整型以二进制方式显示</td></tr><tr>
+<td>%o</td><td>整型以八进制方式显示</td></tr><tr>
+<td>%d</td><td>整型以十进制方式显示</td></tr><tr>
+<td>%x</td><td>整型以十六进制方式显示</td></tr><tr>
+<td>%X</td><td>整型以十六进制、字母大写方式显示</td></tr><tr>
+<td>%U</td><td>Unicode 字符</td></tr><tr>
+<td>%f</td><td>浮点数</td></tr><tr>
+<td>%p</td><td>指针，十六进制方式显示</td></tr></tbody></table><h3 id=6相关问题>6.相关问题 <a class=header-link href=#6%e7%9b%b8%e5%85%b3%e9%97%ae%e9%a2%98><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3><h4 id=1go-githubcomburntsushitomlv031-get-httpsproxygolangorggithubcom21burnt21sushitomlvv031mod-dial-tcp-17221716081443-connectex-a-connection-attempt-failed-because-the-connected-party-did-not-properly-respond-after-a-period-of-time-or-established-connection-failed-because-connected-host-has-failed-to-respond>1.go: <a href=mailto:github.com/BurntSushi/toml@v0.3.1>github.com/BurntSushi/toml@v0.3.1</a>: Get &ldquo;<a href=https://proxy.golang.org/github.com/%21burnt%21sushi/toml/@v/v0.3.1.mod%22>https://proxy.golang.org/github.com/%21burnt%21sushi/toml/@v/v0.3.1.mod"</a>: dial tcp 172.217.160.81:443: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond. <a class=header-link href=#1go-githubcomburntsushitomlv031-get-httpsproxygolangorggithubcom21burnt21sushitomlvv031mod-dial-tcp-17221716081443-connectex-a-connection-attempt-failed-because-the-connected-party-did-not-properly-respond-after-a-period-of-time-or-established-connection-failed-because-connected-host-has-failed-to-respond><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p>设置国内代理地址<code>go env -w GOPROXY=https://goproxy.cn</code></p><h4 id=2运行出错-failed-to-build-the-application-go-githubcomastaxiebeegov1121-missing-gosum-entry-to-add-it>2.运行出错 Failed to build the application: go: <a href=mailto:github.com/astaxie/beego@v1.12.1>github.com/astaxie/beego@v1.12.1</a>: missing go.sum entry; to add it: <a class=header-link href=#2%e8%bf%90%e8%a1%8c%e5%87%ba%e9%94%99-failed-to-build-the-application-go-githubcomastaxiebeegov1121-missing-gosum-entry-to-add-it><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p>go mod tidy</p></div><h2>See Also</h2><ul>
+<li><a href=/article/go/go%E8%AF%AD%E8%A8%80%E7%BC%96%E7%A8%8B/>读[GO语言编程]</a></li></ul></div></div><div class="order-0 w-20 dn db-l">
+<nav role=navigation>
+<ul class="list pa0 nl2">
+<li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.bigdata>bigdata</a>
+<ul class="bigdata desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+<li class="f6 fw4">
+<a href=/article/bigdata/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+大数据
+</a>
+</li><li class="f6 fw4">
+<a href=/article/bigdata/%E8%AF%BB%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%9845%E8%AE%B2/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+读[数据分析实战45讲]
+</a>
+</li></ul></li><li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.go>go</a>
+<ul class="go desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+<li class="f6 fw4">
+<a href=/article/go/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+go
+</a>
+</li><li class="f6 fw4">
+<a href=/article/go/go-sdk/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+GO SDK
+</a>
+</li><li class="f6 fw4">
+<a href=/article/go/k8s/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+K8S
+</a>
+</li><li class="f6 fw4">
+<a href=/article/go/go%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%8336%E8%AE%B2/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+读[GO语言核心36讲]
+</a>
+</li><li class="f6 fw4">
+<a href=/article/go/go%E8%AF%AD%E8%A8%80%E7%BC%96%E7%A8%8B/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+读[GO语言编程]
+</a>
+</li></ul></li><li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.java>java</a>
+<ul class="java desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+<li class="f6 fw4">
+<a href=/article/java/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+java
+</a>
+</li><li class="f6 fw4">
+<a href=/article/java/maven/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+maven-wrapper基础使用
+</a>
+</li><li class="f6 fw4">
+<a href=/article/java/%E4%BD%8D%E8%BF%90%E7%AE%97/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+位运算基础知识
+</a>
+</li></ul></li><li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.python>python</a>
+<ul class="python desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+<li class="f6 fw4">
+<a href=/article/python/python%E5%9F%BA%E7%A1%80/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+python基础
+</a>
+</li></ul></li><li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.db>db</a>
+<ul class="db desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+<li class="f6 fw4">
+<a href=/article/db/canal/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+canal-mysql binlog日志解析
+</a>
+</li><li class="f6 fw4">
+<a href=/article/db/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+db
+</a>
+</li><li class="f6 fw4">
+<a href=/article/db/mysql-master-slave/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+mysql master-slave
+</a>
+</li></ul></li><li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8 mb1 bb b--moon-gray">
+<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.ai>ai</a>
+<ul class="ai desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+<li class="f6 fw4">
+<a href=/article/ai/ai-agent/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+gpt-agent
+</a>
+</li></ul></li><li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.读书>读书</a>
+<ul class="读书 desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+<li class="f6 fw4">
+<a href=/article/%E8%AF%BB%E4%B9%A6/%E5%A4%A7%E9%A3%8E%E6%AD%8C/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+&lt;&lt;大风歌>>王立群
+</a>
+</li><li class="f6 fw4">
+<a href=/article/%E8%AF%BB%E4%B9%A6/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+概览
+</a>
+</li></ul></li><li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.工具>工具</a>
+<ul class="工具 desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+<li class="f6 fw4">
+<a href=/article/%E5%B7%A5%E5%85%B7/jemeter/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+jemeter基本使用
+</a>
+</li><li class="f6 fw4">
+<a href=/article/%E5%B7%A5%E5%85%B7/sonarqube/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+sonarqube基础使用
+</a>
+</li><li class="f6 fw4">
+<a href=/article/%E5%B7%A5%E5%85%B7/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+工具
+</a>
+</li></ul></li><li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.数学>数学</a>
+<ul class="数学 desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+<li class="f6 fw4">
+<a href=/article/%E6%95%B0%E5%AD%A6/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+math
+</a>
+</li><li class="f6 fw4">
+<a href=/article/%E6%95%B0%E5%AD%A6/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+数学基础概念
+</a>
+</li></ul></li><li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.英语>英语</a>
+<ul class="英语 desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+<li class="f6 fw4">
+<a href=/article/%E8%8B%B1%E8%AF%AD/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+english
+</a>
+</li><li class="f6 fw4">
+<a href=/article/%E8%8B%B1%E8%AF%AD/%E8%87%AA%E7%84%B6%E6%8B%BC%E8%AF%BB/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+英语自然拼读
+</a>
+</li><li class="f6 fw4">
+<a href=/article/%E8%8B%B1%E8%AF%AD/%E9%9F%B3%E8%8A%82%E5%88%92%E5%88%86/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+英语音节划分
+</a>
+</li></ul></li><li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.其他>其他</a>
+<ul class="其他 desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+<li class="f6 fw4">
+<a href=/article/%E5%85%B6%E4%BB%96/hexo%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+Hexo基础使用
+</a>
+</li><li class="f6 fw4">
+<a href=/article/%E5%85%B6%E4%BB%96/hugo%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+Hugo基本使用
+</a>
+</li><li class="f6 fw4">
+<a href=/article/%E5%85%B6%E4%BB%96/markdown%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+Markdown基本使用
+</a>
+</li><li class="f6 fw4">
+<a href=/article/%E5%85%B6%E4%BB%96/yarn%E7%9B%B8%E5%85%B3/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+Yarn相关
+</a>
+</li><li class="f6 fw4">
+<a href=/article/%E5%85%B6%E4%BB%96/%E5%A3%B0%E5%8D%A1/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+关于调音声卡
+</a>
+</li><li class="f6 fw4">
+<a href=/article/%E5%85%B6%E4%BB%96/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+其他
+</a>
+</li><li class="f6 fw4">
+<a href=/article/%E5%85%B6%E4%BB%96/%E5%BC%80%E6%BA%90%E7%9B%91%E6%8E%A7%E8%BD%AF%E4%BB%B6%E5%AF%B9%E6%AF%94_zabbix/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+开源监控软件对比_zabbix
+</a>
+</li><li class="f6 fw4">
+<a href=/article/%E5%85%B6%E4%BB%96/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E7%B4%A2%E5%BC%95/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+开源项目索引
+</a>
+</li><li class="f6 fw4">
+<a href=/article/%E5%85%B6%E4%BB%96/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F30%E5%88%86%E9%92%9F%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+正则表达式30分钟入门教程
+</a>
+</li></ul></li><li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+<a href=/sources/ class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.sources>源码探究</a>
+</li></ul></nav></div></div></article><div class="w-100 bg-light-gray">
+<div class="mw7 pa4 center nested-lh-copy lh-copy">
+<h6 class="f6 dark-gray mb2">
+Last updated: May 25, 2021
+</h6><a href=https://github.com/gohugoio/hugoDocs/edit/master/content/cn/cn/article/go/GO%e8%af%ad%e8%a8%80%e7%bc%96%e7%a8%8b/index.md class="f6 ph3 pv1 br2 dib tc ttu mv3 bg-primary-color white hover-bg-green link">Improve this page</a>
+</div></div></main><footer class="bg-primary-color-dark ph4-ns pt4 relative w-100" role=contentinfo>
+<div class="center flex-ns flex-wrap justify-between mw9 w-90">
+<div class="pb3 pt4 w-100 w-50-ns">
+<div class="b f3 light-gray mb3 nested-links tc">
+李明梓-BLOG<br>
+</div><div class="center w4">
+<img src=/images/hugo-logo-wide.svg alt="Hugo Logo">
+</div></div><div class="w-100 w-50-l light-gray"> 
+本文仅为个人笔记,作为学习使用,如有雷同请联系作者 mingzi.li 处理,mail: qiaomingzi100@sina.com
+</div></div></footer></body></html>

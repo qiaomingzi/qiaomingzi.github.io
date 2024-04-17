@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>go on 李明梓</title><link>https://qiaomingzi.github.io/article/go/</link><description>Recent content in go on 李明梓</description><generator>Hugo -- gohugo.io</generator><language>cn</language><atom:link href="https://qiaomingzi.github.io/article/go/index.xml" rel="self" type="application/rss+xml"/><item><title>读[GO语言核心36讲]</title><link>https://qiaomingzi.github.io/article/go/go%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%8336%E8%AE%B2/</link><pubDate>Sun, 29 May 2022 15:42:33 +0800</pubDate><guid>https://qiaomingzi.github.io/article/go/go%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%8336%E8%AE%B2/</guid><description>一：概要 1.1.参考 【GO编程语言规范】https://golang.google.cn/ref/spec
+【GO命令】https://golang.google.cn/cmd/
+【环境设置】https://www.liwenzhou.com/posts/Go/install_go_dev_old/
+【Unicode】https://home.unicode.org/
+二：Go语言基础知识 理解Go语言的开发环境配置、常用源码文件写法，以及程序实体（尤其是变量）及其相关的各种概念和编程技巧（比如类型推断、变量重声明、可重名变量、类型断言、类型转换、别名类型和潜在类型等）。
+1.工作区和GOPATH GOROOT：Go语言安装根目录的路径，也就是GO语言的安装路径。
+GOPATH：若干工作区目录的路径。是我们自己定义的工作空间。
+你可以把GOPATH简单理解成Go语言的工作目录，它的值是一个目录的路径，也可以是多个目录路径，每个目录都代表Go语言的一个工作区（workspace）
+go mod init qiaomingzi.github.io/m/v1 GOBIN：GO程序生成的可执行文件（executable file）的路径。
+2.源码文件 2.1 运行程序 使用 go run 命令执行go源码main文件
+$ go run hello.go Hello, World! 此外我们还可以使用 go build 命令来生成二进制文件：
+$ go build hello.go $ ls hello hello.go $ ./hello Hello, World! 2.2 程序实体 是变量、常量、函数、结构体和接口的统称；程序实体的名字被统称为标识符。标识符可以是任何Unicode编码可以表示的字母字符、数字以及下划线“_”，但是其首字母不能是数字。
+如：var name string
+2.3 源文件包名 package xxx
+同目录下的源码文件的代码包声明语句要一致。也就是说，它们要同属于一个代码包。这对于所有源码文件都是适用的。
+源码文件声明的代码包的名称可以与其所在的目录的名称不同。在针对代码包进行构建时，生成的结果文件的主名称与其父目录的名称一致。
+为了不让该代码包的使用者产生困惑，我们总是应该让声明的包名与其父目录的名称一致
+名称的首字母为大写的程序实体才可以被当前包外的代码引用，否则它就只能被当前包内的其他代码引用。
+Go 1.5及后续版本中，我们可以通过创建internal代码包让一些程序实体仅仅能被当前模块中的其他代码引用。这被称为Go程序实体的第三种访问权限：模块级私有
+3.程序实体的那些事儿 3.1 变量声明 Go语言是静态类型的编程语言，所以我们在声明变量或常量的时候，都需要指定它们的类型，或者给予足够的信息，这样才可以让Go语言能够推导出它们的类型。Go语言是静态类型的，所以一旦在初始化变量时确定了它的类型，之后就不可能再改变。这就避免了在后面维护程序时的一些问题。另外，请记住，这种类型的确定是在编译期完成的，因此不会对程序的运行效率产生任何影响。
+在Go语言中，变量的类型可以是其预定义的那些类型，也可以是程序自定义的函数、结构体或接口。
+3.2 重构 我们通常把不改变某个程序与外界的任何交互方式和规则，而只改变其内部实现”的代码修改方式，叫做对该程序的重构。重构的对象可以是一行代码、一个函数、一个功能模块，甚至一个软件系统。</description></item><item><title>GO SDK</title><link>https://qiaomingzi.github.io/article/go/go-sdk/</link><pubDate>Tue, 17 May 2022 21:34:28 +0800</pubDate><guid>https://qiaomingzi.github.io/article/go/go-sdk/</guid><description>all.bat all.rc archive bootstrap.bash bufio buildall.bash builtin bytes clean.bash clean.bat clean.rc cmd cmp.bash compress container context crypto database debug embed encoding errors expvar flag fmt 格 式 描 述 %v 按值的本来值输出 %+v 在 %v 基础上，对结构体字段名和值进行展开 %#v 输出 Go 语言语法格式的值 %T 输出 Go 语言语法格式的类型和值 %% 输出 % 本体 %b 整型以二进制方式显示 %o 整型以八进制方式显示 %d 整型以十进制方式显示 %x 整型以十六进制方式显示 %X 整型以十六进制、字母大写方式显示 %U Unicode 字符 %f 浮点数 %p 指针，十六进制方式显示 go go.mod go.sum hash html image index internal io log make.</description></item><item><title>K8S</title><link>https://qiaomingzi.github.io/article/go/k8s/</link><pubDate>Sat, 16 Oct 2021 15:42:33 +0800</pubDate><guid>https://qiaomingzi.github.io/article/go/k8s/</guid><description>一：概要 1.1.参考 二：附录 log pod https://kubernetes.io/docs/concepts/cluster-administration/logging/
+apiVersion: v1 kind: Pod metadata: name: counter spec: containers: - name: count image: busybox:1.28 args: [/bin/sh, -c, &amp;#39;i=0; while true; do echo &amp;#34;$i: $(date)&amp;#34;; i=$((i+1)); sleep 1; done&amp;#39;]</description></item><item><title>读[GO语言编程]</title><link>https://qiaomingzi.github.io/article/go/go%E8%AF%AD%E8%A8%80%E7%BC%96%E7%A8%8B/</link><pubDate>Tue, 25 May 2021 09:34:28 +0800</pubDate><guid>https://qiaomingzi.github.io/article/go/go%E8%AF%AD%E8%A8%80%E7%BC%96%E7%A8%8B/</guid><description>相关链接 https://github.com/golang 源码 https://golang.org/ref/mod 官方文档 https://golang.org/doc/code.html#Workspaces http://www.flysnow.org/categories/Golang/ go专栏 https://golanglibs.com/top 流行的GO应用和GO库 https://gitee.com/pengzhile/ide-eval-resetterv GoLand试用更新插件 一：前言 为什么需要GO语言 Go设计者认为C语言更值得学习，希望让它成为互联网时代的C语言。多数系统级语言（包括Java和C#）的根本编程哲学来源于C++，将C++的面向对象进一步发扬光大。C语言经久不衰的根源是它足够简单，Go语言也要足够简单。
+那么GO需要关注哪些问题 与分布式支持
+并发执行体：多核化和集群化是互联网时代的典型特征，操作系统自己掌管的进程（process）、进程内的线程（thread）以及进程内的协程（goroutine，也叫轻量级线程）。Go语言在语言级别支持协程，叫goroutine。Go语言准库提供的所有系统调用（syscall）操作，当然也包括所有同步IO操作，都会出让CPU给其他goroutine
+执行体间的通信：
+1）执行体之间的互斥与同步，互斥与同步是执行体间最基础 的交互方式。多数语言在库层面提供了线程间的互斥与同步支持，并没有提供协程之间的互斥与同步。
+2）执行体之间的消息传递，在并发编程模型的选择上，一个是共享内存模型，一个是消息传递模型。多数传统语言选择了前者；Go语言推荐采用“Erlang风格的并发模型”的编程范式，尽管传统的“共享内存模型”仍然 被保留，在Go语言中内置了通道（channel）支持。两个goroutine之间可以通过通道来进行交互。
+软件工程支持
+随着工程规模的不断扩大,人们需要建立统一的交互语言来降低沟通的成本。规范化体现在多 个层面，
+1)代码风格规范
+Go语言要求public的变量必须以大写字母开头，private变量则以小写字母开头，这种做法不仅免除public、private关键字，更重要的是统一了命名风格。
+Go语言对{ }应该怎么写进行了强制，Go代码的花括号位置肯定是非常统一的。
+正例: if expression { ... } 反例: if expression { ... } 2)错误处理规范
+Go语言的函数允许返回多个值。大多数函数的最后一个返回值会为error类型，以在错误情况下返回详细信息。
+Go 语言首创的错误处理规范：
+f, err := os.Open(filename) if err != nil { log.Println(&amp;#34;Open file failed:&amp;#34;, err) return } defer f.Close() ... // 操作已经打开的f文件 在Java中： try { Statement stmt = .</description></item></channel></rss>
