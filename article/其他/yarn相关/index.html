@@ -4,18 +4,19 @@
 <link rel=preload href=https://qiaomingzi.github.io/fonts/muli-latin-200.woff2 as=font type=font/woff2 crossorigin>
 <link rel=preload href=https://qiaomingzi.github.io/fonts/muli-latin-400.woff2 as=font type=font/woff2 crossorigin>
 <link rel=preload href=https://qiaomingzi.github.io/fonts/muli-latin-800.woff2 as=font type=font/woff2 crossorigin>
-<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta http-equiv=X-UA-Compatible content="IE=edge">
 <title>
 Yarn相关 | 李明梓
-</title><meta name=viewport content="width=device-width,minimum-scale=1">
-<meta name=generator content="Hugo 0.116.0">
+</title>
+<meta name=viewport content="width=device-width,minimum-scale=1">
+<meta name=generator content="Hugo 0.125.0">
 <meta name=robots content="index, follow">
-<link rel=stylesheet href=/output/css/app.min.a832962a67e26bb64619e3de5faeaf124462d791802743409826bb5788adf48e.css integrity="sha256-qDKWKmfia7ZGGePeX66vEkRi15GAJ0NAmCa7V4it9I4=" crossorigin=anonymous>
+<link rel=stylesheet href=/output/css/app.min.f5631eeeca4e467026e4115898af115d1dda1767791c22841d02b8a556b2ad5c.css integrity="sha256-9WMe7spORnAm5BFYmK8RXR3aF2d5HCKEHQK4pVayrVw=" crossorigin=anonymous>
 <meta name=description content="
-        The world’s fastest framework for building websites
+        李明梓个人站点
       
       ">
-<script type=text/javascript src=/output/js/app.5a802739f9b2407f0d3a1f84a20731b6705a5a4df051c35686f22bd3aea90731.js integrity="sha256-WoAnOfmyQH8NOh+EogcxtnBaWk3wUcNWhvIr066pBzE=" crossorigin=anonymous defer></script>
+<script type=text/javascript src=/output/js/app.d805ae0639aa4bf4b35f1863e219243d6a79b910625d8f0be3664db006b4ce6f.js integrity="sha256-2AWuBjmqS/SzXxhj4hkkPWp5uRBiXY8L42ZNsAa0zm8=" crossorigin=anonymous defer></script>
 <script async defer src=https://buttons.github.io/buttons.js></script>
 <link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
 <link rel=icon type=image/png href=/favicon-32x32.png sizes=32x32>
@@ -24,7 +25,7 @@ Yarn相关 | 李明梓
 <link rel=mask-icon href=/safari-pinned-tab.svg color=#0594cb>
 <meta name=theme-color content="#ffffff">
 <meta property="og:title" content="Yarn相关">
-<meta property="og:description" content="1.概述 Yarn是您的代码的包管理器，yarn和npm的对比
+<meta property="og:description" content='1.概述 Yarn是您的代码的包管理器，yarn和npm的对比
 速度
 npm 是按照队列执行每个 package，也就是说必须要等到当前 package 安装完成之后，才能继续后面的安装。而 Yarn 是同步执行所有任务，提高了性能。
 安装版本统一
@@ -37,15 +38,15 @@ https://github.com/yarnpkg/yarn/releases 下载路径
 npm install --g yarn window下 配置文件路径 C:\Users\Administrator\.yarnrc
 2.1.修改缓存路径 #修改yarn 缓存位置 yarn config set cache-folder &ldquo;你的磁盘路径&rdquo; #这里是我的路径 yarn config set cache-folder &ldquo;D:\Software\yarn\cache&rdquo;
 2.2.修改包源 yarn config set registry https://registry.npm.taobao.org/
-2.3.yarn 全局安装位置 yarn config set global-folder &#34;D:\yarnData\global&#34;
+2.3.yarn 全局安装位置 yarn config set global-folder "D:\yarnData\global"
 2.4.改变yarn bin位置 yarn config set prefix D:\yarnData\global\bin
-3.yarn版本号 yarn的包遵守 semver，即语义化版本。 SemVer 是一套语义化版本控制的约定，定义的格式为 X.Y.Z（主版本号.次版本号.修订号）： X.主版本号：进行不向下兼容的修改时，递增主版本号 Y.次版本号: 做了向下兼容的新增功能或修改 Z.">
+3.yarn版本号 yarn的包遵守 semver，即语义化版本。 SemVer 是一套语义化版本控制的约定，定义的格式为 X.Y.Z（主版本号.次版本号.修订号）： X.主版本号：进行不向下兼容的修改时，递增主版本号 Y.次版本号: 做了向下兼容的新增功能或修改 Z.'>
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://qiaomingzi.github.io/article/%E5%85%B6%E4%BB%96/yarn%E7%9B%B8%E5%85%B3/"><meta property="og:image" content="https://qiaomingzi.github.io/opengraph/gohugoio-card-base-1_huf001e7df4fd9c00c4355abac7d4ca455_242906_filter_12121380896309921268.png"><meta property="article:section" content="article">
 <meta property="article:published_time" content="2021-05-27T09:46:19+08:00">
 <meta property="article:modified_time" content="2021-05-27T09:46:19+08:00">
 <meta itemprop=name content="Yarn相关">
-<meta itemprop=description content="1.概述 Yarn是您的代码的包管理器，yarn和npm的对比
+<meta itemprop=description content='1.概述 Yarn是您的代码的包管理器，yarn和npm的对比
 速度
 npm 是按照队列执行每个 package，也就是说必须要等到当前 package 安装完成之后，才能继续后面的安装。而 Yarn 是同步执行所有任务，提高了性能。
 安装版本统一
@@ -58,15 +59,17 @@ https://github.com/yarnpkg/yarn/releases 下载路径
 npm install --g yarn window下 配置文件路径 C:\Users\Administrator\.yarnrc
 2.1.修改缓存路径 #修改yarn 缓存位置 yarn config set cache-folder &ldquo;你的磁盘路径&rdquo; #这里是我的路径 yarn config set cache-folder &ldquo;D:\Software\yarn\cache&rdquo;
 2.2.修改包源 yarn config set registry https://registry.npm.taobao.org/
-2.3.yarn 全局安装位置 yarn config set global-folder &#34;D:\yarnData\global&#34;
+2.3.yarn 全局安装位置 yarn config set global-folder "D:\yarnData\global"
 2.4.改变yarn bin位置 yarn config set prefix D:\yarnData\global\bin
-3.yarn版本号 yarn的包遵守 semver，即语义化版本。 SemVer 是一套语义化版本控制的约定，定义的格式为 X.Y.Z（主版本号.次版本号.修订号）： X.主版本号：进行不向下兼容的修改时，递增主版本号 Y.次版本号: 做了向下兼容的新增功能或修改 Z."><meta itemprop=datePublished content="2021-05-27T09:46:19+08:00">
+3.yarn版本号 yarn的包遵守 semver，即语义化版本。 SemVer 是一套语义化版本控制的约定，定义的格式为 X.Y.Z（主版本号.次版本号.修订号）： X.主版本号：进行不向下兼容的修改时，递增主版本号 Y.次版本号: 做了向下兼容的新增功能或修改 Z.'>
+<meta itemprop=datePublished content="2021-05-27T09:46:19+08:00">
 <meta itemprop=dateModified content="2021-05-27T09:46:19+08:00">
-<meta itemprop=wordCount content="743"><meta itemprop=image content="https://qiaomingzi.github.io/images/gohugoio-card.png">
-<meta itemprop=keywords content="yarn,"><meta name=twitter:card content="summary_large_image">
+<meta itemprop=wordCount content="743">
+<meta itemprop=image content="https://qiaomingzi.github.io/images/gohugoio-card.png">
+<meta itemprop=keywords content="前端,前端"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://qiaomingzi.github.io/opengraph/gohugoio-card-base-1_huf001e7df4fd9c00c4355abac7d4ca455_242906_filter_12121380896309921268.png">
 <meta name=twitter:title content="Yarn相关">
-<meta name=twitter:description content="1.概述 Yarn是您的代码的包管理器，yarn和npm的对比
+<meta name=twitter:description content='1.概述 Yarn是您的代码的包管理器，yarn和npm的对比
 速度
 npm 是按照队列执行每个 package，也就是说必须要等到当前 package 安装完成之后，才能继续后面的安装。而 Yarn 是同步执行所有任务，提高了性能。
 安装版本统一
@@ -79,64 +82,336 @@ https://github.com/yarnpkg/yarn/releases 下载路径
 npm install --g yarn window下 配置文件路径 C:\Users\Administrator\.yarnrc
 2.1.修改缓存路径 #修改yarn 缓存位置 yarn config set cache-folder &ldquo;你的磁盘路径&rdquo; #这里是我的路径 yarn config set cache-folder &ldquo;D:\Software\yarn\cache&rdquo;
 2.2.修改包源 yarn config set registry https://registry.npm.taobao.org/
-2.3.yarn 全局安装位置 yarn config set global-folder &#34;D:\yarnData\global&#34;
+2.3.yarn 全局安装位置 yarn config set global-folder "D:\yarnData\global"
 2.4.改变yarn bin位置 yarn config set prefix D:\yarnData\global\bin
-3.yarn版本号 yarn的包遵守 semver，即语义化版本。 SemVer 是一套语义化版本控制的约定，定义的格式为 X.Y.Z（主版本号.次版本号.修订号）： X.主版本号：进行不向下兼容的修改时，递增主版本号 Y.次版本号: 做了向下兼容的新增功能或修改 Z.">
-<meta name=twitter:site content="@GoHugoIO">
-<script>var _hmt=_hmt||[];(function(){var e,t=document.createElement("script");t.src="https://hm.baidu.com/hm.js?245212315af876cae36fd6880abbfa41",e=document.getElementsByTagName("script")[0],e.parentNode.insertBefore(t,e)})()</script>
-</head><body class="ma0 sans-serif bg-primary-color-light">
+3.yarn版本号 yarn的包遵守 semver，即语义化版本。 SemVer 是一套语义化版本控制的约定，定义的格式为 X.Y.Z（主版本号.次版本号.修订号）： X.主版本号：进行不向下兼容的修改时，递增主版本号 Y.次版本号: 做了向下兼容的新增功能或修改 Z.'>
+<script async src="https://www.googletagmanager.com/gtag/js?id=245212315af876cae36fd6880abbfa41"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","245212315af876cae36fd6880abbfa41",{anonymize_ip:!0,dimension1:"qiaomingzi.github.io",dimension2:""});var trackOutboundLink=function(e){gtag("event","click",{event_category:"outbound",event_label:e,transport_type:"beacon"})}</script>
+</head>
+<body class="ma0 sans-serif bg-primary-color-light">
 <nav class="bg-primary-color-dark pv4 w-100" role=navigation>
 <div class="center flex-ns flex-wrap items-center justify-start mw9">
 <h1 class="dim f3 lh-solid ml0-ns mr0 mr4-l mv0 pl3 pl4-ns">
 <a href=javascript:void(0); class="link white">
 李明梓
 </a>
-</h1><div class="db dib-ns pl3"><form id=site-search-form role=search>
+</h1>
+<div class="db dib-ns pl3"><form id=site-search-form role=search>
 <fieldset class="bn ma0 pa0">
 <label class=clip for=search-input>Search</label>
 <input type=search id=search-input class="needs-js bg-left bn f5 input-reset lh-solid mt3 mt0-ns pl4 pv2 w5 white" placeholder="Search the Docs" name=search-input style="background:url(/images/icon-search.png)5px 11px/16px 16px no-repeat;background-color:rgba(255,255,255,0)">
-</fieldset></form></div><ul class="list ma0 pa0 dn dib-l" role=menu>
+</fieldset>
+</form>
+</div>
+<ul class="list ma0 pa0 dn dib-l" role=menu>
 <li class="f5 dib mr4" role=menuitem>
 <a href=https://qiaomingzi.github.io/ class="dim link light-silver">
 首页
 </a>
-</li><li class="f5 dib mr4" role=menuitem>
+</li>
+<li class="f5 dib mr4" role=menuitem>
 <a href=/article/documentation/ class="dim link light-silver">
 文档
 </a>
-</li><li class="f5 dib mr4" role=menuitem>
+</li>
+<li class="f5 dib mr4" role=menuitem>
 <a href=/about/ class="dim link light-silver">
 关于我
 </a>
-</li></ul></div></nav><main role=main class="content-with-sidebar min-vh-100 pb7 pb0-ns">
+</li>
+</ul>
+<div class="absolute mt1 mt2-l pr3 right-0 top-0 flex items-start">
+<a class="github-button needs-js link primary-color-dark" href=https://github.com/qiaomingzi data-size=large data-show-count=false aria-label="Star gohugoio/hugo on GitHub">Star</a>
+</div>
+</div>
+</nav>
+<main role=main class="content-with-sidebar min-vh-100 pb7 pb0-ns">
 <article class="w-100 ph4 pb5 pb6-ns pt1 pt5-ns">
 <div class=flex-l>
-<div class="order-2 w-100 w-20-l ph5-m ph0-l mb4 sticky">
-<aside class="fixed-lTK mw5-l right-0 f6 bl-l b--moon-gray pv4 pv0-ns ph4-l nested-list-reset nested-links nested-copy-line-height">
-<p class=b>What's on this Page</p><nav id=TableOfContents>
-<ul>
-<li></li></ul></nav><div date-pref>
-<a href=https://qiaomingzi.github.io/article/%E5%85%B6%E4%BB%96/%E5%A3%B0%E5%8D%A1/ class="dib f6 pl1 hover-bg-light-gray br-100" title="关于调音声卡 "><svg class="fill-current" height="30" viewBox="0 0 24 24" width="30" xmlns="http://www.w3.org/2000/svg"><path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
+<div class="order-0 w-20 dn db-l">
+<nav role=navigation>
+<ul class="list pa0 nl2">
+<li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.bigdata>bigdata</a>
+<ul class="bigdata desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+<li class="f6 fw4">
+<a href=/article/bigdata/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+bigdata
 </a>
-<a href=https://qiaomingzi.github.io/article/%E5%85%B6%E4%BB%96/hugo%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/ class="dib f6 pr1 hover-bg-light-gray br-100" title=Hugo基本使用><svg class="fill-current" height="30" viewBox="0 0 24 24" width="30" xmlns="http://www.w3.org/2000/svg"><path d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
+</li>
+<li class="f6 fw4">
+<a href=/article/bigdata/%E8%AF%BB%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%9845%E8%AE%B2/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+读[数据分析实战45讲]
 </a>
-</div></aside></div><div class="order-1 w-60-l mw7 ph0 ph5-ns mid-gray nested-copy-line-height no-underline nested-links nested-img nested-copy-seperator nested-blockquote mt0-ns" style=flex-grow:1>
-<div class="documentation-copy center measure-wide-l">
-<div id=readout class="fixed right-0 bottom-0">
-</div><header class="flex-none w-100">
+</li>
+</ul>
+</li>
+<li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.go>go</a>
+<ul class="go desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+<li class="f6 fw4">
+<a href=/article/go/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+go
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/go/go-sdk/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+GO SDK
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/go/k8s/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+K8S
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/go/go%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%8336%E8%AE%B2/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+读[GO语言核心36讲]
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/go/go%E8%AF%AD%E8%A8%80%E7%BC%96%E7%A8%8B/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+读[GO语言编程]
+</a>
+</li>
+</ul>
+</li>
+<li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.java>java</a>
+<ul class="java desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+<li class="f6 fw4">
+<a href=/article/java/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+java
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/java/maven/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+maven-wrapper基础使用
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/java/%E4%BD%8D%E8%BF%90%E7%AE%97/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+位运算基础知识
+</a>
+</li>
+</ul>
+</li>
+<li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.python>python</a>
+<ul class="python desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+<li class="f6 fw4">
+<a href=/article/python/python%E5%9F%BA%E7%A1%80/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+python基础
+</a>
+</li>
+</ul>
+</li>
+<li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.db>db</a>
+<ul class="db desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+<li class="f6 fw4">
+<a href=/article/db/canal/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+canal-mysql binlog日志解析
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/db/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+db
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/db/mysql-master-slave/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+mysql master-slave
+</a>
+</li>
+</ul>
+</li>
+<li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8 mb1 bb b--moon-gray">
+<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.ai>ai</a>
+<ul class="ai desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+<li class="f6 fw4">
+<a href=/article/ai/ai-agent/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+gpt-agent
+</a>
+</li>
+</ul>
+</li>
+<li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.读书>读书</a>
+<ul class="读书 desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+<li class="f6 fw4">
+<a href=/article/%E8%AF%BB%E4%B9%A6/%E5%A4%A7%E9%A3%8E%E6%AD%8C/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+&lt;&lt;大风歌>>王立群
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/%E8%AF%BB%E4%B9%A6/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+概览
+</a>
+</li>
+</ul>
+</li>
+<li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.工具>工具</a>
+<ul class="工具 desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+<li class="f6 fw4">
+<a href=/article/%E5%B7%A5%E5%85%B7/jemeter/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+jemeter基本使用
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/%E5%B7%A5%E5%85%B7/sonarqube/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+sonarqube基础使用
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/%E5%B7%A5%E5%85%B7/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+工具
+</a>
+</li>
+</ul>
+</li>
+<li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.数学>数学</a>
+<ul class="数学 desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+<li class="f6 fw4">
+<a href=/article/%E6%95%B0%E5%AD%A6/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+math
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/%E6%95%B0%E5%AD%A6/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+数学基础概念
+</a>
+</li>
+</ul>
+</li>
+<li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.英语>英语</a>
+<ul class="英语 desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+<li class="f6 fw4">
+<a href=/article/%E8%8B%B1%E8%AF%AD/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+english
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/%E8%8B%B1%E8%AF%AD/%E8%87%AA%E7%84%B6%E6%8B%BC%E8%AF%BB/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+英语自然拼读
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/%E8%8B%B1%E8%AF%AD/%E9%9F%B3%E8%8A%82%E5%88%92%E5%88%86/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+英语音节划分
+</a>
+</li>
+</ul>
+</li>
+<li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2 primary-color" data-target=.其他>其他</a>
+<ul class="其他 desktopmenu animated fadeIn list pl0 bg-light-gray db">
+<li class="f6 fw4">
+<a href=/article/%E5%85%B6%E4%BB%96/hexo%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+Hexo基础使用
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/%E5%85%B6%E4%BB%96/hugo%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+Hugo基本使用
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/%E5%85%B6%E4%BB%96/markdown%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+Markdown基本使用
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/%E5%85%B6%E4%BB%96/yarn%E7%9B%B8%E5%85%B3/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 primary-color">
+Yarn相关
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/%E5%85%B6%E4%BB%96/%E5%A3%B0%E5%8D%A1/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+关于调音声卡
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/%E5%85%B6%E4%BB%96/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+其他
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/%E5%85%B6%E4%BB%96/%E5%BC%80%E6%BA%90%E7%9B%91%E6%8E%A7%E8%BD%AF%E4%BB%B6%E5%AF%B9%E6%AF%94_zabbix/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+开源监控软件对比_zabbix
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/%E5%85%B6%E4%BB%96/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E7%B4%A2%E5%BC%95/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+开源项目索引
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/%E5%85%B6%E4%BB%96/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F30%E5%88%86%E9%92%9F%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+正则表达式30分钟入门教程
+</a>
+</li>
+</ul>
+</li>
+<li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+<a href=/sources/ class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.sources>源码探究</a>
+</li>
+</ul>
+</nav>
+</div>
+<div class="order-1 flex-grow-1 ph0 ph5-ns mt0-ns mid-gray nested-copy-line-height no-underline nested-links nested-img nested-copy-seperator nested-blockquote">
+<div style=max-width:40rem class=documentation-copy>
+<div id=readout class="fixed right-0 bottom-0"></div>
+<header class="flex-none w-100">
 <a href=/categories/%E5%89%8D%E7%AB%AF class="f6 fw8 mb0 link mid-gray dim mr3">
 前端
 </a>
-<h1 class="lh-title mb3 mv0 pt3 primary-color-dark">Yarn相关</h1></header><aside class="bt bw1 pt3 mt2 mid-gray b--mid-gray fn w-100">
-</aside><div class=prose id=prose>
-<h3 id=1概述>1.概述 <a class=header-link href=#1%e6%a6%82%e8%bf%b0><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3><p>Yarn是您的代码的包管理器，yarn和npm的对比</p><ul>
+<h1 class="lh-title mb3 mv0 pt3 primary-color-dark">
+Yarn相关
+</h1>
+</header>
+<aside class="bt bw1 pt3 mt2 mid-gray b--mid-gray fn w-100">
+</aside>
+<div class=prose id=prose>
+<div class=mb4></div>
+<h3 id=1概述>1.概述 <a class=header-link href=#1%e6%a6%82%e8%bf%b0><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3>
+<p>Yarn是您的代码的包管理器，yarn和npm的对比</p>
+<ul>
 <li>
-<p>速度</p><p>npm 是按照队列执行每个 package，也就是说必须要等到当前 package 安装完成之后，才能继续后面的安装。而 Yarn 是同步执行所有任务，提高了性能。</p></li><li>
-<p>安装版本统一</p></li><li>
-<p>更简洁的输出</p></li></ul><p>参考：</p><p><code>https://classic.yarnpkg.com</code> yarn官网</p><h3 id=2基础配置>2.基础配置 <a class=header-link href=#2%e5%9f%ba%e7%a1%80%e9%85%8d%e7%bd%ae><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3><p>使用安装包安装</p><p><code>https://github.com/yarnpkg/yarn/releases</code> 下载路径</p><p>使用npm安装</p><p><code>npm install --g yarn </code></p><p>window下 配置文件路径 <code>C:\Users\Administrator\.yarnrc</code></p><h4 id=21修改缓存路径>2.1.修改缓存路径 <a class=header-link href=#21%e4%bf%ae%e6%94%b9%e7%bc%93%e5%ad%98%e8%b7%af%e5%be%84><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p>#修改yarn 缓存位置
+<p>速度</p>
+<p>npm 是按照队列执行每个 package，也就是说必须要等到当前 package 安装完成之后，才能继续后面的安装。而 Yarn 是同步执行所有任务，提高了性能。</p>
+</li>
+<li>
+<p>安装版本统一</p>
+</li>
+<li>
+<p>更简洁的输出</p>
+</li>
+</ul>
+<p>参考：</p>
+<p><code>https://classic.yarnpkg.com</code> yarn官网</p>
+<h3 id=2基础配置>2.基础配置 <a class=header-link href=#2%e5%9f%ba%e7%a1%80%e9%85%8d%e7%bd%ae><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3>
+<p>使用安装包安装</p>
+<p><code>https://github.com/yarnpkg/yarn/releases</code> 下载路径</p>
+<p>使用npm安装</p>
+<p><code>npm install --g yarn </code></p>
+<p>window下 配置文件路径 <code>C:\Users\Administrator\.yarnrc</code></p>
+<h4 id=21修改缓存路径>2.1.修改缓存路径 <a class=header-link href=#21%e4%bf%ae%e6%94%b9%e7%bc%93%e5%ad%98%e8%b7%af%e5%be%84><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4>
+<p>#修改yarn 缓存位置
 yarn config set cache-folder &ldquo;你的磁盘路径&rdquo;
 #这里是我的路径
-yarn config set cache-folder &ldquo;D:\Software\yarn\cache&rdquo;</p><h4 id=22修改包源>2.2.修改包源 <a class=header-link href=#22%e4%bf%ae%e6%94%b9%e5%8c%85%e6%ba%90><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p><code>yarn config set registry https://registry.npm.taobao.org/</code></p><h4 id=23yarn-全局安装位置>2.3.yarn 全局安装位置 <a class=header-link href=#23yarn-%e5%85%a8%e5%b1%80%e5%ae%89%e8%a3%85%e4%bd%8d%e7%bd%ae><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p><code>yarn config set global-folder "D:\yarnData\global"</code></p><h4 id=24改变yarn-bin位置>2.4.改变yarn bin位置 <a class=header-link href=#24%e6%94%b9%e5%8f%98yarn-bin%e4%bd%8d%e7%bd%ae><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p><code>yarn config set prefix D:\yarnData\global\bin</code></p><h3 id=3yarn版本号>3.yarn版本号 <a class=header-link href=#3yarn%e7%89%88%e6%9c%ac%e5%8f%b7><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3><pre tabindex=0><code>yarn的包遵守 semver，即语义化版本。 SemVer 是一套语义化版本控制的约定，定义的格式为
+yarn config set cache-folder &ldquo;D:\Software\yarn\cache&rdquo;</p>
+<h4 id=22修改包源>2.2.修改包源 <a class=header-link href=#22%e4%bf%ae%e6%94%b9%e5%8c%85%e6%ba%90><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4>
+<p><code>yarn config set registry https://registry.npm.taobao.org/</code></p>
+<h4 id=23yarn-全局安装位置>2.3.yarn 全局安装位置 <a class=header-link href=#23yarn-%e5%85%a8%e5%b1%80%e5%ae%89%e8%a3%85%e4%bd%8d%e7%bd%ae><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4>
+<p><code>yarn config set global-folder "D:\yarnData\global"</code></p>
+<h4 id=24改变yarn-bin位置>2.4.改变yarn bin位置 <a class=header-link href=#24%e6%94%b9%e5%8f%98yarn-bin%e4%bd%8d%e7%bd%ae><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4>
+<p><code>yarn config set prefix D:\yarnData\global\bin</code></p>
+<h3 id=3yarn版本号>3.yarn版本号 <a class=header-link href=#3yarn%e7%89%88%e6%9c%ac%e5%8f%b7><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3>
+<pre tabindex=0><code>yarn的包遵守 semver，即语义化版本。 SemVer 是一套语义化版本控制的约定，定义的格式为
 X.Y.Z（主版本号.次版本号.修订号）：
 X.主版本号：进行不向下兼容的修改时，递增主版本号
 Y.次版本号: 做了向下兼容的新增功能或修改
@@ -181,7 +456,8 @@ yarn 中依赖版本范围的表示方法有以下几种：
 	^0.0.2	&gt;=0.0.2 &lt;0.0.3
 使用 yarn add [package-name] 命令安装依赖，默认使用的是 ^ 范围。
 需要注意的是，如果一个比较器包含有预发布标签的版本，它将只匹配有相同 major.minor.patch 的版本。 例如 &gt;=3.1.4-beta.2，可以匹配 3.1.4-beta.3，但不会匹配 3.1.5-beta.3 版本。
-</code></pre><h3 id=3yarn依赖类型>3.yarn依赖类型 <a class=header-link href=#3yarn%e4%be%9d%e8%b5%96%e7%b1%bb%e5%9e%8b><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3><pre tabindex=0><code>dependences 代码运行时所需要的依赖，比如vue，vue-router。
+</code></pre><h3 id=3yarn依赖类型>3.yarn依赖类型 <a class=header-link href=#3yarn%e4%be%9d%e8%b5%96%e7%b1%bb%e5%9e%8b><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3>
+<pre tabindex=0><code>dependences 代码运行时所需要的依赖，比如vue，vue-router。
 devDependences 开发依赖，就是那些只在开发过程中需要，而运行时不需要的依赖，比如babel，webpack。
 peerDependences 同伴依赖，它用来告知宿主环境需要什么依赖以及依赖的版本范围。如果宿主环境没有对应版本的依赖，在安装依赖时会报出警告。比如包 eslint-plugin-import 中有依赖：
   &#34;peerDependencies&#34;: {
@@ -191,8 +467,25 @@ peerDependences 同伴依赖，它用来告知宿主环境需要什么依赖以�
 optionalDependencies 可选依赖，这种依赖即便安装失败，Yarn也会认为整个依赖安装过程是成功的。可选依赖适用于那些即便没有成功安装可选依赖，也有后备方案的情况。
 
 bundledDependencies 打包依赖，在发布包时，这个数组里的包都会被打包打包到最终的发布包里，需要注意 bundledDependencies 中的包必须是在devDependencies或dependencies声明过的。
-</code></pre><h3 id=4yarn-包缓存>4.yarn 包缓存 <a class=header-link href=#4yarn-%e5%8c%85%e7%bc%93%e5%ad%98><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3><p>yarn 会将安装过的包缓存下来，这样再次安装相同包的时候，就不需要再去下载，而是直接从缓存文件中直接copy进来。</p><p>可以通过命令 yarn cache dir 查看yarn的全局缓存目录。我的缓存目录在 /Library/Caches/Yarn/v1 下。</p><p>可以看出，yarn 会将不通版本解压后的包存放在不同目录下，目录以</p><p>npm-[package name]-[version]-[shasum]`</p><p>来命名。shasum 即上文中 registry 获取的 dist.shasum。</p><p>我们可以通过命令查看已经缓存过的包。</p><p>yarn cache list 列出已缓存的每个包</p><p>yarn cache list &ndash;pattern 列出匹配指定模式的已缓存的包</p><p>例如执行 yarn cache list &ndash;pattern vue</p><h3 id=5yarn-install过程>5.yarn install过程 <a class=header-link href=#5yarn-install%e8%bf%87%e7%a8%8b><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3><p>首次执行 yarn install 安装，会按照 package.json 中的语义化版本，去向 registry 进行查询，并获取到符合版本规则的最新的依赖包进行下载，并构建构建依赖关系树。 比如在 package.json 中指定 vue 的版本为 ^2.0.0，就会获取符合 2.x.x 的最高版本的包。然后自动生成 yarn.lock 文件，并生成缓存。</p><p>之后再执行 yarn install，会对比 package.json 中依赖版本范围和 yarn.lock 中版本号是否匹配。</p><ol>
-<li>版本号匹配，会根据 yarn.lock 中的 resolved 字段去查看缓存， 如果有缓存，直接copy，没有缓存则按照 resolved 字段的url去下载包。</li><li>版本号不匹配，根据 package.json 中的版本范围去 registry 查询，下载符合版本规则最新的包，并更新至 yarn.lock 中。</li></ol><h3 id=6yarnlock>6.yarn.lock <a class=header-link href=#6yarnlock><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3><pre tabindex=0><code>yarn.lock 中会准确的存储每个依赖的具体版本信息，以保证在不同机器安装可以得到相同的结果。
+</code></pre><h3 id=4yarn-包缓存>4.yarn 包缓存 <a class=header-link href=#4yarn-%e5%8c%85%e7%bc%93%e5%ad%98><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3>
+<p>yarn 会将安装过的包缓存下来，这样再次安装相同包的时候，就不需要再去下载，而是直接从缓存文件中直接copy进来。</p>
+<p>可以通过命令 yarn cache dir 查看yarn的全局缓存目录。我的缓存目录在 /Library/Caches/Yarn/v1 下。</p>
+<p>可以看出，yarn 会将不通版本解压后的包存放在不同目录下，目录以</p>
+<p>npm-[package name]-[version]-[shasum]`</p>
+<p>来命名。shasum 即上文中 registry 获取的 dist.shasum。</p>
+<p>我们可以通过命令查看已经缓存过的包。</p>
+<p>yarn cache list 列出已缓存的每个包</p>
+<p>yarn cache list &ndash;pattern 列出匹配指定模式的已缓存的包</p>
+<p>例如执行 yarn cache list &ndash;pattern vue</p>
+<h3 id=5yarn-install过程>5.yarn install过程 <a class=header-link href=#5yarn-install%e8%bf%87%e7%a8%8b><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3>
+<p>首次执行 yarn install 安装，会按照 package.json 中的语义化版本，去向 registry 进行查询，并获取到符合版本规则的最新的依赖包进行下载，并构建构建依赖关系树。 比如在 package.json 中指定 vue 的版本为 ^2.0.0，就会获取符合 2.x.x 的最高版本的包。然后自动生成 yarn.lock 文件，并生成缓存。</p>
+<p>之后再执行 yarn install，会对比 package.json 中依赖版本范围和 yarn.lock 中版本号是否匹配。</p>
+<ol>
+<li>版本号匹配，会根据 yarn.lock 中的 resolved 字段去查看缓存， 如果有缓存，直接copy，没有缓存则按照 resolved 字段的url去下载包。</li>
+<li>版本号不匹配，根据 package.json 中的版本范围去 registry 查询，下载符合版本规则最新的包，并更新至 yarn.lock 中。</li>
+</ol>
+<h3 id=6yarnlock>6.yarn.lock <a class=header-link href=#6yarnlock><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3>
+<pre tabindex=0><code>yarn.lock 中会准确的存储每个依赖的具体版本信息，以保证在不同机器安装可以得到相同的结果。
 下面以@babel/code-frame为例，看看yarn.lock 中会记录哪些信息。
 	1. 第一行 &#34;@babel/code-frame@7.0.0-beta.54&#34; 包的name和语义化版本号，这些都来自package.json中的定义。
 	2. version 字段，记录的是一个确切的版本。
@@ -201,7 +494,8 @@ bundledDependencies 打包依赖，在发布包时，这个数组里的包都会
 	
 Yarn 在安装期间，只会使用当前项目的 yarn.lock 文件（即 顶级 yarn.lock 文件），会忽略任何依赖里面的 yarn.lock 文件。在顶级 yarn.lock 中包含需要锁定的整个依赖树里全部包版本的所有信息。
 yarn.lock文件是在安装期间，由 Yarn 自动生成的，并且由yarn来管理，不应该手动去更改，更不应该删除yarn.lock文件，且要提交到版本控制系统中，以免因为不同机器安装的包版本不一致引发问题。
-</code></pre><h3 id=7模块扁平化>7.模块扁平化 <a class=header-link href=#7%e6%a8%a1%e5%9d%97%e6%89%81%e5%b9%b3%e5%8c%96><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3><pre tabindex=0><code>上面提到，在安装依赖时，会解析依赖构建出依赖关系树。 比如我项目的首层依赖(即当前项目的dependence和devDependences中的依赖，不包括依赖的依赖)中有A，B，C三个包，A 和 B包同时依赖了相同版本范围的D包。那么这部分的依赖关系树是这样的：
+</code></pre><h3 id=7模块扁平化>7.模块扁平化 <a class=header-link href=#7%e6%a8%a1%e5%9d%97%e6%89%81%e5%b9%b3%e5%8c%96><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3>
+<pre tabindex=0><code>上面提到，在安装依赖时，会解析依赖构建出依赖关系树。 比如我项目的首层依赖(即当前项目的dependence和devDependences中的依赖，不包括依赖的依赖)中有A，B，C三个包，A 和 B包同时依赖了相同版本范围的D包。那么这部分的依赖关系树是这样的：
 ├── A    				
 │ └── D    
 ├── B    				
@@ -224,7 +518,8 @@ yarn.lock文件是在安装期间，由 Yarn 自动生成的，并且由yarn来�
 ├── D@1
  
 当代码中 require 或 import 某个模块时，会从当前 package 的 node-modules 里中开始找，找不到就到当前package的上一层 node-modules 里找，这样一直找到全局的node_modules。 所以上面的安装的树结构，可以保证每个 package 都能获取到所需要版本的包。 
-</code></pre><h3 id=8基本命令>8.基本命令 <a class=header-link href=#8%e5%9f%ba%e6%9c%ac%e5%91%bd%e4%bb%a4><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3><pre tabindex=0><code>1.查看配置
+</code></pre><h3 id=8基本命令>8.基本命令 <a class=header-link href=#8%e5%9f%ba%e6%9c%ac%e5%91%bd%e4%bb%a4><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3>
+<pre tabindex=0><code>1.查看配置
 yarn --version 
 yarn global bin 查看bin路径
 yarn global dir 查看安装路径
@@ -314,193 +609,62 @@ yarn &lt;script&gt; [&lt;args&gt;] 执行用户自定义的脚本
  
 10. 详细日志模式 运行yarn命令时，增加参数 --verbose，这对排查错误时很有帮助
 yarn &lt;command&gt; --verbose
-</code></pre><h3 id=9问题>9.问题 <a class=header-link href=#9%e9%97%ae%e9%a2%98><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3><h4 id=yarn------the-platform-win32-is-incompatible-with-this-module>yarn The platform &ldquo;win32&rdquo; is incompatible with this module <a class=header-link href=#yarn------the-platform-win32-is-incompatible-with-this-module><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p><code>yarn config set ignore-engines true</code></p></div><h2>See Also</h2><ul>
-<li><a href=/cn/article/%E5%85%B6%E4%BB%96/yarn%E7%9B%B8%E5%85%B3/>Yarn相关</a></li></ul></div></div><div class="order-0 w-20 dn db-l">
-<nav role=navigation>
-<ul class="list pa0 nl2">
-<li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
-<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.bigdata>bigdata</a>
-<ul class="bigdata desktopmenu animated fadeIn list pl0 bg-light-gray dn">
-<li class="f6 fw4">
-<a href=/article/bigdata/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-大数据
+</code></pre><h3 id=9问题>9.问题 <a class=header-link href=#9%e9%97%ae%e9%a2%98><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3>
+<h4 id=yarn------the-platform-win32-is-incompatible-with-this-module>yarn The platform &ldquo;win32&rdquo; is incompatible with this module <a class=header-link href=#yarn------the-platform-win32-is-incompatible-with-this-module><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4>
+<p><code>yarn config set ignore-engines true</code></p>
+</div>
+<h2>See also</h2>
+<ul>
+<li><a href=/cn/article/%E5%85%B6%E4%BB%96/yarn%E7%9B%B8%E5%85%B3/>Yarn相关</a></li>
+</ul>
+</div>
+</div>
+<div id=right-sidebar class="order-2 w-20 dn db-l sticky pt2">
+<aside class="right-0 f6 pv4 pv0-ns ph4-l nested-list-reset nested-copy-line-height">
+<div class=nested-links>
+<div date-pref>
+<a href=https://qiaomingzi.github.io/article/%E5%85%B6%E4%BB%96/%E5%A3%B0%E5%8D%A1/ class="dib f6 pl1 hover-bg-light-gray br-100" title="关于调音声卡 ">
+<svg class="fill-current" height="30" viewBox="0 0 24 24" width="30" xmlns="http://www.w3.org/2000/svg"><path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
 </a>
-</li><li class="f6 fw4">
-<a href=/article/bigdata/%E8%AF%BB%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%9845%E8%AE%B2/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-读[数据分析实战45讲]
+<a href=https://qiaomingzi.github.io/article/%E5%85%B6%E4%BB%96/hugo%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/ class="dib f6 pr1 hover-bg-light-gray br-100" title=Hugo基本使用>
+<svg class="fill-current" height="30" viewBox="0 0 24 24" width="30" xmlns="http://www.w3.org/2000/svg"><path d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
 </a>
-</li></ul></li><li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
-<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.go>go</a>
-<ul class="go desktopmenu animated fadeIn list pl0 bg-light-gray dn">
-<li class="f6 fw4">
-<a href=/article/go/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-go
-</a>
-</li><li class="f6 fw4">
-<a href=/article/go/go-sdk/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-GO SDK
-</a>
-</li><li class="f6 fw4">
-<a href=/article/go/k8s/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-K8S
-</a>
-</li><li class="f6 fw4">
-<a href=/article/go/go%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%8336%E8%AE%B2/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-读[GO语言核心36讲]
-</a>
-</li><li class="f6 fw4">
-<a href=/article/go/go%E8%AF%AD%E8%A8%80%E7%BC%96%E7%A8%8B/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-读[GO语言编程]
-</a>
-</li></ul></li><li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
-<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.java>java</a>
-<ul class="java desktopmenu animated fadeIn list pl0 bg-light-gray dn">
-<li class="f6 fw4">
-<a href=/article/java/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-java
-</a>
-</li><li class="f6 fw4">
-<a href=/article/java/maven/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-maven-wrapper基础使用
-</a>
-</li><li class="f6 fw4">
-<a href=/article/java/%E4%BD%8D%E8%BF%90%E7%AE%97/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-位运算基础知识
-</a>
-</li></ul></li><li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
-<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.python>python</a>
-<ul class="python desktopmenu animated fadeIn list pl0 bg-light-gray dn">
-<li class="f6 fw4">
-<a href=/article/python/python%E5%9F%BA%E7%A1%80/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-python基础
-</a>
-</li></ul></li><li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
-<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.db>db</a>
-<ul class="db desktopmenu animated fadeIn list pl0 bg-light-gray dn">
-<li class="f6 fw4">
-<a href=/article/db/canal/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-canal-mysql binlog日志解析
-</a>
-</li><li class="f6 fw4">
-<a href=/article/db/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-db
-</a>
-</li><li class="f6 fw4">
-<a href=/article/db/mysql-master-slave/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-mysql master-slave
-</a>
-</li></ul></li><li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8 mb1 bb b--moon-gray">
-<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.ai>ai</a>
-<ul class="ai desktopmenu animated fadeIn list pl0 bg-light-gray dn">
-<li class="f6 fw4">
-<a href=/article/ai/ai-agent/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-gpt-agent
-</a>
-</li></ul></li><li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
-<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.读书>读书</a>
-<ul class="读书 desktopmenu animated fadeIn list pl0 bg-light-gray dn">
-<li class="f6 fw4">
-<a href=/article/%E8%AF%BB%E4%B9%A6/%E5%A4%A7%E9%A3%8E%E6%AD%8C/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-&lt;&lt;大风歌>>王立群
-</a>
-</li><li class="f6 fw4">
-<a href=/article/%E8%AF%BB%E4%B9%A6/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-概览
-</a>
-</li></ul></li><li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
-<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.工具>工具</a>
-<ul class="工具 desktopmenu animated fadeIn list pl0 bg-light-gray dn">
-<li class="f6 fw4">
-<a href=/article/%E5%B7%A5%E5%85%B7/jemeter/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-jemeter基本使用
-</a>
-</li><li class="f6 fw4">
-<a href=/article/%E5%B7%A5%E5%85%B7/sonarqube/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-sonarqube基础使用
-</a>
-</li><li class="f6 fw4">
-<a href=/article/%E5%B7%A5%E5%85%B7/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-工具
-</a>
-</li></ul></li><li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
-<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.数学>数学</a>
-<ul class="数学 desktopmenu animated fadeIn list pl0 bg-light-gray dn">
-<li class="f6 fw4">
-<a href=/article/%E6%95%B0%E5%AD%A6/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-math
-</a>
-</li><li class="f6 fw4">
-<a href=/article/%E6%95%B0%E5%AD%A6/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-数学基础概念
-</a>
-</li></ul></li><li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
-<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.英语>英语</a>
-<ul class="英语 desktopmenu animated fadeIn list pl0 bg-light-gray dn">
-<li class="f6 fw4">
-<a href=/article/%E8%8B%B1%E8%AF%AD/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-english
-</a>
-</li><li class="f6 fw4">
-<a href=/article/%E8%8B%B1%E8%AF%AD/%E8%87%AA%E7%84%B6%E6%8B%BC%E8%AF%BB/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-英语自然拼读
-</a>
-</li><li class="f6 fw4">
-<a href=/article/%E8%8B%B1%E8%AF%AD/%E9%9F%B3%E8%8A%82%E5%88%92%E5%88%86/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-英语音节划分
-</a>
-</li></ul></li><li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
-<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2 primary-color" data-target=.其他>其他</a>
-<ul class="其他 desktopmenu animated fadeIn list pl0 bg-light-gray db">
-<li class="f6 fw4">
-<a href=/article/%E5%85%B6%E4%BB%96/hexo%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-Hexo基础使用
-</a>
-</li><li class="f6 fw4">
-<a href=/article/%E5%85%B6%E4%BB%96/hugo%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-Hugo基本使用
-</a>
-</li><li class="f6 fw4">
-<a href=/article/%E5%85%B6%E4%BB%96/markdown%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-Markdown基本使用
-</a>
-</li><li class="f6 fw4">
-<a href=/article/%E5%85%B6%E4%BB%96/yarn%E7%9B%B8%E5%85%B3/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 primary-color">
-Yarn相关
-</a>
-</li><li class="f6 fw4">
-<a href=/article/%E5%85%B6%E4%BB%96/%E5%A3%B0%E5%8D%A1/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-关于调音声卡
-</a>
-</li><li class="f6 fw4">
-<a href=/article/%E5%85%B6%E4%BB%96/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-其他
-</a>
-</li><li class="f6 fw4">
-<a href=/article/%E5%85%B6%E4%BB%96/%E5%BC%80%E6%BA%90%E7%9B%91%E6%8E%A7%E8%BD%AF%E4%BB%B6%E5%AF%B9%E6%AF%94_zabbix/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-开源监控软件对比_zabbix
-</a>
-</li><li class="f6 fw4">
-<a href=/article/%E5%85%B6%E4%BB%96/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E7%B4%A2%E5%BC%95/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-开源项目索引
-</a>
-</li><li class="f6 fw4">
-<a href=/article/%E5%85%B6%E4%BB%96/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F30%E5%88%86%E9%92%9F%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-正则表达式30分钟入门教程
-</a>
-</li></ul></li><li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
-<a href=/sources/ class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.sources>源码探究</a>
-</li></ul></nav></div></div></article><div class="w-100 bg-light-gray">
+</div>
+</div>
+<div class=nested-links>
+<p class="f5 fw8 mid-gray mb0">On this page</p><nav id=TableOfContents>
+<ul>
+<li></li>
+</ul>
+</nav>
+</div>
+</aside>
+</div>
+</div>
+</article>
+<div id=page-footer class="w-100 bg-light-gray">
 <div class="mw7 pa4 center nested-lh-copy lh-copy">
 <h6 class="f6 dark-gray mb2">
 Last updated: May 27, 2021
-</h6><a href=https://github.com/gohugoio/hugoDocs/edit/master/content/cn/article/%e5%85%b6%e4%bb%96/yarn%e7%9b%b8%e5%85%b3.md class="f6 ph3 pv1 br2 dib tc ttu mv3 bg-primary-color white hover-bg-green link">Improve this page</a>
-</div></div></main><footer class="bg-primary-color-dark ph4-ns pt4 relative w-100" role=contentinfo>
+</h6>
+<a href=https://github.com/gohugoio/hugoDocs/edit/master/content/cn/article/%e5%85%b6%e4%bb%96/yarn%e7%9b%b8%e5%85%b3.md class="f6 ph3 pv1 br2 dib tc ttu mv3 bg-primary-color white hover-bg-green link">Improve this page</a>
+</div>
+</div>
+</main>
+<footer class="bg-primary-color-dark ph4-ns pt4 relative w-100" role=contentinfo>
 <div class="center flex-ns flex-wrap justify-between mw9 w-90">
 <div class="pb3 pt4 w-100 w-50-ns">
 <div class="b f3 light-gray mb3 nested-links tc">
 李明梓-BLOG<br>
-</div><div class="center w4">
+</div>
+<div class="center w4">
 <img src=/images/hugo-logo-wide.svg alt="Hugo Logo">
-</div></div><div class="w-100 w-50-l light-gray"> 
+</div>
+</div>
+<div class="w-100 w-50-l light-gray"> 
 本文仅为个人笔记,作为学习使用,如有雷同请联系作者 mingzi.li 处理,mail: qiaomingzi100@sina.com
-</div></div></footer></body></html>
+</div>
+</div>
+</footer>
+</body>
+</html>

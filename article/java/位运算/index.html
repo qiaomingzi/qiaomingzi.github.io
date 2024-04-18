@@ -4,18 +4,19 @@
 <link rel=preload href=https://qiaomingzi.github.io/fonts/muli-latin-200.woff2 as=font type=font/woff2 crossorigin>
 <link rel=preload href=https://qiaomingzi.github.io/fonts/muli-latin-400.woff2 as=font type=font/woff2 crossorigin>
 <link rel=preload href=https://qiaomingzi.github.io/fonts/muli-latin-800.woff2 as=font type=font/woff2 crossorigin>
-<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta http-equiv=X-UA-Compatible content="IE=edge">
 <title>
 位运算基础知识 | 李明梓
-</title><meta name=viewport content="width=device-width,minimum-scale=1">
-<meta name=generator content="Hugo 0.116.0">
+</title>
+<meta name=viewport content="width=device-width,minimum-scale=1">
+<meta name=generator content="Hugo 0.125.0">
 <meta name=robots content="index, follow">
-<link rel=stylesheet href=/output/css/app.min.a832962a67e26bb64619e3de5faeaf124462d791802743409826bb5788adf48e.css integrity="sha256-qDKWKmfia7ZGGePeX66vEkRi15GAJ0NAmCa7V4it9I4=" crossorigin=anonymous>
+<link rel=stylesheet href=/output/css/app.min.f5631eeeca4e467026e4115898af115d1dda1767791c22841d02b8a556b2ad5c.css integrity="sha256-9WMe7spORnAm5BFYmK8RXR3aF2d5HCKEHQK4pVayrVw=" crossorigin=anonymous>
 <meta name=description content="
-        The world’s fastest framework for building websites
+        李明梓个人站点
       
       ">
-<script type=text/javascript src=/output/js/app.5a802739f9b2407f0d3a1f84a20731b6705a5a4df051c35686f22bd3aea90731.js integrity="sha256-WoAnOfmyQH8NOh+EogcxtnBaWk3wUcNWhvIr066pBzE=" crossorigin=anonymous defer></script>
+<script type=text/javascript src=/output/js/app.d805ae0639aa4bf4b35f1863e219243d6a79b910625d8f0be3664db006b4ce6f.js integrity="sha256-2AWuBjmqS/SzXxhj4hkkPWp5uRBiXY8L42ZNsAa0zm8=" crossorigin=anonymous defer></script>
 <script async defer src=https://buttons.github.io/buttons.js></script>
 <link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
 <link rel=icon type=image/png href=/favicon-32x32.png sizes=32x32>
@@ -50,10 +51,12 @@ int[10^9] 需要内存 10^9 * 4(B) => ((10^9 * 4)/1000 * 1000)(M) => 4000M => 4G
 10 0000 0000 = 10^9
 int[10^9] 需要内存 10^9 * 4(B) => ((10^9 * 4)/1000 * 1000)(M) => 4000M => 4GB
 对于普通32位最大理论内存为4G的PC来说，这个计算资源是无法实现需求的，那么有没有更好的解决方法呢？在此之前先做些知识点温故。
-三：知识点回顾 1.java基本类型 Data Type Default Value Default size range range value boolean false 1 bit char &lsquo;\u0000&rsquo; 2 byte &lsquo;\u0000&rsquo;~&rsquo;\uFFFF&rsquo; byte 0 1 byte -2^7~2^7-1 -128~127 short 0 2 byte -2^15~2^15-1 -32768~32767 int 0 4 byte -2^31~2^31-1 0x80000000~0x7fffffff long 0L 8 byte -2^63~2^63-1 float 0."><meta itemprop=datePublished content="2022-03-16T15:42:33+08:00">
+三：知识点回顾 1.java基本类型 Data Type Default Value Default size range range value boolean false 1 bit char &lsquo;\u0000&rsquo; 2 byte &lsquo;\u0000&rsquo;~&rsquo;\uFFFF&rsquo; byte 0 1 byte -2^7~2^7-1 -128~127 short 0 2 byte -2^15~2^15-1 -32768~32767 int 0 4 byte -2^31~2^31-1 0x80000000~0x7fffffff long 0L 8 byte -2^63~2^63-1 float 0.">
+<meta itemprop=datePublished content="2022-03-16T15:42:33+08:00">
 <meta itemprop=dateModified content="2022-03-16T15:42:33+08:00">
-<meta itemprop=wordCount content="1132"><meta itemprop=image content="https://qiaomingzi.github.io/images/gohugoio-card.png">
-<meta itemprop=keywords content="java,基础,"><meta name=twitter:card content="summary_large_image">
+<meta itemprop=wordCount content="1132">
+<meta itemprop=image content="https://qiaomingzi.github.io/images/gohugoio-card.png">
+<meta itemprop=keywords content="Java,Java"><meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://qiaomingzi.github.io/opengraph/gohugoio-card-base-1_huf001e7df4fd9c00c4355abac7d4ca455_242906_filter_8659522471690247446.png">
 <meta name=twitter:title content="位运算基础知识">
 <meta name=twitter:description content="一：参考 [算法心得] http://graphics.stanford.edu/~seander/bithacks.html#IntegerLogIEEE64Float
@@ -67,73 +70,484 @@ int[10^9] 需要内存 10^9 * 4(B) => ((10^9 * 4)/1000 * 1000)(M) => 4000M => 4G
 int[10^9] 需要内存 10^9 * 4(B) => ((10^9 * 4)/1000 * 1000)(M) => 4000M => 4GB
 对于普通32位最大理论内存为4G的PC来说，这个计算资源是无法实现需求的，那么有没有更好的解决方法呢？在此之前先做些知识点温故。
 三：知识点回顾 1.java基本类型 Data Type Default Value Default size range range value boolean false 1 bit char &lsquo;\u0000&rsquo; 2 byte &lsquo;\u0000&rsquo;~&rsquo;\uFFFF&rsquo; byte 0 1 byte -2^7~2^7-1 -128~127 short 0 2 byte -2^15~2^15-1 -32768~32767 int 0 4 byte -2^31~2^31-1 0x80000000~0x7fffffff long 0L 8 byte -2^63~2^63-1 float 0.">
-<meta name=twitter:site content="@GoHugoIO">
-<script>var _hmt=_hmt||[];(function(){var e,t=document.createElement("script");t.src="https://hm.baidu.com/hm.js?245212315af876cae36fd6880abbfa41",e=document.getElementsByTagName("script")[0],e.parentNode.insertBefore(t,e)})()</script>
-</head><body class="ma0 sans-serif bg-primary-color-light">
+<script async src="https://www.googletagmanager.com/gtag/js?id=245212315af876cae36fd6880abbfa41"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","245212315af876cae36fd6880abbfa41",{anonymize_ip:!0,dimension1:"qiaomingzi.github.io",dimension2:""});var trackOutboundLink=function(e){gtag("event","click",{event_category:"outbound",event_label:e,transport_type:"beacon"})}</script>
+</head>
+<body class="ma0 sans-serif bg-primary-color-light">
 <nav class="bg-primary-color-dark pv4 w-100" role=navigation>
 <div class="center flex-ns flex-wrap items-center justify-start mw9">
 <h1 class="dim f3 lh-solid ml0-ns mr0 mr4-l mv0 pl3 pl4-ns">
 <a href=javascript:void(0); class="link white">
 李明梓
 </a>
-</h1><div class="db dib-ns pl3"><form id=site-search-form role=search>
+</h1>
+<div class="db dib-ns pl3"><form id=site-search-form role=search>
 <fieldset class="bn ma0 pa0">
 <label class=clip for=search-input>Search</label>
 <input type=search id=search-input class="needs-js bg-left bn f5 input-reset lh-solid mt3 mt0-ns pl4 pv2 w5 white" placeholder="Search the Docs" name=search-input style="background:url(/images/icon-search.png)5px 11px/16px 16px no-repeat;background-color:rgba(255,255,255,0)">
-</fieldset></form></div><ul class="list ma0 pa0 dn dib-l" role=menu>
+</fieldset>
+</form>
+</div>
+<ul class="list ma0 pa0 dn dib-l" role=menu>
 <li class="f5 dib mr4" role=menuitem>
 <a href=https://qiaomingzi.github.io/ class="dim link light-silver">
 首页
 </a>
-</li><li class="f5 dib mr4" role=menuitem>
+</li>
+<li class="f5 dib mr4" role=menuitem>
 <a href=/article/documentation/ class="dim link light-silver">
 文档
 </a>
-</li><li class="f5 dib mr4" role=menuitem>
+</li>
+<li class="f5 dib mr4" role=menuitem>
 <a href=/about/ class="dim link light-silver">
 关于我
 </a>
-</li></ul></div></nav><main role=main class="content-with-sidebar min-vh-100 pb7 pb0-ns">
+</li>
+</ul>
+<div class="absolute mt1 mt2-l pr3 right-0 top-0 flex items-start">
+<a class="github-button needs-js link primary-color-dark" href=https://github.com/qiaomingzi data-size=large data-show-count=false aria-label="Star gohugoio/hugo on GitHub">Star</a>
+</div>
+</div>
+</nav>
+<main role=main class="content-with-sidebar min-vh-100 pb7 pb0-ns">
 <article class="w-100 ph4 pb5 pb6-ns pt1 pt5-ns">
 <div class=flex-l>
-<div class="order-2 w-100 w-20-l ph5-m ph0-l mb4 sticky">
-<aside class="fixed-lTK mw5-l right-0 f6 bl-l b--moon-gray pv4 pv0-ns ph4-l nested-list-reset nested-links nested-copy-line-height">
-<div date-pref>
-<a href=https://qiaomingzi.github.io/article/java/maven/ class="dib f6 pr1 hover-bg-light-gray br-100" title=maven-wrapper基础使用><svg class="fill-current" height="30" viewBox="0 0 24 24" width="30" xmlns="http://www.w3.org/2000/svg"><path d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
+<div class="order-0 w-20 dn db-l">
+<nav role=navigation>
+<ul class="list pa0 nl2">
+<li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.bigdata>bigdata</a>
+<ul class="bigdata desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+<li class="f6 fw4">
+<a href=/article/bigdata/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+bigdata
 </a>
-</div></aside></div><div class="order-1 w-60-l mw7 ph0 ph5-ns mid-gray nested-copy-line-height no-underline nested-links nested-img nested-copy-seperator nested-blockquote mt0-ns" style=flex-grow:1>
-<div class="documentation-copy center measure-wide-l">
-<div id=readout class="fixed right-0 bottom-0">
-</div><header class="flex-none w-100">
+</li>
+<li class="f6 fw4">
+<a href=/article/bigdata/%E8%AF%BB%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%9845%E8%AE%B2/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+读[数据分析实战45讲]
+</a>
+</li>
+</ul>
+</li>
+<li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.go>go</a>
+<ul class="go desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+<li class="f6 fw4">
+<a href=/article/go/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+go
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/go/go-sdk/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+GO SDK
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/go/k8s/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+K8S
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/go/go%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%8336%E8%AE%B2/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+读[GO语言核心36讲]
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/go/go%E8%AF%AD%E8%A8%80%E7%BC%96%E7%A8%8B/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+读[GO语言编程]
+</a>
+</li>
+</ul>
+</li>
+<li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2 primary-color" data-target=.java>java</a>
+<ul class="java desktopmenu animated fadeIn list pl0 bg-light-gray db">
+<li class="f6 fw4">
+<a href=/article/java/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+java
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/java/maven/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+maven-wrapper基础使用
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/java/%E4%BD%8D%E8%BF%90%E7%AE%97/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 primary-color">
+位运算基础知识
+</a>
+</li>
+</ul>
+</li>
+<li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.python>python</a>
+<ul class="python desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+<li class="f6 fw4">
+<a href=/article/python/python%E5%9F%BA%E7%A1%80/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+python基础
+</a>
+</li>
+</ul>
+</li>
+<li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.db>db</a>
+<ul class="db desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+<li class="f6 fw4">
+<a href=/article/db/canal/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+canal-mysql binlog日志解析
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/db/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+db
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/db/mysql-master-slave/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+mysql master-slave
+</a>
+</li>
+</ul>
+</li>
+<li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8 mb1 bb b--moon-gray">
+<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.ai>ai</a>
+<ul class="ai desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+<li class="f6 fw4">
+<a href=/article/ai/ai-agent/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+gpt-agent
+</a>
+</li>
+</ul>
+</li>
+<li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.读书>读书</a>
+<ul class="读书 desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+<li class="f6 fw4">
+<a href=/article/%E8%AF%BB%E4%B9%A6/%E5%A4%A7%E9%A3%8E%E6%AD%8C/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+&lt;&lt;大风歌>>王立群
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/%E8%AF%BB%E4%B9%A6/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+概览
+</a>
+</li>
+</ul>
+</li>
+<li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.工具>工具</a>
+<ul class="工具 desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+<li class="f6 fw4">
+<a href=/article/%E5%B7%A5%E5%85%B7/jemeter/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+jemeter基本使用
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/%E5%B7%A5%E5%85%B7/sonarqube/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+sonarqube基础使用
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/%E5%B7%A5%E5%85%B7/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+工具
+</a>
+</li>
+</ul>
+</li>
+<li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.数学>数学</a>
+<ul class="数学 desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+<li class="f6 fw4">
+<a href=/article/%E6%95%B0%E5%AD%A6/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+math
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/%E6%95%B0%E5%AD%A6/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+数学基础概念
+</a>
+</li>
+</ul>
+</li>
+<li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.英语>英语</a>
+<ul class="英语 desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+<li class="f6 fw4">
+<a href=/article/%E8%8B%B1%E8%AF%AD/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+english
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/%E8%8B%B1%E8%AF%AD/%E8%87%AA%E7%84%B6%E6%8B%BC%E8%AF%BB/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+英语自然拼读
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/%E8%8B%B1%E8%AF%AD/%E9%9F%B3%E8%8A%82%E5%88%92%E5%88%86/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+英语音节划分
+</a>
+</li>
+</ul>
+</li>
+<li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.其他>其他</a>
+<ul class="其他 desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+<li class="f6 fw4">
+<a href=/article/%E5%85%B6%E4%BB%96/hexo%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+Hexo基础使用
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/%E5%85%B6%E4%BB%96/hugo%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+Hugo基本使用
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/%E5%85%B6%E4%BB%96/markdown%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+Markdown基本使用
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/%E5%85%B6%E4%BB%96/yarn%E7%9B%B8%E5%85%B3/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+Yarn相关
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/%E5%85%B6%E4%BB%96/%E5%A3%B0%E5%8D%A1/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+关于调音声卡
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/%E5%85%B6%E4%BB%96/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+其他
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/%E5%85%B6%E4%BB%96/%E5%BC%80%E6%BA%90%E7%9B%91%E6%8E%A7%E8%BD%AF%E4%BB%B6%E5%AF%B9%E6%AF%94_zabbix/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+开源监控软件对比_zabbix
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/%E5%85%B6%E4%BB%96/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E7%B4%A2%E5%BC%95/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+开源项目索引
+</a>
+</li>
+<li class="f6 fw4">
+<a href=/article/%E5%85%B6%E4%BB%96/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F30%E5%88%86%E9%92%9F%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
+正则表达式30分钟入门教程
+</a>
+</li>
+</ul>
+</li>
+<li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+<a href=/sources/ class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.sources>源码探究</a>
+</li>
+</ul>
+</nav>
+</div>
+<div class="order-1 flex-grow-1 ph0 ph5-ns mt0-ns mid-gray nested-copy-line-height no-underline nested-links nested-img nested-copy-seperator nested-blockquote">
+<div style=max-width:40rem class=documentation-copy>
+<div id=readout class="fixed right-0 bottom-0"></div>
+<header class="flex-none w-100">
 <a href=/categories/java class="f6 fw8 mb0 link mid-gray dim mr3">
 JAVA
 </a>
-<h1 class="lh-title mb3 mv0 pt3 primary-color-dark">位运算基础知识</h1></header><aside class="bt bw1 pt3 mt2 mid-gray b--mid-gray fn w-100">
-</aside><div class=prose id=prose>
-<h2 id=一参考>一：参考 <a class=header-link href=#%e4%b8%80%e5%8f%82%e8%80%83><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h2><p>[算法心得] <a href=http://graphics.stanford.edu/~seander/bithacks.html#IntegerLogIEEE64Float>http://graphics.stanford.edu/~seander/bithacks.html#IntegerLogIEEE64Float</a></p><p>[运算符优先级] <a href="https://tool.oschina.net/commons?type=6">https://tool.oschina.net/commons?type=6</a></p><p>[位运算技巧] <a href=https://www.zhihu.com/question/38206659>https://www.zhihu.com/question/38206659</a></p><p>[思考题解法] <a href=https://www.iteye.com/blog/yacare-1969931>https://www.iteye.com/blog/yacare-1969931</a></p><h2 id=二概要>二：概要 <a class=header-link href=#%e4%ba%8c%e6%a6%82%e8%a6%81><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h2><p>通过本文可以让我们温习下位运算、进制转换，为写出更精良的代码奠定理论基础。现在我们从一个题目说开去：</p><p>问：如何载预计有10亿个int的数据中，剔除其中重复的数据并排序输出?</p><p>分析：首先要进行排序、排重必须得把相关数据加载到内存中，那么要用哪种数据结构来存储呢?</p><p>10 0000 0000 = 10^9</p><p>int[10^9] 需要内存 10^9 * 4(B) => ((10^9 * 4)/1000 * 1000)(M) => 4000M => 4GB</p><p>对于普通32位最大理论内存为4G的PC来说，这个计算资源是无法实现需求的，那么有没有更好的解决方法呢？在此之前先做些知识点温故。</p><h2 id=三知识点回顾>三：知识点回顾 <a class=header-link href=#%e4%b8%89%e7%9f%a5%e8%af%86%e7%82%b9%e5%9b%9e%e9%a1%be><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h2><h3 id=1java基本类型>1.java基本类型 <a class=header-link href=#1java%e5%9f%ba%e6%9c%ac%e7%b1%bb%e5%9e%8b><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3><p><img src=../images/java-data-types.png alt=数据类型></p><table>
+<h1 class="lh-title mb3 mv0 pt3 primary-color-dark">
+位运算基础知识
+</h1>
+</header>
+<aside class="bt bw1 pt3 mt2 mid-gray b--mid-gray fn w-100">
+</aside>
+<div class=prose id=prose>
+<div class=mb4></div>
+<h2 id=一参考>一：参考 <a class=header-link href=#%e4%b8%80%e5%8f%82%e8%80%83><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h2>
+<p>[算法心得] <a href=http://graphics.stanford.edu/~seander/bithacks.html#IntegerLogIEEE64Float rel=external>http://graphics.stanford.edu/~seander/bithacks.html#IntegerLogIEEE64Float</a></p>
+<p>[运算符优先级] <a href="https://tool.oschina.net/commons?type=6" rel=external>https://tool.oschina.net/commons?type=6</a></p>
+<p>[位运算技巧] <a href=https://www.zhihu.com/question/38206659 rel=external>https://www.zhihu.com/question/38206659</a></p>
+<p>[思考题解法] <a href=https://www.iteye.com/blog/yacare-1969931 rel=external>https://www.iteye.com/blog/yacare-1969931</a></p>
+<h2 id=二概要>二：概要 <a class=header-link href=#%e4%ba%8c%e6%a6%82%e8%a6%81><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h2>
+<p>通过本文可以让我们温习下位运算、进制转换，为写出更精良的代码奠定理论基础。现在我们从一个题目说开去：</p>
+<p>问：如何载预计有10亿个int的数据中，剔除其中重复的数据并排序输出?</p>
+<p>分析：首先要进行排序、排重必须得把相关数据加载到内存中，那么要用哪种数据结构来存储呢?</p>
+<p>10 0000 0000 = 10^9</p>
+<p>int[10^9] 需要内存 10^9 * 4(B) => ((10^9 * 4)/1000 * 1000)(M) => 4000M => 4GB</p>
+<p>对于普通32位最大理论内存为4G的PC来说，这个计算资源是无法实现需求的，那么有没有更好的解决方法呢？在此之前先做些知识点温故。</p>
+<h2 id=三知识点回顾>三：知识点回顾 <a class=header-link href=#%e4%b8%89%e7%9f%a5%e8%af%86%e7%82%b9%e5%9b%9e%e9%a1%be><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h2>
+<h3 id=1java基本类型>1.java基本类型 <a class=header-link href=#1java%e5%9f%ba%e6%9c%ac%e7%b1%bb%e5%9e%8b><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3>
+<p><img alt=数据类型 src=../images/java-data-types.png></p>
+<table>
 <thead>
 <tr>
-<th style=text-align:left><strong>Data Type</strong></th><th style=text-align:left><strong>Default Value</strong></th><th style=text-align:left><strong>Default size</strong></th><th>range</th><th>range value</th></tr></thead><tbody>
+<th style=text-align:left><strong>Data Type</strong></th>
+<th style=text-align:left><strong>Default Value</strong></th>
+<th style=text-align:left><strong>Default size</strong></th>
+<th>range</th>
+<th>range value</th>
+</tr>
+</thead>
+<tbody>
 <tr>
-<td style=text-align:left>boolean</td><td style=text-align:left>false</td><td style=text-align:left>1 bit</td><td></td><td></td></tr><tr>
-<td style=text-align:left>char</td><td style=text-align:left>&lsquo;\u0000&rsquo;</td><td style=text-align:left>2 byte</td><td>&lsquo;\u0000&rsquo;~&rsquo;\uFFFF&rsquo;</td><td></td></tr><tr>
-<td style=text-align:left>byte</td><td style=text-align:left>0</td><td style=text-align:left>1 byte</td><td>-2^7~2^7-1</td><td>-128~127</td></tr><tr>
-<td style=text-align:left>short</td><td style=text-align:left>0</td><td style=text-align:left>2 byte</td><td>-2^15~2^15-1</td><td>-32768~32767</td></tr><tr>
-<td style=text-align:left>int</td><td style=text-align:left>0</td><td style=text-align:left>4 byte</td><td>-2^31~2^31-1</td><td>0x80000000~0x7fffffff</td></tr><tr>
-<td style=text-align:left>long</td><td style=text-align:left>0L</td><td style=text-align:left>8 byte</td><td>-2^63~2^63-1</td><td></td></tr><tr>
-<td style=text-align:left>float</td><td style=text-align:left>0.0f</td><td style=text-align:left>4 byte</td><td></td><td></td></tr><tr>
-<td style=text-align:left>double</td><td style=text-align:left>0.0d</td><td style=text-align:left>8 byte</td><td></td><td></td></tr></tbody></table><h3 id=2进制>2.进制 <a class=header-link href=#2%e8%bf%9b%e5%88%b6><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3><p>**二进制：**由0，1组成，运算规律是逢二进一，计算机只能识别二进制表示的数据；</p><p>**八进制：**由0、1、2、3、4、5、6、7组成，运算规律是逢八进一；用前导0区别，例如 012；</p><p>**十进制：**由0，1，2、3、4、5、6、7、8、9组成，运算规律是逢十进一；例如 12；</p><p>**十六进制：**由数字0～9以及字母A (10)，B (11)，C (12)，D (13)，E (14)，F (15)组成,大小写均可，运算规律是逢十六进一；例如 0XC；</p><h4 id=21-十进制转二进制>2.1 十进制转二进制 <a class=header-link href=#21-%e5%8d%81%e8%bf%9b%e5%88%b6%e8%bd%ac%e4%ba%8c%e8%bf%9b%e5%88%b6><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p>除2取余倒排，每发生一次除必须要有一个余数，必须除倒商是0的时候，最后把所得的余数倒排。</p><p><img src=../images/10to2.png alt=十转二></p><h4 id=22-二进制转十进制>2.2 二进制转十进制 <a class=header-link href=#22-%e4%ba%8c%e8%bf%9b%e5%88%b6%e8%bd%ac%e5%8d%81%e8%bf%9b%e5%88%b6><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p>按位乘权相加</p><p><img src=../images/2to10.png alt=十转二></p><h4 id=23-十进制转八进制>2.3 十进制转八进制 <a class=header-link href=#23-%e5%8d%81%e8%bf%9b%e5%88%b6%e8%bd%ac%e5%85%ab%e8%bf%9b%e5%88%b6><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p>10进制数转换成8进制的方法，和转换为2进制的方法类似，唯一变化：将图1中的基数由2变成8，然后依次计算。</p><h4 id=24-八进制转十进制>2.4 八进制转十进制 <a class=header-link href=#24-%e5%85%ab%e8%bf%9b%e5%88%b6%e8%bd%ac%e5%8d%81%e8%bf%9b%e5%88%b6><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p>可参考图2中二进制的计算过程: 进制数第1位的权值为8的0次方，第2位权值为8的1次方，第3位权值为8的2次方，依次计算，公式：第N位 * 8的N-1次方，结果再相加便是最后结果。</p><h4 id=25-十进制转十六进制>2.5 十进制转十六进制: <a class=header-link href=#25-%e5%8d%81%e8%bf%9b%e5%88%b6%e8%bd%ac%e5%8d%81%e5%85%ad%e8%bf%9b%e5%88%b6><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p>10进制数转换成16进制的方法，和转换为2进制的方法类似，唯一变化：将图1中的基数由2变成16，然后依次计算。</p><h4 id=26-十六进制转十进制>2.6 十六进制转十进制: <a class=header-link href=#26-%e5%8d%81%e5%85%ad%e8%bf%9b%e5%88%b6%e8%bd%ac%e5%8d%81%e8%bf%9b%e5%88%b6><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p>第0位的权值为16的0次方，第1位的权值为16的1次方，第2位的权值为16的2次方，依次计算，公式：第N位 * 16的N-1次方，结果再相加便是最后结果。</p><h4 id=27-二进制与八进制的转换>2.7 二进制与八进制的转换 <a class=header-link href=#27-%e4%ba%8c%e8%bf%9b%e5%88%b6%e4%b8%8e%e5%85%ab%e8%bf%9b%e5%88%b6%e7%9a%84%e8%bd%ac%e6%8d%a2><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p>1）二进制转八进制，3位二进制位压缩为1位，</p><p>2）八进制转二进制，1位展开为3位</p><p><img src=../images/2to8.png alt=二与八></p><p>3）可先转换为十进制在转换为二进制或者八进制</p><h4 id=28-二进制与十六进制的转换>2.8 二进制与十六进制的转换 <a class=header-link href=#28-%e4%ba%8c%e8%bf%9b%e5%88%b6%e4%b8%8e%e5%8d%81%e5%85%ad%e8%bf%9b%e5%88%b6%e7%9a%84%e8%bd%ac%e6%8d%a2><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p>1）二进制转十六进制，4位二进制位压缩为1位，</p><p>2）十六进制转二进制，1位展开为4位</p><p><img src=../images/2to16.png alt=二与十六></p><p>3）可先转换为十进制在转换为二进制或者十六进制</p><h4 id=29-八进制与十六进制的转换>2.9 八进制与十六进制的转换 <a class=header-link href=#29-%e5%85%ab%e8%bf%9b%e5%88%b6%e4%b8%8e%e5%8d%81%e5%85%ad%e8%bf%9b%e5%88%b6%e7%9a%84%e8%bd%ac%e6%8d%a2><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p>可先转换为十进制在转换为十六进制或者八进制</p><h3 id=3进制存储单位>3.进制存储单位 <a class=header-link href=#3%e8%bf%9b%e5%88%b6%e5%ad%98%e5%82%a8%e5%8d%95%e4%bd%8d><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3><p><strong>在计算机的二进制数系统中，位简记为bit，也称为比特，是数据存储的最小单位</strong>，每个二进制数字0或1就是一个位(bit)，也就是一比特；也可以把二进制中的0和1看做开关中的“开”和“关”，1表示“开”，0表示“关”。</p><p>8 bit（位）= 1B，也就是一个字节（Byte），然而1KB却不等于1000B，下面是详细的计算规则：</p><p><strong>1B（byte，字节）= 8 bit；</strong></p><p>1KB（Kilobyte，千字节）= 1024B = 2^10 B；</p><p>1MB（Megabyte，兆字节，百万字节，简称“兆”）= 1024KB = 2^20 B；</p><p>1GB（Gigabyte，吉字节，十亿字节，又称“千兆”）= 1024MB = 2^30 B；</p><p>1TB（Terabyte，万亿字节，太字节）= 1024GB = 2^40 B；</p><p>1PB（Petabyte，千万亿字节，拍字节）= 1024TB = 2^50 B；</p><h3 id=4原码反码和补码>4.原码、反码和补码 <a class=header-link href=#4%e5%8e%9f%e7%a0%81%e5%8f%8d%e7%a0%81%e5%92%8c%e8%a1%a5%e7%a0%81><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3><p>在计算机内，有符号数（这里的符号指的是正负符号，有符号数指的就是正负数）有3种表示法：<strong>原码、反码和补码</strong>，所有数据的运算都是采用补码进行的：</p><p><strong>1). 正数的原码，反码，补码都相同；</strong></p><p><strong>2). 负数的有些不同，详情如下：</strong></p><p>**原码：**根据二进制定点表示法，二进制最高位为符号位，“0”表示正，“1”表示负，其余位表示数值的大小。</p><p>**反码：**负数的反码是对其原码逐位取反（0变1，1变0），但符号位除外。</p><p>**补码：**负数的补码是在其反码的末位加1（逢二进一）。</p><p>需要注意的是：求反码的时候，最高位（符号位）是不能被改变的， 正数的符号位是0，负数的符号位是1。</p><p>例子：分别求出5和-5的原码、反码和补码</p><p><img src=../images/ym.jfif alt=二与十六></p><h3 id=5位运算>5.位运算 <a class=header-link href=#5%e4%bd%8d%e8%bf%90%e7%ae%97><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3><p>位运算只能整型或者字符型，计算时将非二进制转成二进制后在进行按位运算，按位运算不产生进位、借位，最后在还原成十进制。</p><h4 id=51-运算符>5.1 运算符 <a class=header-link href=#51-%e8%bf%90%e7%ae%97%e7%ac%a6><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><h5 id=511-位运算符>5.1.1 位运算符</h5><table>
+<td style=text-align:left>boolean</td>
+<td style=text-align:left>false</td>
+<td style=text-align:left>1 bit</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td style=text-align:left>char</td>
+<td style=text-align:left>&lsquo;\u0000&rsquo;</td>
+<td style=text-align:left>2 byte</td>
+<td>&lsquo;\u0000&rsquo;~&rsquo;\uFFFF&rsquo;</td>
+<td></td>
+</tr>
+<tr>
+<td style=text-align:left>byte</td>
+<td style=text-align:left>0</td>
+<td style=text-align:left>1 byte</td>
+<td>-2^7~2^7-1</td>
+<td>-128~127</td>
+</tr>
+<tr>
+<td style=text-align:left>short</td>
+<td style=text-align:left>0</td>
+<td style=text-align:left>2 byte</td>
+<td>-2^15~2^15-1</td>
+<td>-32768~32767</td>
+</tr>
+<tr>
+<td style=text-align:left>int</td>
+<td style=text-align:left>0</td>
+<td style=text-align:left>4 byte</td>
+<td>-2^31~2^31-1</td>
+<td>0x80000000~0x7fffffff</td>
+</tr>
+<tr>
+<td style=text-align:left>long</td>
+<td style=text-align:left>0L</td>
+<td style=text-align:left>8 byte</td>
+<td>-2^63~2^63-1</td>
+<td></td>
+</tr>
+<tr>
+<td style=text-align:left>float</td>
+<td style=text-align:left>0.0f</td>
+<td style=text-align:left>4 byte</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td style=text-align:left>double</td>
+<td style=text-align:left>0.0d</td>
+<td style=text-align:left>8 byte</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id=2进制>2.进制 <a class=header-link href=#2%e8%bf%9b%e5%88%b6><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3>
+<p>**二进制：**由0，1组成，运算规律是逢二进一，计算机只能识别二进制表示的数据；</p>
+<p>**八进制：**由0、1、2、3、4、5、6、7组成，运算规律是逢八进一；用前导0区别，例如 012；</p>
+<p>**十进制：**由0，1，2、3、4、5、6、7、8、9组成，运算规律是逢十进一；例如 12；</p>
+<p>**十六进制：**由数字0～9以及字母A (10)，B (11)，C (12)，D (13)，E (14)，F (15)组成,大小写均可，运算规律是逢十六进一；例如 0XC；</p>
+<h4 id=21-十进制转二进制>2.1 十进制转二进制 <a class=header-link href=#21-%e5%8d%81%e8%bf%9b%e5%88%b6%e8%bd%ac%e4%ba%8c%e8%bf%9b%e5%88%b6><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4>
+<p>除2取余倒排，每发生一次除必须要有一个余数，必须除倒商是0的时候，最后把所得的余数倒排。</p>
+<p><img alt=十转二 src=../images/10to2.png></p>
+<h4 id=22-二进制转十进制>2.2 二进制转十进制 <a class=header-link href=#22-%e4%ba%8c%e8%bf%9b%e5%88%b6%e8%bd%ac%e5%8d%81%e8%bf%9b%e5%88%b6><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4>
+<p>按位乘权相加</p>
+<p><img alt=十转二 src=../images/2to10.png></p>
+<h4 id=23-十进制转八进制>2.3 十进制转八进制 <a class=header-link href=#23-%e5%8d%81%e8%bf%9b%e5%88%b6%e8%bd%ac%e5%85%ab%e8%bf%9b%e5%88%b6><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4>
+<p>10进制数转换成8进制的方法，和转换为2进制的方法类似，唯一变化：将图1中的基数由2变成8，然后依次计算。</p>
+<h4 id=24-八进制转十进制>2.4 八进制转十进制 <a class=header-link href=#24-%e5%85%ab%e8%bf%9b%e5%88%b6%e8%bd%ac%e5%8d%81%e8%bf%9b%e5%88%b6><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4>
+<p>可参考图2中二进制的计算过程: 进制数第1位的权值为8的0次方，第2位权值为8的1次方，第3位权值为8的2次方，依次计算，公式：第N位 * 8的N-1次方，结果再相加便是最后结果。</p>
+<h4 id=25-十进制转十六进制>2.5 十进制转十六进制: <a class=header-link href=#25-%e5%8d%81%e8%bf%9b%e5%88%b6%e8%bd%ac%e5%8d%81%e5%85%ad%e8%bf%9b%e5%88%b6><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4>
+<p>10进制数转换成16进制的方法，和转换为2进制的方法类似，唯一变化：将图1中的基数由2变成16，然后依次计算。</p>
+<h4 id=26-十六进制转十进制>2.6 十六进制转十进制: <a class=header-link href=#26-%e5%8d%81%e5%85%ad%e8%bf%9b%e5%88%b6%e8%bd%ac%e5%8d%81%e8%bf%9b%e5%88%b6><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4>
+<p>第0位的权值为16的0次方，第1位的权值为16的1次方，第2位的权值为16的2次方，依次计算，公式：第N位 * 16的N-1次方，结果再相加便是最后结果。</p>
+<h4 id=27-二进制与八进制的转换>2.7 二进制与八进制的转换 <a class=header-link href=#27-%e4%ba%8c%e8%bf%9b%e5%88%b6%e4%b8%8e%e5%85%ab%e8%bf%9b%e5%88%b6%e7%9a%84%e8%bd%ac%e6%8d%a2><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4>
+<p>1）二进制转八进制，3位二进制位压缩为1位，</p>
+<p>2）八进制转二进制，1位展开为3位</p>
+<p><img alt=二与八 src=../images/2to8.png></p>
+<p>3）可先转换为十进制在转换为二进制或者八进制</p>
+<h4 id=28-二进制与十六进制的转换>2.8 二进制与十六进制的转换 <a class=header-link href=#28-%e4%ba%8c%e8%bf%9b%e5%88%b6%e4%b8%8e%e5%8d%81%e5%85%ad%e8%bf%9b%e5%88%b6%e7%9a%84%e8%bd%ac%e6%8d%a2><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4>
+<p>1）二进制转十六进制，4位二进制位压缩为1位，</p>
+<p>2）十六进制转二进制，1位展开为4位</p>
+<p><img alt=二与十六 src=../images/2to16.png></p>
+<p>3）可先转换为十进制在转换为二进制或者十六进制</p>
+<h4 id=29-八进制与十六进制的转换>2.9 八进制与十六进制的转换 <a class=header-link href=#29-%e5%85%ab%e8%bf%9b%e5%88%b6%e4%b8%8e%e5%8d%81%e5%85%ad%e8%bf%9b%e5%88%b6%e7%9a%84%e8%bd%ac%e6%8d%a2><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4>
+<p>可先转换为十进制在转换为十六进制或者八进制</p>
+<h3 id=3进制存储单位>3.进制存储单位 <a class=header-link href=#3%e8%bf%9b%e5%88%b6%e5%ad%98%e5%82%a8%e5%8d%95%e4%bd%8d><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3>
+<p><strong>在计算机的二进制数系统中，位简记为bit，也称为比特，是数据存储的最小单位</strong>，每个二进制数字0或1就是一个位(bit)，也就是一比特；也可以把二进制中的0和1看做开关中的“开”和“关”，1表示“开”，0表示“关”。</p>
+<p>8 bit（位）= 1B，也就是一个字节（Byte），然而1KB却不等于1000B，下面是详细的计算规则：</p>
+<p><strong>1B（byte，字节）= 8 bit；</strong></p>
+<p>1KB（Kilobyte，千字节）= 1024B = 2^10 B；</p>
+<p>1MB（Megabyte，兆字节，百万字节，简称“兆”）= 1024KB = 2^20 B；</p>
+<p>1GB（Gigabyte，吉字节，十亿字节，又称“千兆”）= 1024MB = 2^30 B；</p>
+<p>1TB（Terabyte，万亿字节，太字节）= 1024GB = 2^40 B；</p>
+<p>1PB（Petabyte，千万亿字节，拍字节）= 1024TB = 2^50 B；</p>
+<h3 id=4原码反码和补码>4.原码、反码和补码 <a class=header-link href=#4%e5%8e%9f%e7%a0%81%e5%8f%8d%e7%a0%81%e5%92%8c%e8%a1%a5%e7%a0%81><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3>
+<p>在计算机内，有符号数（这里的符号指的是正负符号，有符号数指的就是正负数）有3种表示法：<strong>原码、反码和补码</strong>，所有数据的运算都是采用补码进行的：</p>
+<p><strong>1). 正数的原码，反码，补码都相同；</strong></p>
+<p><strong>2). 负数的有些不同，详情如下：</strong></p>
+<p>**原码：**根据二进制定点表示法，二进制最高位为符号位，“0”表示正，“1”表示负，其余位表示数值的大小。</p>
+<p>**反码：**负数的反码是对其原码逐位取反（0变1，1变0），但符号位除外。</p>
+<p>**补码：**负数的补码是在其反码的末位加1（逢二进一）。</p>
+<p>需要注意的是：求反码的时候，最高位（符号位）是不能被改变的， 正数的符号位是0，负数的符号位是1。</p>
+<p>例子：分别求出5和-5的原码、反码和补码</p>
+<p><img alt=二与十六 src=../images/ym.jfif></p>
+<h3 id=5位运算>5.位运算 <a class=header-link href=#5%e4%bd%8d%e8%bf%90%e7%ae%97><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3>
+<p>位运算只能整型或者字符型，计算时将非二进制转成二进制后在进行按位运算，按位运算不产生进位、借位，最后在还原成十进制。</p>
+<h4 id=51-运算符>5.1 运算符 <a class=header-link href=#51-%e8%bf%90%e7%ae%97%e7%ac%a6><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4>
+<h5 id=511-位运算符>5.1.1 位运算符</h5>
+<table>
 <thead>
 <tr>
-<th style=text-align:left>运算符</th><th style=text-align:left>描述</th><th style=text-align:left>运算规则</th></tr></thead><tbody>
+<th style=text-align:left>运算符</th>
+<th style=text-align:left>描述</th>
+<th style=text-align:left>运算规则</th>
+</tr>
+</thead>
+<tbody>
 <tr>
-<td style=text-align:left>&</td><td style=text-align:left>按位与</td><td style=text-align:left>两个位都为1时，结果才为11&amp;1=1 1&amp;0=0 0&amp;1=0 0&amp;0=0</td></tr><tr>
-<td style=text-align:left>|</td><td style=text-align:left>按位或</td><td style=text-align:left>两个位都为0时，结果才为01|1=1 1|0=1 0|1=1 0|0=0</td></tr><tr>
-<td style=text-align:left>^</td><td style=text-align:left>按位异或</td><td style=text-align:left>两个位相同为0，相异为11^1=0 1^0=1 0^1=1 0^0=0</td></tr><tr>
-<td style=text-align:left>~</td><td style=text-align:left>按位取反</td><td style=text-align:left>0变1，1变0,属于单目运算符</td></tr><tr>
-<td style=text-align:left>&#171;</td><td style=text-align:left>左移</td><td style=text-align:left>各二进位全部左移若干位，高位丢弃，低位补0</td></tr><tr>
-<td style=text-align:left>&#187;</td><td style=text-align:left>右移</td><td style=text-align:left>各二进位全部右移若干位，对无符号数，高位补0，有符号数，各编译器处理方法不一样，有的补符号位（算术右移），有的补0（逻辑右移）</td></tr><tr>
-<td style=text-align:left>&#187;></td><td style=text-align:left>无符号右移</td><td style=text-align:left>不考虑符号位右移 如：-2 &#187;> 1 => 0101</td></tr></tbody></table><h5 id=512-复合赋值运算符>5.1.2 复合赋值运算符</h5><pre tabindex=0><code>&amp;=       例：a&amp;=b    相当于   a=a&amp;b
+<td style=text-align:left>&</td>
+<td style=text-align:left>按位与</td>
+<td style=text-align:left>两个位都为1时，结果才为11&amp;1=1 1&amp;0=0 0&amp;1=0 0&amp;0=0</td>
+</tr>
+<tr>
+<td style=text-align:left>|</td>
+<td style=text-align:left>按位或</td>
+<td style=text-align:left>两个位都为0时，结果才为01|1=1 1|0=1 0|1=1 0|0=0</td>
+</tr>
+<tr>
+<td style=text-align:left>^</td>
+<td style=text-align:left>按位异或</td>
+<td style=text-align:left>两个位相同为0，相异为11^1=0 1^0=1 0^1=1 0^0=0</td>
+</tr>
+<tr>
+<td style=text-align:left>~</td>
+<td style=text-align:left>按位取反</td>
+<td style=text-align:left>0变1，1变0,属于单目运算符</td>
+</tr>
+<tr>
+<td style=text-align:left>&#171;</td>
+<td style=text-align:left>左移</td>
+<td style=text-align:left>各二进位全部左移若干位，高位丢弃，低位补0</td>
+</tr>
+<tr>
+<td style=text-align:left>&#187;</td>
+<td style=text-align:left>右移</td>
+<td style=text-align:left>各二进位全部右移若干位，对无符号数，高位补0，有符号数，各编译器处理方法不一样，有的补符号位（算术右移），有的补0（逻辑右移）</td>
+</tr>
+<tr>
+<td style=text-align:left>&#187;></td>
+<td style=text-align:left>无符号右移</td>
+<td style=text-align:left>不考虑符号位右移 如：-2 &#187;> 1 => 0101</td>
+</tr>
+</tbody>
+</table>
+<h5 id=512-复合赋值运算符>5.1.2 复合赋值运算符</h5>
+<pre tabindex=0><code>&amp;=       例：a&amp;=b    相当于   a=a&amp;b
 
 |=       例：a|=b    相当于   a=a|b
 
@@ -152,37 +566,101 @@ JAVA
 /=       例：a/=b    相当于   a=a/b
 
 %=       例：a%=b    相当于   a=a%b          
-</code></pre><h5 id=513-逻辑运算符>5.1.3 逻辑运算符</h5><p>逻辑运算符有短路现象，&& 如果第一个数为0则会短路第2个结果为0，||如果第一个数非0短路第2个结果为1</p><table>
+</code></pre><h5 id=513-逻辑运算符>5.1.3 逻辑运算符</h5>
+<p>逻辑运算符有短路现象，&& 如果第一个数为0则会短路第2个结果为0，||如果第一个数非0短路第2个结果为1</p>
+<table>
 <thead>
 <tr>
-<th>运算符</th><th>含义</th><th>效 果</th></tr></thead><tbody>
+<th>运算符</th>
+<th>含义</th>
+<th>效 果</th>
+</tr>
+</thead>
+<tbody>
 <tr>
-<td>&&</td><td>与</td><td>将两个表达式连接成一个。两个表达式必须都为 true，整个表达式才为 true</td></tr><tr>
-<td>||</td><td>或</td><td>将两个表达式连接成一个。必须有一个或两个表达式为 true，才能使整个表达式为 true。只要其中有一个为 true，那么另外一个就变得无关紧要</td></tr><tr>
-<td>！</td><td>非</td><td>反转一个表达式的“真相”。它使一个表达式从 true 变成了 false，或者从 false 变成了 true</td></tr></tbody></table><h4 id=52-按位运算>5.2 按位运算 <a class=header-link href=#52-%e6%8c%89%e4%bd%8d%e8%bf%90%e7%ae%97><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><p>计算机中的数在内存中都是以二进制形式进行存储的，用位运算就是直接对整数在内存中的二进制位进行操作，因此其执行效率非常高，在程序中尽量使用位运算进行操作，这会大大提高程序的性能。</p><h5 id=521--按位与运算>5.2.1 & 按位与运算</h5><p>​ 1 0 0 1 1
+<td>&&</td>
+<td>与</td>
+<td>将两个表达式连接成一个。两个表达式必须都为 true，整个表达式才为 true</td>
+</tr>
+<tr>
+<td>||</td>
+<td>或</td>
+<td>将两个表达式连接成一个。必须有一个或两个表达式为 true，才能使整个表达式为 true。只要其中有一个为 true，那么另外一个就变得无关紧要</td>
+</tr>
+<tr>
+<td>！</td>
+<td>非</td>
+<td>反转一个表达式的“真相”。它使一个表达式从 true 变成了 false，或者从 false 变成了 true</td>
+</tr>
+</tbody>
+</table>
+<h4 id=52-按位运算>5.2 按位运算 <a class=header-link href=#52-%e6%8c%89%e4%bd%8d%e8%bf%90%e7%ae%97><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4>
+<p>计算机中的数在内存中都是以二进制形式进行存储的，用位运算就是直接对整数在内存中的二进制位进行操作，因此其执行效率非常高，在程序中尽量使用位运算进行操作，这会大大提高程序的性能。</p>
+<h5 id=521--按位与运算>5.2.1 & 按位与运算</h5>
+<p>​ 1 0 0 1 1
 & 1 1 0 0 1
 <code>------------------------------</code>
-​ 1 0 0 0 1</p><p>全1为1，有0为0，也叫按位乘</p><p><strong>主要作用：</strong></p><p><strong>1）清零</strong></p><p>如果想将一个单元清零，即使其全部二进制位为0，只要与一个各位都为零的数值相与，结果为零。</p><p><strong>2）取一个数的指定位</strong></p><p>比如取数 X=1010 1110 的低4位，只需要另找一个数Y，令Y的低4位为1，其余位为0，即Y=0000 1111，然后将X与Y进行按位与运算（X&amp;Y=0000 1110）即可得到X的指定位。</p><p><strong>3）判断奇偶</strong></p><p>只要根据最未位是0还是1来决定，为0就是偶数，为1就是奇数。因此可以用if ((a & 1) == 0)代替if (a % 2 == 0)来判断a是不是偶数。</p><h5 id=522--按位或运算>5.2.2 | 按位或运算</h5><p>​ 1 0 0 1 1
+​ 1 0 0 0 1</p>
+<p>全1为1，有0为0，也叫按位乘</p>
+<p><strong>主要作用：</strong></p>
+<p><strong>1）清零</strong></p>
+<p>如果想将一个单元清零，即使其全部二进制位为0，只要与一个各位都为零的数值相与，结果为零。</p>
+<p><strong>2）取一个数的指定位</strong></p>
+<p>比如取数 X=1010 1110 的低4位，只需要另找一个数Y，令Y的低4位为1，其余位为0，即Y=0000 1111，然后将X与Y进行按位与运算（X&amp;Y=0000 1110）即可得到X的指定位。</p>
+<p><strong>3）判断奇偶</strong></p>
+<p>只要根据最未位是0还是1来决定，为0就是偶数，为1就是奇数。因此可以用if ((a & 1) == 0)代替if (a % 2 == 0)来判断a是不是偶数。</p>
+<h5 id=522--按位或运算>5.2.2 | 按位或运算</h5>
+<p>​ 1 0 0 1 1
 | 1 1 0 0 1
 <code>------------------------------</code>
-​ 1 1 0 1 1</p><p>有1为1，全0为0，也叫按位加。注意：负数按补码形式参加按位或运算。</p><p><strong>主要作用：置1操作</strong></p><h5 id=523--按位异或运算>5.2.3 ^ 按位异或运算</h5><p>​ 1 0 0 1 1
+​ 1 1 0 1 1</p>
+<p>有1为1，全0为0，也叫按位加。注意：负数按补码形式参加按位或运算。</p>
+<p><strong>主要作用：置1操作</strong></p>
+<h5 id=523--按位异或运算>5.2.3 ^ 按位异或运算</h5>
+<p>​ 1 0 0 1 1
 ^ 1 1 0 0 1
 <code>-----------------------------</code>
-​ 0 1 0 1 0</p><p>相异为1，相同为0</p><p><strong>异或的几条性质:</strong></p><ul>
-<li>1、交换律</li><li>2、结合律 (a^b)^c == a^(b^c)</li><li>3、对于任何数x，都有 x^x=0，x^0=x</li><li>4、自反性: a^b^b=a^0=a;</li></ul><p><strong>异或运算的用途：</strong></p><p><strong>1）翻转指定位</strong></p><p>比如将数 X=1010 1110 的低4位进行翻转，只需要另找一个数Y，令Y的低4位为1，其余位为0，即Y=0000 1111，然后将X与Y进行异或运算（X^Y=1010 0001）即可得到。</p><p><strong>2）与0相异或值不变</strong></p><p>例如：1010 1110 ^ 0000 0000 = 1010 1110</p><p><strong>3）交换两个数</strong></p><pre tabindex=0><code>void Swap(int &amp;a, int &amp;b){
+​ 0 1 0 1 0</p>
+<p>相异为1，相同为0</p>
+<p><strong>异或的几条性质:</strong></p>
+<ul>
+<li>1、交换律</li>
+<li>2、结合律 (a^b)^c == a^(b^c)</li>
+<li>3、对于任何数x，都有 x^x=0，x^0=x</li>
+<li>4、自反性: a^b^b=a^0=a;</li>
+</ul>
+<p><strong>异或运算的用途：</strong></p>
+<p><strong>1）翻转指定位</strong></p>
+<p>比如将数 X=1010 1110 的低4位进行翻转，只需要另找一个数Y，令Y的低4位为1，其余位为0，即Y=0000 1111，然后将X与Y进行异或运算（X^Y=1010 0001）即可得到。</p>
+<p><strong>2）与0相异或值不变</strong></p>
+<p>例如：1010 1110 ^ 0000 0000 = 1010 1110</p>
+<p><strong>3）交换两个数</strong></p>
+<pre tabindex=0><code>void Swap(int &amp;a, int &amp;b){
     if (a != b){
         a ^= b;
         b ^= a;
         a ^= b;
     }
 }
-</code></pre><h5 id=524--按位取反运算>5.2.4 ~ 按位取反运算</h5><p>~ 1 0 0 1 1
+</code></pre><h5 id=524--按位取反运算>5.2.4 ~ 按位取反运算</h5>
+<p>~ 1 0 0 1 1
 <code>-----------------------------</code>
-0 1 1 0 0</p><p>对于一个数按位取反得到的值为该数+1后在乘以-1</p><p>**技巧：(该数+1) * (-1) **</p><p><strong>异或运算的用途：</strong></p><p><strong>1）使一个数的最低位为零</strong></p><p>使a的最低位为0，可以表示为：a & ~1。~1的值为 1111 1111 1111 1110，再按"与"运算，最低位一定为0。因为" ~&ldquo;运算符的优先级比算术运算符、关系运算符、逻辑运算符和其他运算符都高。</p><h5 id=525---按位左移运算>5.2.5 &#171; 按位左移运算</h5><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>int a = 8;
+0 1 1 0 0</p>
+<p>对于一个数按位取反得到的值为该数+1后在乘以-1</p>
+<p>**技巧：(该数+1) * (-1) **</p>
+<p><strong>异或运算的用途：</strong></p>
+<p><strong>1）使一个数的最低位为零</strong></p>
+<p>使a的最低位为0，可以表示为：a & ~1。~1的值为 1111 1111 1111 1110，再按"与"运算，最低位一定为0。因为" ~&ldquo;运算符的优先级比算术运算符、关系运算符、逻辑运算符和其他运算符都高。</p>
+<h5 id=525---按位左移运算>5.2.5 &#171; 按位左移运算</h5>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>int a = 8;
 </span></span><span class=line><span class=cl>a &lt;&lt; 3;
 </span></span><span class=line><span class=cl>移位前：0000 0000 0000 0000 0000 0000 0000 1000
 </span></span><span class=line><span class=cl>移位后：0000 0000 0000 0000 0000 0000 0100 0000
-</span></span></code></pre></div><p><strong>主要作用：将二进制位按位依序左移n位</strong></p><p>对于一个十进制数左移n位后得到的值为该数乘以2^n的积。</p><h5 id=526--按位右移运算>5.2.6 &#187; 按位右移运算</h5><p>向右进行移位操作，对无符号数，高位补 0，对于有符号数，高位补符号位，如</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>unsigned int a = 8;
+</span></span></code></pre></div><p><strong>主要作用：将二进制位按位依序左移n位</strong></p>
+<p>对于一个十进制数左移n位后得到的值为该数乘以2^n的积。</p>
+<h5 id=526--按位右移运算>5.2.6 &#187; 按位右移运算</h5>
+<p>向右进行移位操作，对无符号数，高位补 0，对于有符号数，高位补符号位，如</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>unsigned int a = 8;
 </span></span><span class=line><span class=cl>a &gt;&gt; 3;
 </span></span><span class=line><span class=cl>移位前：0000 0000 0000 0000 0000 0000 0000 1000
 </span></span><span class=line><span class=cl>移位后：0000 0000 0000 0000 0000 0000 0000 0001
@@ -191,8 +669,12 @@ JAVA
 </span></span><span class=line><span class=cl>a &gt;&gt; 3;
 </span></span><span class=line><span class=cl>移位前：1111 1111 1111 1111 1111 1111 1111 1000
 </span></span><span class=line><span class=cl>移位前：1111 1111 1111 1111 1111 1111 1111 1111
-</span></span></code></pre></div><p><strong>主要作用：将二进制位按位依序右移n位</strong></p><p>对于一个十进制数，若该数为负数 并且 不能被2^n整除，则得到的数为商加-1。</p><p>正数||(负数 && 能被2^n整除)则结果为=> 数/2^n
-(负数 && 不能被2^n整除)则结果为=>数/2^n+(-1)</p><h4 id=53-位运算技巧>5.3 位运算技巧 <a class=header-link href=#53-%e4%bd%8d%e8%bf%90%e7%ae%97%e6%8a%80%e5%b7%a7><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4><pre tabindex=0><code>1、
+</span></span></code></pre></div><p><strong>主要作用：将二进制位按位依序右移n位</strong></p>
+<p>对于一个十进制数，若该数为负数 并且 不能被2^n整除，则得到的数为商加-1。</p>
+<p>正数||(负数 && 能被2^n整除)则结果为=> 数/2^n
+(负数 && 不能被2^n整除)则结果为=>数/2^n+(-1)</p>
+<h4 id=53-位运算技巧>5.3 位运算技巧 <a class=header-link href=#53-%e4%bd%8d%e8%bf%90%e7%ae%97%e6%8a%80%e5%b7%a7><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h4>
+<pre tabindex=0><code>1、
 a &amp; a = a
 a | a = a
 a ^ a = 0
@@ -260,7 +742,25 @@ a = a |(a&gt;&gt;8);
 a = a |(a&gt;&gt;16);
 return (a+1)&gt;&gt;1;
  
-</code></pre><h2 id=四问题解答>四：问题解答 <a class=header-link href=#%e5%9b%9b%e9%97%ae%e9%a2%98%e8%a7%a3%e7%ad%94><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h2><p>对于概要的问题，有没有更好的方式来解决呢，答案是肯定的。</p><p>计算机中最小的存储单位是bit，它的值只有两个0或1，假如刚好有10亿个int的数据，那么我们是否可以构造出10个bit,然后以我们想象中的方式从左到右平铺开来，然后把这10亿个int的数据从小到大一一对应到这些bit中，如果数值存在则标记为1，那么所需空间为10^9位，换算成10^9/8/1000/1000 约为125M，</p><p>由于两位bit可以表示4位数即2^2，那么对于4个byte能表示的数据量为2^32个(bit)，<strong>2^32 bit =2^32 / 2^3(byte) = 2^29 byte= 512M</strong>；int数据范围为【-2^31,2^31-1】即[-21,4748,3648 ~ 21,4748,3648-1]</p><p>那么把10亿个数据平铺开的效果如下：</p><p><img src=../images/int-mapping.png alt=有符号int数据></p><p>那么可以得出</p><p>1.<strong>long bitIndex = 任意int数 + (1l &#171; 31); 得出数字在理论bit数组中的位置</strong></p><p>2.<strong>int byteIndex = bitIndex / 8; 得出数字在真实byte[]数组的位置</strong></p><p>3.int innerByteIndex = bitIndex % 8; 得出数字在真实byte[byteIndex]中8个位置中的哪个位置</p><p>4.byteData[index] = (byte) (byteData[byteIndex ] | (1 &lt; innerByteIndex)); 将定位到的innerByteIndex位置如果为0设置为1</p><p><img src=../images/unsign-int-mapping.png alt=无符号></p><p>那么可以得出</p><p>1.int bitIndex = 任意int数; 得出数字在理论bit数组中的位置</p><p>2.int byteIndex = bitIndex / 8; 得出数字在真实byte[]数组的位置</p><p>3.int innerByteIndex = bitIndex % 8; 得出数字在真实byte[byteIndex]中8个位置中的哪个位置</p><p>4.byteData[index] = (byte) (byteData[byteIndex ] | (1 &lt; innerByteIndex)); 将定位到的innerByteIndex位置如果为0设置为1</p><p>以下为有符号int的场景测试代码</p><pre tabindex=0><code>import java.util.Random;   
+</code></pre><h2 id=四问题解答>四：问题解答 <a class=header-link href=#%e5%9b%9b%e9%97%ae%e9%a2%98%e8%a7%a3%e7%ad%94><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h2>
+<p>对于概要的问题，有没有更好的方式来解决呢，答案是肯定的。</p>
+<p>计算机中最小的存储单位是bit，它的值只有两个0或1，假如刚好有10亿个int的数据，那么我们是否可以构造出10个bit,然后以我们想象中的方式从左到右平铺开来，然后把这10亿个int的数据从小到大一一对应到这些bit中，如果数值存在则标记为1，那么所需空间为10^9位，换算成10^9/8/1000/1000 约为125M，</p>
+<p>由于两位bit可以表示4位数即2^2，那么对于4个byte能表示的数据量为2^32个(bit)，<strong>2^32 bit =2^32 / 2^3(byte) = 2^29 byte= 512M</strong>；int数据范围为【-2^31,2^31-1】即[-21,4748,3648 ~ 21,4748,3648-1]</p>
+<p>那么把10亿个数据平铺开的效果如下：</p>
+<p><img alt=有符号int数据 src=../images/int-mapping.png></p>
+<p>那么可以得出</p>
+<p>1.<strong>long bitIndex = 任意int数 + (1l &#171; 31); 得出数字在理论bit数组中的位置</strong></p>
+<p>2.<strong>int byteIndex = bitIndex / 8; 得出数字在真实byte[]数组的位置</strong></p>
+<p>3.int innerByteIndex = bitIndex % 8; 得出数字在真实byte[byteIndex]中8个位置中的哪个位置</p>
+<p>4.byteData[index] = (byte) (byteData[byteIndex ] | (1 &lt; innerByteIndex)); 将定位到的innerByteIndex位置如果为0设置为1</p>
+<p><img alt=无符号 src=../images/unsign-int-mapping.png></p>
+<p>那么可以得出</p>
+<p>1.int bitIndex = 任意int数; 得出数字在理论bit数组中的位置</p>
+<p>2.int byteIndex = bitIndex / 8; 得出数字在真实byte[]数组的位置</p>
+<p>3.int innerByteIndex = bitIndex % 8; 得出数字在真实byte[byteIndex]中8个位置中的哪个位置</p>
+<p>4.byteData[index] = (byte) (byteData[byteIndex ] | (1 &lt; innerByteIndex)); 将定位到的innerByteIndex位置如果为0设置为1</p>
+<p>以下为有符号int的场景测试代码</p>
+<pre tabindex=0><code>import java.util.Random;   
 public class BigDataSort {  
     //数据容量
     private final int CAPACITY = 1 000 000 000;  
@@ -314,7 +814,10 @@ public class BigDataSort {
         }  
     }  
 }  
-</code></pre><h2 id=五java无符号处理>五：java无符号处理 <a class=header-link href=#%e4%ba%94java%e6%97%a0%e7%ac%a6%e5%8f%b7%e5%a4%84%e7%90%86><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h2><p>有符号数（signed）可以表示特定类型规定范围内的整数（包括负数），而<em>无符号</em>数只能表示非负数（0及正数）</p><h2 id=java-unsigned表示>java unsigned表示 <a class=header-link href=#java-unsigned%e8%a1%a8%e7%a4%ba><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h2><pre tabindex=0><code>// java 中没有 unsigned，所以为了实现 unsigned，需要使用比原本类型更大的类型，通过位运算获取其 unsigned 的值
+</code></pre><h2 id=五java无符号处理>五：java无符号处理 <a class=header-link href=#%e4%ba%94java%e6%97%a0%e7%ac%a6%e5%8f%b7%e5%a4%84%e7%90%86><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h2>
+<p>有符号数（signed）可以表示特定类型规定范围内的整数（包括负数），而<em>无符号</em>数只能表示非负数（0及正数）</p>
+<h2 id=java-unsigned表示>java unsigned表示 <a class=header-link href=#java-unsigned%e8%a1%a8%e7%a4%ba><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h2>
+<pre tabindex=0><code>// java 中没有 unsigned，所以为了实现 unsigned，需要使用比原本类型更大的类型，通过位运算获取其 unsigned 的值
 // unsigned byte &amp; short -&gt; int，unsigned int -&gt; long
 private static int getUnsignedByte(byte b) {
     return b &amp; 0x0FF;
@@ -328,7 +831,8 @@ private static long getUnsignedInt(int data) {
     // data &amp; 0xFFFFFFFF 和 data &amp; 0xFFFFFFFFL 结果是不同的，需要注意，有可能与 JDK 版本有关
     return data &amp; 0xFFFFFFFFL;
 }
-</code></pre><h3 id=shortint-和-long-转-bytes>short、int 和 long 转 bytes <a class=header-link href=#shortint-%e5%92%8c-long-%e8%bd%ac-bytes><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3><pre tabindex=0><code>import java.nio.ByteBuffer;
+</code></pre><h3 id=shortint-和-long-转-bytes>short、int 和 long 转 bytes <a class=header-link href=#shortint-%e5%92%8c-long-%e8%bd%ac-bytes><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3>
+<pre tabindex=0><code>import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
 ByteOrder order = ByteOrder.LITTLE_ENDIAN;
@@ -348,7 +852,8 @@ int data = ByteBuffer.wrap(bytes, 0, bytes.length).order(order).getInt();
 short s = 32767;
 byte[] bytes = ByteBuffer.allocate(2).order(order).putShort(s).array();
 int data = ByteBuffer.wrap(bytes, 0, bytes.length).order(order).getShort();
-</code></pre><h3 id=string转byte>String转Byte <a class=header-link href=#string%e8%bd%acbyte><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3><pre tabindex=0><code>import java.nio.charset.Charset;
+</code></pre><h3 id=string转byte>String转Byte <a class=header-link href=#string%e8%bd%acbyte><svg class="fill-current o-60 hover-accent-color-light" height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"/></svg></a></h3>
+<pre tabindex=0><code>import java.nio.charset.Charset;
 
 Charset charset = Charset.forName(&#34;UTF-8&#34;);
 
@@ -356,193 +861,52 @@ String data = &#34;abc&#34;;
 byte[] bytes = data.getBytes(charset);
 
 String newData = new String(bytes, 0, bytes.length, charset);
-</code></pre></div><h2>See Also</h2><ul>
-<li><a href=/cn/article/java/%E4%BD%8D%E8%BF%90%E7%AE%97/>位运算基础知识</a></li><li><a href=/article/%E5%B7%A5%E5%85%B7/jemeter/>jemeter基本使用</a></li><li><a href=/cn/article/%E5%B7%A5%E5%85%B7/jemeter/>jemeter基本使用</a></li></ul></div></div><div class="order-0 w-20 dn db-l">
-<nav role=navigation>
-<ul class="list pa0 nl2">
-<li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
-<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.bigdata>bigdata</a>
-<ul class="bigdata desktopmenu animated fadeIn list pl0 bg-light-gray dn">
-<li class="f6 fw4">
-<a href=/article/bigdata/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-大数据
+</code></pre>
+</div>
+<h2>See also</h2>
+<ul>
+<li><a href=/cn/article/java/%E4%BD%8D%E8%BF%90%E7%AE%97/>位运算基础知识</a></li>
+<li><a href=/article/%E5%B7%A5%E5%85%B7/jemeter/>jemeter基本使用</a></li>
+<li><a href=/cn/article/%E5%B7%A5%E5%85%B7/jemeter/>jemeter基本使用</a></li>
+</ul>
+</div>
+</div>
+<div id=right-sidebar class="order-2 w-20 dn db-l sticky pt2">
+<aside class="right-0 f6 pv4 pv0-ns ph4-l nested-list-reset nested-copy-line-height">
+<div class=nested-links>
+<div date-pref>
+<a href=https://qiaomingzi.github.io/article/java/maven/ class="dib f6 pr1 hover-bg-light-gray br-100" title=maven-wrapper基础使用>
+<svg class="fill-current" height="30" viewBox="0 0 24 24" width="30" xmlns="http://www.w3.org/2000/svg"><path d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
 </a>
-</li><li class="f6 fw4">
-<a href=/article/bigdata/%E8%AF%BB%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%AE%9E%E6%88%9845%E8%AE%B2/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-读[数据分析实战45讲]
-</a>
-</li></ul></li><li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
-<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.go>go</a>
-<ul class="go desktopmenu animated fadeIn list pl0 bg-light-gray dn">
-<li class="f6 fw4">
-<a href=/article/go/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-go
-</a>
-</li><li class="f6 fw4">
-<a href=/article/go/go-sdk/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-GO SDK
-</a>
-</li><li class="f6 fw4">
-<a href=/article/go/k8s/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-K8S
-</a>
-</li><li class="f6 fw4">
-<a href=/article/go/go%E8%AF%AD%E8%A8%80%E6%A0%B8%E5%BF%8336%E8%AE%B2/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-读[GO语言核心36讲]
-</a>
-</li><li class="f6 fw4">
-<a href=/article/go/go%E8%AF%AD%E8%A8%80%E7%BC%96%E7%A8%8B/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-读[GO语言编程]
-</a>
-</li></ul></li><li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
-<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2 primary-color" data-target=.java>java</a>
-<ul class="java desktopmenu animated fadeIn list pl0 bg-light-gray db">
-<li class="f6 fw4">
-<a href=/article/java/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-java
-</a>
-</li><li class="f6 fw4">
-<a href=/article/java/maven/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-maven-wrapper基础使用
-</a>
-</li><li class="f6 fw4">
-<a href=/article/java/%E4%BD%8D%E8%BF%90%E7%AE%97/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 primary-color">
-位运算基础知识
-</a>
-</li></ul></li><li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
-<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.python>python</a>
-<ul class="python desktopmenu animated fadeIn list pl0 bg-light-gray dn">
-<li class="f6 fw4">
-<a href=/article/python/python%E5%9F%BA%E7%A1%80/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-python基础
-</a>
-</li></ul></li><li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
-<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.db>db</a>
-<ul class="db desktopmenu animated fadeIn list pl0 bg-light-gray dn">
-<li class="f6 fw4">
-<a href=/article/db/canal/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-canal-mysql binlog日志解析
-</a>
-</li><li class="f6 fw4">
-<a href=/article/db/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-db
-</a>
-</li><li class="f6 fw4">
-<a href=/article/db/mysql-master-slave/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-mysql master-slave
-</a>
-</li></ul></li><li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8 mb1 bb b--moon-gray">
-<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.ai>ai</a>
-<ul class="ai desktopmenu animated fadeIn list pl0 bg-light-gray dn">
-<li class="f6 fw4">
-<a href=/article/ai/ai-agent/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-gpt-agent
-</a>
-</li></ul></li><li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
-<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.读书>读书</a>
-<ul class="读书 desktopmenu animated fadeIn list pl0 bg-light-gray dn">
-<li class="f6 fw4">
-<a href=/article/%E8%AF%BB%E4%B9%A6/%E5%A4%A7%E9%A3%8E%E6%AD%8C/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-&lt;&lt;大风歌>>王立群
-</a>
-</li><li class="f6 fw4">
-<a href=/article/%E8%AF%BB%E4%B9%A6/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-概览
-</a>
-</li></ul></li><li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
-<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.工具>工具</a>
-<ul class="工具 desktopmenu animated fadeIn list pl0 bg-light-gray dn">
-<li class="f6 fw4">
-<a href=/article/%E5%B7%A5%E5%85%B7/jemeter/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-jemeter基本使用
-</a>
-</li><li class="f6 fw4">
-<a href=/article/%E5%B7%A5%E5%85%B7/sonarqube/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-sonarqube基础使用
-</a>
-</li><li class="f6 fw4">
-<a href=/article/%E5%B7%A5%E5%85%B7/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-工具
-</a>
-</li></ul></li><li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
-<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.数学>数学</a>
-<ul class="数学 desktopmenu animated fadeIn list pl0 bg-light-gray dn">
-<li class="f6 fw4">
-<a href=/article/%E6%95%B0%E5%AD%A6/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-math
-</a>
-</li><li class="f6 fw4">
-<a href=/article/%E6%95%B0%E5%AD%A6/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-数学基础概念
-</a>
-</li></ul></li><li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
-<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.英语>英语</a>
-<ul class="英语 desktopmenu animated fadeIn list pl0 bg-light-gray dn">
-<li class="f6 fw4">
-<a href=/article/%E8%8B%B1%E8%AF%AD/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-english
-</a>
-</li><li class="f6 fw4">
-<a href=/article/%E8%8B%B1%E8%AF%AD/%E8%87%AA%E7%84%B6%E6%8B%BC%E8%AF%BB/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-英语自然拼读
-</a>
-</li><li class="f6 fw4">
-<a href=/article/%E8%8B%B1%E8%AF%AD/%E9%9F%B3%E8%8A%82%E5%88%92%E5%88%86/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-英语音节划分
-</a>
-</li></ul></li><li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
-<a href=javascript:void(0) class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.其他>其他</a>
-<ul class="其他 desktopmenu animated fadeIn list pl0 bg-light-gray dn">
-<li class="f6 fw4">
-<a href=/article/%E5%85%B6%E4%BB%96/hexo%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-Hexo基础使用
-</a>
-</li><li class="f6 fw4">
-<a href=/article/%E5%85%B6%E4%BB%96/hugo%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-Hugo基本使用
-</a>
-</li><li class="f6 fw4">
-<a href=/article/%E5%85%B6%E4%BB%96/markdown%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-Markdown基本使用
-</a>
-</li><li class="f6 fw4">
-<a href=/article/%E5%85%B6%E4%BB%96/yarn%E7%9B%B8%E5%85%B3/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-Yarn相关
-</a>
-</li><li class="f6 fw4">
-<a href=/article/%E5%85%B6%E4%BB%96/%E5%A3%B0%E5%8D%A1/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-关于调音声卡
-</a>
-</li><li class="f6 fw4">
-<a href=/article/%E5%85%B6%E4%BB%96/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-其他
-</a>
-</li><li class="f6 fw4">
-<a href=/article/%E5%85%B6%E4%BB%96/%E5%BC%80%E6%BA%90%E7%9B%91%E6%8E%A7%E8%BD%AF%E4%BB%B6%E5%AF%B9%E6%AF%94_zabbix/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-开源监控软件对比_zabbix
-</a>
-</li><li class="f6 fw4">
-<a href=/article/%E5%85%B6%E4%BB%96/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E7%B4%A2%E5%BC%95/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-开源项目索引
-</a>
-</li><li class="f6 fw4">
-<a href=/article/%E5%85%B6%E4%BB%96/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F30%E5%88%86%E9%92%9F%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/ class="db link hover-bg-gray hover-white pl3 pr2 pv2 black">
-正则表达式30分钟入门教程
-</a>
-</li></ul></li><li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
-<a href=/sources/ class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2" data-target=.sources>源码探究</a>
-</li></ul></nav></div></div></article><div class="w-100 bg-light-gray">
+</div>
+</div>
+</aside>
+</div>
+</div>
+</article>
+<div id=page-footer class="w-100 bg-light-gray">
 <div class="mw7 pa4 center nested-lh-copy lh-copy">
 <h6 class="f6 dark-gray mb2">
 Last updated: March 16, 2022
-</h6><a href=https://github.com/gohugoio/hugoDocs/edit/master/content/cn/article/JAVA/%e4%bd%8d%e8%bf%90%e7%ae%97/index.md class="f6 ph3 pv1 br2 dib tc ttu mv3 bg-primary-color white hover-bg-green link">Improve this page</a>
-</div></div></main><footer class="bg-primary-color-dark ph4-ns pt4 relative w-100" role=contentinfo>
+</h6>
+<a href=https://github.com/gohugoio/hugoDocs/edit/master/content/cn/article/JAVA/%e4%bd%8d%e8%bf%90%e7%ae%97/index.md class="f6 ph3 pv1 br2 dib tc ttu mv3 bg-primary-color white hover-bg-green link">Improve this page</a>
+</div>
+</div>
+</main>
+<footer class="bg-primary-color-dark ph4-ns pt4 relative w-100" role=contentinfo>
 <div class="center flex-ns flex-wrap justify-between mw9 w-90">
 <div class="pb3 pt4 w-100 w-50-ns">
 <div class="b f3 light-gray mb3 nested-links tc">
 李明梓-BLOG<br>
-</div><div class="center w4">
+</div>
+<div class="center w4">
 <img src=/images/hugo-logo-wide.svg alt="Hugo Logo">
-</div></div><div class="w-100 w-50-l light-gray"> 
+</div>
+</div>
+<div class="w-100 w-50-l light-gray"> 
 本文仅为个人笔记,作为学习使用,如有雷同请联系作者 mingzi.li 处理,mail: qiaomingzi100@sina.com
-</div></div></footer></body></html>
+</div>
+</div>
+</footer>
+</body>
+</html>
